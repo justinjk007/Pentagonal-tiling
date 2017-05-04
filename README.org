@@ -8,3 +8,6 @@ The pentagons we will be dealing with will have *9* variables or
 properties to define it.
 - The *5* sides.
 - Each of the *4* angles. (The fifth angle can be easily calculated)
+
+** Usability
+- The compiler used is *gcc version 5.4.0 20160609*
