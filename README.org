@@ -1,3 +1,10 @@
 * Pentagonal tiling
-
-Yet to be discovered and conquered.
+**  Pentagons
+There can be regular and irregular pentagons. Regular Pentagons have
+all there sides of equal length and all the angles of equal
+measure. For any pentagon the sum of its angles should be equal to
+540 ° (3 x 180 °).
+The pentagons we will be dealing with will have *9* variables or
+properties to define it.
+- The *5* sides.
+- Each of the *4* angles. (The fifth angle can be easily calculated)
