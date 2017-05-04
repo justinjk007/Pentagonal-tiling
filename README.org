@@ -1,4 +1,7 @@
 * Pentagonal tiling
+#+CAPTION: Image representing pentagonal tiling, in a way
+#+NAME: face of the repository
+     [[./face.png]]
 **  Pentagons
 There can be regular and irregular pentagons. Regular Pentagons have
 all there sides of equal length and all the angles of equal
