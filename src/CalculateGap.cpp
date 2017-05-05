@@ -1,9 +1,8 @@
 #include <iostream>
 #include "Tile.h"
+#include "CalculateGap.h"
 
 using namespace std;
-double CalculateGap(Tile);
-bool validateTile(Tile);
 
 double CalculateGap(Tile tile){
   if(validateTile(tile))
