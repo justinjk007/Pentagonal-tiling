@@ -2,10 +2,10 @@
 test: test.o CalculateGap.o
 	g++ -o test test.o CalculateGap.o
 
-test.o: test.cpp Tile.h CalculateGap.h
+test.o: test.cpp Tile.hpp CalculateGap.hpp
 	g++ -c test.cpp
 
-CalculateGap.o: CalculateGap.cpp Tile.h CalculateGap.h
+CalculateGap.o: CalculateGap.cpp Tile.hpp CalculateGap.hpp
 	g++ -c CalculateGap.cpp
 
 clean:
