@@ -15,3 +15,6 @@ properties to define it.
 ** Usability
 - The compiler used is *gcc version 5.4.0 20160609*
 - Requires C++11 or higher
+
+** Exception error codes
+- *101* Invalid tile Exception

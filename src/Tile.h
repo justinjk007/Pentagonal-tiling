@@ -1,5 +1,6 @@
 #ifndef TILE_H
 #define TILE_H
+
 struct Tile{
   double side_a;
   double side_b;
@@ -11,4 +12,5 @@ struct Tile{
   double angle_c;
   double angle_d;
 };
+
 #endif /* TILE_H */

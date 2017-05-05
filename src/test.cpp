@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Tile.h"
+#include "CalculateGap.h"
 
 using namespace std;
 
@@ -19,18 +20,6 @@ int main()
   cout<<"Angle B of the tile is "<<test2.angle_b<<endl;
   cout<<"Angle C of the tile is "<<test2.angle_c<<endl;
   cout<<"Angle D of the tile is "<<test2.angle_d<<endl;
-  try{
-    if (true)
-      throw 001;
-  }
-  catch(string e){
-    cout<<"An exception occured "<<e<<endl;
-  }
 
-  try{
-    int b=2/0;
-  }
-  catch(int d){
-    cout<<"An exception occured "<<d<<endl;
-  } 
+  cout<<"The gap created by using tile 2 is "<<getGap(test2)<<endl;
 }
