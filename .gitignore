@@ -1,12 +1,8 @@
-#files being edited
-*~
-
-# make and build files
-*.lst
-*.o
-*.out
-*.exe
-*.eep
-*.lss
-*.map
-*.sym
+*
+!*.cpp
+!*.c
+!*.org
+!*.png
+!*.jpg
+!*.h
+!Makefile
