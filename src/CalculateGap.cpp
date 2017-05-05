@@ -9,7 +9,8 @@ double getGap(Tile tile){
    *This is the main method that calculated the gap between the tiles when arranged.
    */
   if(!validateTile(tile))
-    throw 101;			// Tile not valid Exception
+    ;
+  // throw 101;			// Tile not valid Exception
   return 7.7777;
 }
 
