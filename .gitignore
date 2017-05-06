@@ -6,4 +6,5 @@
 !*.png
 !*.jpg
 !*.h
+!*.hpp
 !Makefile
