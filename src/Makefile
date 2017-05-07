@@ -1,5 +1,5 @@
 test: test.o CalculateGap.o
-	g++ -o test test.o CalculateGap.o -lboost_unit_test_framework && ./test
+	g++ -o test test.o CalculateGap.o -lboost_unit_test_framework
 
 test.o: test.cpp Tile.hpp CalculateGap.hpp
 	g++ -c test.cpp
