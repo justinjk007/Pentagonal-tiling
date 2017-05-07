@@ -7,7 +7,12 @@
 
 using namespace std;
 
-BOOST_AUTO_TEST_CASE(test1){
-  Tile test2 ={21, 54, 54, 54, 4, 40, 120, 120, 60,};
-  BOOST_CHECK_EQUAL(getGap(test2), 7.77);
+BOOST_AUTO_TEST_CASE(validate){
+  Tile tile ={5, 10, 5, 4.3197516, 5, 150, 60, 135, 90,};
+  BOOST_CHECK_EQUAL(validateTile(tile), true);
+}
+
+BOOST_AUTO_TEST_CASE(MaxSide){
+  Tile tile ={21, 24, 434, 54, 4, 40, 120, 120, 60,};
+  BOOST_CHECK_EQUAL(getMaxSide(tile), 434);
 }
