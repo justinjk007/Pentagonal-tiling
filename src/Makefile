@@ -1,12 +1,11 @@
 test: test.o CalculateGap.o
-	g++ -o $@ test.o CalculateGap.o
-# && ./test --log_level=test_suite
+	g++ -o test test.o CalculateGap.o -lboost_unit_test_framework && ./test
 
 test.o: test.cpp Tile.hpp CalculateGap.hpp
-	g++ -c test.cpp -lboost_unit_test_framework-nt
+	g++ -c test.cpp
 
 CalculateGap.o: CalculateGap.cpp Tile.hpp CalculateGap.hpp
-	g++ -c CalculateGap.cpp -lboost_unit_test_framework-nt
+	g++ -c CalculateGap.cpp
 
 clean:
 	rm -f *.o test

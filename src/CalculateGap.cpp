@@ -11,7 +11,7 @@ double getGap(Tile tile){
   if(!validateTile(tile))
     ;
   // throw 101;			// Tile not valid Exception
-  return 7.7777;
+  return 7.77;
 }
 
 bool validateTile(Tile tile){
