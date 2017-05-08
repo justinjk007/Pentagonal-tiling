@@ -30,3 +30,6 @@ image:
 
 ** Exception error codes
 - *101* Invalid tile Exception
+
+** Resources
+- http://www.redblobgames.com/grids/hexagons/
