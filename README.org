@@ -33,3 +33,4 @@ image:
 
 ** Resources
 - http://www.redblobgames.com/grids/hexagons/
+- [[https://www.mathsisfun.com/geometry/pentagon.html][Pentagon applet]]
