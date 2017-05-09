@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Tile.hpp"
+#include "Side.hpp"
 #include "CalculateGap.hpp"
 
 using namespace std;
