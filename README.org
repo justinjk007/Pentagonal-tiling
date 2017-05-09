@@ -28,6 +28,11 @@ image:
 - The compiler used is *gcc version 5.4.0 20160609*
 - Requires C++11 or higher
 
+To test out ~cd~ to ~src~ folder, then run the ~Makefile~ with the ~make~
+command(You should have ~g++~ installed ofc).
+
+Then you can run the main executable object with ~./test~ command.
+
 ** Exception error codes
 - *101* Invalid tile Exception
 
