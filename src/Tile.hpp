@@ -3,11 +3,11 @@
 #include "Side.hpp"
 
 struct Tile{
-  Side side_ab = {0,&side_bc,&side_ea,};
-  Side side_bc = {0,&side_cd,&side_ab,};
-  Side side_cd = {0,&side_de,&side_bc,};
-  Side side_de = {0,&side_ea,&side_cd,};
-  Side side_ea = {0,&side_ab,&side_de,};
+  Side side_ab = {0,&side_bc,&side_ea};
+  Side side_bc = {0,&side_cd,&side_ab};
+  Side side_cd = {0,&side_de,&side_bc};
+  Side side_de = {0,&side_ea,&side_cd};
+  Side side_ea = {0,&side_ab,&side_de};
   double angle_a;
   double angle_b;
   double angle_c;
