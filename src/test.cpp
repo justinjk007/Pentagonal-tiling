@@ -5,6 +5,7 @@
 #include "Tile.hpp"
 #include "Side.hpp"
 #include "CalculateGap.hpp"
+#include "PrimitiveTile.hpp"
 
 using namespace std;
 
@@ -28,9 +29,16 @@ BOOST_AUTO_TEST_CASE(AngleE){
   BOOST_CHECK_EQUAL(tile.angle_e, 200);
 }
 
-BOOST_AUTO_TEST_CASE( test1){
+BOOST_AUTO_TEST_CASE(tile_values){
   Tile tile={10,7,21,20,30,54,54,45,45};
   BOOST_CHECK_EQUAL(tile.side_ab.value, 10);
   BOOST_CHECK_EQUAL(tile.side_ab.next->value, 7);
   BOOST_CHECK_EQUAL(tile.side_ab.previous->value, 30);
+}
+
+
+BOOST_AUTO_TEST_CASE(primitive_tile){
+  PrimitiveTile one;
+  Side side(2,NULL,NULL);
+  BOOST_CHECK_EQUAL(one.checkSide(side), false);
 }
