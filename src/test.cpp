@@ -36,7 +36,6 @@ BOOST_AUTO_TEST_CASE(tile_values){
   BOOST_CHECK_EQUAL(tile.side_ab.previous->value, 30);
 }
 
-
 BOOST_AUTO_TEST_CASE(primitive_tile){
   PrimitiveTile one;
   Side side(2,NULL,NULL);
