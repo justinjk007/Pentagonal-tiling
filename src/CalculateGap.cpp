@@ -2,6 +2,7 @@
 #include "Tile.hpp"
 #include "Side.hpp"
 #include "CalculateGap.hpp"
+#include "PrimitiveTile.hpp"
 
 using namespace std;
 
@@ -13,8 +14,7 @@ double getGap(Tile tile){
   if(!validateTile(tile))
     return 1.01;
   // throw 101;			// Tile not valid Exception
-  else
-    return 7.77;
+
 }
 
 bool validateTile(Tile tile){
