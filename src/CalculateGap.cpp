@@ -8,8 +8,8 @@ using namespace std;
 
 double getGap(Tile tile){
   /*
-   *This is the main method that calculated the gap between the tiles
-   *when arranged.
+   * This is the main method that calculated the gap between the tiles
+   * when arranged.
    */
   if(!validateTile(tile))
     return 1.01;
@@ -19,7 +19,8 @@ double getGap(Tile tile){
 
 bool validateTile(Tile tile){
   /*
-   *This method returns whether the Tile inputted is valid or not.
+   * This method returns whether the Tile inputted is valid or not.
+   * This method is used by getgap()
    */
   double max_side = getMaxSide(tile);
   if(tile.angle_e > 0)
@@ -37,8 +38,9 @@ bool validateTile(Tile tile){
 
 double getMaxSide(Tile tile){
   /*
-   *This method returns the biggest side of the tile.
-   *Pretty bad way to do it I think
+   * This method returns the biggest side of the tile.
+   * Pretty bad way to do it I think
+   * This method is used by ValidateTile
    */
   double max_side = tile.side_ab.value;
   if (tile.side_bc.value > max_side)

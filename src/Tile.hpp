@@ -1,6 +1,5 @@
 /**
  * This structure defines one pentagon or I am simply calling it a tile.
- *
  */
 #ifndef TILE_HPP
 #define TILE_HPP
