@@ -1,3 +1,7 @@
+/**
+ * This structure connects to tiles(which are pentagons together).
+ * This also allows multiple links from one side to many, same way back and forth.
+ */
 #ifndef LINK_HPP
 #define LINK_HPP
 #include "Side.hpp"

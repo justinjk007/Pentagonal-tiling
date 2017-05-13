@@ -1,3 +1,9 @@
+/**
+ * This structure defines a primitive tile, which is linkedlist of
+ * connected tiles making use of the Link, Side and the Tile
+ * strcuture.
+ *
+ */
 #ifndef PRIMITIVETILE_HPP
 #define PRIMITIVETILE_HPP
 #include "Side.hpp"
