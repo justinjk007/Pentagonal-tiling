@@ -5,9 +5,17 @@
 
 class PrimitiveTile{
 private:
-  Tile tile_here ={3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 230, 66};
+  Tile pentagon;
+  Tile* next_link;
+  int size;
 public:
   bool checkSide(Side);
+  void addTile(Tile tile);
+  PrimitiveTile(Tile tile){
+    this->pentagon = tile;
+    this->next_link = NULL;
+    this->size = 1;
+  }
 };
 
 #endif /* PRIMITIVETILE_HPP */
