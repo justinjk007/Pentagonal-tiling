@@ -4,6 +4,6 @@ bool PrimitiveTile::checkSide(Side side){
   return false;
 }
 
-void PrimitiveTile::addTile(Tile tile,Side to_be_connected, Side connected_too){
+bool PrimitiveTile::addTile(Tile tile,Link link){
   return false;
 }

@@ -28,6 +28,18 @@ struct Tile{
     this->angle_d = d;
     this->angle_e = 540-(angle_a+angle_b+angle_c+angle_d);
   }
+  Tile(){
+    this->side_ab.value = 0;
+    this->side_bc.value = 0;
+    this->side_cd.value = 0;
+    this->side_de.value = 0;
+    this->side_ea.value = 0;
+    this->angle_a = 0;
+    this->angle_b = 0;
+    this->angle_c = 0;
+    this->angle_d = 0;
+    this->angle_e = 0;
+  }
 };
 
 #endif /* TILE_HPP */

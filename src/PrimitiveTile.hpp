@@ -7,6 +7,7 @@
 #define PRIMITIVETILE_HPP
 #include "Side.hpp"
 #include "Tile.hpp"
+#include "Link.hpp"
 
 class PrimitiveTile{
 public:
@@ -14,10 +15,10 @@ public:
   Link* next;
   int size;
   bool checkSide(Side);
-  void addTile(Tile tile);
+  bool addTile(Tile tile, Link link);
   PrimitiveTile(Tile tile){
     this->pentagon = tile;
-    this->link = NULL;
+    this->next = NULL;
     this->size = 1;
   }
 };

@@ -37,9 +37,9 @@ BOOST_AUTO_TEST_CASE(tile_values_test){
 }
 
 BOOST_AUTO_TEST_CASE(primitive_tile_test){
-  PrimitiveTile one;
-  Side side(2,NULL,NULL);
-  BOOST_CHECK_EQUAL(one.checkSide(side), false);
+  Tile tile={10,7,21,20,30,54,54,45,45};
+  PrimitiveTile one(tile);
+  BOOST_CHECK_EQUAL(one.checkSide(tile.side_bc), false);
 }
 
 BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion){
