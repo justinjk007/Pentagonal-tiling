@@ -42,6 +42,11 @@ BOOST_AUTO_TEST_CASE(primitive_tile_test){
   BOOST_CHECK_EQUAL(one.checkSide(tile.side_bc), false);
 }
 
+BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion){
+  Tile tile ={3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
+  BOOST_CHECK_EQUAL(getGap(tile),0);
+}
+
 BOOST_AUTO_TEST_CASE(primitive_tile_add_tile){
   Tile tile1={10,7,21,20,30,54,54,45,45};
   Tile tile2={1,17,21,30,40,54,54,45,45};
@@ -54,9 +59,5 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile){
   BOOST_CHECK_EQUAL(answer1,true);
   BOOST_CHECK_EQUAL(answer2,false);
   BOOST_CHECK_EQUAL(newSample.size, 2);
-}
-
-BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion){
-  Tile tile ={3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
-  BOOST_CHECK_EQUAL(getGap(tile),0);
+  newSample.print();
 }
