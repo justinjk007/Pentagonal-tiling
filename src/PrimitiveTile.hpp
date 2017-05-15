@@ -12,7 +12,8 @@
 class PrimitiveTile{
 public:
   Tile pentagon;
-  Link* next;
+  Tile* next;
+  Link* links[1000] = {NULL};;
   int size;
   bool checkSide(Side);
   bool addTile(Tile tile, Link link);

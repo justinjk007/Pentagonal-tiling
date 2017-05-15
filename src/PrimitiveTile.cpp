@@ -5,5 +5,14 @@ bool PrimitiveTile::checkSide(Side side){
 }
 
 bool PrimitiveTile::addTile(Tile tile,Link link){
-  return false;
+  if(!(link.from->value == link.to->value))
+    return false;
+  else{
+    Tile new_tile;
+    new_tile = tile;
+    this->next = &new_tile;
+    links[size] = &link;
+    size++;
+    return true;
+  }
 }

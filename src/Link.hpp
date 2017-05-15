@@ -6,7 +6,7 @@
 #ifndef LINK_HPP
 #define LINK_HPP
 #include "Side.hpp"
-#include <cstddef>
+#include <cstddef> // This library is included so that the NULL pointer works
 
 struct Link
 {
