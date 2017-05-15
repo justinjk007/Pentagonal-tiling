@@ -24,7 +24,6 @@ void PrimitiveTile::print(){
   cout << "\n";
   for (int i = 1; i <= this->size; i++)
     {
-      cout << this->size << "\n";
       cout << this->links[i]->from <<"  "<<links[i]->to<<"\n";
     }
 
