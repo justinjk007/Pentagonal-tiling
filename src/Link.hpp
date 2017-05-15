@@ -8,17 +8,14 @@
 #include "Side.hpp"
 #include <cstddef> // This library is included so that the NULL pointer works
 
-struct Link
-{
+struct Link {
   double from;
   double to;
-  Link(double connected_from, double connected_to)
-  {
+  Link(double connected_from, double connected_to) {
     this->from = connected_from;
     this->to = connected_to;
   }
-  Link()
-  {
+  Link() {
     this->from = 0;
     this->to = 0;
   }

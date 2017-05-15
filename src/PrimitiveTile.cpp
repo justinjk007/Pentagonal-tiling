@@ -3,31 +3,24 @@
 
 using namespace std;
 
-bool PrimitiveTile::checkSide(Side side)
-{
-  return false;
-}
+bool PrimitiveTile::checkSide(Side side) { return false; }
 
-bool PrimitiveTile::addTile(Tile tile,Link link)
-{
-  if(!(link.from == link.to))
+bool PrimitiveTile::addTile(Tile tile, Link link) {
+  if (!(link.from == link.to))
     return false;
-  else
-    {
-      Tile new_tile;
-      new_tile = tile;
-      this->next = &new_tile;
-      size++;
-      links[size] = &link;
-      return true;
-    }
+  else {
+    Tile new_tile;
+    new_tile = tile;
+    this->next = &new_tile;
+    size++;
+    links[size] = &link;
+    return true;
+  }
 }
 
-void PrimitiveTile::print()
-{
+void PrimitiveTile::print() {
   cout << "\n";
-  for (int i = 1; i <= this->size; i++)
-    {
-      cout << this->links[i]->from <<"  "<<links[i]->to<<"\n";
-    }
+  for (int i = 1; i <= this->size; i++) {
+    cout << this->links[i]->from << "  " << links[i]->to << "\n";
+  }
 }
