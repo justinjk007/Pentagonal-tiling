@@ -8,23 +8,24 @@ bool PrimitiveTile::checkSide(Side side){
 }
 
 bool PrimitiveTile::addTile(Tile tile,Link link){
-  if(!(link.from->value == link.to->value))
+  if(!(link.from == link.to))
     return false;
   else{
     Tile new_tile;
     new_tile = tile;
     this->next = &new_tile;
-    links[size] = &link;
     size++;
+    links[size] = &link;
     return true;
   }
 }
 
 void PrimitiveTile::print(){
   cout << "\n";
-  for (int i = 1; i < this->size; i++)
+  for (int i = 1; i <= this->size; i++)
     {
-      cout << this->links[i]->from->value <<"  "<<links[i]->to->value<<"\n";
+      cout << this->size << "\n";
+      cout << this->links[i]->from <<"  "<<links[i]->to<<"\n";
     }
 
 }

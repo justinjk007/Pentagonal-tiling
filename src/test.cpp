@@ -52,8 +52,8 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile){
   Tile tile2={1,17,21,30,40,54,54,45,45};
   Tile tile3={1,17,23,30,40,54,54,45,45};
   PrimitiveTile newSample(tile1);
-  Link link1(&tile1.side_cd,&tile2.side_cd);
-  Link link2(&tile1.side_cd,&tile3.side_cd);
+  Link link1(tile1.side_cd.value,tile2.side_cd.value);
+  Link link2(tile1.side_cd.value,tile3.side_cd.value);
   bool answer1 = newSample.addTile(tile2, link1);
   bool answer2 = newSample.addTile(tile3, link2);
   BOOST_CHECK_EQUAL(answer1,true);

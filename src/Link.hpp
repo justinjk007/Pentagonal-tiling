@@ -10,15 +10,15 @@
 
 struct Link
 {
-  Side* from;
-  Side* to;
-  Link(Side* connected_from, Side* connected_to){
+  double from;
+  double to;
+  Link(double connected_from, double connected_to){
     this->from = connected_from;
     this->to = connected_to;
   }
   Link(){
-    this->from = NULL;
-    this->to = NULL;
+    this->from = 0;
+    this->to = 0;
   }
 };
 
