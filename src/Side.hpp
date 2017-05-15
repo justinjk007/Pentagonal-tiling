@@ -13,7 +13,8 @@ struct Side
   double value;
   Side* next;
   Side* previous;
-  Side(double val, Side* nex, Side* prev){
+  Side(double val, Side* nex, Side* prev)
+  {
     this-> value = val;
     this-> next = nex;
     this-> previous = prev;

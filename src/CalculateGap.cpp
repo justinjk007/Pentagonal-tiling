@@ -6,7 +6,8 @@
 
 using namespace std;
 
-double getGap(Tile tile){
+double getGap(Tile tile)
+{
   /*
    * This is the main method that calculated the gap between the tiles
    * when arranged.
@@ -17,7 +18,8 @@ double getGap(Tile tile){
 
 }
 
-bool validateTile(Tile tile){
+bool validateTile(Tile tile)
+{
   /*
    * This method returns whether the Tile inputted is valid or not.
    * This method is used by getgap()
@@ -36,7 +38,8 @@ bool validateTile(Tile tile){
     return false;
 }
 
-double getMaxSide(Tile tile){
+double getMaxSide(Tile tile)
+{
   /*
    * This method returns the biggest side of the tile.
    * Pretty bad way to do it I think

@@ -9,7 +9,8 @@
 #include "Tile.hpp"
 #include "Link.hpp"
 
-class PrimitiveTile{
+class PrimitiveTile
+{
 public:
   Tile pentagon;
   Tile* next;
@@ -18,7 +19,8 @@ public:
   bool checkSide(Side);
   bool addTile(Tile tile, Link link);
   void print();
-  PrimitiveTile(Tile tile){
+  PrimitiveTile(Tile tile)
+  {
     this->pentagon = tile;
     this->next = NULL;
     this->size = 1;
