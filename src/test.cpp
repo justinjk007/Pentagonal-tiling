@@ -36,12 +36,6 @@ BOOST_AUTO_TEST_CASE(tile_values_test) {
   BOOST_CHECK_EQUAL(tile.side_ab.previous->value, 30);
 }
 
-BOOST_AUTO_TEST_CASE(primitive_tile_test) {
-  Tile tile = {10, 7, 21, 20, 30, 54, 54, 45, 45};
-  PrimitiveTile one(tile);
-  BOOST_CHECK_EQUAL(one.checkSide(tile.side_bc), false);
-}
-
 BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) {
   Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
   BOOST_CHECK_EQUAL(getGap(tile), 0);
@@ -56,6 +50,9 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) {
   Link link2(tile1.side_cd.value, tile3.side_cd.value);
   bool answer1 = newSample.addTile(tile2, link1);
   bool answer2 = newSample.addTile(tile3, link2);
+  bool answer3 = newSample.addTile(tile2, link1);
+  bool answer4 = newSample.addTile(tile2, link1);
+  bool answer5 = newSample.addTile(tile2, link1);
   BOOST_CHECK_EQUAL(answer1, true);
   BOOST_CHECK_EQUAL(answer2, false);
   BOOST_CHECK_EQUAL(newSample.size, 2);

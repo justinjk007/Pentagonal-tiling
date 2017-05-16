@@ -5,20 +5,21 @@
  */
 #ifndef PRIMITIVETILE_HPP
 #define PRIMITIVETILE_HPP
-#include "Link.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
+#include "Link.hpp"
 
-class PrimitiveTile {
+class PrimitiveTile
+{
 public:
   Tile pentagon;
-  Tile *next;
-  Link *links[1000] = {NULL}; // Max size of the primitive tile for now = 1000.
+  Tile* next;
+  Link* links[1000] = {0};  //Max size of the primitive tile for now = 1000.
   int size;
-  bool checkSide(Side);
   bool addTile(Tile tile, Link link);
   void print();
-  PrimitiveTile(Tile tile) {
+  PrimitiveTile(Tile tile)
+  {
     this->pentagon = tile;
     this->next = NULL;
     this->size = 1;

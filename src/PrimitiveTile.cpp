@@ -3,8 +3,6 @@
 
 using namespace std;
 
-bool PrimitiveTile::checkSide(Side side) { return false; }
-
 bool PrimitiveTile::addTile(Tile tile, Link link) {
   if (!(link.from == link.to))
     return false;
@@ -12,15 +10,16 @@ bool PrimitiveTile::addTile(Tile tile, Link link) {
     Tile new_tile;
     new_tile = tile;
     this->next = &new_tile;
-    size++;
-    links[size] = &link;
+    this->links[size] = &link;
+    this->size++;
     return true;
   }
 }
 
 void PrimitiveTile::print() {
   cout << "\n";
-  for (int i = 1; i <= this->size; i++) {
-    cout << this->links[i]->from << "  " << links[i]->to << "\n";
+  cout << this->size<<"\n";
+  for (int i = 1; i < this->size; i++) {
+    cout << (int)this->links[i]->from << "  " << (int)links[i]->to << "\n";
   }
 }

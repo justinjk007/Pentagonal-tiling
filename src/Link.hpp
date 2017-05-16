@@ -16,8 +16,8 @@ struct Link {
     this->to = connected_to;
   }
   Link() {
-    this->from = 0;
-    this->to = 0;
+    this->from = 0.0;
+    this->to = 0.0;
   }
 };
 
