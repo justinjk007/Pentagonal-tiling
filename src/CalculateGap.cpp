@@ -3,6 +3,7 @@
 #include "CalculateGap.hpp"
 #include "PrimitiveTile.hpp"
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -69,4 +70,13 @@ double getMaxAngle(Tile tile) {
   if (tile.angle_e  > max_angle)
     max_angle = tile.angle_e ;
   return max_angle;
+}
+
+double getThirdSide(Side a, Side b) {
+  double side_c = 0;
+  /*
+   * This method returns the third side of the triangle formed inside
+   * a polygon used for area calculating purposes
+   */
+  return side_c;
 }
