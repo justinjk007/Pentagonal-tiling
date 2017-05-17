@@ -14,7 +14,7 @@ class PrimitiveTile
 public:
   Tile pentagon;
   Tile* next;
-  Link* links[1000] = {0};  //Max size of the primitive tile for now = 1000.
+  Link links[1000];  //Max size of the primitive tile for now = 1000.
   int size;
   bool addTile(Tile tile, Link link);
   void print();
