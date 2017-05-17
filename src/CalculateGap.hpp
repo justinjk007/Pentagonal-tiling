@@ -4,9 +4,11 @@
  */
 #ifndef CALCULATEGAP_HPP
 #define CALCULATEGAP_HPP
+#include "Tile.hpp"
 
 double getGap(Tile);
 bool validateTile(Tile);
 double getMaxSide(Tile);
+double getMaxAngle(Tile);
 
 #endif /* CALCULATEGAP_HPP */

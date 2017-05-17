@@ -19,9 +19,19 @@ BOOST_AUTO_TEST_CASE(validate2) { // Complex pentagon
   BOOST_CHECK_EQUAL(validateTile(tile), false);
 }
 
+BOOST_AUTO_TEST_CASE(validate3) {
+  Tile tile = {21, 24, 434, 54, 4, 40, 120, 130, 60};
+  BOOST_CHECK_EQUAL(validateTile(tile), false);
+}
+
 BOOST_AUTO_TEST_CASE(max_side_test) {
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 120, 60};
   BOOST_CHECK_EQUAL(getMaxSide(tile), 434);
+}
+
+BOOST_AUTO_TEST_CASE(max_angle_test) {
+  Tile tile = {21, 24, 434, 54, 4, 40, 120, 130, 60};
+  BOOST_CHECK_EQUAL(getMaxAngle(tile), 190);
 }
 
 BOOST_AUTO_TEST_CASE(AngleE) {
@@ -50,11 +60,7 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) {
   Link link2(tile1.side_cd.value, tile3.side_cd.value);
   bool answer1 = newSample.addTile(tile2, link1);
   bool answer2 = newSample.addTile(tile3, link2);
-  bool answer3 = newSample.addTile(tile2, link1);
-  bool answer4 = newSample.addTile(tile2, link1);
-  bool answer5 = newSample.addTile(tile2, link1);
   BOOST_CHECK_EQUAL(answer1, true);
   BOOST_CHECK_EQUAL(answer2, false);
   BOOST_CHECK_EQUAL(newSample.size, 2);
-  newSample.print();
 }
