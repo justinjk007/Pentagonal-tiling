@@ -1,10 +1,9 @@
-#include "Side.hpp"
-#include "Tile.hpp"
 #include "CalculateGap.hpp"
 #include "PrimitiveTile.hpp"
 #include <iostream>
-#include <cmath>
+#include <math.h>
 
+#define PI 3.14159265
 using namespace std;
 
 double getGap(Tile tile) {
@@ -72,11 +71,32 @@ double getMaxAngle(Tile tile) {
   return max_angle;
 }
 
-double getThirdSide(Side a, Side b) {
-  double side_c = 0;
+double getThirdSide(Side a, Side b, double angle) {
   /*
    * This method returns the third side of the triangle formed inside
    * a polygon used for area calculating purposes
    */
+  angle = angle * PI / 180;
+  double side_c = sqrt((a.value * a.value) + (b.value * b.value) -
+                       (2 * a.value * b.value * cos(angle)));
   return side_c;
+}
+
+double getTriangleArea(Side a, Side b, Side c) {
+  /*
+   * This method returns the Area of the triagle using Heron's
+   * Formulae
+   */
+  double S = (a.value + b.value + c.value) / 2;
+  double area = sqrt(S * (S - a.value) * (S - b.value) * (S - c.value));
+  return area;
+}
+
+double getPentagonArea(Tile tile) {
+  /*
+   * This method returns the Area of the pentagon dividing it into
+   * three triangles, calculating its area and summing them up.
+   */
+  double ac = getThirdSide(tile.side_ab, tile.side_bc, tile.angle_b);
+  return 0;
 }
