@@ -60,9 +60,9 @@ BOOST_AUTO_TEST_CASE(get_triangle_area) {
 }
 
 BOOST_AUTO_TEST_CASE(get_tile_area) {
-  Tile tile1 = {5, 5, 5, 5, 5, 23, 37, 45, 45};
+  Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   double ans = getTileArea(tile1);
-  BOOST_CHECK_CLOSE(ans, 43.01, 0.001); // 0.001% is the tolerance
+  BOOST_CHECK_CLOSE(ans, 43.01, 0.01); // 0.01% is the tolerance
 }
 
 BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) {

@@ -101,13 +101,10 @@ double getTileArea(Tile tile) {
   double ce = getThirdSide(tile.side_cd, tile.side_de, tile.angle_d);
   double triangle1 =
   getTriangleArea(tile.side_ab.value, tile.side_bc.value, ac);
-  printf("%f\n",triangle1);
   double triangle2 =
     getTriangleArea(tile.side_cd.value, tile.side_de.value, ce);
-  printf("%f\n",triangle2);
   double triangle3 =
     getTriangleArea(ac, ce, tile.side_ea.value);
-  printf("%f\n",triangle2);
   double pentagonArea = triangle1 + triangle2 + triangle3;
   return pentagonArea;
 }
