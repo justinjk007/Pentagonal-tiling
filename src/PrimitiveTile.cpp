@@ -17,9 +17,9 @@ bool PrimitiveTile::addTile(Tile tile, Link link) {
 }
 
 void PrimitiveTile::print() {
-  cout << "\n";
-  cout << this->size<<"\n";
+  printf("\n");
+  printf("%i\n", this->size);
   for (int i = 1; i < this->size; i++) {
-    cout << (int)this->links[i].from << "  " << (int)links[i].to << "\n";
+    printf("%0.3f  %0.3f\n", this->links[i].from, this->links[i].to);
   }
 }
