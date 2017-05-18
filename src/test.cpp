@@ -49,19 +49,20 @@ BOOST_AUTO_TEST_CASE(tile_values_test) {
 BOOST_AUTO_TEST_CASE(get_third_side) {
   Tile tile1 = {11, 8, 21, 20, 30, 23, 37, 45, 45};
   double ans = getThirdSide(tile1.side_ab, tile1.side_bc, tile1.angle_b);
-  BOOST_CHECK_CLOSE(ans, 6.6663, 0.001); // 0.001 is the tolerance
+  BOOST_CHECK_CLOSE(ans, 6.6663, 0.001); // 0.001% is the tolerance
 }
 
 BOOST_AUTO_TEST_CASE(get_triangle_area) {
   Tile tile1 = {54, 45, 25, 20, 30, 23, 37, 45, 45};
-  double ans = getTriangleArea(tile1.side_ab, tile1.side_bc, tile1.side_cd);
-  BOOST_CHECK_CLOSE(ans, 558.5552, 0.001); // 0.001 is the tolerance
+  double ans = getTriangleArea(tile1.side_ab.value, tile1.side_bc.value,
+                               tile1.side_cd.value);
+  BOOST_CHECK_CLOSE(ans, 558.5552, 0.001); // 0.001% is the tolerance
 }
 
-BOOST_AUTO_TEST_CASE(get_pentagon_area) {
+BOOST_AUTO_TEST_CASE(get_tile_area) {
   Tile tile1 = {5, 5, 5, 5, 5, 23, 37, 45, 45};
-  double ans = getPentagonArea(tile1);
-  BOOST_CHECK_CLOSE(ans, 43.01, 0.001); // 0.001 is the tolerance
+  double ans = getTileArea(tile1);
+  BOOST_CHECK_CLOSE(ans, 43.01, 0.001); // 0.001% is the tolerance
 }
 
 BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) {

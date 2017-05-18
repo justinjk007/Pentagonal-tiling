@@ -12,7 +12,7 @@ bool validateTile(Tile);
 double getMaxSide(Tile);
 double getMaxAngle(Tile);
 double getThirdSide(Side, Side, double);
-double getTriangleArea(Side, Side, Side);
-double getPentagonArea(Tile);
+double getTriangleArea(double, double, double);
+double getTileArea(Tile);
 
 #endif /* CALCULATEGAP_HPP */

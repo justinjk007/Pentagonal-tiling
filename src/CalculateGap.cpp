@@ -82,21 +82,32 @@ double getThirdSide(Side a, Side b, double angle) {
   return side_c;
 }
 
-double getTriangleArea(Side a, Side b, Side c) {
+double getTriangleArea(double a, double b, double c) {
   /*
    * This method returns the Area of the triagle using Heron's
    * Formulae
    */
-  double S = (a.value + b.value + c.value) / 2;
-  double area = sqrt(S * (S - a.value) * (S - b.value) * (S - c.value));
+  double S = (a + b + c) / 2;
+  double area = sqrt(S * (S - a) * (S - b) * (S - c));
   return area;
 }
 
-double getPentagonArea(Tile tile) {
+double getTileArea(Tile tile) {
   /*
    * This method returns the Area of the pentagon dividing it into
    * three triangles, calculating its area and summing them up.
    */
   double ac = getThirdSide(tile.side_ab, tile.side_bc, tile.angle_b);
-  return 0;
+  double ce = getThirdSide(tile.side_cd, tile.side_de, tile.angle_d);
+  double triangle1 =
+  getTriangleArea(tile.side_ab.value, tile.side_bc.value, ac);
+  printf("%f\n",triangle1);
+  double triangle2 =
+    getTriangleArea(tile.side_cd.value, tile.side_de.value, ce);
+  printf("%f\n",triangle2);
+  double triangle3 =
+    getTriangleArea(ac, ce, tile.side_ea.value);
+  printf("%f\n",triangle2);
+  double pentagonArea = triangle1 + triangle2 + triangle3;
+  return pentagonArea;
 }
