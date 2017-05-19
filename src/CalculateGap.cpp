@@ -1,6 +1,5 @@
 #include "CalculateGap.hpp"
 #include "PrimitiveTile.hpp"
-#include <iostream>
 #include <math.h>
 
 #define PI 3.14159265
@@ -37,6 +36,8 @@ bool validateTile(Tile tile) {
         return false;
     else
       return false;
+  else
+    return false;
 }
 
 double getMaxSide(Tile tile) {
