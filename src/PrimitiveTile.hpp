@@ -13,16 +13,15 @@ class PrimitiveTile
 {
 public:
   Tile pentagon;
-  Tile* next;
   Link links[1000];  //Max size of the primitive tile for now = 1000.
   int size;
-  bool addTile(Tile tile, Link link);
+  bool addTile(Link link);
   void print();
   PrimitiveTile(Tile tile)
   {
     this->pentagon = tile;
-    this->next = NULL;
-    this->size = 1;
+    this->size = 1; // Because creating the primitive tile means there
+                    // should be at least one pentagon to start from
   }
 };
 

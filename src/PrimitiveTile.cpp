@@ -3,13 +3,10 @@
 
 using namespace std;
 
-bool PrimitiveTile::addTile(Tile tile, Link link) {
+bool PrimitiveTile::addTile(Link link) {
   if (!(link.from == link.to))
     return false;
   else {
-    Tile new_tile;
-    new_tile = tile;
-    this->next = &new_tile;
     this->links[size] = link;
     this->size++;
     return true;
