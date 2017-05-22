@@ -84,11 +84,6 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) {
   newSample.print();
 }
 
-// TODO Fix the print funtion is addtile, current problem might be
-// that the first tile might have fucked up side pointer vlaues, so ot
-// might have the loop might have to start from 2 or something, or you
-// have to do somethibg about tile at position one
-
 BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) {
   Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
   BOOST_CHECK_EQUAL(getGap(tile), 0);
