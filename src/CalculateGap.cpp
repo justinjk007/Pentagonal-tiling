@@ -11,8 +11,7 @@ double getGap(Tile tile) {
    * when arranged.
    */
   if (!validateTile(tile))
-    return 1.01;
-  // throw 101;			// Tile not valid Exception
+    return -101;		// Negative gap means the tile is not valid.
 }
 
 bool validateTile(Tile tile) {

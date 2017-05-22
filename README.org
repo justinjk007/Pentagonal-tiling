@@ -41,9 +41,6 @@ command(You should have ~g++~ installed ofc).
 
 Then you can run the main executable object with ~./test~ command.
 
-** Exception error codes
-- *101* Invalid tile Exception
-
 ** Resources
 - http://www.redblobgames.com/grids/hexagons/
 - [[https://www.mathsisfun.com/geometry/pentagon.html][Pentagon applet]]
