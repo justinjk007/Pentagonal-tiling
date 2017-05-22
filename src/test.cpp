@@ -66,18 +66,28 @@ BOOST_AUTO_TEST_CASE(get_tile_area) {
 }
 
 BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) {
-  Tile tile1 = {10, 7, 21, 20, 30, 54, 54, 45, 45};
-  Tile tile2 = {1, 17, 21, 30, 40, 54, 54, 45, 45};
-  Tile tile3 = {1, 17, 23, 30, 40, 54, 54, 45, 45};
-  PrimitiveTile newSample(tile1);
-  Link link1(tile1.side_cd.value, tile2.side_cd.value);
-  Link link2(tile1.side_cd.value, tile3.side_cd.value);
+  Tile tile = {10, 7, 21, 20, 20, 54, 54, 45, 45};
+  PrimitiveTile newSample(tile);
+  Link link1(tile.side_cd, tile.side_cd);
+  Link link2(tile.side_cd, tile.side_ab);
+  Link link3(tile.side_ab, tile.side_bc);
+  Link link4(tile.side_de, tile.side_ea);
   bool answer1 = newSample.addTile(link1);
   bool answer2 = newSample.addTile(link2);
+  bool answer3 = newSample.addTile(link3);
+  bool answer4 = newSample.addTile(link4);
   BOOST_CHECK_EQUAL(answer1, true);
   BOOST_CHECK_EQUAL(answer2, false);
-  BOOST_CHECK_EQUAL(newSample.size, 2);
+  BOOST_CHECK_EQUAL(answer3, false);
+  BOOST_CHECK_EQUAL(answer4, true);
+  BOOST_CHECK_EQUAL(newSample.size, 3);
+  newSample.print();
 }
+
+// TODO Fix the print funtion is addtile, current problem might be
+// that the first tile might have fucked up side pointer vlaues, so ot
+// might have the loop might have to start from 2 or something, or you
+// have to do somethibg about tile at position one
 
 BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) {
   Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};

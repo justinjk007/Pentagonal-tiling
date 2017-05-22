@@ -4,11 +4,7 @@
      [[./face.png]]
 
 
-** TODO  Make sure the given pentagon is a convex pentagon.
-
-** TODO Tile the given tile for all possibilities of a primitive tile  for just two of the tiles.
-
-** TODO Calculate the third side of a triangle
+** TODO Tile the given tile for all possibilities of a primitive tile for just two of the tiles.
 
 
 **  Pentagons

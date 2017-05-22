@@ -7,11 +7,17 @@
  */
 #ifndef SIDE_HPP
 #define SIDE_HPP
+#include <cstddef> // This library is included so that the NULL pointer works
 
 struct Side {
   double value;
   Side *next;
   Side *previous;
+  Side() {
+    this->value = 0;
+    this->next = NULL;
+    this->previous = NULL;
+  }
   Side(double val, Side *nex, Side *prev) {
     this->value = val;
     this->next = nex;
