@@ -44,14 +44,10 @@ double getMaxSide(Tile tile) {
    * This method returns the biggest side of the tile.
    */
   double max_side = tile.side[0].value;
-  if (tile.side[1].value > max_side)
-    max_side = tile.side[1].value;
-  if (tile.side[2].value > max_side)
-    max_side = tile.side[2].value;
-  if (tile.side[3].value > max_side)
-    max_side = tile.side[3].value;
-  if (tile.side[4].value > max_side)
-    max_side = tile.side[4].value;
+  for (int i = 0; i < 5; ++i) {
+    if (tile.side[i].value > max_side)
+      max_side = tile.side[i].value;
+  }
   return max_side;
 }
 
