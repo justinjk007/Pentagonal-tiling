@@ -86,5 +86,6 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
 
 BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #12
   Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
-  BOOST_CHECK_EQUAL(getGap(tile), -101);
+  Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  BOOST_CHECK_EQUAL(getGap(tile1), -101);
 }

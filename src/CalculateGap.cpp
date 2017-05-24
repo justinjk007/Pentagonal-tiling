@@ -10,8 +10,31 @@ double getGap(Tile tile) {
    * This is the main method that calculated the gap between the tiles
    * when arranged.
    */
+  double gap = 0;
+  double gap_list[25] = {0}; // 25 is the maximum number of
+  // combinations in this case.
+  int gap_index = 0;
   if (!validateTile(tile))
-    return -101;		// Negative gap means the tile is not valid.
+    return -101; // Negative gap means the tile is not valid.
+  for (int i = 0; i < 5; ++i) {
+    for (int j = 0; j < 5; ++j) {
+      PrimitiveTile p_tile(tile);
+      Link link(tile.side[i], tile.side[j]);
+      if (p_tile.addTile(link)) {
+        gap_list[gap_index] = gap;
+      }
+    }
+  }
+
+  // Returning the minimumgap in the gap list
+  double min_gap = gap_list[0];
+  double gap_list_size = sizeof(gap_list);
+  for (int i = 0; i < gap_list_size; ++i) {
+    if (gap_list[i] < min_gap)
+      min_gap = gap_list[i];
+  }
+  return min_gap;
+
 }
 
 bool validateTile(Tile tile) {
@@ -24,7 +47,7 @@ bool validateTile(Tile tile) {
   if (max_angle <= 180.00)
     if (tile.angle_e > 0)
       if (tile.side[0].value + tile.side[1].value + tile.side[2].value +
-          tile.side[3].value + tile.side[4].value >
+	  tile.side[3].value + tile.side[4].value >
           (2 * max_side))
         // 2 x Biggest side becauase we don't know which one is the
         // biggest side now and we should count that twice on the right
