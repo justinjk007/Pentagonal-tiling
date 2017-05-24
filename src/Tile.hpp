@@ -6,11 +6,11 @@
 #include "Side.hpp"
 
 struct Tile {
-  Side side_ab = {0, &side_bc, &side_ea};
-  Side side_bc = {0, &side_cd, &side_ab};
-  Side side_cd = {0, &side_de, &side_bc};
-  Side side_de = {0, &side_ea, &side_cd};
-  Side side_ea = {0, &side_ab, &side_de};
+  Side side[5] = {{0, &side[1], &side[4]},
+                  {0, &side[2], &side[0]},
+                  {0, &side[3], &side[1]},
+                  {0, &side[4], &side[2]},
+                  {0, &side[0], &side[3]}};
   double angle_a;
   double angle_b;
   double angle_c;
@@ -18,11 +18,11 @@ struct Tile {
   double angle_e;
   Tile(double sab, double sbc, double scd, double sde, double sea, double a,
        double b, double c, double d) {
-    this->side_ab.value = sab;
-    this->side_bc.value = sbc;
-    this->side_cd.value = scd;
-    this->side_de.value = sde;
-    this->side_ea.value = sea;
+    this->side[0].value = sab;
+    this->side[1].value = sbc;
+    this->side[2].value = scd;
+    this->side[3].value = sde;
+    this->side[4].value = sea;
     this->angle_a = a;
     this->angle_b = b;
     this->angle_c = c;
@@ -30,11 +30,11 @@ struct Tile {
     this->angle_e = 540 - (angle_a + angle_b + angle_c + angle_d);
   }
   Tile() {
-    this->side_ab.value = 0;
-    this->side_bc.value = 0;
-    this->side_cd.value = 0;
-    this->side_de.value = 0;
-    this->side_ea.value = 0;
+    this->side[0].value = 0;
+    this->side[1].value = 0;
+    this->side[2].value = 0;
+    this->side[3].value = 0;
+    this->side[4].value = 0;
     this->angle_a = 0;
     this->angle_b = 0;
     this->angle_c = 0;

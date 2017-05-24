@@ -41,21 +41,21 @@ BOOST_AUTO_TEST_CASE(AngleE) {	// #6
 
 BOOST_AUTO_TEST_CASE(tile_values_test) { // #7
   Tile tile = {10, 7, 21, 20, 30, 54, 54, 45, 45};
-  BOOST_CHECK_EQUAL(tile.side_ab.value, 10);
-  BOOST_CHECK_EQUAL(tile.side_ab.next->value, 7);
-  BOOST_CHECK_EQUAL(tile.side_ab.previous->value, 30);
+  BOOST_CHECK_EQUAL(tile.side[0].value, 10);
+  BOOST_CHECK_EQUAL(tile.side[0].next->value, 7);
+  BOOST_CHECK_EQUAL(tile.side[0].previous->value, 30);
 }
 
 BOOST_AUTO_TEST_CASE(get_third_side) { // #8
   Tile tile1 = {11, 8, 21, 20, 30, 23, 37, 45, 45};
-  double ans = getThirdSide(tile1.side_ab, tile1.side_bc, tile1.angle_b);
+  double ans = getThirdSide(tile1.side[0], tile1.side[1], tile1.angle_b);
   BOOST_CHECK_CLOSE(ans, 6.6663, 0.001); // 0.001% is the tolerance
 }
 
 BOOST_AUTO_TEST_CASE(get_triangle_area) { // #9
   Tile tile1 = {54, 45, 25, 20, 30, 23, 37, 45, 45};
-  double ans = getTriangleArea(tile1.side_ab.value, tile1.side_bc.value,
-                               tile1.side_cd.value);
+  double ans = getTriangleArea(tile1.side[0].value, tile1.side[1].value,
+                               tile1.side[2].value);
   BOOST_CHECK_CLOSE(ans, 558.5552, 0.001); // 0.001% is the tolerance
 }
 
@@ -68,10 +68,10 @@ BOOST_AUTO_TEST_CASE(get_tile_area) { // #10
 BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
   Tile tile = {10, 7, 21, 20, 20, 54, 54, 45, 45};
   PrimitiveTile newSample(tile);
-  Link link1(tile.side_cd, tile.side_cd);
-  Link link2(tile.side_cd, tile.side_ab);
-  Link link3(tile.side_ab, tile.side_bc);
-  Link link4(tile.side_de, tile.side_ea);
+  Link link1(tile.side[2], tile.side[2]);
+  Link link2(tile.side[2], tile.side[0]);
+  Link link3(tile.side[0], tile.side[1]);
+  Link link4(tile.side[3], tile.side[4]);
   bool answer1 = newSample.addTile(link1);
   bool answer2 = newSample.addTile(link2);
   bool answer3 = newSample.addTile(link3);
