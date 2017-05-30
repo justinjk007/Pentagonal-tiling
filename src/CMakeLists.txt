@@ -3,7 +3,7 @@ project (PentagonalTiling)
 
 # The version number.
 set (Tutorial_VERSION_MAJOR 0)
-set (Tutorial_VERSION_MINOR 4)
+set (Tutorial_VERSION_MINOR 5)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -14,10 +14,7 @@ set (Tutorial_VERSION_MINOR 4)
 
 # add the binary tree to the search path for include files
 # so that we will find TutorialConfig.h
-# include_directories("${PROJECT_BINARY_DIR}")
-
-# include_directories ("${PROJECT_SOURCE_DIR}/MathFunctions")
-# add_subdirectory (MathFunctions)
+include_directories("${PROJECT_BINARY_DIR}")
 
 SET(BOOST_ROOT "C:\\local\\boost_1_64_0")
 SET(Boost_USE_STATIC_LIBS ON)
@@ -29,5 +26,5 @@ INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 ADD_LIBRARY(CalculateGap CalculateGap.cpp)
 ADD_LIBRARY(PrimitiveTile Primitivetile.cpp)
 
-ADD_EXECUTABLE(testing test.cpp)
-TARGET_LINK_LIBRARIES (testing CalculateGap PrimitiveTile ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+ADD_EXECUTABLE(main main.cpp)
+TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
