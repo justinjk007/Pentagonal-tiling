@@ -22,3 +22,11 @@ void PrimitiveTile::print() {
   }
   printf("\n");
 }
+
+
+void PrimitiveTile::del() {
+  /**
+   * Resets the contents of the primitiveTile.
+   */
+  this->size = 1;
+}

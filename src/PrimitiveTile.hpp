@@ -17,6 +17,7 @@ public:
   int size;
   bool addTile(Link link);
   void print();
+  void del();
   PrimitiveTile(Tile tile)
   {
     this->pentagon = tile;

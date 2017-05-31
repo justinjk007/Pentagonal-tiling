@@ -4,15 +4,19 @@
  */
 #ifndef CALCULATEGAP_HPP
 #define CALCULATEGAP_HPP
-#include "Tile.hpp"
+#include "PrimitiveTile.hpp"
 #include "Side.hpp"
+#include "Square.hpp"
+#include "Tile.hpp"
 
 double getGap(Tile);
+double calculateGap(PrimitiveTile, double);
 bool validateTile(Tile);
 double getMaxSide(Tile);
 double getMaxAngle(Tile);
 double getThirdSide(Side, Side, double);
 double getTriangleArea(double, double, double);
 double getTileArea(Tile);
+Square drawSquare(double);
 
 #endif /* CALCULATEGAP_HPP */
