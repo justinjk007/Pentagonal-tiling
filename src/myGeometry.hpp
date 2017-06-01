@@ -19,6 +19,11 @@ class Line {
 public:
   Point start;
   Point end;
+  Line drawLine(Point, double, double);
+  Line drawLine(Point, double);
+  double getSlope();
+  double getInclineAngle();
+  double getAngleWithRespectTo(Line);
   Line() {
     this->start.x_cord = 0.0;
     this->start.y_cord = 0.0;
@@ -29,12 +34,6 @@ public:
     this->start = a;
     this->end = b;
   }
-};
-
-class GeoSystem {
-public:
-  void drawLine(Point, double, double);
-  void drawLine(Point, double);
 };
 
 #endif /* MYGEOMETRY_HPP */
