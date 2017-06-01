@@ -15,4 +15,9 @@ public:
   }
 };
 
+class GeoSystem {
+public:
+  void drawLine(double start, double end);
+};
+
 #endif /* MYGEOMETRY_HPP */

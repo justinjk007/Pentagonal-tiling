@@ -16,6 +16,7 @@ INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 ADD_LIBRARY(CalculateGap CalculateGap.cpp)
 ADD_LIBRARY(PrimitiveTile Primitivetile.cpp)
+ADD_LIBRARY(myGeometry myGeometry.cpp)
 
 ADD_EXECUTABLE(main main.cpp)
-TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
