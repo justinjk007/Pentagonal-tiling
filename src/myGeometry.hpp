@@ -15,9 +15,26 @@ public:
   }
 };
 
+class Line {
+public:
+  Point start;
+  Point end;
+  Line() {
+    this->start.x_cord = 0.0;
+    this->start.y_cord = 0.0;
+    this->end.x_cord = 0.0;
+    this->end.y_cord = 0.0;
+  }
+  Line(Point a, Point b) {
+    this->start = a;
+    this->end = b;
+  }
+};
+
 class GeoSystem {
 public:
-  void drawLine(double start, double end);
+  void drawLine(Point, double, double);
+  void drawLine(Point, double);
 };
 
 #endif /* MYGEOMETRY_HPP */
