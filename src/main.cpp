@@ -4,6 +4,7 @@
 #include "Tile.hpp"
 #include "CalculateGap.hpp"
 #include "PrimitiveTile.hpp"
+#include "myGeometry.hpp"
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
@@ -82,11 +83,25 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
   BOOST_CHECK_EQUAL(answer3, false);
   BOOST_CHECK_EQUAL(answer4, true);
   BOOST_CHECK_EQUAL(newSample.size, 3);
-  newSample.print();
 }
 
-BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #12
-  Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
-  Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  BOOST_CHECK_EQUAL(getGap(tile1), -101);
+BOOST_AUTO_TEST_CASE(my_geometry_line_finder){ // #12
+  Line line1 = {{0,0}, {4.76,0.10}};
+  Line line2;
+  line2 = line1.getLineWithRespectTo(131,3.53);
+  BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
+  BOOST_CHECK_EQUAL(line1.start.y_cord, 0);
+  BOOST_CHECK_EQUAL(line1.end.x_cord, 4.76); //(4.76,0.10)
+  BOOST_CHECK_EQUAL(line1.end.y_cord, 0.10);
+
+  BOOST_CHECK_EQUAL(line2.start.x_cord, 4.76);
+  BOOST_CHECK_EQUAL(line2.start.y_cord, 0.10);
+  BOOST_CHECK_EQUAL(line2.end.x_cord, 7); //(7.00,2.83)
+  BOOST_CHECK_EQUAL(line2.end.y_cord, 2.83);
 }
+
+// BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #13
+//   Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
+//   Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+//   BOOST_CHECK_EQUAL(getGap(tile1), -101);
+// }

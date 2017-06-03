@@ -1,4 +1,5 @@
 #include "myGeometry.hpp"
+#include "iostream"
 #include <math.h>
 
 #define PI 3.14159265
@@ -31,17 +32,25 @@ double Line::getSlope() {
 double Line::getInclineAngle() {
   double angle = 0;
   double m = this->getSlope();
-  angle = atan (m) * 180 / PI; // Convert degree into Radians
+  printf("slope is %f \n \n",m);
+  angle = atan(m);
+  printf("angle before is %f \n \n",angle);
+  angle = angle * 180 / PI; // Convert Rad into degrees
+  printf("angle after is %f \n \n",angle);
   return angle;
 }
 
-double Line::getAngleWithRespectTo(Line line) {
+Line Line::getLineWithRespectTo(double angle, double length) {
+  Line line;
+  line.start.x_cord = this->end.x_cord;
+  line.start.y_cord = this->end.y_cord;
   double angle1 = this->getInclineAngle();
-  double angle2 = line.getInclineAngle();
-  double diff = angle1 - angle2;
-  return 0;
+  printf("angle1 is %f \n \n",angle1);
+  // Here suffix 2 means that of the second line or 2nd co-ordinate of the line
+  double m2 = tan(angle + angle1); // Slope of the second line.
+  double x2 = sqrt((length * length) / (m2 * m2) + 1) + this->end.x_cord;
+  double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
+  line.end.x_cord = x2;
+  line.end.y_cord = y2;
+  return line;
 }
-
-
-// What was the point of implementing these again ?
-// you are suppose to go the other way around
