@@ -88,16 +88,19 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
 BOOST_AUTO_TEST_CASE(my_geometry_line_finder){ // #12
   Line line1 = {{0,0}, {4.76,0.10}};
   Line line2;
-  line2 = line1.getLineWithRespectTo(131,3.53);
+  line2 = line1.getLineWithRespectTo(49,3.53); // Angle and length
+
+  BOOST_CHECK_CLOSE(line1.getSlope(), 0.02100, 0.05);
   BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
   BOOST_CHECK_EQUAL(line1.start.y_cord, 0);
   BOOST_CHECK_EQUAL(line1.end.x_cord, 4.76); //(4.76,0.10)
   BOOST_CHECK_EQUAL(line1.end.y_cord, 0.10);
 
-  BOOST_CHECK_EQUAL(line2.start.x_cord, 4.76);
-  BOOST_CHECK_EQUAL(line2.start.y_cord, 0.10);
-  BOOST_CHECK_EQUAL(line2.end.x_cord, 7); //(7.00,2.83)
-  BOOST_CHECK_EQUAL(line2.end.y_cord, 2.83);
+  BOOST_CHECK_CLOSE(line2.getSlope(), 1.21875, 0.05);
+  BOOST_CHECK_CLOSE(line2.start.x_cord, 4.76, 0.05);
+  BOOST_CHECK_CLOSE(line2.start.y_cord, 0.10, 0.05);
+  BOOST_CHECK_CLOSE(line2.end.x_cord, 7, 0.05); //(7.00,2.83)
+  BOOST_CHECK_CLOSE(line2.end.y_cord, 2.83, 0.05);
 }
 
 // BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #13

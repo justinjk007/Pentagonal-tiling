@@ -2,7 +2,7 @@
 #include "iostream"
 #include <math.h>
 
-#define PI 3.14159265
+#define PI 3.14159265359
 
 double Line::getSlope() {
   double diff_y = this->end.y_cord - this->start.y_cord;
@@ -14,11 +14,8 @@ double Line::getSlope() {
 double Line::getInclineAngle() {
   double angle = 0;
   double m = this->getSlope();
-  printf("slope is %f \n \n",m);
   angle = atan(m);
-  printf("angle before is %f \n \n",angle);
-  angle = angle * 180 / PI; // Convert Rad into degrees
-  printf("angle after is %f \n \n",angle);
+  angle = angle * (180 / PI); // Convert Rad into degrees
   return angle;
 }
 
@@ -35,15 +32,15 @@ Line Line::getLineWithRespectTo(Point origin, double length) {
   return line;
 }
 
-Line Line::getLineWithRespectTo(double angle, double length) {
+Line Line::getLineWithRespectTo(double angle2, double length) {
   Line line;
   line.start.x_cord = this->end.x_cord;
   line.start.y_cord = this->end.y_cord;
   double angle1 = this->getInclineAngle();
-  printf("angle1 is %f \n \n",angle1);
+  double m = this->getSlope();
   // Here suffix 2 means that of the second line or 2nd co-ordinate of the line
-  double m2 = tan(angle + angle1); // Slope of the second line.
-  double x2 = sqrt((length * length) / (m2 * m2) + 1) + this->end.x_cord;
+  double m2 = tan((angle2 + angle1)*(PI/180)); // Slope of the second line.
+  double x2 = sqrt(pow(length, 2) / (1 + pow(m2, 2))) + this->end.x_cord;
   double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
   line.end.x_cord = x2;
   line.end.y_cord = y2;
