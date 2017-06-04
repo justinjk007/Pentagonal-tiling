@@ -19,10 +19,9 @@ class Line {
 public:
   Point start;
   Point end;
-  Line drawLine(Point, double, double);
-  Line drawLine(Point, double);
   double getSlope();
   double getInclineAngle();
+  Line getLineWithRespectTo(Point, double);
   Line getLineWithRespectTo(double, double);
   Line() {
     this->start.x_cord = 0.0;

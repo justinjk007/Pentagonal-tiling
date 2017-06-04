@@ -4,7 +4,7 @@
 
 #define PI 3.14159265
 
-Line Line::drawLine(Point origin, double length) {
+Line Line::getLineWithRespectTo(Point origin, double length) {
   /**
    * This method is to draw the first line in the shape when we don't
    * have an other side for the angle to be based on
@@ -14,11 +14,6 @@ Line Line::drawLine(Point origin, double length) {
   line.start.y_cord = origin.y_cord;
   line.end.x_cord = length;
   line.end.y_cord = 0.0;
-  return line;
-}
-
-Line Line::drawLine(Point origin ,double length, double angle) {
-  Line line ;
   return line;
 }
 
