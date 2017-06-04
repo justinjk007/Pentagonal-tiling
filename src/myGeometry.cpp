@@ -4,19 +4,6 @@
 
 #define PI 3.14159265
 
-Line Line::getLineWithRespectTo(Point origin, double length) {
-  /**
-   * This method is to draw the first line in the shape when we don't
-   * have an other side for the angle to be based on
-   */
-  Line line ;
-  line.start.x_cord = origin.x_cord;
-  line.start.y_cord = origin.y_cord;
-  line.end.x_cord = length;
-  line.end.y_cord = 0.0;
-  return line;
-}
-
 double Line::getSlope() {
   double diff_y = this->end.y_cord - this->start.y_cord;
   double diff_x = this->end.x_cord - this->start.x_cord;
@@ -33,6 +20,19 @@ double Line::getInclineAngle() {
   angle = angle * 180 / PI; // Convert Rad into degrees
   printf("angle after is %f \n \n",angle);
   return angle;
+}
+
+Line Line::getLineWithRespectTo(Point origin, double length) {
+  /**
+   * This method is to draw the first line in the shape when we don't
+   * have an other side for the angle to be based on
+   */
+  Line line ;
+  line.start.x_cord = origin.x_cord;
+  line.start.y_cord = origin.y_cord;
+  line.end.x_cord = length;
+  line.end.y_cord = 0.0;
+  return line;
 }
 
 Line Line::getLineWithRespectTo(double angle, double length) {
