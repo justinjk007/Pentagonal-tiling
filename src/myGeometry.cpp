@@ -33,6 +33,10 @@ Line Line::getLineWithRespectTo(Point origin, double length) {
 }
 
 Line Line::getLineWithRespectTo(double angle2, double length) {
+  /**
+   * This method is to draw the lines with respect to the angle
+   * between this line & the last line and the length of the second line.
+   */
   Line line;
   line.start.x_cord = this->end.x_cord;
   line.start.y_cord = this->end.y_cord;
