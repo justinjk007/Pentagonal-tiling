@@ -41,7 +41,6 @@ Line Line::getLineWithRespectTo(double angle2, double length) {
   line.start.x_cord = this->end.x_cord;
   line.start.y_cord = this->end.y_cord;
   double angle1 = this->getInclineAngle();
-  double m = this->getSlope();
   // Here suffix 2 means that of the second line or 2nd co-ordinate of the line
   double m2 = tan((angle2 + angle1)*(PI/180)); // Slope of the second line.
   double x2 = sqrt(pow(length, 2) / (1 + pow(m2, 2))) + this->end.x_cord;
