@@ -40,22 +40,28 @@ void PrimitiveTile::drawPentagon(Tile tile) {
   Point origin = {0,0};
   double length = tile.side[0].value;
   current_line = current_line.getLineWithRespectTo(origin,length);
+  // current_line = {{0, 0}, {5.65, 0}};
   pentagon[0] = current_line;
-  for (int i = 1; i < 5; ++i)
-    {
+  for (int i = 1; i < 5; i++) {
+    if(i<3)
       next_angle = 180.0 - tile.angle[i];
-      next_line = current_line.getLineWithRespectTo(next_angle, tile.side[i].value);
-      pentagon[i] = current_line;
-      current_line = next_line;
-    }
-  ofstream myfile;
-  // (5.09,5.80), (1.68,4.90), (1.48,1.38), (4.76,0.10), (7.00,2.83)
-  myfile.open ("example.csv");
-  myfile << "x,y,\n";
-  for (int i = 0; i < 5; ++i)
-    myfile <<pentagon[i].start.x_cord<<","<<pentagon[i].start.y_cord<< "\n";
+    else
+      next_angle = tile.angle[i];
+    next_line =
+      current_line.getLineWithRespectTo(next_angle, tile.side[i].value);
+    pentagon[i] = next_line;
+    current_line = next_line;
+  }
 
-  myfile <<pentagon[4].end.x_cord<<","<<pentagon[4].end.y_cord<< "\n"; // So that it will complete a circle
+  ofstream myfile;
+  myfile.open("example.csv");
+  myfile << "x,y,\n";
+  for (int i = 0; i < 5; ++i) {
+    myfile << pentagon[i].start.x_cord << "," << pentagon[i].start.y_cord
+           << "\n";
+  }
+  myfile << pentagon[0].start.x_cord << "," << pentagon[0].start.y_cord
+         << "\n"; // So that it will complete a circle
   myfile.close();
 }
 

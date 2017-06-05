@@ -104,7 +104,8 @@ BOOST_AUTO_TEST_CASE(my_geometry_line_finder){ // #12
 }
 
 BOOST_AUTO_TEST_CASE(test_drawing_methods){
-  Tile tile = {10, 7, 21, 20, 20, 54, 54, 45, 45};
+  // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
+  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(tile);
   BOOST_CHECK_EQUAL(0.10, 0.10);
