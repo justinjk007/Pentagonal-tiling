@@ -7,6 +7,8 @@
 #define PRIMITIVETILE_HPP
 #include "Side.hpp"
 #include "Tile.hpp"
+#include "Square.hpp"
+#include "myGeometry.hpp"
 #include "Link.hpp"
 
 class PrimitiveTile
@@ -17,6 +19,8 @@ public:
   int size;
   bool addTile(Link link);
   void print();
+  void drawPentagon(Tile);
+  void drawPrimitiveTile();
   void del();
   PrimitiveTile(Tile tile)
   {

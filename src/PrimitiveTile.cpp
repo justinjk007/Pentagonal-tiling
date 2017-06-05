@@ -30,3 +30,21 @@ void PrimitiveTile::del() {
    */
   this->size = 1;
 }
+
+void PrimitiveTile::drawPentagon(Tile tile) {
+  Line pentagon[5];
+  Line current_line;
+  Line next_line;
+  Point origin = {0,0};
+  double length = tile.side[0].value;
+  current_line = current_line.getLineWithRespectTo(origin,length);
+  pentagon[0] = current_line;
+  for (int i = 0; i < 4; ++i)
+    {
+      next_line = current_line.getLineWithRespectTo(double, double);
+    }
+}
+
+void PrimitiveTile::drawPrimitiveTile() {
+
+}
