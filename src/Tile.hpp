@@ -11,11 +11,7 @@ struct Tile {
                   {0, &side[3], &side[1]},
                   {0, &side[4], &side[2]},
                   {0, &side[0], &side[3]}};
-  double angle_a;
-  double angle_b;
-  double angle_c;
-  double angle_d;
-  double angle_e;
+  double angle[5] = {0};
   Tile(double sab, double sbc, double scd, double sde, double sea, double a,
        double b, double c, double d) {
     this->side[0].value = sab;
@@ -23,11 +19,11 @@ struct Tile {
     this->side[2].value = scd;
     this->side[3].value = sde;
     this->side[4].value = sea;
-    this->angle_a = a;
-    this->angle_b = b;
-    this->angle_c = c;
-    this->angle_d = d;
-    this->angle_e = 540 - (angle_a + angle_b + angle_c + angle_d);
+    this->angle[0] = a;
+    this->angle[1] = b;
+    this->angle[2] = c;
+    this->angle[3] = d;
+    this->angle[4] = 540 - (angle[0] + angle[1] + angle[2] + angle[3]);
   }
   Tile() {
     this->side[0].value = 0;
@@ -35,11 +31,11 @@ struct Tile {
     this->side[2].value = 0;
     this->side[3].value = 0;
     this->side[4].value = 0;
-    this->angle_a = 0;
-    this->angle_b = 0;
-    this->angle_c = 0;
-    this->angle_d = 0;
-    this->angle_e = 0;
+    this->angle[0] = 0;
+    this->angle[1] = 0;
+    this->angle[2] = 0;
+    this->angle[3] = 0;
+    this->angle[4] = 0;
   }
 };
 

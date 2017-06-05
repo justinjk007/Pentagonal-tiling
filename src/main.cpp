@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(max_angle_test) { // #5
 
 BOOST_AUTO_TEST_CASE(AngleE) {	// #6
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 120, 60};
-  BOOST_CHECK_EQUAL(tile.angle_e, 200);
+  BOOST_CHECK_EQUAL(tile.angle[4], 200);
 }
 
 BOOST_AUTO_TEST_CASE(tile_values_test) { // #7
@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(tile_values_test) { // #7
 
 BOOST_AUTO_TEST_CASE(get_third_side) { // #8
   Tile tile1 = {11, 8, 21, 20, 30, 23, 37, 45, 45};
-  double ans = getThirdSide(tile1.side[0], tile1.side[1], tile1.angle_b);
+  double ans = getThirdSide(tile1.side[0], tile1.side[1], tile1.angle[1]);
   BOOST_CHECK_CLOSE(ans, 6.6663, 0.001); // 0.001% is the tolerance
 }
 

@@ -49,7 +49,7 @@ bool validateTile(Tile tile) {
   double max_side = getMaxSide(tile);
   double max_angle = getMaxAngle(tile);
   if (max_angle <= 180.00)
-    if (tile.angle_e > 0)
+    if (tile.angle[4] > 0)
       if (tile.side[0].value + tile.side[1].value + tile.side[2].value +
 	  tile.side[3].value + tile.side[4].value >
           (2 * max_side))
@@ -82,15 +82,15 @@ double getMaxAngle(Tile tile) {
   /*
    * This method returns the biggest angle of the tile.
    */
-  double max_angle = tile.angle_a;
-  if (tile.angle_b > max_angle)
-    max_angle = tile.angle_b;
-  if (tile.angle_c > max_angle)
-    max_angle = tile.angle_c ;
-  if (tile.angle_d  > max_angle)
-    max_angle = tile.angle_d ;
-  if (tile.angle_e  > max_angle)
-    max_angle = tile.angle_e ;
+  double max_angle = tile.angle[0];
+  if (tile.angle[1] > max_angle)
+    max_angle = tile.angle[1];
+  if (tile.angle[2] > max_angle)
+    max_angle = tile.angle[2] ;
+  if (tile.angle[3]  > max_angle)
+    max_angle = tile.angle[4] ;
+  if (tile.angle[4]  > max_angle)
+    max_angle = tile.angle[4] ;
   return max_angle;
 }
 
@@ -120,8 +120,8 @@ double getTileArea(Tile tile) {
    * This method returns the Area of the pentagon dividing it into
    * three triangles, calculating its area and summing them up.
    */
-  double ac = getThirdSide(tile.side[0], tile.side[1], tile.angle_b);
-  double ce = getThirdSide(tile.side[2], tile.side[3], tile.angle_d);
+  double ac = getThirdSide(tile.side[0], tile.side[1], tile.angle[1]);
+  double ce = getThirdSide(tile.side[2], tile.side[3], tile.angle[3]);
   double triangle1 =
     getTriangleArea(tile.side[0].value, tile.side[1].value, ac);
   double triangle2 =
