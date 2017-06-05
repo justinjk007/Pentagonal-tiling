@@ -49,12 +49,13 @@ void PrimitiveTile::drawPentagon(Tile tile) {
       current_line = next_line;
     }
   ofstream myfile;
+  // (5.09,5.80), (1.68,4.90), (1.48,1.38), (4.76,0.10), (7.00,2.83)
   myfile.open ("example.csv");
-  myfile << "This is the first cell in the first column.\n";
-  myfile << "a,b,c,\n";
-  myfile << "c,s,v,\n";
-  myfile << "1,2,3.456\n";
-  myfile << "semi;colon";
+  myfile << "x,y,\n";
+  for (int i = 0; i < 5; ++i)
+    myfile <<pentagon[i].start.x_cord<<","<<pentagon[i].start.y_cord<< "\n";
+
+  myfile <<pentagon[4].end.x_cord<<","<<pentagon[4].end.y_cord<< "\n"; // So that it will complete a circle
   myfile.close();
 }
 
