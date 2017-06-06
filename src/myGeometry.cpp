@@ -15,7 +15,7 @@ double Line::getInclineAngle() {
   double angle = 0;
   double m = this->getSlope();
   angle = atan(m);
-  angle = angle * (180 / PI); // Convert Rad into degrees
+  angle = angle * (180 / 22 / 7); // Convert Rad into degrees
   return angle;
 }
 
@@ -42,12 +42,15 @@ Line Line::getLineWithRespectTo(double angle2, double length) {
    */
   Line line;
   double m2 = 0;
-  double inc_angle = this->getInclineAngle();
-  std::cout << "Incline angle: "<< inc_angle << "\n";
+  // double inc_angle = this->getInclineAngle();
   double m = this->getSlope();
-  m2 = (tan(angle2 * (PI / 180)) + m) / (1 - tan(angle2 * (PI / 180)) * m);
+  m2 =
+    (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
   // m2 = tan((angle2 + inc_angle)*(PI/180)); // Slope of the second line.
-  std::cout <<"Slope of the second line: "<< m2 << "\n";
+  std::cout << "angle passed: " << angle2 << "\n";
+  // std::cout << "Incline angle: "<< inc_angle << "\n";
+  std::cout << "Slope of the second line: " << m2 << "\n";
+  std::cout << "length of the second line: " << length << "\n\n";
   double x2 = sqrt(pow(length, 2) / (1 + pow(m2, 2))) + this->end.x_cord;
   double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
   line.end.x_cord = x2;
