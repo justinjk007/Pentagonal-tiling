@@ -43,10 +43,7 @@ void PrimitiveTile::drawPentagon(Tile tile) {
   // current_line = {{0, 0}, {5.65, 0}};
   pentagon[0] = current_line;
   for (int i = 1; i < 5; i++) {
-    if(i<3)
-      next_angle = 180.0 - tile.angle[i];
-    else
-      next_angle = tile.angle[i];
+    next_angle = 180.0 - tile.angle[i];
     next_line =
       current_line.getLineWithRespectTo(next_angle, tile.side[i].value);
     pentagon[i] = next_line;
