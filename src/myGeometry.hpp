@@ -23,7 +23,7 @@ public:
   double getInclineAngle();
   double getInclineAngle(double);
   Line getLineWithRespectTo(Point, double);
-  Line getLineWithRespectTo(double, double);
+  Line getLineWithRespectTo(double, double, int);
   Line() {
     this->start.x_cord = 0.0;
     this->start.y_cord = 0.0;

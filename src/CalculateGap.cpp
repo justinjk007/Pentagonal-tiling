@@ -23,7 +23,7 @@ double getGap(Tile tile) {
     for (int j = 0; j < 5; ++j) {
       p_tile.del(); // Reset the primitiveTile
       Link link(tile.side[i], tile.side[j]);
-      if (p_tile.addTile(link)) {
+      if (p_tile.isLinkable(link)) {
 	p_tile_area = p_tile.size * tile_area;
 	gap_list[gap_index] = calculateGap(p_tile,p_tile_area);
       }
