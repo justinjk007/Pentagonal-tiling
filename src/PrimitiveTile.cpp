@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <array>
+#include <string>
 
 using namespace std;
 
@@ -45,19 +46,23 @@ void PrimitiveTile::drawPentagon(Tile tile) {
     this->first_tile[i] = next_line;
     current_line = next_line;
   }
-
   ofstream myfile;
-  myfile.open("example.csv");
+  string file_name = "example";
+  file_name += this->count;
+  this->count++;
+  file_name += ".csv";
+  std::cout << file_name;
+  myfile.open(file_name);
   myfile << "x,y,\n";
   for (int i = 0; i < 5; ++i) {
     myfile << this->first_tile[i].start.x_cord << "," << this->first_tile[i].start.y_cord
-           << "\n";
+	   << "\n";
   }
   myfile << this->first_tile[0].start.x_cord << "," << this->first_tile[0].start.y_cord
          << "\n"; // So that it will complete a circle or a this->first_tile.
   myfile.close();
 }
 
-void PrimitiveTile::drawPrimitiveTile() {
-
+void PrimitiveTile::drawPrimitiveTile(Tile tile, int i, int j) {
+  this->drawPentagon(tile);
 }

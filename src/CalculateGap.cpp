@@ -19,16 +19,25 @@ double getGap(Tile tile) {
   int gap_index = 0;
   if (!validateTile(tile))
     return -101; // Negative gap means the tile is not valid.
-  for (int i = 0; i < 5; ++i) {
-    for (int j = 0; j < 5; ++j) {
-      p_tile.del(); // Reset the primitiveTile
-      Link link(tile.side[i], tile.side[j]);
-      if (p_tile.isLinkable(link)) {
-	p_tile_area = p_tile.size * tile_area;
-	gap_list[gap_index] = calculateGap(p_tile,p_tile_area);
-      }
-    }
+  // for (int i = 0; i < 5; ++i) {
+  //   for (int j = 0; j < 5; ++j) {
+  // TODO Remove this
+  // TODO Remove this
+  // TODO Remove this
+  int i=3;
+  int j=3;
+  // TODO Remove this
+  // TODO Remove this
+  // TODO Remove this
+  p_tile.del(); // Reset the primitiveTile
+  Link link(tile.side[i], tile.side[j]);
+  if (p_tile.isLinkable(link)) {
+    p_tile_area = p_tile.size * tile_area;
+    p_tile.drawPrimitiveTile(tile,i,j);
+    gap_list[gap_index] = calculateGap(p_tile,p_tile_area);
   }
+  // }
+  // }
 
   // Returning the minimumgap in the gap list
   double min_gap = gap_list[0];

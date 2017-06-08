@@ -18,13 +18,15 @@ public:
   Tile pentagon;
   Link links[1000];  //Max size of the primitive tile for now = 1000.
   int size;
+  int count;
   bool isLinkable(Link);
   void print();
   void drawPentagon(Tile);
-  void drawPrimitiveTile();
+  void drawPrimitiveTile(Tile,int,int);
   void del();
   PrimitiveTile(Tile tile)
       {
+	this->count = 0;
 	this->pentagon = tile;
 	this->size = 1; // Because creating the primitive tile means there
 	// should be at least one pentagon to start from
