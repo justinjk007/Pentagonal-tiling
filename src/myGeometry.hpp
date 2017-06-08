@@ -21,6 +21,7 @@ public:
   Point end;
   double getSlope();
   double getInclineAngle();
+  double getInclineAngle(double);
   Line getLineWithRespectTo(Point, double);
   Line getLineWithRespectTo(double, double);
   Line() {
