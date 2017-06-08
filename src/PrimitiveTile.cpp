@@ -40,7 +40,6 @@ void PrimitiveTile::drawPentagon(Tile tile) {
   Point origin = {0,0};
   double length = tile.side[0].value;
   current_line = current_line.getLineWithRespectTo(origin,length);
-  // current_line = {{0, 0}, {5.65, 0}};
   pentagon[0] = current_line;
   for (int i = 1; i < 5; i++) {
     next_angle = 180.0 - tile.angle[i];
@@ -58,7 +57,7 @@ void PrimitiveTile::drawPentagon(Tile tile) {
            << "\n";
   }
   myfile << pentagon[0].start.x_cord << "," << pentagon[0].start.y_cord
-         << "\n"; // So that it will complete a circle
+         << "\n"; // So that it will complete a circle or a pentagon.
   myfile.close();
 }
 

@@ -37,7 +37,7 @@ Line Line::getLineWithRespectTo(double angle2, double length) {
    * This method is to draw the lines with respect to the angle
    * between this line & the last line and the length of the second line.
    * Here suffix 2 means that of the second line or 2nd co-ordinate of the line
-   * TODO once intiial problem is fixed try printing the contents of
+   * TODO once initial problem is fixed try printing the contents of
    * the pentagon array to see there are actually 5 line nmot just 4.
    */
   Line line;
@@ -47,12 +47,15 @@ Line Line::getLineWithRespectTo(double angle2, double length) {
   m2 =
     (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
   // m2 = tan((angle2 + inc_angle)*(PI/180)); // Slope of the second line.
-  std::cout << "angle passed: " << angle2 << "\n";
+  std::cout << "angle passed: " << 180-angle2 << "\n";
   // std::cout << "Incline angle: "<< inc_angle << "\n";
   std::cout << "Slope of the second line: " << m2 << "\n";
-  std::cout << "length of the second line: " << length << "\n\n";
+  std::cout << "length of the second line: " << length << "\n";
   double x2 = sqrt(pow(length, 2) / (1 + pow(m2, 2))) + this->end.x_cord;
   double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
+  std::cout << "new co-ordinates found are "
+            << "(" << x2 << ", " << y2 << ")"
+            << "\n\n";
   line.end.x_cord = x2;
   line.end.y_cord = y2;
   line.start.x_cord = this->end.x_cord;
