@@ -47,7 +47,7 @@ Line Line::getLineWithRespectTo(double angle2, double length) {
    * TODO once initial problem is fixed try printing the contents of
    * the pentagon array to see there are actually 5 line nmot just 4.
    */
-  static int count=0;
+  static int count=1; // Because first line is already created
   count++;
   Line line;
   double m2 = 0;
@@ -61,7 +61,7 @@ Line Line::getLineWithRespectTo(double angle2, double length) {
   std::cout << "Slope of the second line: " << m2 << "\n";
   std::cout << "length of the second line: " << length << "\n";
   double x2 = sqrt(pow(length, 2) / (1 + pow(m2, 2))) + this->end.x_cord;
-  if (count >1)
+  if (count >2)
     x2 = this->end.x_cord -sqrt(pow(length, 2) / (1 + pow(m2, 2)));
   double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
 
