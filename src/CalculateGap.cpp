@@ -24,8 +24,8 @@ double getGap(Tile tile) {
   // TODO Remove this
   // TODO Remove this
   // TODO Remove this
-  int i=3;
-  int j=3;
+  int i = 3;
+  int j = 3;
   // TODO Remove this
   // TODO Remove this
   // TODO Remove this
@@ -33,8 +33,8 @@ double getGap(Tile tile) {
   Link link(tile.side[i], tile.side[j]);
   if (p_tile.isLinkable(link)) {
     p_tile_area = p_tile.size * tile_area;
-    p_tile.drawPrimitiveTile(tile,i,j);
-    gap_list[gap_index] = calculateGap(p_tile,p_tile_area);
+    p_tile.drawPrimitiveTile();
+    gap_list[gap_index] = calculateGap(p_tile, p_tile_area);
   }
   // }
   // }
@@ -47,7 +47,6 @@ double getGap(Tile tile) {
       min_gap = gap_list[i];
   }
   return min_gap;
-
 }
 
 bool validateTile(Tile tile) {
@@ -95,11 +94,11 @@ double getMaxAngle(Tile tile) {
   if (tile.angle[1] > max_angle)
     max_angle = tile.angle[1];
   if (tile.angle[2] > max_angle)
-    max_angle = tile.angle[2] ;
-  if (tile.angle[3]  > max_angle)
-    max_angle = tile.angle[4] ;
-  if (tile.angle[4]  > max_angle)
-    max_angle = tile.angle[4] ;
+    max_angle = tile.angle[2];
+  if (tile.angle[3] > max_angle)
+    max_angle = tile.angle[4];
+  if (tile.angle[4] > max_angle)
+    max_angle = tile.angle[4];
   return max_angle;
 }
 
@@ -132,15 +131,13 @@ double getTileArea(Tile tile) {
   double ac = getThirdSide(tile.side[0], tile.side[1], tile.angle[1]);
   double ce = getThirdSide(tile.side[2], tile.side[3], tile.angle[3]);
   double triangle1 =
-    getTriangleArea(tile.side[0].value, tile.side[1].value, ac);
+      getTriangleArea(tile.side[0].value, tile.side[1].value, ac);
   double triangle2 =
-    getTriangleArea(tile.side[2].value, tile.side[3].value, ce);
-  double triangle3 =
-    getTriangleArea(ac, ce, tile.side[4].value);
+      getTriangleArea(tile.side[2].value, tile.side[3].value, ce);
+  double triangle3 = getTriangleArea(ac, ce, tile.side[4].value);
   double pentagonArea = triangle1 + triangle2 + triangle3;
   return pentagonArea;
 }
-
 
 double calculateGap(PrimitiveTile p_tile, double p_tile_area) {
   Square square;

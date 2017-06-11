@@ -1,9 +1,9 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE GapTest
-#include "Side.hpp"
-#include "Tile.hpp"
 #include "CalculateGap.hpp"
 #include "PrimitiveTile.hpp"
+#include "Side.hpp"
+#include "Tile.hpp"
 #include "myGeometry.hpp"
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
@@ -36,7 +36,7 @@ BOOST_AUTO_TEST_CASE(max_angle_test) { // #5
   BOOST_CHECK_EQUAL(getMaxAngle(tile), 190);
 }
 
-BOOST_AUTO_TEST_CASE(AngleE) {	// #6
+BOOST_AUTO_TEST_CASE(AngleE) { // #6
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 120, 60};
   BOOST_CHECK_EQUAL(tile.angle[4], 200);
 }
@@ -84,10 +84,10 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
   BOOST_CHECK_EQUAL(answer4, true);
 }
 
-BOOST_AUTO_TEST_CASE(my_geometry_line_finder){ // #12
-  Line line1 = {{0,0}, {4.76,0.10}};
+BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #12
+  Line line1 = {{0, 0}, {4.76, 0.10}};
   Line line2;
-  line2 = line1.getLineWithRespectTo(49,3.53,1); // Angle and length
+  line2 = line1.getLineWithRespectTo(49, 3.53, 1); // Angle and length
 
   BOOST_CHECK_CLOSE(line1.getSlope(), 0.02100840, 0.01);
   BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
@@ -102,12 +102,12 @@ BOOST_AUTO_TEST_CASE(my_geometry_line_finder){ // #12
   BOOST_CHECK_CLOSE(line2.end.y_cord, 2.812957, 0.01);
 }
 
-BOOST_AUTO_TEST_CASE(test_drawing_methods){ // #13
+BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13
   // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   PrimitiveTile newSample(tile);
-  newSample.drawPentagon(tile);
+  newSample.drawPentagon();
   BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 

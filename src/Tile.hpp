@@ -4,6 +4,7 @@
 #ifndef TILE_HPP
 #define TILE_HPP
 #include "Side.hpp"
+#include <algorithm>
 
 struct Tile {
   Side side[5] = {{0, &side[1], &side[4]},
@@ -31,11 +32,7 @@ struct Tile {
     this->side[2].value = 0;
     this->side[3].value = 0;
     this->side[4].value = 0;
-    this->angle[0] = 0;
-    this->angle[1] = 0;
-    this->angle[2] = 0;
-    this->angle[3] = 0;
-    this->angle[4] = 0;
+    std::fill_n(this->angle, 5, 0);
   }
 };
 

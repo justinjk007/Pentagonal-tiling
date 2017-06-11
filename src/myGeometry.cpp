@@ -31,7 +31,7 @@ Line Line::getLineWithRespectTo(Point origin, double length) {
    * This method is to draw the first line in the shape when we don't
    * have an other side for the angle to be based on
    */
-  Line line ;
+  Line line;
   line.start.x_cord = origin.x_cord;
   line.start.y_cord = origin.y_cord;
   line.end.x_cord = length;
@@ -59,8 +59,8 @@ Line Line::getLineWithRespectTo(double angle2, double length, int count) {
   // std::cout << "Slope of the second line: " << m2 << "\n";
   // std::cout << "length of the second line: " << length << "\n";
   double x2 = sqrt(pow(length, 2) / (1 + pow(m2, 2))) + this->end.x_cord;
-  if (count >2)
-    x2 = this->end.x_cord -sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+  if (count > 2)
+    x2 = this->end.x_cord - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
   double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
 
   // double x2 = (length*(cos(inc_angle*22/7/180))) + this->end.x_cord;
