@@ -16,20 +16,18 @@ class PrimitiveTile {
 public:
   Line first_tile[5]; // Stores the co-ordinates for the first pentagon drawn.
   Tile pentagon;      // Stores the measurements of the tile or pentagon used.
-  int connector_sides[1000]; // Max size of the primitive tile for now = 1000.
+  int connector_sides[1000]; // Max size of the connectors for now = 1000.
   int size; // This accounts for the number of tiles in the primitive tile.
-  int count;
   bool isLinkable(Link);
   void drawPentagon();
   void drawPrimitiveTile();
-  Square drawSquare(double area);
+  void addTile(double, double);
   void del();
+  Square drawSquare(double area);
   PrimitiveTile(Tile tile) {
     std::fill_n(this->connector_sides, 1000, 0);
-    this->count = 0;
     this->pentagon = tile;
-    this->size = 1; // Because creating the primitive tile means there
-    // should be at least one pentagon to start from
+    this->size = 1; // Obviously we need atleast one tile.
   }
 };
 
