@@ -142,21 +142,6 @@ double getTileArea(Tile tile) {
 double calculateGap(PrimitiveTile p_tile, double p_tile_area) {
   Square square;
   double gap = 0;
-  square = drawSquare(p_tile_area);
+  square = p_tile.drawSquare(p_tile_area);
   return gap;
-}
-
-Square drawSquare(double area) {
-  Square square;
-  area = area * 25; // Make the area of the sqaure 25 times the primtive tile
-  square.side = sqrt(area); // Get the side length of the square.
-  square.point[0].x_cord = 0;
-  square.point[0].y_cord = 0;
-  square.point[1].x_cord = square.side;
-  square.point[1].y_cord = 0;
-  square.point[2].x_cord = square.side;
-  square.point[2].y_cord = square.side;
-  square.point[3].x_cord = 0;
-  square.point[3].y_cord = square.side;
-  return square;
 }

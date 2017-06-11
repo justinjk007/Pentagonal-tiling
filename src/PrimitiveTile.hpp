@@ -22,6 +22,7 @@ public:
   bool isLinkable(Link);
   void drawPentagon();
   void drawPrimitiveTile();
+  Square drawSquare(double area);
   void del();
   PrimitiveTile(Tile tile) {
     std::fill_n(this->connector_sides, 1000, 0);

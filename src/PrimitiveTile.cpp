@@ -55,3 +55,18 @@ void PrimitiveTile::drawPentagon() {
 void PrimitiveTile::drawPrimitiveTile() {
   this->drawPentagon();
 }
+
+Square PrimitiveTile::drawSquare(double area) {
+  Square square;
+  area = area * 25; // Make the area of the sqaure 25 times the primtive tile
+  square.side = sqrt(area); // Get the side length of the square.
+  square.point[0].x_cord = 0;
+  square.point[0].y_cord = 0;
+  square.point[1].x_cord = square.side;
+  square.point[1].y_cord = 0;
+  square.point[2].x_cord = square.side;
+  square.point[2].y_cord = square.side;
+  square.point[3].x_cord = 0;
+  square.point[3].y_cord = square.side;
+  return square;
+}

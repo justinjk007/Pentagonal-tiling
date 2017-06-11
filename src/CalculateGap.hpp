@@ -6,7 +6,6 @@
 #define CALCULATEGAP_HPP
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
-#include "Square.hpp"
 #include "Tile.hpp"
 
 double getGap(Tile);
@@ -17,6 +16,5 @@ double getMaxAngle(Tile);
 double getThirdSide(Side, Side, double);
 double getTriangleArea(double, double, double);
 double getTileArea(Tile);
-Square drawSquare(double);
 
 #endif /* CALCULATEGAP_HPP */
