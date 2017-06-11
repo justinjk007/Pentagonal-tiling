@@ -8,8 +8,9 @@ using namespace std;
 
 double getGap(Tile tile) {
   /*
-   * This is the main method that calculated the gap between the tiles
-   * when arranged.
+   * This is the main method that returns the gap minimum between the
+   * tiles when arranged with any particular order. Current this only
+   * calculates gap between primitive tiles of size 2.
    */
   double tile_area = getTileArea(tile);
   PrimitiveTile p_tile(tile);
@@ -91,14 +92,10 @@ double getMaxAngle(Tile tile) {
    * This method returns the biggest angle of the tile.
    */
   double max_angle = tile.angle[0];
-  if (tile.angle[1] > max_angle)
-    max_angle = tile.angle[1];
-  if (tile.angle[2] > max_angle)
-    max_angle = tile.angle[2];
-  if (tile.angle[3] > max_angle)
-    max_angle = tile.angle[4];
-  if (tile.angle[4] > max_angle)
-    max_angle = tile.angle[4];
+  for (int i = 0; i < 5; ++i) {
+    if (tile.angle[i] > max_angle)
+      max_angle = tile.angle[i];
+  }
   return max_angle;
 }
 
