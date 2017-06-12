@@ -76,18 +76,17 @@ void PrimitiveTile::writeToFile() {
 }
 
 void PrimitiveTile::drawPrimitiveTile() {
-  list<int>::iterator it = this->connector_sides.begin();
-  cout << *it <<endl;
-  this->drawFirstPentagon(this->connector_sides.front());
+  list<int>::iterator boundary_it = this->connector_sides.begin();
+  this->drawFirstPentagon(this->connector_sides.front()); // Get the first element in the list
 }
 
 Square PrimitiveTile::drawSquare(double area) {
   /**
-   * () +----------+ ()
-   *    |          |
-   *    |  Sqaure  |
-   *    |          |
-   * () +----------+ ()
+   * [3](0,side) +----------+ [2](side,side)
+   *             |          |
+   *             |  Sqaure  |
+   *             |          |
+   *     [0](0,0)+----------+ [1](0,side)
    */
   Square square;
   area = area * 25; // Make the area of the sqaure 25 times the primtive tile
