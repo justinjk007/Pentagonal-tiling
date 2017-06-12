@@ -67,7 +67,6 @@ void PrimitiveTile::writeToFile() {
   myfile.open(file_name);
   myfile << "x,y,\n";
   for (list<Line>::iterator it = this->boundary.begin(); it != this->boundary.end(); ++it) {
-    cout<<it->start.x_cord<<endl;
     myfile << it->start.x_cord << ","
 	   << it->start.y_cord << "\n";
   }

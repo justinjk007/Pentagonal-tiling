@@ -107,14 +107,14 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   PrimitiveTile newSample(tile);
-  newSample.drawFirstPentagon(0);
+  newSample.drawFirstPentagon(2);
   BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 
-BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14
-  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  BOOST_CHECK_EQUAL(getGap(tile), -101);
-}
+// BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14
+//   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+//   BOOST_CHECK_EQUAL(getGap(tile), -101);
+// }
 
 BOOST_AUTO_TEST_CASE(line_compare_test){
   Line line1 = {{8, 9}, {4.76, 0.10}};
