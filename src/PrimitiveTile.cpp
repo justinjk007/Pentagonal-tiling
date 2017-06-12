@@ -21,9 +21,8 @@ void PrimitiveTile::addTile(int from, int to) {
    * Add a tile to the primitive tile after saving the combination of
    * the side used to connect it.
    */
-  this->connector_sides[this->connector_num] = from;
-  this->connector_sides[this->connector_num + 1] = to;
-  this->connector_num += 2;
+  this->connector_sides.push_back(from);
+  this->connector_sides.push_back(to);
   this->size += 1;
 }
 
@@ -77,15 +76,18 @@ void PrimitiveTile::writeToFile() {
 }
 
 void PrimitiveTile::drawPrimitiveTile() {
-  this->drawFirstPentagon(this->connector_sides[0]);
+  list<int>::iterator it = this->connector_sides.begin();
+  cout << *it <<endl;
+  this->drawFirstPentagon(this->connector_sides.front());
 }
 
 Square PrimitiveTile::drawSquare(double area) {
   /**
-   * () +-------+ ()
-   *    |       |
-   *    |       |
-   * () +-------+ ()
+   * () +----------+ ()
+   *    |          |
+   *    |  Sqaure  |
+   *    |          |
+   * () +----------+ ()
    */
   Square square;
   area = area * 25; // Make the area of the sqaure 25 times the primtive tile
