@@ -1,8 +1,6 @@
 #ifndef MYGEOMETRY_HPP
 #define MYGEOMETRY_HPP
 
-int wrapAround(int);
-
 class Point {
 public:
   double x_cord;
@@ -37,5 +35,8 @@ public:
     this->end = b;
   }
 };
+
+int wrapAround(int);
+bool compareLine(Line ,Line);
 
 #endif /* MYGEOMETRY_HPP */

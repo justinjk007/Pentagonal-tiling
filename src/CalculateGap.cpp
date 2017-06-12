@@ -131,5 +131,6 @@ double calculateGap(PrimitiveTile p_tile, double p_tile_area) {
   Square square;
   double gap = 0;
   square = p_tile.drawSquare(p_tile_area);
+  p_tile.drawPrimitiveTile();
   return gap;
 }

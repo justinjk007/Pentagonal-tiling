@@ -38,19 +38,22 @@ void PrimitiveTile::drawPentagon() {
   ;
 }
 
-void PrimitiveTile::drawFirstPentagon(int from,int to) {
+void PrimitiveTile::drawFirstPentagon(int from) {
   Line current_line;
   Line next_line;
   double next_angle = 0;
   Point origin = {0, 0};
-  current_line =
-    current_line.getLineWithRespectTo(origin, this->pentagon.side[0].value);
-  this->first_tile[0] = current_line;
+  int correct_index = wrapAround(from);
+  int moded_index = 0;
+  current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[correct_index].value);
+  this->boundary.push_back(current_line);
   for (int i = 1; i < 5; i++) {
-    next_angle = 180.0 - this->pentagon.angle[i];
-    next_line = current_line.getLineWithRespectTo(next_angle, this->pentagon.side[i].value, i + 1);
-   this->first_tile[i] = next_line;
-   current_line = next_line;
+    correct_index += i;
+    moded_index = correct_index % 5; // Wraparound like a circle array
+    next_angle = 180.0 - this->pentagon.angle[moded_index];
+    next_line = current_line.getLineWithRespectTo(next_angle, this->pentagon.side[moded_index].value, i + 1);
+    this->boundary.push_back(next_line);
+    current_line = next_line;
   }
   this->writeToFile();
 }
@@ -63,17 +66,20 @@ void PrimitiveTile::writeToFile() {
   string file_name = "example.csv";
   myfile.open(file_name);
   myfile << "x,y,\n";
-  for (int i = 0; i < 5; ++i) {
-    myfile << this->first_tile[i].start.x_cord << ","
-	   << this->first_tile[i].start.y_cord << "\n";
+  for (list<Line>::iterator it = this->boundary.begin(); it != this->boundary.end(); ++it) {
+    cout<<it->start.x_cord<<endl;
+    myfile << it->start.x_cord << ","
+	   << it->start.y_cord << "\n";
   }
-  myfile << this->first_tile[0].start.x_cord << ","
-	 << this->first_tile[0].start.y_cord
-	 << "\n"; // So that it will complete a circle or a this->first_tile.
+  myfile << this->boundary.begin()->start.x_cord << ","
+	 << this->boundary.begin()->start.y_cord
+	 << "\n"; // So that it will complete a circle or a this->boundary.
   myfile.close();
 }
 
-void PrimitiveTile::drawPrimitiveTile() { this->drawPentagon(); }
+void PrimitiveTile::drawPrimitiveTile() {
+  this->drawFirstPentagon(this->connector_sides[0]);
+}
 
 Square PrimitiveTile::drawSquare(double area) {
   /**

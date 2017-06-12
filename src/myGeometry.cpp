@@ -8,7 +8,40 @@ int wrapAround(int i) {
   if(i==0)
     return 3;
   else if(i==1)
-    return 3;
+    return 4;
+  else if(i==2)
+    return 0;
+  else if(i==3)
+    return 1;
+  else if(i==4)
+    return 2;
+  else
+    return 10000;
+}
+
+bool compareLine(Line line1, Line line2){
+  /**
+   * Compare lines to see if they are equal, true if they are equal else false
+   */
+    bool first,second = false;
+  double diff1 = line1.start.x_cord - line2.start.x_cord;
+  double diff2 = line1.end.x_cord - line2.end.x_cord;
+  double diff3 = line1.start.y_cord - line2.start.y_cord;
+  double diff4 = line1.end.y_cord - line2.end.y_cord;
+  if (diff1 < 0.02 || diff2 < 0.02 || diff3 < 0.02 || diff4 < 0.02)
+    first = true;
+
+  diff1 = line1.start.x_cord - line2.end.x_cord;
+  diff2 = line1.end.x_cord - line2.start.x_cord;
+  diff3 = line1.start.y_cord - line2.end.y_cord;
+  diff4 = line1.end.y_cord - line2.start.y_cord;
+  if (diff1 < 0.02 || diff2 < 0.02 || diff3 < 0.02 || diff4 < 0.02)
+    second = true;
+
+  if (first || second)
+    return true;
+  else
+    return false;
 }
 
 double Line::getSlope() {
