@@ -7,16 +7,23 @@
 using namespace std;
 
 bool PrimitiveTile::isLinkable(Link link) {
-  if (!(link.from.value == link.to.value))
+  /**
+   * Check if the sides are linkable
+   */
+    if (!(link.from.value == link.to.value))
     return false;
   else
     return true;
 }
 
-void PrimitiveTile::addTile(double from, double to) {
-  int connector_side_num = (this->size * 2) - 2;
-  connector_sides[connector_side_num] = from;
-  connector_sides[connector_side_num+1] = to;
+void PrimitiveTile::addTile(int from, int to) {
+  /**
+   * Add a tile to the primitive tile after saving the combination of
+   * the side used to connect it.
+   */
+  this->connector_sides[this->connector_num] = from;
+  this->connector_sides[this->connector_num + 1] = to;
+  this->connector_num += 2;
   this->size += 1;
 }
 
@@ -41,7 +48,14 @@ void PrimitiveTile::drawPentagon() {
     this->first_tile[i] = next_line;
     current_line = next_line;
   }
-  ofstream myfile;
+  this->writeToFile();
+}
+
+void PrimitiveTile::writeToFile(){
+  /**
+   * Write the first pentagon to file, so it can be plotted
+   */
+    ofstream myfile;
   string file_name = "example.csv";
   myfile.open(file_name);
   myfile << "x,y,\n";
@@ -59,10 +73,10 @@ void PrimitiveTile::drawPrimitiveTile() { this->drawPentagon(); }
 
 Square PrimitiveTile::drawSquare(double area) {
   /**
-   * () +--------+ ()
-   *    |        |
-   *    |        |
-   * () +--------+ ()
+   * () +-------+ ()
+   *    |       |
+   *    |       |
+   * () +-------+ ()
    */
   Square square;
   area = area * 25; // Make the area of the sqaure 25 times the primtive tile
