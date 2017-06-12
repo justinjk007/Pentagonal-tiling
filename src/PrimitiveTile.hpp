@@ -21,7 +21,7 @@ public:
   int size; // This accounts for the number of tiles in the primitive tile.
   bool isLinkable(Link);
   void drawPentagon();
-  void drawPentagon(int,int);
+  void drawFirstPentagon(int,int);
   void drawPrimitiveTile();
   void addTile(int, int);
   void del();

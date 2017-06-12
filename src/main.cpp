@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13
   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   PrimitiveTile newSample(tile);
-  newSample.drawPentagon();
+  newSample.drawFirstPentagon(0,0);
   BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 

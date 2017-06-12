@@ -35,6 +35,10 @@ void PrimitiveTile::del() {
 }
 
 void PrimitiveTile::drawPentagon() {
+  ;
+}
+
+void PrimitiveTile::drawFirstPentagon(int from,int to) {
   Line current_line;
   Line next_line;
   double next_angle = 0;
@@ -45,17 +49,17 @@ void PrimitiveTile::drawPentagon() {
   for (int i = 1; i < 5; i++) {
     next_angle = 180.0 - this->pentagon.angle[i];
     next_line = current_line.getLineWithRespectTo(next_angle, this->pentagon.side[i].value, i + 1);
-    this->first_tile[i] = next_line;
-    current_line = next_line;
+   this->first_tile[i] = next_line;
+   current_line = next_line;
   }
   this->writeToFile();
 }
 
-void PrimitiveTile::writeToFile(){
+void PrimitiveTile::writeToFile() {
   /**
    * Write the first pentagon to file, so it can be plotted
    */
-    ofstream myfile;
+  ofstream myfile;
   string file_name = "example.csv";
   myfile.open(file_name);
   myfile << "x,y,\n";

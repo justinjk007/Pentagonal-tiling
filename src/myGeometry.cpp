@@ -4,6 +4,13 @@
 
 #define PI 3.14159265359
 
+int wrapAround(int i) {
+  if(i==0)
+    return 3;
+  else if(i==1)
+    return 3;
+}
+
 double Line::getSlope() {
   double diff_y = this->end.y_cord - this->start.y_cord;
   double diff_x = this->end.x_cord - this->start.x_cord;

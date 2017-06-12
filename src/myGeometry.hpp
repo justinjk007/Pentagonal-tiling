@@ -1,6 +1,8 @@
 #ifndef MYGEOMETRY_HPP
 #define MYGEOMETRY_HPP
 
+int wrapAround(int);
+
 class Point {
 public:
   double x_cord;
