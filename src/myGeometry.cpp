@@ -5,15 +5,18 @@
 #define PI 3.14159265359
 
 int wrapAround(int i) {
-  if(i==0)
+  /**
+   * One of the stupidest things I have done in years, hard coding.
+   */
+  if (i == 0)
     return 3;
-  else if(i==1)
+  else if (i == 1)
     return 4;
-  else if(i==2)
+  else if (i == 2)
     return 0;
-  else if(i==3)
+  else if (i == 3)
     return 1;
-  else if(i==4)
+  else if (i == 4)
     return 2;
   else
     return 10000;
@@ -23,7 +26,7 @@ bool compareLine(Line line1, Line line2){
   /**
    * Compare lines to see if they are equal, true if they are equal else false
    */
-    bool first,second = false;
+  bool first = false, second = false;
   double diff1 = line1.start.x_cord - line2.start.x_cord;
   double diff2 = line1.end.x_cord - line2.end.x_cord;
   double diff3 = line1.start.y_cord - line2.start.y_cord;
