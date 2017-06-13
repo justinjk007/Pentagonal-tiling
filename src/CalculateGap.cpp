@@ -93,12 +93,36 @@ double getMaxAngle(Tile tile) {
 double getThirdSide(Side a, Side b, double angle) {
   /*
    * This method returns the third side of the triangle formed inside
-   * a polygon used for area calculating purposes
+   * a polygon used for area calculating purposes. Angle should be
+   * passed in degrees
    */
-  angle = angle * PI / 180;
+  angle = angle * PI / 180.0;
   double side_c = sqrt((a.value * a.value) + (b.value * b.value) -
                        (2 * a.value * b.value * cos(angle)));
   return side_c;
+}
+
+double getOtherAngle(Side a, Side b, double angle_b, char which_angle) {
+  /**
+   * This method uses sine law to find the angle b/w a and c or b and
+   * c .Here the angle passed is the angle b/w the sides a and b. The
+   * character passed is the angle to be found which can be a or c
+   * because the angle we know that's in the middle is b.Angle should
+   * be passed in degrees
+   */
+  double other_angle = NULL;
+  double part_one;
+  double side_c_length = getThirdSide(a,b,angle_b);
+  if (which_angle == 'a') {
+    part_one = (sin(angle_b * PI / 180.0) * b.value) / side_c_length;
+    other_angle = asin(part_one) * 180.0 / PI;
+    return other_angle;
+  } else if (which_angle == 'c') {
+    part_one = (sin(angle_b * PI / 180.0) * a.value) / side_c_length;
+    other_angle = asin(part_one) * 180.0 / PI;
+    return other_angle;
+  } else
+    return other_angle;
 }
 
 double getTriangleArea(double a, double b, double c) {

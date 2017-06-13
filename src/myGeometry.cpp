@@ -82,7 +82,7 @@ Line Line::getLineWithRespectTo(Point origin, double length) {
   return line;
 }
 
-Line Line::getLineWithRespectTo(double angle2, double length, int count) {
+Line Line::getLineWithRespectTo(double angle2, double length, int type) {
   /**
    * This method is to draw the lines with respect to the angle
    * between this line & the last line and the length of the second line.
@@ -92,6 +92,7 @@ Line Line::getLineWithRespectTo(double angle2, double length, int count) {
    */
   Line line;
   double m2 = 0;
+  double x2 = NULL;
   double m = this->getSlope();
   m2 =
     (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
@@ -101,13 +102,15 @@ Line Line::getLineWithRespectTo(double angle2, double length, int count) {
   // std::cout << "Incline angle: "<< inc_angle << "\n";
   // std::cout << "Slope of the second line: " << m2 << "\n";
   // std::cout << "length of the second line: " << length << "\n";
-  double x2 = sqrt(pow(length, 2) / (1 + pow(m2, 2))) + this->end.x_cord;
-  if (count > 2)
+  if(type == 1)
+    // Type on is when x2 is greater than x1.
+    x2 = this->end.x_cord + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+  else
+    // Type on is when x2 is smaller than x1, ie the line is backward.
     x2 = this->end.x_cord - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+
   double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
 
-  // double x2 = (length*(cos(inc_angle*22/7/180))) + this->end.x_cord;
-  // double y2 = (length*(sin(inc_angle*22/7/180))) + this->end.y_cord;
   // std::cout << "new co-ordinates found are "
   // << "(" << x2 << ", " << y2 << ")"
   // << "\n\n";

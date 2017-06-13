@@ -47,10 +47,10 @@ void PrimitiveTile::drawFirstPentagon(int from) {
   current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[correct_index].value);
   this->boundary.push_back(current_line);
   for (int i = 1; i < 5; i++) {
-    correct_index += i;
+    correct_index += i; // TODO check if this correct.
     moded_index = correct_index % 5; // Wraparound like a circle array
     next_angle = 180.0 - this->pentagon.angle[moded_index];
-    next_line = current_line.getLineWithRespectTo(next_angle, this->pentagon.side[moded_index].value, i + 1);
+    next_line = current_line.getLineWithRespectTo(next_angle, this->pentagon.side[moded_index].value,1);
     this->boundary.push_back(next_line);
     current_line = next_line;
   }

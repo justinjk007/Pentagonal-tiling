@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
 BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #12
   Line line1 = {{0, 0}, {4.76, 0.10}};
   Line line2;
-  line2 = line1.getLineWithRespectTo(49, 3.53, 1); // Angle and length
+  line2 = line1.getLineWithRespectTo(49, 3.53,1); // Angle and length
 
   BOOST_CHECK_CLOSE(line1.getSlope(), 0.02100840, 0.01);
   BOOST_CHECK_EQUAL(line1.start.x_cord, 0);

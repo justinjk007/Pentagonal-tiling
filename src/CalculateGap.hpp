@@ -16,5 +16,6 @@ double getMaxAngle(Tile);
 double getThirdSide(Side, Side, double);
 double getTriangleArea(double, double, double);
 double getTileArea(Tile);
+double getOtherAngle(Side, Side, Side, double, int);
 
 #endif /* CALCULATEGAP_HPP */
