@@ -91,21 +91,12 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
    * TODO once initial problem is fixed try printing the contents of
    * the pentagon array to see there are actually 5 line nmot just 4.
    */
-  static int check = 0;
   Line line;
   double m2 = 0.0;
   double x2 = 0.0;
   double y2 = 0.0;
   double m = this->getSlope();
   m2 = (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
-  std::cout << "type passed: " << type << "\n";
-  if (check%2 == 0)
-    std::cout << "angle passed: " << angle2 << "\n";
-  else
-    std::cout << "angle passed: " << 180-angle2 << "\n";
-  check++;
-  std::cout << "Slope of the second line: " << m2 << "\n";
-  std::cout << "length of the second line: " << length << "\n";
   if (which == 's') {
     if (type == 0)
       // Type on is when x2 is greater than x1.
@@ -130,9 +121,6 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
     } else
     return line;
 
-  std::cout << "new co-ordinates found are "
-  	    << "(" << x2 << ", " << y2 << ")"
-  	    << "\n";
   line.end.x_cord = x2;
   line.end.y_cord = y2;
   return line;
