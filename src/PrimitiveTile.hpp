@@ -10,8 +10,8 @@
 #include "Square.hpp"
 #include "Tile.hpp"
 #include "myGeometry.hpp"
-#include <list>
 #include <algorithm>
+#include <list>
 
 class PrimitiveTile {
 public:

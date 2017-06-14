@@ -1,14 +1,17 @@
-test: test.o CalculateGap.o PrimitiveTile.o
-	g++ -std=c++11 -g -o test test.o CalculateGap.o PrimitiveTile.o -lboost_unit_test_framework
+main: main.o CalculateGap.o PrimitiveTile.o myGeometry.o
+	g++ -std=c++11 -g -o main main.o CalculateGap.o PrimitiveTile.o myGeometry.o -lboost_unit_test_framework
 
-test.o: test.cpp Tile.hpp Side.hpp CalculateGap.hpp PrimitiveTile.hpp
-	g++ -std=c++11 -c -g test.cpp
+main.o: main.cpp CalculateGap.hpp PrimitiveTile.hpp Link.hpp Side.hpp Square.hpp myGeometry.hpp Tile.hpp
+	g++ -std=c++11 -c -g main.cpp
 
-CalculateGap.o: CalculateGap.cpp Tile.hpp Side.hpp CalculateGap.hpp
+CalculateGap.o: CalculateGap.cpp CalculateGap.hpp PrimitiveTile.hpp Link.hpp Side.hpp Square.hpp myGeometry.hpp Tile.hpp
 	g++ -std=c++11 -c -g CalculateGap.cpp
 
-PrimitiveTile.o: PrimitiveTile.cpp PrimitiveTile.hpp Side.hpp Tile.hpp
+PrimitiveTile.o: PrimitiveTile.cpp PrimitiveTile.hpp Link.hpp Side.hpp Square.hpp Tile.hpp myGeometry.hpp CalculateGap.hpp
 	g++ -std=c++11 -c -g PrimitiveTile.cpp
+
+myGeometry.o: myGeometry.cpp myGeometry.hpp
+	g++ -std=c++11 -c -g myGeometry.cpp
 
 clean:
 	rm -f *.o test

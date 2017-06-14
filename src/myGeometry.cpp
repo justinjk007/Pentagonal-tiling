@@ -93,9 +93,9 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
    */
   static int check = 0;
   Line line;
-  double m2 = 0;
-  double x2 = NULL;
-  double y2 = NULL;
+  double m2 = 0.0;
+  double x2 = 0.0;
+  double y2 = 0.0;
   double m = this->getSlope();
   m2 = (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
   std::cout << "type passed: " << type << "\n";

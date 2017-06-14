@@ -110,7 +110,7 @@ double getOtherAngle(Side a, Side b, double angle_b, char which_angle) {
    * because the angle we know that's in the middle is b.Angle should
    * be passed in degrees
    */
-  double other_angle = NULL;
+  double other_angle = 0.0;
   double part_one;
   double side_c_length = getThirdSide(a,b,angle_b);
   if (which_angle == 'a') {
