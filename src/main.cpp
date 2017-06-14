@@ -84,28 +84,29 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
   BOOST_CHECK_EQUAL(answer4, true);
 }
 
-BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #12
-  Line line1 = {{0, 0}, {4.76, 0.10}};
-  Line line2;
-  line2 = line1.getLineWithRespectTo(49, 3.53,1); // Angle and length
+// BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #12
+//   Line line1 = {{0, 0}, {4.76, 0.10}};
+//   Line line2;
+//   line2 = line1.getLineWithRespectTo(49, 3.53,0); // Angle and length
 
-  BOOST_CHECK_CLOSE(line1.getSlope(), 0.02100840, 0.01);
-  BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
-  BOOST_CHECK_EQUAL(line1.start.y_cord, 0);
-  BOOST_CHECK_EQUAL(line1.end.x_cord, 4.76); //(4.76,0.10)
-  BOOST_CHECK_EQUAL(line1.end.y_cord, 0.10);
+//   BOOST_CHECK_CLOSE(line1.getSlope(), 0.02100840, 0.01);
+//   BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
+//   BOOST_CHECK_EQUAL(line1.start.y_cord, 0);
+//   BOOST_CHECK_EQUAL(line1.end.x_cord, 4.76); //(4.76,0.10)
+//   BOOST_CHECK_EQUAL(line1.end.y_cord, 0.10);
 
-  BOOST_CHECK_CLOSE(line2.getSlope(), 1.201227, 0.01);
-  BOOST_CHECK_CLOSE(line2.start.x_cord, 4.76, 0.01);
-  BOOST_CHECK_CLOSE(line2.start.y_cord, 0.10, 0.01);
-  BOOST_CHECK_CLOSE(line2.end.x_cord, 7.01829, 0.01); //(7.00,2.83)
-  BOOST_CHECK_CLOSE(line2.end.y_cord, 2.812957, 0.01);
-}
+//   BOOST_CHECK_CLOSE(line2.getSlope(), 1.201227, 0.01);
+//   BOOST_CHECK_CLOSE(line2.start.x_cord, 4.76, 0.01);
+//   BOOST_CHECK_CLOSE(line2.start.y_cord, 0.10, 0.01);
+//   BOOST_CHECK_CLOSE(line2.end.x_cord, 7.01829, 0.01); //(7.00,2.83)
+//   BOOST_CHECK_CLOSE(line2.end.y_cord, 2.812957, 0.01);
+// }
 
 BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just to print the data
   // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
-  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile = {3.80, 2.57, 2.74, 4.17, 3.58, 115, 47, 231, 63};
   PrimitiveTile newSample(tile);
   newSample.drawFirstPentagon(2);
   BOOST_CHECK_EQUAL(0.10, 0.10);

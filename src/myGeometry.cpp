@@ -82,41 +82,58 @@ Line Line::getLineWithRespectTo(Point origin, double length) {
   return line;
 }
 
-Line Line::getLineWithRespectTo(double angle2, double length, int type) {
+Line Line::getLineWithRespectTo(double angle2, double length, int type, char which) {
   /**
    * This method is to draw the lines with respect to the angle
    * between this line & the last line and the length of the second line.
    * Here suffix 2 means that of the second line or 2nd co-ordinate of the line
+   * 'which variable decides to see if we want the diagonal or the side'
    * TODO once initial problem is fixed try printing the contents of
    * the pentagon array to see there are actually 5 line nmot just 4.
    */
+  static int check = 0;
   Line line;
   double m2 = 0;
   double x2 = NULL;
+  double y2 = NULL;
   double m = this->getSlope();
-  m2 =
-    (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
-  double inc_angle = this->getInclineAngle(m2);
-  // m2 = tan((angle2 + inc_angle)*(PI/180)); // Slope of the second line.
-  // std::cout << "angle passed: " << 180-angle2 << "\n";
-  // std::cout << "Incline angle: "<< inc_angle << "\n";
-  // std::cout << "Slope of the second line: " << m2 << "\n";
-  // std::cout << "length of the second line: " << length << "\n";
-  if(type == 1)
-    // Type on is when x2 is greater than x1.
-    x2 = this->end.x_cord + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+  m2 = (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
+  std::cout << "type passed: " << type << "\n";
+  if (check%2 == 0)
+    std::cout << "angle passed: " << angle2 << "\n";
   else
-    // Type on is when x2 is smaller than x1, ie the line is backward.
-    x2 = this->end.x_cord - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+    std::cout << "angle passed: " << 180-angle2 << "\n";
+  check++;
+  std::cout << "Slope of the second line: " << m2 << "\n";
+  std::cout << "length of the second line: " << length << "\n";
+  if (which == 's') {
+    if (type == 0)
+      // Type on is when x2 is greater than x1.
+      x2 = this->end.x_cord + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+    else
+      // Type on is when x2 is smaller than x1, ie the line is backward.
+      x2 = this->end.x_cord - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+    y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
+    line.start.x_cord = this->end.x_cord;
+    line.start.y_cord = this->end.y_cord;
+  } else if (which == 'd') // when which = 'd' for diagonal.
+    {
+      if (type == 0)
+	// Type on is when x2 is greater than x1.
+	x2 = this->start.x_cord + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+      else
+	// Type on is when x2 is smaller than x1, ie the line is backward.
+	x2 = this->start.x_cord - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+      y2 = m2 * (x2 - this->start.x_cord) + this->start.y_cord;
+      line.start.x_cord = this->start.x_cord;
+      line.start.y_cord = this->start.y_cord;
+    } else
+    return line;
 
-  double y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
-
-  // std::cout << "new co-ordinates found are "
-  // << "(" << x2 << ", " << y2 << ")"
-  // << "\n\n";
+  std::cout << "new co-ordinates found are "
+  	    << "(" << x2 << ", " << y2 << ")"
+  	    << "\n";
   line.end.x_cord = x2;
   line.end.y_cord = y2;
-  line.start.x_cord = this->end.x_cord;
-  line.start.y_cord = this->end.y_cord;
   return line;
 }

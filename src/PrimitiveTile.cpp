@@ -1,4 +1,5 @@
 #include "PrimitiveTile.hpp"
+#include "CalculateGap.hpp"
 #include <array>
 #include <fstream>
 #include <iostream>
@@ -39,23 +40,63 @@ void PrimitiveTile::drawPentagon() {
 
 void PrimitiveTile::drawFirstPentagon(int from) {
   Line current_line;
+  Line diagonal; // The line that connects the 1st and the end of the 2nd line.
   Line next_line;
   double next_angle = 0;
+  double diagonal_angle = 0;
+  double diagonal_length = 0;
   Point origin = {0, 0};
   int correct_index = wrapAround(from);
   int moded_index = 0;
+  int type1 = 0;
+  int type2 = 0;
+  int i =1;
   current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[correct_index].value);
   this->boundary.push_back(current_line);
-  for (int i = 1; i < 5; i++) {
-    correct_index += i; // TODO check if this correct.
-    moded_index = correct_index % 5; // Wraparound like a circle array
-    next_angle = 180.0 - this->pentagon.angle[moded_index];
-    next_line = current_line.getLineWithRespectTo(next_angle, this->pentagon.side[moded_index].value,1);
-    this->boundary.push_back(next_line);
-    current_line = next_line;
+  correct_index += 1;
+  moded_index = correct_index % 5; // Wraparound like a circle array
+  while(i < 5){ // TODO change 2 to 5, 2 was just for debugging.
+    next_angle = this->pentagon.angle[moded_index];
+    std::cout << "\nNext angle is " <<next_angle<< "\n";
+    diagonal_length = getThirdSide(this->pentagon.side[(moded_index - 1) % 5], this->pentagon.side[moded_index],next_angle);
+    diagonal_angle =getOtherAngle(this->pentagon.side[(moded_index - 1) % 5], this->pentagon.side[moded_index], next_angle, 'a');
+    std::cout << "\nFor the diagonal -------------" << "\n";
+    std::cout << "Diagonal angle is " <<diagonal_angle<< "\n";
+    diagonal = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1,'d');
+    std::cout << "\nFor the line     -------------" << "\n";
+    next_line = current_line.getLineWithRespectTo(180-next_angle, this->pentagon.side[moded_index].value, type2, 's');
+    double diff = diagonal.end.x_cord - next_line.end.x_cord;
+    std::cout << "Diff between the co-ordinates: " <<diff<< "\n";
+    if (diff <= 0.1 && diff >= -0.1) {
+      std::cout << "One side found***************" <<endl;
+      type1 = 0;
+      type2 = 0;
+      this->boundary.push_back(next_line);
+      current_line = next_line;
+      ++i;
+      correct_index += 1;
+      moded_index = correct_index % 5; // Wraparound like a circle array
+    } else {
+      if (type1 == 0 && type2 == 0) {
+        type1 = 1;
+        continue;
+      } else if (type1 == 1 && type2 == 0) {
+        type2 = 1;
+        continue;
+      } else if (type1 == 1 && type2 == 1) {
+        type1 = 0;
+        continue;
+      } else
+	{
+	  std::cout << "*******************************************************************************\n";
+	  std::cout << "All options for finding co-ordinates covered program exited with exit status 1\n";
+	  std::cout << "*******************************************************************************\n";
+	  break;
+	}
+    }
   }
   this->writeToFile();
-}
+  }
 
 void PrimitiveTile::writeToFile() {
   /**
