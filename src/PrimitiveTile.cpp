@@ -2,6 +2,7 @@
 #include "CalculateGap.hpp"
 #include <array>
 #include <fstream>
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -56,12 +57,18 @@ void PrimitiveTile::drawFirstPentagon(int from) {
   moded_index = correct_index % 5; // Wraparound like a circle array
   while(i < 5){ // TODO change 2 to 5, 2 was just for debugging.
     next_angle = this->pentagon.angle[moded_index];
+    std::cout << "\nNext angle is " <<next_angle<< "\n";
     diagonal_length = getThirdSide(this->pentagon.side[(moded_index - 1) % 5], this->pentagon.side[moded_index],next_angle);
     diagonal_angle =getOtherAngle(this->pentagon.side[(moded_index - 1) % 5], this->pentagon.side[moded_index], next_angle, 'a');
+    std::cout << "\nFor the diagonal -------------" << "\n";
+    std::cout << "Diagonal angle is " <<diagonal_angle<< "\n";
     diagonal = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1,'d');
+    std::cout << "\nFor the line     -------------" << "\n";
     next_line = current_line.getLineWithRespectTo(180-next_angle, this->pentagon.side[moded_index].value, type2, 's');
     double diff = diagonal.end.x_cord - next_line.end.x_cord;
+    std::cout << "Diff between the co-ordinates: " <<diff<< "\n";
     if (diff <= 0.1 && diff >= -0.1) {
+      std::cout << "One side found***************" <<endl;
       type1 = 0;
       type2 = 0;
       this->boundary.push_back(next_line);
@@ -81,12 +88,9 @@ void PrimitiveTile::drawFirstPentagon(int from) {
         continue;
       } else
 	{
-	  fprintf(stderr, "******************************************************"
-		  "*************************\n");
-	  fprintf(stderr, "All options for finding co-ordinates covered program "
-		  "exited with exit status 1\n");
-	  fprintf(stderr, "******************************************************"
-		  "*************************\n");
+	  std::cout << "*******************************************************************************\n";
+	  std::cout << "All options for finding co-ordinates covered program exited with exit status 1\n";
+	  std::cout << "*******************************************************************************\n";
 	  break;
 	}
     }
