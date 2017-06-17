@@ -47,19 +47,21 @@ void PrimitiveTile::drawFirstPentagon(int from) {
   double diagonal_length = 0;
   Point origin = {0, 0};
   int correct_index = wrapAround(from);
-  int moded_index = 0;
+  int moded_index = correct_index % 5;
   int type1 = 0;
   int type2 = 0;
   int i =1;
-  current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[correct_index].value);
+  current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
+  std::cout << "\nModed index is " <<moded_index<< "\n";
   this->boundary.push_back(current_line);
   correct_index += 1;
   moded_index = correct_index % 5; // Wraparound like a circle array
   while(i < 5){ // TODO change 2 to 5, 2 was just for debugging.
     next_angle = this->pentagon.angle[moded_index];
     std::cout << "\nNext angle is " <<next_angle<< "\n";
-    diagonal_length = getThirdSide(this->pentagon.side[(moded_index - 1) % 5], this->pentagon.side[moded_index],next_angle);
-    diagonal_angle =getOtherAngle(this->pentagon.side[(moded_index - 1) % 5], this->pentagon.side[moded_index], next_angle, 'a');
+    diagonal_length = getThirdSide(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index],next_angle);
+    diagonal_angle =getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
+    std::cout <<"This contraption is "<< (moded_index + 4) % 5 <<endl;
     std::cout << "\nFor the diagonal -------------" << "\n";
     std::cout << "Diagonal angle is " <<diagonal_angle<< "\n";
     diagonal = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1,'d');

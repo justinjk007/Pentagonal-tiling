@@ -5,21 +5,7 @@
 #define PI 3.14159265359
 
 int wrapAround(int i) {
-  /**
-   * One of the stupidest things I have done in years, hard coding.
-   */
-  if (i == 0)
-    return 3;
-  else if (i == 1)
-    return 4;
-  else if (i == 2)
-    return 0;
-  else if (i == 3)
-    return 1;
-  else if (i == 4)
-    return 2;
-  else
-    return 10000;
+  return i + 3;
 }
 
 bool compareLine(Line line1, Line line2){
