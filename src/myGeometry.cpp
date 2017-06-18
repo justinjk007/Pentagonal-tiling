@@ -4,10 +4,6 @@
 
 #define PI 3.14159265359
 
-int wrapAround(int i) {
-  return i + 3;
-}
-
 bool compareLine(Line line1, Line line2){
   /**
    * Compare lines to see if they are equal, true if they are equal else false

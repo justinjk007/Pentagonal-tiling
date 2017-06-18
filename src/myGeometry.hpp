@@ -36,7 +36,6 @@ public:
   }
 };
 
-int wrapAround(int);
 bool compareLine(Line ,Line);
 
 #endif /* MYGEOMETRY_HPP */
