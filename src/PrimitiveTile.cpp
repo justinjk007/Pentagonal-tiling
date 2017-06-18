@@ -42,19 +42,25 @@ void PrimitiveTile::drawPentagon(int from, bool is_first) {
   double diagonal_angle = 0;
   double diagonal_length = 0;
   Point origin = {0, 0};
-  int correct_index = wrapAround(from);
-  int moded_index = correct_index % 5;
+  int correct_index = 0;
+  int moded_index = 0;
   int type1 = 0;
   int type2 = 0;
-  int i =1;
-  current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
+  int i =1; // Becuase we are already finding line 1 here
+  if (is_first) {
+    correct_index = wrapAround(from);
+    moded_index = correct_index % 5;
+    current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
+  } else
+    ;
   std::cout << "\nModed index is " <<moded_index<< "\n";
   this->boundary.push_back(current_line);
   correct_index += 1;
   moded_index = correct_index % 5; // Wraparound like a circle array
-  while(i < 5){
+  while (i < 5) {
     next_angle = this->pentagon.angle[moded_index];
     std::cout << "\nNext angle is " <<next_angle<< "\n";
+    // TODO Check if +4 and -1 are the same on paper
     diagonal_length = getThirdSide(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index],next_angle);
     diagonal_angle = getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
     std::cout <<"This contraption is "<< (moded_index + 4) % 5 <<endl;
@@ -67,8 +73,8 @@ void PrimitiveTile::drawPentagon(int from, bool is_first) {
     std::cout << "Diff between the co-ordinates: " <<diff<< "\n";
     if (diff <= 0.1 && diff >= -0.1) {
       std::cout << "One side found***************" <<endl;
-      type1 = 0;
-      type2 = 0;
+      type1 = 0; // Reset types after every line
+      type2 = 0; // Reset types after every line
       this->boundary.push_back(next_line);
       current_line = next_line;
       ++i;
