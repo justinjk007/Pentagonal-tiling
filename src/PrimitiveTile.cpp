@@ -34,11 +34,7 @@ void PrimitiveTile::del() {
   this->size = 1;
 }
 
-void PrimitiveTile::drawPentagon() {
-  ;
-}
-
-void PrimitiveTile::drawFirstPentagon(int from) {
+void PrimitiveTile::drawPentagon(int from, bool is_first) {
   Line current_line;
   Line diagonal; // The line that connects the 1st and the end of the 2nd line.
   Line next_line;
@@ -56,11 +52,11 @@ void PrimitiveTile::drawFirstPentagon(int from) {
   this->boundary.push_back(current_line);
   correct_index += 1;
   moded_index = correct_index % 5; // Wraparound like a circle array
-  while(i < 5){ // TODO change 2 to 5, 2 was just for debugging.
+  while(i < 5){
     next_angle = this->pentagon.angle[moded_index];
     std::cout << "\nNext angle is " <<next_angle<< "\n";
     diagonal_length = getThirdSide(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index],next_angle);
-    diagonal_angle =getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
+    diagonal_angle = getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
     std::cout <<"This contraption is "<< (moded_index + 4) % 5 <<endl;
     std::cout << "\nFor the diagonal -------------" << "\n";
     std::cout << "Diagonal angle is " <<diagonal_angle<< "\n";
@@ -80,14 +76,14 @@ void PrimitiveTile::drawFirstPentagon(int from) {
       moded_index = correct_index % 5; // Wraparound like a circle array
     } else {
       if (type1 == 0 && type2 == 0) {
-        type1 = 1;
-        continue;
+	type1 = 1;
+	continue;
       } else if (type1 == 1 && type2 == 0) {
-        type2 = 1;
-        continue;
+	type2 = 1;
+	continue;
       } else if (type1 == 1 && type2 == 1) {
-        type1 = 0;
-        continue;
+	type1 = 0;
+	continue;
       } else
 	{
 	  std::cout << "*******************************************************************************\n";
@@ -98,7 +94,7 @@ void PrimitiveTile::drawFirstPentagon(int from) {
     }
   }
   this->writeToFile();
-  }
+}
 
 void PrimitiveTile::writeToFile() {
   /**
@@ -120,7 +116,7 @@ void PrimitiveTile::writeToFile() {
 
 void PrimitiveTile::drawPrimitiveTile() {
   list<int>::iterator boundary_it = this->connector_sides.begin();
-  this->drawFirstPentagon(this->connector_sides.front()); // Get the first element in the list
+  this->drawPentagon(this->connector_sides.front(), true); // Get the first element in the list
 }
 
 Square PrimitiveTile::drawSquare(double area) {

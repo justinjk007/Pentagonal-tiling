@@ -20,8 +20,7 @@ public:
   std::list<int> connector_sides; // Stores the indexes of the sides connected.
   int size; // This accounts for the number of tiles in the primitive tile.
   bool isLinkable(Link);
-  void drawPentagon();
-  void drawFirstPentagon(int);
+  void drawPentagon(int, bool);
   void drawPrimitiveTile();
   void addTile(int, int);
   void del();

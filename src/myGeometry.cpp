@@ -74,8 +74,6 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
    * between this line & the last line and the length of the second line.
    * Here suffix 2 means that of the second line or 2nd co-ordinate of the line
    * 'which variable decides to see if we want the diagonal or the side'
-   * TODO once initial problem is fixed try printing the contents of
-   * the pentagon array to see there are actually 5 line nmot just 4.
    */
   static int check = 0;
   Line line;
