@@ -112,7 +112,9 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
   double p_area = 2 * tile_area;
   newSample.drawSquare(p_area);
   newSample.drawPentagon(2);
-  newSample.drawPentagon(2,3);
+  Link link1(tile.side[2], tile.side[3]);
+  if (newSample.isLinkable(link1))
+    newSample.drawPentagon(2,3);
   BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 

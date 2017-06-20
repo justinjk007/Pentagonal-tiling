@@ -24,6 +24,7 @@ public:
   double getInclineAngle(double);
   Line getLineWithRespectTo(Point, double);
   Line getLineWithRespectTo(double, double, int, char);
+  Line reverse(); // Reverse the start and end points of the line.
   Line() {
     this->start.x_cord = 0.0;
     this->start.y_cord = 0.0;

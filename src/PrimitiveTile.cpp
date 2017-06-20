@@ -51,11 +51,16 @@ void PrimitiveTile::drawPentagon(int from, int to) {
   if(!this->boundary.empty())
     {
       list<Line>::iterator it = this->boundary.begin();
-      advance(it,3);
+      advance(it,2);
       current_line = *it;
+      current_line = current_line.reverse();
     }
   else
-    std::cout << "\nThe list is empty\n";
+    {
+      std::cout << "\nThe list is empty\n\n";
+      std::cout << "\nUnexpected error\n\n";
+      exit(1);
+    }
   std::cout << "\nModed index is " <<moded_index<< "\n";
   this->boundary.push_back(current_line);
   moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
@@ -100,6 +105,7 @@ void PrimitiveTile::drawPentagon(int from, int to) {
 	}
     }
   }
+  cout << "Finished drawing one pentagon ------------------************************";
   this->writeToFile();
 }
 
@@ -166,7 +172,8 @@ void PrimitiveTile::drawPentagon(int from) {
 	}
     }
   }
-  this->writeToFile();
+  cout << "Finished drawing one pentagon ------------------************************";
+  // this->writeToFile();
 }
 
 void PrimitiveTile::writeToFile() {
@@ -180,9 +187,6 @@ void PrimitiveTile::writeToFile() {
     myfile << it->start.x_cord << ","
 	   << it->start.y_cord << "\n";
   }
-  myfile << this->boundary.begin()->start.x_cord << ","
-	 << this->boundary.begin()->start.y_cord
-	 << "\n"; // So that it will complete a circle or a this->boundary.
   myfile.close();
 }
 

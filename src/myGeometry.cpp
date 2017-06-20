@@ -51,6 +51,18 @@ double Line::getInclineAngle(double m) {
   return angle;
 }
 
+Line Line::reverse() {
+  /**
+   * Reverses the start and end points
+   */
+    Line temp_line;
+    temp_line.start.x_cord = this->end.x_cord;
+    temp_line.start.y_cord = this->end.y_cord;
+    temp_line.end.x_cord = this->start.x_cord;
+    temp_line.end.y_cord = this->start.y_cord;
+    return temp_line;
+}
+
 Line Line::getLineWithRespectTo(Point origin, double length) {
   /**
    * This method is to draw the first line in the shape when we don't
