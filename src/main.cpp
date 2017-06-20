@@ -112,6 +112,7 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
   double p_area = 2 * tile_area;
   newSample.drawSquare(p_area);
   newSample.drawPentagon(2);
+  newSample.drawPentagon(2,3);
   BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 

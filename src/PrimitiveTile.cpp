@@ -47,8 +47,15 @@ void PrimitiveTile::drawPentagon(int from, int to) {
   int type1 = 0;
   int type2 = 0;
   int i =1; // Becuase we are already finding line 1 here
-  moded_index = (from + 3) % 5; // This is done to rotate the first pentagon
-  current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
+  moded_index = to % 5; // This is done to rotate the first pentagon
+  if(!this->boundary.empty())
+    {
+      list<Line>::iterator it = this->boundary.begin();
+      advance(it,3);
+      current_line = *it;
+    }
+  else
+    std::cout << "\nThe list is empty\n";
   std::cout << "\nModed index is " <<moded_index<< "\n";
   this->boundary.push_back(current_line);
   moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
