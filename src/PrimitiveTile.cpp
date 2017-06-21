@@ -105,7 +105,7 @@ void PrimitiveTile::drawPentagon(int from, int to) {
 	}
     }
   }
-  cout << "Finished drawing one pentagon ------------------************************";
+  cout << "Finished drawing second pentagon ------------------************************";
   this->writeToFile();
 }
 
@@ -172,7 +172,7 @@ void PrimitiveTile::drawPentagon(int from) {
 	}
     }
   }
-  cout << "Finished drawing one pentagon ------------------************************";
+  cout << "Finished drawing first pentagon ------------------************************";
   // this->writeToFile();
 }
 
@@ -183,10 +183,25 @@ void PrimitiveTile::writeToFile() {
   ofstream myfile;
   string file_name = "example.csv";
   myfile.open(file_name, std::ios_base::app);
-  for (list<Line>::iterator it = this->boundary.begin(); it != this->boundary.end(); ++it) {
+  list<Line>::iterator it = this->boundary.begin();
+  int i = 0;
+  Point i_need_this = this->boundary.begin()->start;
+  while (it != this->boundary.end()) {
     myfile << it->start.x_cord << ","
-	   << it->start.y_cord << "\n";
+	     << it->start.y_cord << "\n";
+    list<Line>::iterator temp_it = it;
+    ++it;
+    ++i;
+    if(i%5 == 0)
+	{
+	  temp_it--;
+	  myfile << i_need_this.x_cord << ","
+		 << i_need_this.y_cord << "\n";
+	  i_need_this = temp_it->start;
+	}
   }
+  myfile << this->boundary.back().end.x_cord << ","
+  	 << this->boundary.back().end.y_cord << "\n";
   myfile.close();
 }
 
