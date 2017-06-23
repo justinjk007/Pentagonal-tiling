@@ -32,3 +32,5 @@
 #Don't ignore these files from build
 !/src/build/debug/plot_lines.py
 !/src/build/debug/example.csv
+
+*.html
