@@ -1,6 +1,8 @@
 import csv
 import matplotlib.pyplot as plt
 
+colors = ["r", "g", "b", "c", "m", "k"]
+count = 0
 
 def parse(file_name):
     "Parses the data sets from the csv file we are given to work with"
@@ -29,6 +31,7 @@ def toXandY(unorderedData):
     return orderedData
 
 def main():
+    global count
     newData = []
     square_x = []
     square_y = []
@@ -47,17 +50,20 @@ def main():
     for i in range(0, 5):
         square_x.append(DataXandY[0].pop(0))
         square_y.append(DataXandY[1].pop(0))
-    for i in range(0, 6):
+    draw(square_x, square_y, labels[0], labels[1], file_name, "g")
+    i = 0
+    while(len(DataXandY[0])):
+        count += 1
+        i += 1
         pent_x.append(DataXandY[0].pop(0))
         pent_y.append(DataXandY[1].pop(0))
-    draw(square_x, square_y, labels[0], labels[1], file_name, "g")
-    draw(pent_x, pent_y, labels[0], labels[1], file_name, "b")
-    draw(DataXandY[0], DataXandY[1], labels[0], labels[1], file_name, "r")
-    plt.xlim(-5, 15)
-    plt.ylim(-5, 15)
+        if(i % 6 == 0):
+            draw(pent_x, pent_y, labels[0], labels[1], file_name, colors[count%6])
+
+    # plt.xlim(-5, 15)
+    # plt.ylim(-5, 15)
     plt.gca().set_aspect('equal', adjustable='box')
     plt.show()
-
 
 if __name__ == "__main__":
     main()
