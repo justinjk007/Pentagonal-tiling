@@ -11,7 +11,7 @@ SET(BOOST_ROOT "C:\\local\\boost_1_64_0")
 SET(Boost_USE_STATIC_LIBS ON)
 SET(Boost_USE_MULTITHREADED ON)
 
-FIND_PACKAGE( Boost 1.60 COMPONENTS unit_test_framework REQUIRED )
+FIND_PACKAGE( Boost 1.58 COMPONENTS unit_test_framework REQUIRED )
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 ADD_LIBRARY(CalculateGap CalculateGap.cpp)
