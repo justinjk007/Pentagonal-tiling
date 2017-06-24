@@ -48,9 +48,9 @@ void PrimitiveTile::drawPentagon(int from, int to) {
   int type2 = 0;
   int i =1; // Becuase we are already finding line 1 here
   moded_index = to % 5; // This is done to rotate the first pentagon
-  if(!this->boundary.empty())
+  if(!this->lines.empty())
     {
-      list<Line>::iterator it = this->boundary.begin();
+      list<Line>::iterator it = this->lines.begin();
       advance(it,2);
       current_line = *it;
       current_line = current_line.reverse();
@@ -62,7 +62,7 @@ void PrimitiveTile::drawPentagon(int from, int to) {
       exit(1);
     }
   std::cout << "\nModed index is " <<moded_index<< "\n";
-  this->boundary.push_back(current_line);
+  this->lines.push_back(current_line);
   moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
   while (i < 5) {
     next_angle = this->pentagon.angle[moded_index];
@@ -82,7 +82,7 @@ void PrimitiveTile::drawPentagon(int from, int to) {
       std::cout << "One side found***************" <<endl;
       type1 = 0; // Reset types after every line
       type2 = 0; // Reset types after every line
-      this->boundary.push_back(next_line);
+      this->lines.push_back(next_line);
       current_line = next_line;
       ++i;
       moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
@@ -106,7 +106,6 @@ void PrimitiveTile::drawPentagon(int from, int to) {
     }
   }
   cout << "Finished drawing second pentagon ------------------************************";
-  this->writeToFile();
 }
 
 void PrimitiveTile::drawPentagon(int from) {
@@ -128,7 +127,7 @@ void PrimitiveTile::drawPentagon(int from) {
   moded_index = (from + 3) % 5; // This is done to rotate the first pentagon
   current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
   std::cout << "\nModed index is " <<moded_index<< "\n";
-  this->boundary.push_back(current_line);
+  this->lines.push_back(current_line);
   moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
   // ---------- Finding the first line here
   while (i < 5) {
@@ -149,7 +148,7 @@ void PrimitiveTile::drawPentagon(int from) {
       std::cout << "One side found***************" <<endl;
       type1 = 0; // Reset types after every line
       type2 = 0; // Reset types after every line
-      this->boundary.push_back(next_line);
+      this->lines.push_back(next_line);
       current_line = next_line;
       ++i;
       moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
@@ -173,23 +172,22 @@ void PrimitiveTile::drawPentagon(int from) {
     }
   }
   cout << "Finished drawing first pentagon ------------------************************";
-  // this->writeToFile();
 }
 
 void PrimitiveTile::writeToFile() {
   /**
-   * Write the first pentagon to file, so it can be plotted
+   * Write the lines list to file so it can be printed
    */
   ofstream myfile;
   string file_name = "example.csv";
   myfile.open(file_name, std::ios_base::app);
-  list<Line>::iterator it = this->boundary.begin();
+  list<Line>::iterator it = this->lines.begin();
   int i = 0;
-  Point i_need_this = this->boundary.begin()->start;
-  while (it != this->boundary.end()) {
+  Point i_need_this = this->lines.begin()->start;
+  while (it != this->lines.end()) {
     myfile << it->start.x_cord << ","
 	     << it->start.y_cord << "\n";
-    list<Line>::iterator temp_it = it;
+    list<Line>::iterator temp_it = it; // Temporary storage fo the main iterator
     ++it;
     ++i;
     if(i%5 == 0)
@@ -200,8 +198,8 @@ void PrimitiveTile::writeToFile() {
 	  i_need_this = temp_it->start;
 	}
   }
-  myfile << this->boundary.back().end.x_cord << ","
-  	 << this->boundary.back().end.y_cord << "\n";
+  // myfile << this->lines.back().end.x_cord << ","
+  // 	 << this->lines.back().end.y_cord << "\n";
   myfile.close();
 }
 
@@ -237,8 +235,7 @@ Square PrimitiveTile::drawSquare(double area) {
   myfile << square.point[1].x_cord << "," << square.point[1].y_cord << "\n";
   myfile << square.point[2].x_cord << "," << square.point[2].y_cord << "\n";
   myfile << square.point[3].x_cord << "," << square.point[3].y_cord << "\n";
-  // Complete circle
-  myfile << square.point[0].x_cord << "," << square.point[0].y_cord << "\n";
+  myfile << square.point[0].x_cord << "," << square.point[0].y_cord << "\n"; // Complete circle
   myfile.close();
   return square;
 }

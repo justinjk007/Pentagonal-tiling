@@ -15,7 +15,7 @@
 
 class PrimitiveTile {
 public:
-  std::list<Line> boundary; // Stores the lines of the boundaries primitive tile
+  std::list<Line> lines; // Stores the lines of the boundaries primitive tile
   std::list<int> connector_sides; // Stores the indexes of the sides connected.
   Tile pentagon; // Stores the measurements of the tile or pentagon used.
   int size; // This accounts for the number of tiles in the primitive tile.

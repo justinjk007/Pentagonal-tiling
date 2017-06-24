@@ -1,7 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 
-colors = ["r", "g", "b", "c", "m", "k"]
+colors = ["r", "g", "b", "c", "m"]
 count = 0
 
 def parse(file_name):
@@ -50,15 +50,15 @@ def main():
     for i in range(0, 5):
         square_x.append(DataXandY[0].pop(0))
         square_y.append(DataXandY[1].pop(0))
-    draw(square_x, square_y, labels[0], labels[1], file_name, "g")
-    i = 0
-    while(len(DataXandY[0])):
+        draw(square_x, square_y, labels[0], labels[1], file_name, "k")
+    while len(DataXandY[0]) != 0:
         count += 1
-        i += 1
-        pent_x.append(DataXandY[0].pop(0))
-        pent_y.append(DataXandY[1].pop(0))
-        if(i % 6 == 0):
-            draw(pent_x, pent_y, labels[0], labels[1], file_name, colors[count%6])
+        for i in range(0, 6):
+            pent_x.append(DataXandY[0].pop(0))
+            pent_y.append(DataXandY[1].pop(0))
+        draw(pent_x, pent_y, labels[0], labels[1], file_name, colors[count%5])
+        pent_x[:] = []          # Delete the list
+        pent_y[:] = []          # Delete the list
 
     # plt.xlim(-5, 15)
     # plt.ylim(-5, 15)
