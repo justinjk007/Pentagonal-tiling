@@ -1,9 +1,9 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE GapTest
-#include "Side.hpp"
-#include "Tile.hpp"
 #include "CalculateGap.hpp"
 #include "PrimitiveTile.hpp"
+#include "Side.hpp"
+#include "Tile.hpp"
 #include "myGeometry.hpp"
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
@@ -36,9 +36,9 @@ BOOST_AUTO_TEST_CASE(max_angle_test) { // #5
   BOOST_CHECK_EQUAL(getMaxAngle(tile), 190);
 }
 
-BOOST_AUTO_TEST_CASE(AngleE) {	// #6
+BOOST_AUTO_TEST_CASE(AngleE) { // #6
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 120, 60};
-  BOOST_CHECK_EQUAL(tile.angle_e, 200);
+  BOOST_CHECK_EQUAL(tile.angle[4], 200);
 }
 
 BOOST_AUTO_TEST_CASE(tile_values_test) { // #7
@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(tile_values_test) { // #7
 
 BOOST_AUTO_TEST_CASE(get_third_side) { // #8
   Tile tile1 = {11, 8, 21, 20, 30, 23, 37, 45, 45};
-  double ans = getThirdSide(tile1.side[0], tile1.side[1], tile1.angle_b);
+  double ans = getThirdSide(tile1.side[0], tile1.side[1], tile1.angle[1]);
   BOOST_CHECK_CLOSE(ans, 6.6663, 0.001); // 0.001% is the tolerance
 }
 
@@ -74,34 +74,51 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
   Link link2(tile.side[2], tile.side[0]);
   Link link3(tile.side[0], tile.side[1]);
   Link link4(tile.side[3], tile.side[4]);
-  bool answer1 = newSample.addTile(link1);
-  bool answer2 = newSample.addTile(link2);
-  bool answer3 = newSample.addTile(link3);
-  bool answer4 = newSample.addTile(link4);
+  bool answer1 = newSample.isLinkable(link1);
+  bool answer2 = newSample.isLinkable(link2);
+  bool answer3 = newSample.isLinkable(link3);
+  bool answer4 = newSample.isLinkable(link4);
   BOOST_CHECK_EQUAL(answer1, true);
   BOOST_CHECK_EQUAL(answer2, false);
   BOOST_CHECK_EQUAL(answer3, false);
   BOOST_CHECK_EQUAL(answer4, true);
-  BOOST_CHECK_EQUAL(newSample.size, 3);
 }
 
-BOOST_AUTO_TEST_CASE(my_geometry_line_finder){ // #12
-  Line line1 = {{0,0}, {4.76,0.10}};
-  Line line2;
-  line2 = line1.getLineWithRespectTo(131,3.53);
-  BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
-  BOOST_CHECK_EQUAL(line1.start.y_cord, 0);
-  BOOST_CHECK_EQUAL(line1.end.x_cord, 4.76); //(4.76,0.10)
-  BOOST_CHECK_EQUAL(line1.end.y_cord, 0.10);
+// BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #12
+//   Line line1 = {{0, 0}, {4.76, 0.10}};
+//   Line line2;
+//   line2 = line1.getLineWithRespectTo(49, 3.53,0); // Angle and length
 
-  BOOST_CHECK_EQUAL(line2.start.x_cord, 4.76);
-  BOOST_CHECK_EQUAL(line2.start.y_cord, 0.10);
-  BOOST_CHECK_EQUAL(line2.end.x_cord, 7); //(7.00,2.83)
-  BOOST_CHECK_EQUAL(line2.end.y_cord, 2.83);
+//   BOOST_CHECK_CLOSE(line1.getSlope(), 0.02100840, 0.01);
+//   BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
+//   BOOST_CHECK_EQUAL(line1.start.y_cord, 0);
+//   BOOST_CHECK_EQUAL(line1.end.x_cord, 4.76); //(4.76,0.10)
+//   BOOST_CHECK_EQUAL(line1.end.y_cord, 0.10);
+
+//   BOOST_CHECK_CLOSE(line2.getSlope(), 1.201227, 0.01);
+//   BOOST_CHECK_CLOSE(line2.start.x_cord, 4.76, 0.01);
+//   BOOST_CHECK_CLOSE(line2.start.y_cord, 0.10, 0.01);
+//   BOOST_CHECK_CLOSE(line2.end.x_cord, 7.01829, 0.01); //(7.00,2.83)
+//   BOOST_CHECK_CLOSE(line2.end.y_cord, 2.812957, 0.01);
+// }
+
+BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just to print the data
+  // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // tile tile = {3.80, 2.57, 2.74, 4.17, 3.58, 115, 47, 231, 63};
+  PrimitiveTile newSample(tile);
+  double tile_area = getTileArea(tile);
+  double p_area = 2 * tile_area;
+  newSample.drawSquare(p_area);
+  newSample.drawPentagon(2);
+  Link link1(tile.side[2], tile.side[3]);
+  if (newSample.isLinkable(link1))
+    newSample.drawPentagon(2,3);
+  BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 
-// BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #13
-//   Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
-//   Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-//   BOOST_CHECK_EQUAL(getGap(tile1), -101);
+// BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14
+//   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+//   BOOST_CHECK_EQUAL(getGap(tile), -101);
 // }

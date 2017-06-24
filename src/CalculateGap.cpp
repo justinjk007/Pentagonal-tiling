@@ -8,8 +8,9 @@ using namespace std;
 
 double getGap(Tile tile) {
   /*
-   * This is the main method that calculated the gap between the tiles
-   * when arranged.
+   * This is the main method that returns the gap minimum between the
+   * tiles when arranged with any particular order. Current this only
+   * calculates gap between primitive tiles of size 2.
    */
   double tile_area = getTileArea(tile);
   PrimitiveTile p_tile(tile);
@@ -19,15 +20,15 @@ double getGap(Tile tile) {
   int gap_index = 0;
   if (!validateTile(tile))
     return -101; // Negative gap means the tile is not valid.
-  for (int i = 0; i < 5; ++i) {
-    for (int j = 0; j < 5; ++j) {
-      p_tile.del(); // Reset the primitiveTile
-      Link link(tile.side[i], tile.side[j]);
-      if (p_tile.addTile(link)) {
-	p_tile_area = p_tile.size * tile_area;
-	gap_list[gap_index] = calculateGap(p_tile,p_tile_area);
-      }
-    }
+  int i = 3;
+  int j = 3;
+  p_tile.del(); // Reset the primitiveTile
+  Link link(tile.side[i], tile.side[j]);
+  if (p_tile.isLinkable(link)) {
+    p_tile.addTile(i,j); // i and j are the side indexs that are linked.
+    p_tile_area = p_tile.size * tile_area;
+    p_tile.drawPrimitiveTile();
+    gap_list[gap_index] = calculateGap(p_tile, p_tile_area);
   }
 
   // Returning the minimumgap in the gap list
@@ -38,7 +39,6 @@ double getGap(Tile tile) {
       min_gap = gap_list[i];
   }
   return min_gap;
-
 }
 
 bool validateTile(Tile tile) {
@@ -49,7 +49,7 @@ bool validateTile(Tile tile) {
   double max_side = getMaxSide(tile);
   double max_angle = getMaxAngle(tile);
   if (max_angle <= 180.00)
-    if (tile.angle_e > 0)
+    if (tile.angle[4] > 0)
       if (tile.side[0].value + tile.side[1].value + tile.side[2].value +
 	  tile.side[3].value + tile.side[4].value >
           (2 * max_side))
@@ -82,27 +82,47 @@ double getMaxAngle(Tile tile) {
   /*
    * This method returns the biggest angle of the tile.
    */
-  double max_angle = tile.angle_a;
-  if (tile.angle_b > max_angle)
-    max_angle = tile.angle_b;
-  if (tile.angle_c > max_angle)
-    max_angle = tile.angle_c ;
-  if (tile.angle_d  > max_angle)
-    max_angle = tile.angle_d ;
-  if (tile.angle_e  > max_angle)
-    max_angle = tile.angle_e ;
+  double max_angle = tile.angle[0];
+  for (int i = 0; i < 5; ++i) {
+    if (tile.angle[i] > max_angle)
+      max_angle = tile.angle[i];
+  }
   return max_angle;
 }
 
 double getThirdSide(Side a, Side b, double angle) {
   /*
    * This method returns the third side of the triangle formed inside
-   * a polygon used for area calculating purposes
+   * a polygon used for area calculating purposes. Angle should be
+   * passed in degrees
    */
-  angle = angle * PI / 180;
+  angle = angle * PI / 180.0;
   double side_c = sqrt((a.value * a.value) + (b.value * b.value) -
                        (2 * a.value * b.value * cos(angle)));
   return side_c;
+}
+
+double getOtherAngle(Side a, Side b, double angle_b, char which_angle) {
+  /**
+   * This method uses sine law to find the angle b/w a and c or b and
+   * c .Here the angle passed is the angle b/w the sides a and b. The
+   * character passed is the angle to be found which can be a or c
+   * because the angle we know that's in the middle is b.Angle should
+   * be passed in degrees
+   */
+  double other_angle = 0.0;
+  double part_one;
+  double side_c_length = getThirdSide(a,b,angle_b);
+  if (which_angle == 'a') {
+    part_one = (sin(angle_b * PI / 180.0) * b.value) / side_c_length;
+    other_angle = asin(part_one) * 180.0 / PI;
+    return other_angle;
+  } else if (which_angle == 'c') {
+    part_one = (sin(angle_b * PI / 180.0) * a.value) / side_c_length;
+    other_angle = asin(part_one) * 180.0 / PI;
+    return other_angle;
+  } else
+    return other_angle;
 }
 
 double getTriangleArea(double a, double b, double c) {
@@ -120,37 +140,21 @@ double getTileArea(Tile tile) {
    * This method returns the Area of the pentagon dividing it into
    * three triangles, calculating its area and summing them up.
    */
-  double ac = getThirdSide(tile.side[0], tile.side[1], tile.angle_b);
-  double ce = getThirdSide(tile.side[2], tile.side[3], tile.angle_d);
+  double ac = getThirdSide(tile.side[0], tile.side[1], tile.angle[1]);
+  double ce = getThirdSide(tile.side[2], tile.side[3], tile.angle[3]);
   double triangle1 =
-    getTriangleArea(tile.side[0].value, tile.side[1].value, ac);
+      getTriangleArea(tile.side[0].value, tile.side[1].value, ac);
   double triangle2 =
-    getTriangleArea(tile.side[2].value, tile.side[3].value, ce);
-  double triangle3 =
-    getTriangleArea(ac, ce, tile.side[4].value);
+      getTriangleArea(tile.side[2].value, tile.side[3].value, ce);
+  double triangle3 = getTriangleArea(ac, ce, tile.side[4].value);
   double pentagonArea = triangle1 + triangle2 + triangle3;
   return pentagonArea;
 }
 
-
 double calculateGap(PrimitiveTile p_tile, double p_tile_area) {
   Square square;
   double gap = 0;
-  square = drawSquare(p_tile_area);
+  square = p_tile.drawSquare(p_tile_area);
+  p_tile.drawPrimitiveTile();
   return gap;
-}
-
-Square drawSquare(double area) {
-  Square square;
-  area = area * 25; // Make the area of the sqaure 25 times the primtive tile
-  square.side = sqrt(area); // Get the side length of the square.
-  square.point[0].x_cord = 0;
-  square.point[0].y_cord = 0;
-  square.point[1].x_cord = square.side;
-  square.point[1].y_cord = 0;
-  square.point[2].x_cord = square.side;
-  square.point[2].y_cord = square.side;
-  square.point[3].x_cord = 0;
-  square.point[3].y_cord = square.side;
-  return square;
 }

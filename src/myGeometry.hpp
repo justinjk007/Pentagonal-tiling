@@ -6,8 +6,8 @@ public:
   double x_cord;
   double y_cord;
   Point() {
-    this->x_cord = 0.0 ;
-    this->y_cord = 0.0 ;
+    this->x_cord = 0.0;
+    this->y_cord = 0.0;
   }
   Point(double x, double y) {
     this->x_cord = x;
@@ -19,11 +19,12 @@ class Line {
 public:
   Point start;
   Point end;
-  Line drawLine(Point, double, double);
-  Line drawLine(Point, double);
   double getSlope();
   double getInclineAngle();
-  Line getLineWithRespectTo(double, double);
+  double getInclineAngle(double);
+  Line getLineWithRespectTo(Point, double);
+  Line getLineWithRespectTo(double, double, int, char);
+  Line reverse(); // Reverse the start and end points of the line.
   Line() {
     this->start.x_cord = 0.0;
     this->start.y_cord = 0.0;
@@ -35,5 +36,7 @@ public:
     this->end = b;
   }
 };
+
+bool compareLine(Line ,Line);
 
 #endif /* MYGEOMETRY_HPP */

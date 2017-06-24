@@ -5,24 +5,31 @@
  */
 #ifndef PRIMITIVETILE_HPP
 #define PRIMITIVETILE_HPP
-#include "Side.hpp"
-#include "Tile.hpp"
 #include "Link.hpp"
+#include "Side.hpp"
+#include "Square.hpp"
+#include "Tile.hpp"
+#include "myGeometry.hpp"
+#include <algorithm>
+#include <list>
 
-class PrimitiveTile
-{
+class PrimitiveTile {
 public:
-  Tile pentagon;
-  Link links[1000];  //Max size of the primitive tile for now = 1000.
-  int size;
-  bool addTile(Link link);
-  void print();
+  std::list<Line> boundary; // Stores the lines of the boundaries primitive tile
+  std::list<int> connector_sides; // Stores the indexes of the sides connected.
+  Tile pentagon; // Stores the measurements of the tile or pentagon used.
+  int size; // This accounts for the number of tiles in the primitive tile.
+  bool isLinkable(Link);
+  void drawPentagon(int);
+  void drawPentagon(int, int);
+  void drawPrimitiveTile();
+  void addTile(int, int);
   void del();
-  PrimitiveTile(Tile tile)
-  {
+  void writeToFile();
+  Square drawSquare(double area);
+  PrimitiveTile(Tile tile) {
     this->pentagon = tile;
-    this->size = 1; // Because creating the primitive tile means there
-                    // should be at least one pentagon to start from
+    this->size = 1; // Obviously we need atleast one tile.
   }
 };
 
