@@ -54,24 +54,22 @@ void PrimitiveTile::drawPentagon(int from, int to) {
   int type1 = 0;
   int type2 = 0;
   int i =1; // Becuase we are already finding line 1 here
-  moded_index = to % 5; // This is done to rotate the first pentagon
   if (!this->lines.empty()) {
+    moded_index = to % 5; // This is done to rotate the first pentagon
     list<Line>::iterator it = this->lines.begin();
     advance(it, 2);
     current_line = *it;
     current_line = current_line.reverse();
+    this->lines.push_back(current_line);
   } else {
     // ---------- Finding the first line here
     moded_index = (from + 3) % 5; // This is done to rotate the first pentagon
-    current_line = current_line.getLineWithRespectTo(
-        origin, this->pentagon.side[moded_index].value);
+    current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
     std::cout << "\nModed index is " << moded_index << "\n";
     this->lines.push_back(current_line);
-    moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
     // ---------- Finding the first line here
   }
   std::cout << "\nModed index is " <<moded_index<< "\n";
-  this->lines.push_back(current_line);
   moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
   while (i < 5) {
     next_angle = this->pentagon.angle[moded_index];
@@ -133,14 +131,33 @@ void PrimitiveTile::writeToFile() {
 	     << it->start.y_cord << "\n";
     list<Line>::iterator temp_it = it; // Temporary storage fo the main iterator
     ++it;
-    ++i;
-    if(i%6 == 0)
-      {
-	temp_it--;
-	myfile << i_need_this.x_cord << ","
-	       << i_need_this.y_cord << "\n";
-	i_need_this = temp_it->start;
-      }
+    i += 1;
+    if (i % 6 == 0) {
+      temp_it--;
+      myfile << i_need_this.x_cord << "," << i_need_this.y_cord << "\n";
+      i_need_this = temp_it->start;
+    }
+  }
+  myfile.close();
+}
+
+void PrimitiveTile::writeToFileRaw() {
+  /**
+   * Write the lines list to file in raw, meaning the coordinates of
+   * points of each line in the list, this is just for viewing and not
+   * for plotting.
+   */
+  ofstream myfile;
+  string file_name = "rawData.csv";
+  myfile.open(file_name);
+  myfile << "x,y,\n";
+  list<Line>::iterator it = this->lines.begin();
+  while (it != this->lines.end()) {
+    myfile << it->start.x_cord << ","
+           << it->start.y_cord << "\n";
+    myfile << it->end.x_cord << ","
+           << it->end.y_cord << "\n";
+    ++it;
   }
   myfile.close();
 }
