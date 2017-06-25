@@ -116,6 +116,7 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
   if (newSample.isLinkable(link1))
     newSample.drawPentagon(2,3);
   newSample.writeToFileRaw();
+  newSample.writeToFile();
   BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 

@@ -138,7 +138,7 @@ void PrimitiveTile::writeToFile() {
     list<Line>::iterator temp_it = it; // Temporary storage fo the main iterator
     ++it;
     i += 1;
-    if (i % 6 == 0) {
+    if (i % 5 == 0) {
       temp_it--;
       myfile << i_need_this.x_cord << "," << i_need_this.y_cord << "\n";
       i_need_this = temp_it->start;
