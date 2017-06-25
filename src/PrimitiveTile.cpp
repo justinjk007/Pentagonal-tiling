@@ -198,8 +198,6 @@ void PrimitiveTile::writeToFile() {
 	  i_need_this = temp_it->start;
 	}
   }
-  // myfile << this->lines.back().end.x_cord << ","
-  // 	 << this->lines.back().end.y_cord << "\n";
   myfile.close();
 }
 

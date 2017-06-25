@@ -16,7 +16,7 @@ def draw(xCords, yCords, xLabel, yLabel, filename, col):
     plt.xlabel(xLabel)
     plt.ylabel(yLabel)
     plt.title("Pentagon - "+filename)
-    plt.plot(xCords, yCords, '-o', color=col)
+    plt.plot(xCords, yCords, '-o', color=col, markersize = 1, linewidth = 2)
 
 def toXandY(unorderedData):
     "This method converts seperates x and y co-ordinates for plotting"
