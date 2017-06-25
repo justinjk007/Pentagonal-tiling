@@ -27,7 +27,8 @@ double getGap(Tile tile) {
   if (p_tile.isLinkable(link)) {
     p_tile.addTile(i,j); // i and j are the side indexs that are linked.
     p_tile_area = p_tile.size * tile_area;
-    p_tile.drawPrimitiveTile();
+    p_tile.drawPentagon(2,3);
+    p_tile.drawPentagon(2,3);
     gap_list[gap_index] = calculateGap(p_tile, p_tile_area);
   }
 
@@ -155,6 +156,7 @@ double calculateGap(PrimitiveTile p_tile, double p_tile_area) {
   Square square;
   double gap = 0;
   square = p_tile.drawSquare(p_tile_area);
-  p_tile.drawPrimitiveTile();
+  p_tile.drawPentagon(2, 3);
+  p_tile.drawPentagon(2, 3);
   return gap;
 }

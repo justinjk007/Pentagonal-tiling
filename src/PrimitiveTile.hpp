@@ -20,9 +20,7 @@ public:
   Tile pentagon; // Stores the measurements of the tile or pentagon used.
   int size; // This accounts for the number of tiles in the primitive tile.
   bool isLinkable(Link);
-  void drawPentagon(int);
   void drawPentagon(int, int);
-  void drawPrimitiveTile();
   void addTile(int, int);
   void del();
   void writeToFile();
