@@ -43,6 +43,7 @@ void PrimitiveTile::drawPentagon(int from, int to) {
    * pentagon. Parameters are the side conneted from and to of a new
    * pentagon.
    */
+  Line first_line;
   Line current_line;
   Line diagonal; // The line that connects the 1st and the end of the 2nd line.
   Line next_line;
@@ -61,12 +62,14 @@ void PrimitiveTile::drawPentagon(int from, int to) {
     current_line = *it;
     current_line = current_line.reverse();
     this->lines.push_back(current_line);
+    first_line = current_line;
   } else {
     // ---------- Finding the first line here
     moded_index = (from + 3) % 5; // This is done to rotate the first pentagon
     current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
     std::cout << "\nModed index is " << moded_index << "\n";
     this->lines.push_back(current_line);
+    first_line = current_line;
     // ---------- Finding the first line here
   }
   std::cout << "\nModed index is " <<moded_index<< "\n";
@@ -112,6 +115,9 @@ void PrimitiveTile::drawPentagon(int from, int to) {
 	}
     }
   }
+  this->lines.pop_back(); // Remove the last added line
+  current_line.end = first_line.start; // This what the origin and end are always the same points
+  this->lines.push_back(current_line); // Add the modified line to the end
   cout << "Finished drawing a pentagon ------------------************************";
 }
 
