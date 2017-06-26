@@ -208,8 +208,9 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
    * for tiling rightwards. t_x2 is the translation in the x-axis and
    * t_y2 in y-axis respectively for tiling upwards.
    */
-  std::list<Line> original_p_tile; // Stores the lines of the original primitivetile
-  std::list<Line> temp_p_tile; // Stores the lines last drawn primitivetile
+  std::list<Line> original_p_tile; // Stores the lines of the original primitivetile.
+  std::list<Line> temp_p_tile; // Stores the original temporarily for translation.
+  std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
   list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
   int p_tile_size = 2;
   for (int i = 0; i < p_tile_size * 5; ++i) {
@@ -219,26 +220,57 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   }
   // Now original_p_tile have the original primitivetile
 
-  // Get the translation upwards - mock for now -----
+  temp_p_tile = original_p_tile;
+
+  // Get the translation rightwards - mock for now ----
   list<Line>::iterator it = this->lines.begin();
-  double tpx1 = it->start.x_cord;
-  double tpy1 = it->start.y_cord;
+  double tpx1 = it->end.x_cord;
+  double tpy1 = it->end.y_cord;
+  advance(it, 4);
+  double tpx2 = it->end.x_cord;
+  double tpy2 = it->end.y_cord;
+  t_x1 = tpx2 - tpx1;
+  t_y1 = tpy2 - tpy1;
+  // Get the translation rightwards - mock for now ----
+
+  // Start applying the rightwards translation here ****
+  //   for (int i = 0; i < 4; ++i) {
+  //     for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
+  //       it->start.x_cord -= t_x1;
+  //       it->start.y_cord -= t_y1;
+  //       it->end.x_cord -= t_x1;
+  //       it->end.y_cord -= t_y1;
+  //     }
+  //     last_p_tile = temp_p_tile;
+  //     this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+  //     this->count++;
+  //     temp_p_tile = last_p_tile;
+  // }
+  // End applying the rightwards translation here ****
+
+  // Get the translation upwards - mock for now -----
+  it = this->lines.begin();
+  tpx1 = it->start.x_cord;
+  tpy1 = it->start.y_cord;
   advance(it, 7);
-  double tpx2 = it->start.x_cord;
-  double tpy2 = it->start.y_cord;
+  tpx2 = it->start.x_cord;
+  tpy2 = it->start.y_cord;
   t_x2 = tpx2 - tpx1;
   t_y2 = tpy2 - tpy1;
   // Get the translation upwards - mock for now -----
 
   // Start applying the upwards translation here *****
-  temp_p_tile = original_p_tile;
-
-  for (it = temp_p_tile.begin();it != temp_p_tile.end(); ++it)
-    {
+  for (int i = 0; i < 4; ++i) {
+    for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
       it->start.x_cord += t_x2;
       it->start.y_cord += t_y2;
       it->end.x_cord += t_x2;
       it->end.y_cord += t_y2;
     }
-  this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+    last_p_tile = temp_p_tile;
+    this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+    this->count++;
+    temp_p_tile = last_p_tile;
+  }
+  // End applying the upwards translation here *****
 }

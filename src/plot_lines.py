@@ -1,8 +1,8 @@
 import csv
 import matplotlib.pyplot as plt
 
-colors = ["r", "g", "b", "c", "m"]
-count = 0
+colors = ["r","r", "g","g", "b","b", "c","c", "m", "m"]
+count = -1
 
 def parse(file_name):
     "Parses the data sets from the csv file we are given to work with"
@@ -45,7 +45,6 @@ def main():
         newData.append([])          # Add a new sublsit every time
         for j in range(0, 2):       # Append converted data to the new list
             newData[i].append(float(data[i][j]))
-            # Finding the starting point P
     DataXandY = toXandY(newData)     # DataXandY -> [[Xs][Ys]]
     for i in range(0, 5):
         square_x.append(DataXandY[0].pop(0))
@@ -56,7 +55,7 @@ def main():
         for i in range(0, 6):
             pent_x.append(DataXandY[0].pop(0))
             pent_y.append(DataXandY[1].pop(0))
-        draw(pent_x, pent_y, labels[0], labels[1], file_name, colors[count%5])
+        draw(pent_x, pent_y, labels[0], labels[1], file_name, colors[count%10])
         pent_x[:] = []          # Delete the list
         pent_y[:] = []          # Delete the list
 
