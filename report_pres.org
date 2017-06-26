@@ -8,15 +8,80 @@
 #+REVEAL_PLUGINS: (highlight)
 #+REVEAL_HIGHLIGHT_CSS: https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css
 
-* This is 
-Some fake content
+* What is pentagonal tiling ?
+ [[./img/pentagon.png]]
+** Tiling
+- The aim here is to tile the given surface without leaving any
+  gaps. Many geometrical shapes do so very easily.
+- Example for this can be found all around us.
+** Squares and rectangles
+Most common tiling used and found around us.
+[[./img/sqaure.png]]
+** Triangles
+All though not common, these can be also easily tiled.
+[[./img/triangle.png]]
+- Equilateral triangles can be also tiled without any gaps
+** Hexagons
+- Hexagons can also be tiled but not all of them. But many of them are
+  easily tiled.
+- Every Regular pentagons can be easily tiled
+[[./img/hex.png]]
+* The problem with 5
+- Unlike other geometrical shapes all pentagons cannot be tiled.
+- Which means they leave behind gaps, not fully covering the surface
+  they are tiling.
+[[./img/gap.png]]
+** Some particular pentagons tile
+Until now there has been 15 different pentagons found that can tile
+without any gaps of area.
+** I can quickly show a rundown of them
+* My task was to write an algorithm that will determine this unwanted gap.
+** I/O
+- The data given to me for each iteration is the lengths of the 5
+  sides of the pentagon and the corresponding angles.
+- The data output should be the minimum gap between these tiles when tiled.
+* Design
+** Breakdown
+- Our idea was to use my algorithm coupled with a evolutionary algorithm
+  to find a new pentagon that could tile without leaving any gaps.
+- Many challenges are ahead of us.
+** Algorithm
+#+BEGIN_SRC c++
+validate(Pentagon);
+generateCo-ordinates(Pentagon);
+createPrimitiveTile(Pentagon);
+doTiling(primitiveTile);
+return(minimumGap);
+#+END_SRC
+** Challenges faced
+*** Generating co-ordinates
+- Creating co-ordinates for the pentagon where one of the challenges
+- I had to write my own geometrical library that would give the
+  co-ordinates for a polygon from the lengths and angles of each sides.
+- Write now each side of the pentagon requires 4 iteration of the
+  equation to find the co-ordinates.
+- This doesn't slow the algorithm down because this is done only once
+  and rest of the time this original pentagon is just translated.
+*** This was least of the problems
+- Combinations and permutations for everything else came after this.
+*** Creating a primitive Tile
+[[./img/primitive.png]]
+- Once we have the *correct* primitive tile we only have to translate
+  this =primitiveTile= to tile the given surface.
+- This way we reduce the permutations significantly growing after
+  adding each tile to a regular tiling without the =primitiveTile=.
+*** Finding the right translation
+* Demo
+* References
+- http://paulbourke.net/texture_colour/tilingplane/
+FINITO
 * Single Image Background
     :PROPERTIES:
     :reveal_background: ./face.png
     :reveal_background_trans: fade
     :END:
     This is some text you can use.
-* This is 
+* This is
 Some fake content
 #+BEGIN_SRC c++
 class test {
