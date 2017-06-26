@@ -26,7 +26,7 @@ public:
   void writeToFile();
   void writeToFileRaw();
   Square drawSquare(double area);
-  void doTiling(double,double);
+  void doTiling(double,double,double,double);
   PrimitiveTile(Tile tile) {
     this->pentagon = tile;
     this->size = 1; // Obviously we need atleast one tile.

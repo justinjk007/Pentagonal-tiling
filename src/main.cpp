@@ -105,20 +105,20 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
 BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just to print the data
   // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  // tile tile = {3.80, 2.57, 2.74, 4.17, 3.58, 115, 47, 231, 63};
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81, 122.23}; // Type 1
   PrimitiveTile newSample(tile);
   double tile_area = getTileArea(tile);
-  double p_area = 2 * tile_area;
+  double p_area = 2 * tile_area; // This is the area of the primitiveTile
   newSample.drawSquare(p_area);
-  newSample.drawPentagon(2,3);
-  Link link1(tile.side[2], tile.side[3]);
-  if (newSample.isLinkable(link1))
-    newSample.drawPentagon(2,3);
+  newSample.drawPentagon(2,2);
+  Link link1(tile.side[2], tile.side[2]);
+  if (newSample.isLinkable(link1)){
+    newSample.drawPentagon(2,2);
+    newSample.doTiling(0,0,0,0);
+  }
   newSample.writeToFileRaw();
   newSample.writeToFile();
-  newSample.doTiling(0,0);
-  BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 
 // BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14

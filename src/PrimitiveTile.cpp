@@ -201,19 +201,44 @@ Square PrimitiveTile::drawSquare(double area) {
   return square;
 }
 
-void PrimitiveTile::doTiling(double t_x, double t_y) {
+void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2) {
   /**
-   * This method tile the primitiveTile with the given arguments. t_x
-   * is the translation in the x-axis and t_y in y-axis respectively
+   * This method tile the primitiveTile with the given arguments. t_x1
+   * is the translation in the x-axis and t_y1 in y-axis respectively
+   * for tiling rightwards. t_x2 is the translation in the x-axis and
+   * t_y2 in y-axis respectively for tiling upwards.
    */
+  std::list<Line> original_p_tile; // Stores the lines of the original primitivetile
   std::list<Line> temp_p_tile; // Stores the lines last drawn primitivetile
-  list<Line>::const_reverse_iterator rev_it(this->lines.rbegin());
-  // Here rev_it is the reverse end of the list not the begining
+  list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
   int p_tile_size = 2;
   for (int i = 0; i < p_tile_size * 5; ++i) {
-    temp_p_tile.push_front(*rev_it);
+    original_p_tile.push_front(*rev_it);
     if (i != (p_tile_size * 5) - 1)
       rev_it++;
   }
-  // Now temp_p_tile have the last new primitivetTile lines from the main list
+  // Now original_p_tile have the original primitivetile
+
+  // Get the translation upwards - mock for now -----
+  list<Line>::iterator it = this->lines.begin();
+  double tpx1 = it->start.x_cord;
+  double tpy1 = it->start.y_cord;
+  advance(it, 7);
+  double tpx2 = it->start.x_cord;
+  double tpy2 = it->start.y_cord;
+  t_x2 = tpx2 - tpx1;
+  t_y2 = tpy2 - tpy1;
+  // Get the translation upwards - mock for now -----
+
+  // Start applying the upwards translation here *****
+  temp_p_tile = original_p_tile;
+
+  for (it = temp_p_tile.begin();it != temp_p_tile.end(); ++it)
+    {
+      it->start.x_cord += t_x2;
+      it->start.y_cord += t_y2;
+      it->end.x_cord += t_x2;
+      it->end.y_cord += t_y2;
+    }
+  this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
 }
