@@ -19,7 +19,7 @@ public:
   std::list<int> connector_sides; // Stores the indexes of the sides connected.
   Tile pentagon; // Stores the measurements of the tile or pentagon used.
   int size; // This accounts for the number of tiles in the primitive tile.
-  int count; // Stores the number of primitivetile used in tiling
+  int count; // Stores the number of primitivetile used in tiling or drawing.
   bool isLinkable(Link);
   void drawPentagon(int, int);
   void addTile(int, int);
