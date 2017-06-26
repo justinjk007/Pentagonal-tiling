@@ -26,10 +26,11 @@ public:
   void writeToFile();
   void writeToFileRaw();
   Square drawSquare(double area);
+  void doTiling(double,double);
   PrimitiveTile(Tile tile) {
     this->pentagon = tile;
     this->size = 1; // Obviously we need atleast one tile.
   }
-  };
+};
 
 #endif /* PRIMITIVETILE_HPP */

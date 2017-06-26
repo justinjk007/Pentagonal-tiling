@@ -117,6 +117,7 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
     newSample.drawPentagon(2,3);
   newSample.writeToFileRaw();
   newSample.writeToFile();
+  newSample.doTiling(0,0);
   BOOST_CHECK_EQUAL(0.10, 0.10);
 }
 

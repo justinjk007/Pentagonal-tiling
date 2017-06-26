@@ -200,3 +200,20 @@ Square PrimitiveTile::drawSquare(double area) {
   myfile.close();
   return square;
 }
+
+void PrimitiveTile::doTiling(double t_x, double t_y) {
+  /**
+   * This method tile the primitiveTile with the given arguments. t_x
+   * is the translation in the x-axis and t_y in y-axis respectively
+   */
+  std::list<Line> temp_p_tile; // Stores the lines last drawn primitivetile
+  list<Line>::const_reverse_iterator rev_it(this->lines.rbegin());
+  // Here rev_it is the reverse end of the list not the begining
+  int p_tile_size = 2;
+  for (int i = 0; i < p_tile_size * 5; ++i) {
+    temp_p_tile.push_front(*rev_it);
+    if (i != (p_tile_size * 5) - 1)
+      rev_it++;
+  }
+  // Now temp_p_tile have the last new primitivetTile lines from the main list
+}
