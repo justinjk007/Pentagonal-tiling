@@ -130,17 +130,19 @@ void PrimitiveTile::writeToFile() {
   string file_name = "example.csv";
   myfile.open(file_name, std::ios_base::app);
   list<Line>::iterator it = this->lines.begin();
+  list<Line>::iterator temp_it = it; // Temporary storage fo the main iterator
   int i = 0;
   Point i_need_this = this->lines.begin()->start;
   while (it != this->lines.end()) {
     myfile << it->start.x_cord << ","
-	     << it->start.y_cord << "\n";
-    list<Line>::iterator temp_it = it; // Temporary storage fo the main iterator
+           << it->start.y_cord << "\n";
+    temp_it = it;
     ++it;
     i += 1;
     if (i % 5 == 0) {
       temp_it--;
       myfile << i_need_this.x_cord << "," << i_need_this.y_cord << "\n";
+      advance(temp_it,2);
       i_need_this = temp_it->start;
     }
   }
@@ -213,6 +215,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
   list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
   int p_tile_size = 2;
+  int test=0;
   for (int i = 0; i < p_tile_size * 5; ++i) {
     original_p_tile.push_front(*rev_it);
     if (i != (p_tile_size * 5) - 1)
@@ -236,6 +239,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   // Start applying the rightwards translation here ****
   for (int i = 0; i < 4; ++i) {
     for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
+      test++;
       it->start.x_cord -= t_x1;
       it->start.y_cord -= t_y1;
       it->end.x_cord -= t_x1;
@@ -275,4 +279,5 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   // End applying the upwards translation here *****
 
   printf("\nNumber of primitive tile drawn is %d",this->count);
+  printf("\nNumber of test is %d",test);
 }
