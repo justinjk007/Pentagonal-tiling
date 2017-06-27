@@ -123,5 +123,5 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
 
 // BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14
 //   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-//   BOOST_CHECK_EQUAL(getGap(tile), -101);
+//   BOOST_CHECK_EQUAL(getGap(tile), 101);
 // }
