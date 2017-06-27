@@ -224,7 +224,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   // Now original_p_tile have the original primitivetile
 
 
-  // Get the translation rightwards - mock for now ----
+  // Get the translation rightwards
   list<Line>::iterator it = this->lines.begin();
   double tpx1 = it->end.x_cord;
   double tpy1 = it->end.y_cord;
@@ -233,9 +233,9 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   double tpy2 = it->end.y_cord;
   t_x1 = tpx2 - tpx1;
   t_y1 = tpy2 - tpy1;
-  // Get the translation rightwards - mock for now ----
+  // Get the translation rightwards
 
-  // Get the translation upwards - mock for now -----
+  // Get the translation upwards
   it = this->lines.begin();
   tpx1 = it->start.x_cord;
   tpy1 = it->start.y_cord;
@@ -244,11 +244,11 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   tpy2 = it->start.y_cord;
   t_x2 = tpx2 - tpx1;
   t_y2 = tpy2 - tpy1;
-  // Get the translation upwards - mock for now -----
+  // Get the translation upwards
 
   // Start applying the rightwards translation here ****
   temp_p_tile = original_p_tile;
-  for (int i = 0; i < 4; ++i) {
+  for (int i = 1; i < 6; ++i) {
     // while (right_flag) {
     for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
       it->start.x_cord -= t_x1;
@@ -265,8 +265,8 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   // End applying the rightwards translation here ****
 
   // Start applying the upwards translation here *****
-  temp_p_tile = original_p_tile;
-  for (int i = 0; i < 3; ++i) {
+  temp_p_tile = this->lines;
+  for (int i = 1; i < 4; ++i) {
     // while (up_flag) {
     for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
       it->start.x_cord += t_x2;
@@ -282,5 +282,5 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   }
   // End applying the upwards translation here *****
 
-  printf("\nNumber of primitive tile drawn is %d",this->count);
+  printf("\nNumber of primitive tiles drawn is %d",this->count);
 }

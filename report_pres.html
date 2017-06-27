@@ -5,7 +5,7 @@
 <title>Pentagonal Tiling</title>
 <meta name="author" content="(By: Justin Kaipada)"/>
 <style type="text/css">
-.underline { text-decoration: underline; }
+ .underline { text-decoration: underline; }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/reveal.css"/>
 
@@ -14,241 +14,239 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/>
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-        var link = document.createElement( 'link' );
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/print/pdf.css';
-        document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
+ if( window.location.search.match( /print-pdf/gi ) ) {
+   var link = document.createElement( 'link' );
+   link.rel = 'stylesheet';
+   link.type = 'text/css';
+   link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/print/pdf.css';
+   document.getElementsByTagName( 'head' )[0].appendChild( link );
+ }
 </script>
 </head>
 <body>
-<div class="reveal">
-<div class="slides">
-<section id="sec-title-slide"><h1 class="title">Pentagonal Tiling</h1><h2 class="author">By: Justin Kaipada</h2><p class="date">Created: 2017-06-27 Tue 10:09</p>
-</section>
+    <div class="reveal">
+        <div class="slides">
+            <section id="sec-title-slide"><h1 class="title">Pentagonal Tiling</h1><h2 class="author">By: Justin Kaipada</h2><p class="date">Created: 2017-06-27 Tue 09:30</p>
+            </section>
 
-<section>
-<section id="slide-orga1ecb6d">
-<h2 id="orga1ecb6d">What is pentagonal tiling ?</h2>
+            <section>
+                <section id="slide-org3bc5ba6">
+                    <h2 id="org3bc5ba6">What is pentagonal tiling ?</h2>
 
-<div class="figure">
-<p><img src="./img/pentagon.PNG" alt="pentagon.PNG" />
-</p>
-</div>
-</section>
-<section id="slide-orgaa5ccd5">
-<h3 id="orgaa5ccd5">Tiling</h3>
-<ul>
-<li>The aim here is to tile the given surface without leaving any
-gaps. Many geometrical shapes do so very easily.</li>
-<li>Example for this can be found all around us.</li>
+                    <div class="figure">
+                        <p><img src="./img/pentagon.PNG" alt="pentagon.PNG" />
+                        </p>
+                    </div>
+                </section>
+                <section id="slide-orgb958511">
+                    <h3 id="orgb958511">Tiling</h3>
+                    <ul>
+                        <li>The aim here is to tile the given surface without leaving any
+                            gaps. Many geometrical shapes do so very easily.</li>
+                        <li>Example for this can be found all around us.</li>
 
-</ul>
-</section>
-<section id="slide-org2042e48">
-<h3 id="org2042e48">Squares and rectangles</h3>
-<p>
-Most common tiling used and found around us.
-<img src="./img/sqaure.PNG" alt="sqaure.PNG" />
-</p>
-</section>
-<section id="slide-org7810f5c">
-<h3 id="org7810f5c">Triangles</h3>
-<p>
-All though not common, these can be also easily tiled.
-<img src="./img/triangle.PNG" alt="triangle.PNG" />
-</p>
-<ul>
-<li>Equilateral triangles can be also tiled without any gaps</li>
+                    </ul>
+                </section>
+                <section id="slide-orge088361">
+                    <h3 id="orge088361">Squares and rectangles</h3>
+                    <p>
+                        Most common tiling used and found around us.
+                        <img src="./img/sqaure.PNG" alt="sqaure.PNG" />
+                    </p>
+                </section>
+                <section id="slide-org8580b77">
+                    <h3 id="org8580b77">Triangles</h3>
+                    <p>
+                        All though not common, these can be also easily tiled.
+                        <img src="./img/triangle.PNG" alt="triangle.PNG" />
+                    </p>
+                    <ul>
+                        <li>Equilateral triangles can be also tiled without any gaps</li>
 
-</ul>
-</section>
-<section id="slide-orgefba532">
-<h3 id="orgefba532">Hexagons</h3>
-<ul>
-<li>Hexagons can also be tiled but not all of them. But many of them are
-easily tiled.</li>
-<li>Every Regular pentagons can be easily tiled</li>
+                    </ul>
+                </section>
+                <section id="slide-org80bd4ff">
+                    <h3 id="org80bd4ff">Hexagons</h3>
+                    <ul>
+                        <li>Hexagons can also be tiled but not all of them. But many of them are
+                            easily tiled.</li>
+                        <li>Every Regular pentagons can be easily tiled</li>
 
-</ul>
+                    </ul>
 
-<div class="figure">
-<p><img src="./img/hex.PNG" alt="hex.PNG" />
-</p>
-</div>
-</section>
-</section>
-<section>
-<section id="slide-org34277c7">
-<h2 id="org34277c7">The problem with 5</h2>
-<ul>
-<li>Unlike other geometrical shapes all pentagons cannot be tiled.</li>
-<li>Which means they leave behind gaps, not fully covering the surface
-they are tiling.</li>
+                    <div class="figure">
+                        <p><img src="./img/hex.PNG" alt="hex.PNG" />
+                        </p>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section id="slide-orgfe95322">
+                    <h2 id="orgfe95322">The problem with 5</h2>
+                    <ul>
+                        <li>Unlike other geometrical shapes all pentagons cannot be tiled.</li>
+                        <li>Which means they leave behind gaps, not fully covering the surface
+                            they are tiling.</li>
 
-</ul>
+                    </ul>
 
-<div class="figure">
-<p><img src="./img/gap.PNG" alt="gap.PNG" />
-</p>
-</div>
-</section>
-<section id="slide-org72f05ad">
-<h3 id="org72f05ad">Some particular pentagons tile</h3>
-<ul>
-<li>Until now there has been 15 different pentagons found that can tile
-without any gaps of area.</li>
-<li>Last one was found in 2015 by three mathematicians from <b>University of Washington Bothell</b></li>
+                    <div class="figure">
+                        <p><img src="./img/gap.PNG" alt="gap.PNG" />
+                        </p>
+                    </div>
+                </section>
+                <section id="slide-orga117edd">
+                    <h3 id="orga117edd">Some particular pentagons tile</h3>
+                    <ul>
+                        <li>Until now there has been 15 different pentagons found that can tile
+                            without any gaps of area.</li>
+                        <li>Last one was found in 2015 by three mathematicians from <b>University of Washington Bothell</b></li>
 
-</ul>
+                    </ul>
 
-<div class="figure">
-<p><img src="./img/primitive.PNG" alt="primitive.PNG" />
-</p>
-</div>
-</section>
-<section id="slide-orgcf3cab3">
-<h3 id="orgcf3cab3">I can quickly show a rundown of them</h3>
-<ul>
-<li>Thanks to <b>Jaap Scherphuis</b> and his awesome applet.</li>
+                    <div class="figure">
+                        <p><img src="./img/primitive.PNG" alt="primitive.PNG" />
+                        </p>
+                    </div>
+                </section>
+                <section id="slide-org25b3e46">
+                    <h3 id="org25b3e46">I can quickly show a rundown of them</h3>
+                    <ul>
+                        <li>Thanks to <b>Jaap Scherphuis</b> and his awesome applet.</li>
 
-</ul>
-</section>
-</section>
-<section>
-<section id="slide-org76b34b8">
-<h2 id="org76b34b8">My task was to write an algorithm that will determine this unwanted gap.</h2>
-<div class="outline-text-2" id="text-org76b34b8">
-</div></section>
-<section id="slide-org101de62">
-<h3 id="org101de62">I/O</h3>
-<ul>
-<li>The data given to me for each iteration is the lengths of the 5
-sides of the pentagon and the corresponding angles.</li>
-<li>The data output should be the minimum gap between these tiles when tiled.</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section id="slide-org8262d06">
+                    <h2 id="org8262d06">My task was to write an algorithm that will determine this unwanted gap.</h2>
+                    <div class="outline-text-2" id="text-org8262d06">
+                    </div></section>
+                <section id="slide-org4a9aa2a">
+                    <h3 id="org4a9aa2a">I/O</h3>
+                    <ul>
+                        <li>The data given to me for each iteration is the lengths of the 5
+                            sides of the pentagon and the corresponding angles.</li>
+                        <li>The data output should be the minimum gap between these tiles when tiled.</li>
 
-</ul>
-</section>
-</section>
-<section>
-<section id="slide-orgc2fcf48">
-<h2 id="orgc2fcf48">Design</h2>
-<div class="outline-text-2" id="text-orgc2fcf48">
-</div></section>
-<section id="slide-org0e5abc5">
-<h3 id="org0e5abc5">Breakdown</h3>
-<ul>
-<li>Our idea was to use my algorithm coupled with a evolutionary algorithm
-to find a new pentagon that could tile without leaving any gaps.</li>
-<li>Many challenges are ahead of us.</li>
+                    </ul>
+                </section>
+            </section>
+            <section>
+                <section id="slide-org592dc2c">
+                    <h2 id="org592dc2c">Design</h2>
+                    <div class="outline-text-2" id="text-org592dc2c">
+                    </div></section>
+                <section id="slide-org2555bf8">
+                    <h3 id="org2555bf8">Breakdown</h3>
+                    <ul>
+                        <li>Our idea was to use my algorithm coupled with a evolutionary algorithm
+                            to find a new pentagon that could tile without leaving any gaps.</li>
+                        <li>Many challenges are ahead of us.</li>
 
-</ul>
-</section>
-<section id="slide-org54b8826">
-<h3 id="org54b8826">Algorithm</h3>
-<div class="org-src-container">
+                    </ul>
+                </section>
+                <section id="slide-org00ed1cb">
+                    <h3 id="org00ed1cb">Algorithm</h3>
+                    <div class="org-src-container">
 
-<pre><code class="c++" >validate(Pentagon);
+                        <pre><code class="c++" >validate(Pentagon);
 generateCo-ordinates(Pentagon);
 createPrimitiveTile(Pentagon);
 doTiling(primitiveTile);
 return(minimumGap);
-</code></pre>
-</div>
-</section>
-<section id="slide-org587c06d">
-<h3 id="org587c06d">Challenges faced</h3>
-<div class="outline-text-3" id="text-org587c06d">
-</div></section>
-<section id="slide-org05566e0">
-<h4 id="org05566e0">Generating co-ordinates</h4>
-<ul>
-<li>Creating co-ordinates for the pentagon where one of the challenges</li>
-<li>I had to write my own geometrical library that would give the
-co-ordinates for a polygon from the lengths and angles of each sides.</li>
-<li>Write now each side of the pentagon requires 4 iteration of the
-equation to find the co-ordinates.</li>
-<li>This doesn't slow the algorithm down because this is done only once
-when drawing the primitive tile and rest of the time this original
-pentagon is just translated.</li>
+                        </code></pre>
+                    </div>
+                </section>
+                <section id="slide-org3527902">
+                    <h3 id="org3527902">Challenges faced</h3>
+                    <div class="outline-text-3" id="text-org3527902">
+                    </div></section>
+                <section id="slide-orged114db">
+                    <h4 id="orged114db">Generating co-ordinates</h4>
+                    <ul>
+                        <li>Creating co-ordinates for the pentagon was one of the challenge.</li>
+                        <li>Write now each side of the pentagon requires 4 iteration of the
+                            equation to find the co-ordinates.</li>
+                        <li>This doesn't slow the algorithm down because this is done only once
+                            when drawing the primitive tile and rest of the time this original
+                            pentagon is just translated.</li>
 
-</ul>
-</section>
-<section id="slide-org888600d">
-<h4 id="org888600d">This was least of the problems</h4>
-<ul>
-<li>Combinations and permutations for everything else came after this.</li>
+                    </ul>
+                </section>
+                <section id="slide-org251297e">
+                    <h4 id="org251297e">This was least of the problems</h4>
+                    <ul>
+                        <li>Combinations and permutations for everything else came after this.</li>
 
-</ul>
-</section>
-<section id="slide-orge52c3bc">
-<h4 id="orge52c3bc">Creating a primitive Tile</h4>
+                    </ul>
+                </section>
+                <section id="slide-orgc4df2b6">
+                    <h4 id="orgc4df2b6">Creating a primitive Tile</h4>
 
-<div class="figure">
-<p><img src="./img/primitive.PNG" alt="primitive.PNG" />
-</p>
-</div>
-<ul>
-<li>Once we have the <b>correct</b> primitive tile we only have to translate
-this <code>primitiveTile</code> to tile the given surface.</li>
-<li>This way we reduce the permutations significantly growing after
-adding each tile to a regular tiling without the <code>primitiveTile</code>.</li>
+                    <div class="figure">
+                        <p><img src="./img/primitive.PNG" alt="primitive.PNG" />
+                        </p>
+                    </div>
+                    <ul>
+                        <li>Once we have the <b>correct</b> primitive tile we only have to translate
+                            this <code>primitiveTile</code> to tile the given surface.</li>
+                        <li>This way we reduce the permutations significantly growing after
+                            adding each tile to a regular tiling without the <code>primitiveTile</code>.</li>
 
-</ul>
-</section>
-<section id="slide-orgc3bc426">
-<h4 id="orgc3bc426">Finding the right translation</h4>
+            </ul>
+        </section>
+        <section id="slide-orga07093d">
+            <h4 id="orga07093d">Finding the right translation</h4>
 
-<div class="figure">
-<p><img src="./img/translation.png" alt="translation.png" />
-</p>
-</div>
-</section>
-<section id="slide-orgd7f10d4">
-<h4 id="orgd7f10d4">Back to the permutations base</h4>
-<ul>
-<li>Finding the correct primitive tile of size 2 takes <code>5 x 5</code> = <b>25</b> tries</li>
-<li>So increasing the size of the primitive tile means exponential
-growth in the number of combinations available.</li>
-<li>Combine this together with number of possible translations,
-combinations becomes even more bigger.</li>
+            <div class="figure">
+                <p><img src="./img/translation.png" alt="translation.png" />
+                </p>
+            </div>
+        </section>
+        <section id="slide-orgcb73f77">
+            <h4 id="orgcb73f77">Back to the permutations base</h4>
+            <ul>
+                <li>Finding the correct primitive tile of size 2 takes <code>5 x 5</code> = <b>25</b> tries</li>
+                <li>So increasing the size of the primitive tile means exponential
+                    growth in the number of combinations available.</li>
+                <li>Combine this together with number of possible translations,
+                    combinations becomes even more bigger.</li>
 
-</ul>
-</section>
-<section id="slide-org1495c64">
-<h4 id="org1495c64">What we have come down to</h4>
-<ul>
-<li>Let the size of primitive tile be two for now.</li>
-<li>And return the minimum gap for all the primitive tiles possible</li>
+            </ul>
+        </section>
+        <section id="slide-orgb4d7e69">
+            <h4 id="orgb4d7e69">What we have come down to</h4>
+            <ul>
+                <li>Let the size of primitive tile be two for now.</li>
+                <li>And return the minimum gap for all the primitive tiles possible</li>
 
-</ul>
-</section>
-</section>
-<section>
-<section id="slide-org1f40c5b">
-<h2 id="org1f40c5b">Demo</h2>
-<p>
-Source Code Available : <a href="https://github.com/justinjk007/Pentagonal-tiling">https://github.com/justinjk007/Pentagonal-tiling</a>
-<img src="./img/src.png" alt="src.png" />
-</p>
-</section>
-</section>
-<section>
-<section id="slide-org0f77bc4">
-<h2 id="org0f77bc4">References</h2>
-<ul>
-<li><a href="http://paulbourke.net/texture_colour/tilingplane/">http://paulbourke.net/texture_colour/tilingplane/</a></li>
-<li><a href="http://jaapsch.net/tilings">http://jaapsch.net/tilings</a></li>
-<li><a href="https://arxiv.org/abs/1510.01186">https://arxiv.org/abs/1510.01186</a></li>
+            </ul>
+        </section>
+    </section>
+    <section>
+        <section id="slide-org976f8db">
+            <h2 id="org976f8db">Demo</h2>
+            <p>
+                Source Code Available : <a href="https://github.com/justinjk007/Pentagonal-tiling">https://github.com/justinjk007/Pentagonal-tiling</a>
+                <img src="./img/src.png" alt="src.png" />
+            </p>
+        </section>
+    </section>
+    <section>
+        <section id="slide-orgbfb4a8d">
+            <h2 id="orgbfb4a8d">References</h2>
+            <ul>
+                <li><a href="http://paulbourke.net/texture_colour/tilingplane/">http://paulbourke.net/texture_colour/tilingplane/</a></li>
+                <li><a href="http://jaapsch.net/tilings">http://jaapsch.net/tilings</a></li>
+                <li><a href="https://arxiv.org/abs/1510.01186">https://arxiv.org/abs/1510.01186</a></li>
 
-</ul>
-<p>
-FINITO
-</p>
-</section>
-</section>
+            </ul>
+            <p>
+                FINITO
+            </p>
+        </section>
+    </section>
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/lib/js/head.min.js"></script>
@@ -272,7 +270,7 @@ minScale: 0.50,
 maxScale: 2.50,
 
 theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
 transitionSpeed: 'default',
 multiplex: {
     secret: '', // null if client
