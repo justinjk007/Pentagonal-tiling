@@ -248,8 +248,8 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 
   // Start applying the rightwards translation here ****
   temp_p_tile = original_p_tile;
-  // for (int i = 0; i < 4; ++i) {
-  while (right_flag) {
+  for (int i = 0; i < 4; ++i) {
+    // while (right_flag) {
     for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
       it->start.x_cord -= t_x1;
       it->start.y_cord -= t_y1;
@@ -266,8 +266,8 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 
   // Start applying the upwards translation here *****
   temp_p_tile = original_p_tile;
-  // for (int i = 0; i < 3; ++i) {
-  while (up_flag) {
+  for (int i = 0; i < 3; ++i) {
+    // while (up_flag) {
     for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
       it->start.x_cord += t_x2;
       it->start.y_cord += t_y2;
