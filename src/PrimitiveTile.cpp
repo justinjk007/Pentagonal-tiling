@@ -215,7 +215,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
   list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
   int p_tile_size = 2;
-  int test=0;
+  bool right_flag = true, up_flag = true;
   for (int i = 0; i < p_tile_size * 5; ++i) {
     original_p_tile.push_front(*rev_it);
     if (i != (p_tile_size * 5) - 1)
@@ -223,7 +223,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   }
   // Now original_p_tile have the original primitivetile
 
-  temp_p_tile = original_p_tile;
 
   // Get the translation rightwards - mock for now ----
   list<Line>::iterator it = this->lines.begin();
@@ -236,22 +235,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   t_y1 = tpy2 - tpy1;
   // Get the translation rightwards - mock for now ----
 
-  // Start applying the rightwards translation here ****
-  for (int i = 0; i < 4; ++i) {
-    for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
-      test++;
-      it->start.x_cord -= t_x1;
-      it->start.y_cord -= t_y1;
-      it->end.x_cord -= t_x1;
-      it->end.y_cord -= t_y1;
-    }
-    last_p_tile = temp_p_tile;
-    this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
-    this->count++;
-    temp_p_tile = last_p_tile; // Inter-change last drawn line for next translation.
-  }
-  // End applying the rightwards translation here ****
-
   // Get the translation upwards - mock for now -----
   it = this->lines.begin();
   tpx1 = it->start.x_cord;
@@ -263,9 +246,28 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   t_y2 = tpy2 - tpy1;
   // Get the translation upwards - mock for now -----
 
+  // Start applying the rightwards translation here ****
+  temp_p_tile = original_p_tile;
+  // for (int i = 0; i < 4; ++i) {
+  while (right_flag) {
+    for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
+      it->start.x_cord -= t_x1;
+      it->start.y_cord -= t_y1;
+      it->end.x_cord -= t_x1;
+      it->end.y_cord -= t_y1;
+    }
+    last_p_tile = temp_p_tile;
+    this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+    this->count++;
+    temp_p_tile = last_p_tile; // Inter-change last drawn line for next translation.
+    right_flag = false;
+  }
+  // End applying the rightwards translation here ****
+
   // Start applying the upwards translation here *****
   temp_p_tile = original_p_tile;
-  for (int i = 0; i < 3; ++i) {
+  // for (int i = 0; i < 3; ++i) {
+  while (up_flag) {
     for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
       it->start.x_cord += t_x2;
       it->start.y_cord += t_y2;
@@ -276,9 +278,9 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
     this->count++;
     temp_p_tile = last_p_tile;
+    up_flag = false;
   }
   // End applying the upwards translation here *****
 
   printf("\nNumber of primitive tile drawn is %d",this->count);
-  printf("\nNumber of test is %d",test);
 }

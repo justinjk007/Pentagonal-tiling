@@ -32,9 +32,12 @@ All though not common, these can be also easily tiled.
   they are tiling.
 [[./img/gap.png]]
 ** Some particular pentagons tile
-Until now there has been 15 different pentagons found that can tile
-without any gaps of area.
+- Until now there has been 15 different pentagons found that can tile
+  without any gaps of area.
+- Last one was found in 2015 by three mathematicians from *University of *
+ [[./img/pentagon.png]]
 ** I can quickly show a rundown of them
+- Thanks to *Put his name here* and his awesome applet.
 * My task was to write an algorithm that will determine this unwanted gap.
 ** I/O
 - The data given to me for each iteration is the lengths of the 5
@@ -61,7 +64,8 @@ return(minimumGap);
 - Write now each side of the pentagon requires 4 iteration of the
   equation to find the co-ordinates.
 - This doesn't slow the algorithm down because this is done only once
-  and rest of the time this original pentagon is just translated.
+  when drawing the primitive tile and rest of the time this original
+  pentagon is just translated.
 *** This was least of the problems
 - Combinations and permutations for everything else came after this.
 *** Creating a primitive Tile
@@ -74,6 +78,7 @@ return(minimumGap);
 * Demo
 * References
 - http://paulbourke.net/texture_colour/tilingplane/
+- http://jaapsch.net/tilings
 FINITO
 * Single Image Background
     :PROPERTIES:
