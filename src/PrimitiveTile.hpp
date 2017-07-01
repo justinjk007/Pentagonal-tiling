@@ -27,7 +27,8 @@ public:
   void del();
   void writeToFile();
   void writeToFileRaw();
-  bool checkIFOustside(std::list<Line>); // This checks is the given list of lines are outside sqaure
+  bool checkIFOustsideForUp(std::list<Line>); // This checks is the given list of lines are outside sqaure
+  bool checkIFOustsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
   Square drawSquare(double area);
   void doTiling(double,double,double,double);
   PrimitiveTile(Tile tile) {
