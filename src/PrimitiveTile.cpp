@@ -200,6 +200,7 @@ Square PrimitiveTile::drawSquare(double area) {
   myfile << square.point[3].x_cord << "," << square.point[3].y_cord << "\n";
   myfile << square.point[0].x_cord << "," << square.point[0].y_cord << "\n"; // Complete circle
   myfile.close();
+  this->this_square = square;
   return square;
 }
 
@@ -221,8 +222,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     if (i != (p_tile_size * 5) - 1)
       rev_it++;
   }
-  // Now original_p_tile have the original primitivetile
-
 
   // Get the translation rightwards
   list<Line>::iterator it = this->lines.begin();
@@ -283,4 +282,21 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   // End applying the upwards translation here *****
 
   printf("\nNumber of primitive tiles drawn is %d",this->count);
+}
+
+bool PrimitiveTile::checkIFOustside(std::list<Line> checkable) {
+  /**
+   * This method checks through all the points in the given list of
+   * lines and return TRUE if none if none of the points lie outside
+   * the square of the primtive tile and FALSE if any of the points
+   * are outside the sqaure of the primitive tile.
+   * "checkable" is the list to be checked.
+   */
+  for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
+    if(it->start.x_cord <= 0 || it->start.x_cord >= this->this_square.point[1].x_cord)
+      return false;
+    if (it->start.y_cord <= 0 || it->start.y_cord >= this->this_square.point[2].x_cord)
+      return false;
+  }
+  return true;
 }

@@ -20,12 +20,14 @@ public:
   Tile pentagon; // Stores the measurements of the tile or pentagon used.
   int size; // This accounts for the number of tiles in the primitive tile.
   int count; // Stores the number of primitivetile used in tiling or drawing.
+  Square this_square;
   bool isLinkable(Link);
   void drawPentagon(int, int);
   void addTile(int, int);
   void del();
   void writeToFile();
   void writeToFileRaw();
+  bool checkIFOustside(std::list<Line>); // This checks is the given list of lines are outside sqaure
   Square drawSquare(double area);
   void doTiling(double,double,double,double);
   PrimitiveTile(Tile tile) {
