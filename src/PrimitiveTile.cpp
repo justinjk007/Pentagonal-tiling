@@ -230,8 +230,8 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   advance(it, 3);
   double tpx2 = it->end.x_cord;
   double tpy2 = it->end.y_cord;
-  t_x1 = tpx2 - tpx1;
-  t_y1 = tpy2 - tpy1;
+  t_x1 = tpx1 - tpx2;
+  t_y1 = tpy1 - tpy2;
   // Get the translation rightwards
 
   // Get the translation upwards
@@ -245,16 +245,21 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   t_y2 = tpy2 - tpy1;
   // Get the translation upwards
 
-  temp_p_tile = original_p_tile;
-  while (this->count <= 24 || (up_flag && right_flag)) { // 24 becuase one primitive tile is already drawn.
+  temp_p_tile = this->lines;
+  while (this->count <= 25 || (up_flag && right_flag)) {
+    /**
+     * The loop is counted until tile count becomes 25 or when we
+     * can't draw anymore tiles without begin completely outside the
+     * sqaure.
+     */
     up_flag = true;
     right_flag = true;
-    while (right_flag) {
+    while (right_flag && this->count <= 25) {
       for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
-	it->start.x_cord -= t_x1;
-	it->start.y_cord -= t_y1;
-	it->end.x_cord -= t_x1;
-	it->end.y_cord -= t_y1;
+	it->start.x_cord += t_x1;
+	it->start.y_cord += t_y1;
+	it->end.x_cord += t_x1;
+	it->end.y_cord += t_y1;
       }
       last_p_tile = temp_p_tile;
       this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
