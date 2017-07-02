@@ -143,7 +143,8 @@ void PrimitiveTile::writeToFile() {
       temp_it--;
       myfile << i_need_this.x_cord << "," << i_need_this.y_cord << "\n";
       advance(temp_it,2);
-      i_need_this = temp_it->start;
+      if(temp_it != this->lines.end())
+	i_need_this = temp_it->start;
     }
   }
   myfile.close();
@@ -277,14 +278,14 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	transition_flag = false;
       }
       else{
-	while(transition_flag){
-	  printf("\n\n\nHERE\n\n\n");
-	  temp_p_tile = original_p_tile;
-	  last_p_tile = translate(t_x1,t_y1,temp_p_tile);
-	  temp_p_tile = last_p_tile;
-	  if (checkIfFullyOustsideForUp(last_p_tile))
-	    transition_flag = true;
-	}
+        while (transition_flag) {
+          printf("\n\n\nHERE\n\n\n");
+          temp_p_tile = original_p_tile;
+          last_p_tile = translate(t_x1, t_y1, temp_p_tile);
+          temp_p_tile = last_p_tile;
+          if (checkIfFullyOustsideForUp(last_p_tile))
+            transition_flag = true;
+        }
       }
       up_flag = checkIfOustsideForUp(last_p_tile);
     }
