@@ -32,6 +32,7 @@ public:
   bool checkIfFullyOustsideForUp(std::list<Line>);
   Square drawSquare(double area);
   void doTiling(double,double,double,double);
+  std::list<Line> translate(double,double,std::list<Line>);
   PrimitiveTile(Tile tile) {
     this->pentagon = tile;
     this->size = 1; // Obviously we need atleast one tile.
