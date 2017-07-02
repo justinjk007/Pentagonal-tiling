@@ -214,7 +214,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   std::list<Line> original_p_tile = this->lines; // Stores the lines of the original primitivetile.
   std::list<Line> temp_p_tile; // Stores the original temporarily for translation.
   std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
-  bool right_flag = true, up_flag = true;
+  bool right_flag = true, up_flag = true, transition_flag = false;
   // int p_tile_size = 2;
   // list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
   // for (int j = 0; j < p_tile_size * 5; ++j) {
@@ -254,6 +254,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
      */
     up_flag = true;
     right_flag = true;
+    transition_flag = false;
     while (right_flag && this->count <= 25) {
       temp_p_tile = translate(t_x1,t_y1,temp_p_tile);
       last_p_tile = temp_p_tile;
@@ -264,7 +265,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
       right_flag = checkIfOustsideForRight(last_p_tile);
     }
     temp_p_tile = original_p_tile;
-    if (up_flag) {
+    if (up_flag || this->count <= 25) {
       temp_p_tile = translate(t_x2,t_y2,temp_p_tile);
       last_p_tile = temp_p_tile;
       if (!checkIfFullyOustsideForUp(last_p_tile)){
@@ -273,9 +274,18 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
 	this->count++;
 	temp_p_tile = last_p_tile;
+	transition_flag = false;
       }
-      else
-	temp_p_tile = original_p_tile;
+      else{
+	while(transition_flag){
+	  printf("\n\n\nHERE\n\n\n");
+	  temp_p_tile = original_p_tile;
+	  last_p_tile = translate(t_x1,t_y1,temp_p_tile);
+	  temp_p_tile = last_p_tile;
+	  if (!checkIfFullyOustsideForUp(last_p_tile))
+	    transition_flag = false;
+	}
+      }
       up_flag = checkIfOustsideForUp(last_p_tile);
     }
     }
