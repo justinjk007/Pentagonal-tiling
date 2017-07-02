@@ -263,11 +263,10 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
       this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
       this->count++;
       temp_p_tile = last_p_tile; // Inter-change last drawn tile for next translation.
-      right_flag = checkIFOustsideForRight(temp_p_tile);
+      right_flag = checkIfOustsideForRight(temp_p_tile);
     }
     temp_p_tile = original_p_tile;
     if (up_flag) {
-      i++; // I is the loop index which counts the number of primitive tiles drawn
       for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
 	it->start.x_cord += t_x2;
 	it->start.y_cord += t_y2;
@@ -275,18 +274,20 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	it->end.y_cord += t_y2;
       }
       last_p_tile = temp_p_tile;
-      original_p_tile = last_p_tile;
+      original_p_tile = last_p_tile; // Replace original tile with
+				     // newly upwards translated tile
+      up_flag = checkIfOustsideForUp(temp_p_tile);
+      i++; // I is the loop index which counts the number of primitive tiles drawn
       this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
       this->count++;
       temp_p_tile = last_p_tile;
-      up_flag = checkIFOustsideForUp(temp_p_tile);
     }
   }
 
   printf("\nNumber of primitive tiles drawn is %d\n\n",this->count);
 }
 
-bool PrimitiveTile::checkIFOustsideForRight(std::list<Line> checkable) {
+bool PrimitiveTile::checkIfOustsideForRight(std::list<Line> checkable) {
   /**
    * This method checks through all the points in the given list of
    * lines and return TRUE if none if none of the points lie outside
@@ -303,7 +304,7 @@ bool PrimitiveTile::checkIFOustsideForRight(std::list<Line> checkable) {
   return true;
 }
 
-bool PrimitiveTile::checkIFOustsideForUp(std::list<Line> checkable) {
+bool PrimitiveTile::checkIfOustsideForUp(std::list<Line> checkable) {
   /**
    * This method checks through all the points in the given list of
    * lines and return TRUE if none if none of the points lie outside
@@ -318,4 +319,20 @@ bool PrimitiveTile::checkIFOustsideForUp(std::list<Line> checkable) {
       return false;
   }
   return true;
+}
+
+bool PrimitiveTile::checkIfFullyOustsideForUp(std::list<Line> checkable) {
+  /**
+   * This method checks through all the points in the given list of
+   * lines and return FALSE if all the points are outside the sqaure.
+   * "checkable" is the list to be checked.
+   */
+  bool value = true;
+  for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
+    if (it->start.y_cord >= this->this_square.point[2].y_cord && value)
+      ;
+    else
+      value = false;
+  }
+  return !value;
 }
