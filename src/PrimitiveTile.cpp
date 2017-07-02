@@ -211,18 +211,17 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
    * for tiling rightwards. t_x2 is the translation in the x-axis and
    * t_y2 in y-axis respectively for tiling upwards.
    */
-  std::list<Line> original_p_tile; // Stores the lines of the original primitivetile.
+  std::list<Line> original_p_tile = this->lines; // Stores the lines of the original primitivetile.
   std::list<Line> temp_p_tile; // Stores the original temporarily for translation.
   std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
-  int i = 1; // Index for the main loop
-  list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
-  int p_tile_size = 2;
   bool right_flag = true, up_flag = true;
-  for (int j = 0; j < p_tile_size * 5; ++j) {
-    original_p_tile.push_front(*rev_it);
-    if (j != (p_tile_size * 5) - 1)
-      rev_it++;
-  }
+  // int p_tile_size = 2;
+  // list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
+  // for (int j = 0; j < p_tile_size * 5; ++j) {
+  //   original_p_tile.push_front(*rev_it);
+  //   if (j != (p_tile_size * 5) - 1)
+  //     rev_it++;
+  // }
 
   // Get the translation rightwards
   list<Line>::iterator it = this->lines.begin();
@@ -246,13 +245,11 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   t_y2 = tpy2 - tpy1;
   // Get the translation upwards
 
-  // Start applying the rightwards translation here ****
   temp_p_tile = original_p_tile;
-  while (i <= 24) { // 24 becuase one primitive tile is already drawn.
+  while (this->count <= 24 || (up_flag && right_flag)) { // 24 becuase one primitive tile is already drawn.
     up_flag = true;
     right_flag = true;
     while (right_flag) {
-      i++; // I is the loop index which counts the number of primitive tiles drawn
       for (it = temp_p_tile.begin(); it != temp_p_tile.end(); ++it) {
 	it->start.x_cord -= t_x1;
 	it->start.y_cord -= t_y1;
@@ -275,9 +272,8 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
       }
       last_p_tile = temp_p_tile;
       original_p_tile = last_p_tile; // Replace original tile with
-				     // newly upwards translated tile
+      // newly upwards translated tile
       up_flag = checkIfOustsideForUp(temp_p_tile);
-      i++; // I is the loop index which counts the number of primitive tiles drawn
       this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
       this->count++;
       temp_p_tile = last_p_tile;
