@@ -282,8 +282,8 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	  temp_p_tile = original_p_tile;
 	  last_p_tile = translate(t_x1,t_y1,temp_p_tile);
 	  temp_p_tile = last_p_tile;
-	  if (!checkIfFullyOustsideForUp(last_p_tile))
-	    transition_flag = false;
+	  if (checkIfFullyOustsideForUp(last_p_tile))
+	    transition_flag = true;
 	}
       }
       up_flag = checkIfOustsideForUp(last_p_tile);
