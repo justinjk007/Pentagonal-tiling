@@ -256,10 +256,10 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
      */
     up_flag = true;
     right_flag = true;
-    transition_flag = false;
+    transition_flag = true;
     right_flag_full = true;
     up_flag_full = true;
-    while (right_flag && this->count <= 24) {
+    while (this->count <= 24 && right_flag) {
       temp_p_tile = translate(t_x1,t_y1,temp_p_tile); // Translate right
       last_p_tile = temp_p_tile;
       this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
@@ -270,28 +270,27 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
       right_flag_full = !checkIfFullyOustsideForRight(last_p_tile);
     }
     temp_p_tile = original_p_tile;
-    if (this->count <= 24) {
-      temp_p_tile = translate(t_x2, t_y2, temp_p_tile);// Translate up
+    while (this->count <= 24 && transition_flag) {
+      temp_p_tile = translate(t_x2, t_y2, temp_p_tile); // Translate up
       last_p_tile = temp_p_tile;
       if (!checkIfFullyOustsideForUp(last_p_tile)) {
 	original_p_tile = last_p_tile; // Replace original tile with this
 	this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
 	this->count++;
 	temp_p_tile = last_p_tile;
+	transition_flag = false;
+      } else { // If the tile is fully outside
+	printf("\n\n\nHERE\n\n\n");
+	temp_p_tile = original_p_tile;
+	temp_p_tile = translate(t_x1, t_y1, temp_p_tile); // Translate right again
+	last_p_tile = temp_p_tile;
+	original_p_tile = last_p_tile; // Replace original tile with this
       }
       up_flag = checkIfOustsideForUp(last_p_tile);
       up_flag_full = !checkIfFullyOustsideForUp(last_p_tile);
-    } else {
-      break;
-      // while (transition_flag) {
-      //   printf("\n\n\nHERE\n\n\n");
-      //   temp_p_tile = original_p_tile;
-      //   last_p_tile = translate(t_x1, t_y1, temp_p_tile);
-      //   temp_p_tile = last_p_tile;
-      //   if (checkIfFullyOustsideForUp(last_p_tile))
-      //     transition_flag = false;
-      // }
     }
+    if (!(this->count <= 24))
+      break;
   }
 
   printf("\nNumber of primitive tiles drawn is %d\n\n", this->count);
