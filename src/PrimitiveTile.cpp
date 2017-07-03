@@ -216,6 +216,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   std::list<Line> temp_p_tile; // Stores the original temporarily for translation.
   std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
   bool right_flag = true, up_flag = true, transition_flag = false;
+  bool left_flag = true;
   bool right_flag_full = true, up_flag_full = true;
   // int p_tile_size = 2;
   // list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
@@ -248,7 +249,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   // Get the translation upwards
 
   temp_p_tile = original_p_tile;
-  while (this->count <= 24 || (up_flag_full && right_flag_full)) {
+  while (this->count <= 24) {
     /**
      * The loop is counted until tile count becomes 24 or when we
      * can't draw anymore tiles without begin completely outside the
@@ -256,9 +257,10 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
      */
     up_flag = true;
     right_flag = true;
+    left_flag = true;
     transition_flag = true;
     right_flag_full = true;
-    up_flag_full = true;
+    up_flag_full = false;
     while (this->count <= 24 && right_flag) {
       temp_p_tile = translate(t_x1,t_y1,temp_p_tile); // Translate right
       last_p_tile = temp_p_tile;
@@ -273,23 +275,25 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     while (this->count <= 24 && transition_flag) {
       temp_p_tile = translate(t_x2, t_y2, temp_p_tile); // Translate up
       last_p_tile = temp_p_tile;
-      if (!checkIfFullyOustsideForUp(last_p_tile)) {
-	original_p_tile = last_p_tile; // Replace original tile with this
-	this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
-	this->count++;
-	temp_p_tile = last_p_tile;
-	transition_flag = false;
+      up_flag_full = !checkIfFullyOustsideForUp(last_p_tile);
+      if (up_flag_full) {
+        original_p_tile = last_p_tile; // Replace original tile with this
+        this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+        this->count++;
+        temp_p_tile = last_p_tile;
+        transition_flag = false;
       } else { // If the tile is fully outside
-	printf("\n\n\nHERE\n\n\n");
-	temp_p_tile = original_p_tile;
-	temp_p_tile = translate(t_x1, t_y1, temp_p_tile); // Translate right again
-	last_p_tile = temp_p_tile;
-	original_p_tile = last_p_tile; // Replace original tile with this
+        printf("\n\n\nHERE\n\n\n");
+        temp_p_tile = original_p_tile;
+        temp_p_tile = translate(t_x1, t_y1, temp_p_tile); // Translate right again
+        last_p_tile = temp_p_tile;
+        original_p_tile = last_p_tile; // Replace original tile with this
       }
       up_flag = checkIfOustsideForUp(last_p_tile);
-      up_flag_full = !checkIfFullyOustsideForUp(last_p_tile);
     }
     if (!(this->count <= 24))
+      break;
+    if (up_flag_full)
       break;
   }
 
@@ -372,4 +376,21 @@ bool PrimitiveTile::checkIfFullyOustsideForRight(std::list<Line> checkable) {
       value = false;
   }
   return value;
+}
+
+bool PrimitiveTile::checkIfOustsideForLeft(std::list<Line> checkable) {
+  /**
+   * This method checks through all the points in the given list of
+   * lines and return TRUE if none if none of the points lie outside
+   * the square of the primtive tile and FALSE if any of the points
+   * are outside the sqaure of the primitive tile.
+   * "checkable" is the list to be checked.
+   */
+  for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
+    if(it->start.x_cord <= this->this_square.point[0].x_cord)
+      return false;
+    if (it->start.y_cord >= this->this_square.point[0].y_cord)
+      return false;
+  }
+  return true;
 }
