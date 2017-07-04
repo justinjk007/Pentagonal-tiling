@@ -27,10 +27,10 @@ public:
   void del();
   void writeToFile();
   void writeToFileRaw();
-  bool checkIfOustsideForUp(std::list<Line>); // This checks is the given list of lines are outside sqaure
-  bool checkIfOustsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
-  bool checkIfFullyOustsideForUp(std::list<Line>);
-  bool checkIfFullyOustsideForRight(std::list<Line>);
+  bool checkIfOutsideForUp(std::list<Line>); // This checks is the given list of lines are outside sqaure
+  bool checkIfOutsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
+  bool checkIfFullyOutsideForUp(std::list<Line>);
+  bool checkIfFullyOutsideForRight(std::list<Line>);
   bool checkIfFullyInsideForLeft(std::list<Line>);
   Square drawSquare(double area);
   void doTiling(double,double,double,double);

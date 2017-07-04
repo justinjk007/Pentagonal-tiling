@@ -259,7 +259,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     while (this->count <= 24 && this->count != 1) { // This loop handles the leftwards transition.
       temp_p_tile = translate(t_x1*(-1),t_y1*(-1),temp_p_tile); // Translate left
       last_p_tile = temp_p_tile;
-      if(!checkIfFullyInsideForLeft(last_p_tile) || checkIfFullyOustsideForUp(last_p_tile)){
+      if(!checkIfFullyInsideForLeft(last_p_tile) || checkIfFullyOutsideForUp(last_p_tile)){
     	// Check if we can draw anymore inside the sqaure when transition left
     	break;
       }
@@ -272,7 +272,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     while (this->count <= 24 && right_flag) { // This loop handles the rightwards transition.
       temp_p_tile = translate(t_x1,t_y1,temp_p_tile); // Translate right
       last_p_tile = temp_p_tile;
-      if(checkIfFullyOustsideForRight(last_p_tile)){
+      if(checkIfFullyOutsideForRight(last_p_tile)){
 	// Check if we can draw anymore inside the sqaure when transition right
 	done_flag = true;
 	break;
@@ -281,7 +281,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
       this->count++;
       // Splicing empties temp_p_tile so we re-assign it here.
       temp_p_tile = last_p_tile; // Inter-change last drawn tile for next translation.
-      right_flag = checkIfOustsideForRight(last_p_tile);
+      right_flag = checkIfOutsideForRight(last_p_tile);
     }
     if(done_flag)
       break;
@@ -289,7 +289,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     while (this->count <= 24 && transition_flag) { // This loop handles the upwards transition.
       temp_p_tile = translate(t_x2, t_y2, temp_p_tile); // Translate up
       last_p_tile = temp_p_tile;
-      if (!checkIfFullyOustsideForUp(last_p_tile)) {
+      if (!checkIfFullyOutsideForUp(last_p_tile)) {
 	original_p_tile = last_p_tile; // Replace original tile with this
 	this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
 	this->count++;
@@ -322,7 +322,7 @@ std::list<Line> PrimitiveTile::translate(double t_x, double t_y, std::list<Line>
   return tile;
 }
 
-bool PrimitiveTile::checkIfOustsideForRight(std::list<Line> checkable) {
+bool PrimitiveTile::checkIfOutsideForRight(std::list<Line> checkable) {
   /**
    * This method checks through all the points in the given list of
    * lines and return TRUE if none if none of the points lie outside
@@ -339,7 +339,7 @@ bool PrimitiveTile::checkIfOustsideForRight(std::list<Line> checkable) {
   return true;
 }
 
-bool PrimitiveTile::checkIfOustsideForUp(std::list<Line> checkable) {
+bool PrimitiveTile::checkIfOutsideForUp(std::list<Line> checkable) {
   /**
    * This method checks through all the points in the given list of
    * lines and return TRUE if none if none of the points lie outside
@@ -356,7 +356,7 @@ bool PrimitiveTile::checkIfOustsideForUp(std::list<Line> checkable) {
   return true;
 }
 
-bool PrimitiveTile::checkIfFullyOustsideForUp(std::list<Line> checkable) {
+bool PrimitiveTile::checkIfFullyOutsideForUp(std::list<Line> checkable) {
   /**
    * This method checks through all the points in the given list of
    * lines and return TRUE if all the points are outside the sqaure.
@@ -372,7 +372,7 @@ bool PrimitiveTile::checkIfFullyOustsideForUp(std::list<Line> checkable) {
   return value;
 }
 
-bool PrimitiveTile::checkIfFullyOustsideForRight(std::list<Line> checkable) {
+bool PrimitiveTile::checkIfFullyOutsideForRight(std::list<Line> checkable) {
   /**
    * This method checks through all the points in the given list of
    * lines and return TRUE if all the points are outside the sqaure.
