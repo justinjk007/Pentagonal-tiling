@@ -282,14 +282,16 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	temp_p_tile = last_p_tile;
 	transition_flag = false; // Stop transition we have the correct upwards transition
       } else { // If the tile is fully outside
-	printf("\n\n\nHERE\n\n\n");
-	temp_p_tile = original_p_tile;
-	temp_p_tile = translate(t_x1, t_y1, temp_p_tile); // Translate right again
-	last_p_tile = temp_p_tile;
-	original_p_tile = last_p_tile; // Replace original tile with this
+        printf("\n\n\nHERE\n\n\n");
+        temp_p_tile = original_p_tile;
+        temp_p_tile = translate(t_x1, t_y1, temp_p_tile); // Translate right again
+        last_p_tile = temp_p_tile;
+        original_p_tile = last_p_tile; // Replace original tile with this
       }
     }
     if (!(this->count <= 24))
+      break;
+    if (up_flag_full)
       break;
   }
 
@@ -372,4 +374,21 @@ bool PrimitiveTile::checkIfFullyOustsideForRight(std::list<Line> checkable) {
       value = false;
   }
   return value;
+}
+
+bool PrimitiveTile::checkIfOustsideForLeft(std::list<Line> checkable) {
+  /**
+   * This method checks through all the points in the given list of
+   * lines and return TRUE if none if none of the points lie outside
+   * the square of the primtive tile and FALSE if any of the points
+   * are outside the sqaure of the primitive tile.
+   * "checkable" is the list to be checked.
+   */
+  for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
+    if(it->start.x_cord <= this->this_square.point[0].x_cord)
+      return false;
+    if (it->start.y_cord >= this->this_square.point[0].y_cord)
+      return false;
+  }
+  return true;
 }
