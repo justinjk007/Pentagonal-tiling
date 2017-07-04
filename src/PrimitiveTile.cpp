@@ -215,8 +215,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   std::list<Line> original_p_tile = this->lines; // Stores the lines of the original primitivetile.
   std::list<Line> temp_p_tile; // Stores the original temporarily for translation.
   std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
-  bool right_flag = true, up_flag = true, transition_flag = false;
-  bool right_flag_full = true, up_flag_full = true;
   // int p_tile_size = 2;
   // list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
   // for (int j = 0; j < p_tile_size * 5; ++j) {
@@ -248,29 +246,33 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   // Get the translation upwards
 
   temp_p_tile = original_p_tile;
-  while (this->count <= 24 || (up_flag_full && right_flag_full)) {
+  while (this->count <= 24) {
     /**
      * The loop is counted until tile count becomes 24 or when we
      * can't draw anymore tiles without begin completely outside the
-     * sqaure.
+     * sqaure(Which is checked by break statements).
      */
-    up_flag = true;
-    right_flag = true;
-    transition_flag = true;
-    right_flag_full = true;
-    up_flag_full = true;
-    while (this->count <= 24 && right_flag) {
+    // Reset this in the begining of iteratrion
+    bool right_flag = true, transition_flag = true;
+    bool done_flag = false;
+    while (this->count <= 24 && right_flag) { // This loop handles the rightwards transition.
       temp_p_tile = translate(t_x1,t_y1,temp_p_tile); // Translate right
       last_p_tile = temp_p_tile;
+      if(checkIfFullyOustsideForRight(last_p_tile)){
+	// Check if we can draw anymore inside the sqaure when transition right
+	done_flag = true;
+	break;
+      }
       this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
       this->count++;
       // Splicing empties temp_p_tile so we re-assign it here.
       temp_p_tile = last_p_tile; // Inter-change last drawn tile for next translation.
       right_flag = checkIfOustsideForRight(last_p_tile);
-      right_flag_full = !checkIfFullyOustsideForRight(last_p_tile);
     }
+    if(done_flag)
+      break;
     temp_p_tile = original_p_tile;
-    while (this->count <= 24 && transition_flag) {
+    while (this->count <= 24 && transition_flag) { // This loop handles the upwards transition.
       temp_p_tile = translate(t_x2, t_y2, temp_p_tile); // Translate up
       last_p_tile = temp_p_tile;
       if (!checkIfFullyOustsideForUp(last_p_tile)) {
@@ -278,7 +280,7 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
 	this->count++;
 	temp_p_tile = last_p_tile;
-	transition_flag = false;
+	transition_flag = false; // Stop transition we have the correct upwards transition
       } else { // If the tile is fully outside
 	printf("\n\n\nHERE\n\n\n");
 	temp_p_tile = original_p_tile;
@@ -286,8 +288,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	last_p_tile = temp_p_tile;
 	original_p_tile = last_p_tile; // Replace original tile with this
       }
-      up_flag = checkIfOustsideForUp(last_p_tile);
-      up_flag_full = !checkIfFullyOustsideForUp(last_p_tile);
     }
     if (!(this->count <= 24))
       break;
