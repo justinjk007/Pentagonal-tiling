@@ -253,8 +253,22 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
      * sqaure(Which is checked by break statements).
      */
     // Reset this in the begining of iteratrion
-    bool right_flag = true, transition_flag = true;
+    bool right_flag = true;
+    bool transition_flag = true;
     bool done_flag = false;
+    while (this->count <= 24 && this->count != 1) { // This loop handles the leftwards transition.
+      temp_p_tile = translate(t_x1*(-1),t_y1*(-1),temp_p_tile); // Translate left
+      last_p_tile = temp_p_tile;
+      if(!checkIfFullyInsideForLeft(last_p_tile) || checkIfFullyOustsideForUp(last_p_tile)){
+    	// Check if we can draw anymore inside the sqaure when transition left
+    	break;
+      }
+      this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+      this->count++;
+      // Splicing empties temp_p_tile so we re-assign it here.
+      temp_p_tile = last_p_tile; // Inter-change last drawn tile for next translation.
+    }
+    temp_p_tile = original_p_tile;
     while (this->count <= 24 && right_flag) { // This loop handles the rightwards transition.
       temp_p_tile = translate(t_x1,t_y1,temp_p_tile); // Translate right
       last_p_tile = temp_p_tile;
@@ -374,19 +388,18 @@ bool PrimitiveTile::checkIfFullyOustsideForRight(std::list<Line> checkable) {
   return value;
 }
 
-bool PrimitiveTile::checkIfOustsideForLeft(std::list<Line> checkable) {
+bool PrimitiveTile::checkIfFullyInsideForLeft(std::list<Line> checkable) {
   /**
    * This method checks through all the points in the given list of
-   * lines and return TRUE if none if none of the points lie outside
-   * the square of the primtive tile and FALSE if any of the points
-   * are outside the sqaure of the primitive tile.
+   * lines and return TRUE if all the points are outside the sqaure.
    * "checkable" is the list to be checked.
    */
+  bool value = true;
   for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
-    if(it->start.x_cord <= this->this_square.point[0].x_cord)
-      return false;
-    if (it->start.y_cord >= this->this_square.point[0].y_cord)
-      return false;
+    if(it->start.x_cord >= this->this_square.point[0].x_cord)
+      ;
+    else
+      value = false;
   }
-  return true;
+  return value;
 }

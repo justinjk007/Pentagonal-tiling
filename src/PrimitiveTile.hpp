@@ -31,7 +31,7 @@ public:
   bool checkIfOustsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
   bool checkIfFullyOustsideForUp(std::list<Line>);
   bool checkIfFullyOustsideForRight(std::list<Line>);
-  bool checkIfOustsideForLeft(std::list<Line>);
+  bool checkIfFullyInsideForLeft(std::list<Line>);
   Square drawSquare(double area);
   void doTiling(double,double,double,double);
   std::list<Line> translate(double,double,std::list<Line>);
