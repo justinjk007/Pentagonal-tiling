@@ -291,8 +291,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     }
     if (!(this->count <= 24))
       break;
-    if (up_flag_full)
-      break;
   }
 
   printf("\nNumber of primitive tiles drawn is %d\n\n", this->count);

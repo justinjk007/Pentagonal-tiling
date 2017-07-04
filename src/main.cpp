@@ -117,6 +117,8 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
     newSample.drawPentagon(2,2);
     newSample.doTiling(0,0,0,0);
   }
+  double gap = ((25 - newSample.count) * p_area);
+  printf("The gap for the inputted tile is: %f", gap);
   newSample.writeToFileRaw();
   newSample.writeToFile();
 }
