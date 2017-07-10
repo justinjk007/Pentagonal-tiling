@@ -23,6 +23,7 @@ public:
   Square this_square;
   bool isLinkable(Link);
   void drawPentagon(int, int);
+  void drawPentagonRev(int, int);
   void addTile(int, int);
   void del();
   void writeToFile();
