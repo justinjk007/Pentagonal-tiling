@@ -215,16 +215,10 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
   std::list<Line> original_p_tile = this->lines; // Stores the lines of the original primitivetile.
   std::list<Line> temp_p_tile; // Stores the original temporarily for translation.
   std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
-  // int p_tile_size = 2;
-  // list<Line>::const_reverse_iterator rev_it(this->lines.rbegin()); // Here rev_it is the reverse end.
-  // for (int j = 0; j < p_tile_size * 5; ++j) {
-  //   original_p_tile.push_front(*rev_it);
-  //   if (j != (p_tile_size * 5) - 1)
-  //     rev_it++;
-  // }
+  list<Line>::iterator it = this->lines.begin();
 
   // Get the translation rightwards
-  list<Line>::iterator it = this->lines.begin();
+  it = this->lines.begin();
   double tpx1 = it->end.x_cord;
   double tpy1 = it->end.y_cord;
   advance(it, 3);
