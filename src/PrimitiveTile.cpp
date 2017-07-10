@@ -139,29 +139,20 @@ void PrimitiveTile::drawPentagonRev(int from, int to) {
     // ---------- Finding the first line here
     moded_index = (from + 3) % 5; // This is done to rotate the first pentagon
     current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
-    std::cout << "\nModed index is " << moded_index << "\n";
     this->lines.push_back(current_line);
     first_line = current_line;
     // ---------- Finding the first line here
   }
-  std::cout << "\nModed index is " <<moded_index<< "\n";
   moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
   while (i < 5) {
     next_angle = this->pentagon.angle[moded_index];
-    std::cout << "\nNext angle is " <<next_angle<< "\n";
     // TODO Check if +4 and -1 are the same on paper
     diagonal_length = getThirdSide(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index],next_angle);
     diagonal_angle = getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
-    std::cout <<"This contraption is "<< (moded_index + 4) % 5 <<endl;
-    std::cout << "\nFor the diagonal -------------" << "\n";
-    std::cout << "Diagonal angle is " <<diagonal_angle<< "\n";
     diagonal = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1,'d');
-    std::cout << "\nFor the line     -------------" << "\n";
     next_line = current_line.getLineWithRespectTo(180-next_angle, this->pentagon.side[moded_index].value, type2, 's');
     double diff = diagonal.end.x_cord - next_line.end.x_cord;
-    std::cout << "Diff between the co-ordinates: " <<diff<< "\n";
     if (diff <= 0.1 && diff >= -0.1) {
-      std::cout << "One side found***************" <<endl;
       type1 = 0; // Reset types after every line
       type2 = 0; // Reset types after every line
       this->lines.push_back(next_line);
@@ -190,7 +181,6 @@ void PrimitiveTile::drawPentagonRev(int from, int to) {
   this->lines.pop_back(); // Remove the last added line
   current_line.end = first_line.start; // This what the origin and end are always the same points
   this->lines.push_back(current_line); // Add the modified line to the end
-  cout << "Finished drawing a pentagon ------------------************************";
 }
 
 void PrimitiveTile::writeToFile() {
@@ -362,7 +352,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 	temp_p_tile = last_p_tile;
 	transition_flag = false; // Stop transition we have the correct upwards transition
       } else { // If the tile is fully outside
-        printf("\n\n\nHERE\n\n\n");
         temp_p_tile = original_p_tile;
         temp_p_tile = translate(t_x1, t_y1, temp_p_tile); // Translate right again
         last_p_tile = temp_p_tile;
@@ -372,8 +361,6 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     if (!(this->count <= 24))
       break;
   }
-
-  printf("\nNumber of primitive tiles drawn is %d\n\n", this->count);
 }
 
 std::list<Line> PrimitiveTile::translate(double t_x, double t_y, std::list<Line> tile ) {
