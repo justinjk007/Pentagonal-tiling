@@ -2,8 +2,8 @@ cmake_minimum_required (VERSION 3.5)
 project (PentagonalTiling)
 
 # The version number.
-set (Tutorial_VERSION_MAJOR 0)
-set (Tutorial_VERSION_MINOR 5)
+set (Tutorial_VERSION_MAJOR 1)
+set (Tutorial_VERSION_MINOR 0)
 
 INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}")
 
@@ -19,4 +19,6 @@ ADD_LIBRARY(PrimitiveTile Primitivetile.cpp)
 ADD_LIBRARY(myGeometry myGeometry.cpp)
 
 ADD_EXECUTABLE(main main.cpp)
-TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+ADD_EXECUTABLE(run_tests run_tests.cpp)
+TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry )
+TARGET_LINK_LIBRARIES (run_tests CalculateGap PrimitiveTile myGeometry ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
