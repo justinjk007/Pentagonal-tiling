@@ -12,26 +12,32 @@ double getGap(Tile tile) {
    * tiles when arranged with any particular order. Current this only
    * calculates gap between primitive tiles of size 2.
    */
-  double tile_area = getTileArea(tile);
-  PrimitiveTile p_tile(tile);
-  double p_tile_area = 0;
-  double gap_list[25] = {0}; // 25 is the maximum number of
-  // combinations in this case.
-  int gap_index = 0;
   if (!validateTile(tile))
-    return -101; // Negative gap means the tile is not valid.
-  int i = 3;
-  int j = 3;
-  p_tile.del(); // Reset the primitiveTile
-  Link link(tile.side[i], tile.side[j]);
-  if (p_tile.isLinkable(link)) {
-    p_tile.addTile(i,j); // i and j are the side indexs that are linked.
-    p_tile_area = p_tile.size * tile_area;
-    p_tile.drawPentagon(2,3);
-    p_tile.drawPentagon(2,3);
-    gap_list[gap_index] = calculateGap(p_tile, p_tile_area);
+    exit(1);
+  PrimitiveTile newSample(tile);
+  double tile_area = getTileArea(tile);
+  double p_area = 2 * tile_area; // This is the area of the primitiveTile
+  newSample.drawSquare(p_area);
+  newSample.drawPentagon(0,0); // Draw the first pentagon
+  int gap_index = 0;
+  double gap_list[25];
+  for (int i = 0; i < 5; ++i) {
+    for (int j = 0; j < 5; ++i) {
+      Link link(tile.side[i], tile.side[j]);
+      if (newSample.isLinkable(link)) {
+        newSample.drawPentagon(i,j);
+        newSample.doTiling(0, 0, 0, 0); // For now TODO Remove this
+        printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
+        double gap = ((25 - newSample.count) * p_area);
+        gap_list[gap_index] = gap;
+        gap_index++;
+        printf("The gap for the inputted tile is: %f", gap);
+        newSample.writeToFileRaw();
+        newSample.writeToFile();
+      } else
+        continue;
+    }
   }
-
   // Returning the minimumgap in the gap list
   double min_gap = gap_list[0];
   double gap_list_size = sizeof(gap_list);
@@ -150,13 +156,4 @@ double getTileArea(Tile tile) {
   double triangle3 = getTriangleArea(ac, ce, tile.side[4].value);
   double pentagonArea = triangle1 + triangle2 + triangle3;
   return pentagonArea;
-}
-
-double calculateGap(PrimitiveTile p_tile, double p_tile_area) {
-  Square square;
-  double gap = 0;
-  square = p_tile.drawSquare(p_tile_area);
-  p_tile.drawPentagon(2, 3);
-  p_tile.drawPentagon(2, 3);
-  return gap;
 }
