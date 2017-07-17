@@ -44,6 +44,8 @@ public:
   ~PrimitiveTile() {
     this->lines.clear();
     this->connector_sides.clear();
+    this->size = 1;
+    this->count = 1;
   }
 };
 

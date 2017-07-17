@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
 //   BOOST_CHECK_CLOSE(line2.end.y_cord, 2.812957, 0.01);
 // }
 
-BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just to print the data
+BOOST_AUTO_TEST_CASE(drawing_methods) { // #13 There is no test here, just to print the data
   // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
@@ -124,6 +124,8 @@ BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just 
   printf("The gap for the inputted tile is: %f", gap);
   newSample.writeToFileRaw();
   newSample.writeToFile();
+  delete newSample;
+  // newSample.~PrimitiveTile();
 }
 
 // BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14
