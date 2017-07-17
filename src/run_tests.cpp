@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(drawing_methods) { // #13 There is no test here, just to pr
   // Tile tile = {66, 80, 66, 54, 38.54,106.31,110, 70, 135, 118.69}; // Type 1.2
   double tile_area = getTileArea(tile);
   double p_area = 2 * tile_area; // This is the area of the primitiveTile
-  int side_num = 0;
+  int side_num = 1;
   PrimitiveTile newSample(tile);
   newSample.drawSquare(p_area);
   newSample.drawPentagon(side_num,side_num);
@@ -124,8 +124,6 @@ BOOST_AUTO_TEST_CASE(drawing_methods) { // #13 There is no test here, just to pr
   printf("The gap for the inputted tile is: %f", gap);
   newSample.writeToFileRaw();
   newSample.writeToFile();
-  delete newSample;
-  // newSample.~PrimitiveTile();
 }
 
 // BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14
