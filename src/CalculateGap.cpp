@@ -12,13 +12,15 @@ double getGap(Tile tile) {
    * tiles when arranged with any particular order. Current this only
    * calculates gap between primitive tiles of size 2.
    */
-  if (!validateTile(tile))
+  if (!validateTile(tile)){
     exit(1);
+    printf("\nThe tile inputted is invalid");
+  }
   PrimitiveTile newSample(tile);
   double tile_area = getTileArea(tile);
   double p_area = 2 * tile_area; // This is the area of the primitiveTile
   newSample.drawSquare(p_area);
-  newSample.drawPentagon(0,0); // Draw the first pentagon
+  newSample.drawPentagon(1,1); // Draw the first pentagon
   int gap_index = 0;
   double gap_list[25];
   for (int i = 0; i < 5; ++i) {
@@ -34,6 +36,7 @@ double getGap(Tile tile) {
         printf("The gap for the inputted tile is: %f", gap);
         newSample.writeToFileRaw();
         newSample.writeToFile();
+        // TODO Empty Primitivetile after this for new one
       } else
         continue;
     }
