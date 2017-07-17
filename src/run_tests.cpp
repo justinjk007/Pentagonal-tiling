@@ -105,14 +105,14 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
 BOOST_AUTO_TEST_CASE(test_drawing_methods) { // #13 There is no test here, just to print the data
   // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81, 122.23}; // Type 1.1
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81, 122.23}; // Type 1.1
   // Tile tile = {66, 80, 66, 54, 38.54,106.31,110, 70, 135, 118.69}; // Type 1.2
-  PrimitiveTile newSample(tile);
   double tile_area = getTileArea(tile);
   double p_area = 2 * tile_area; // This is the area of the primitiveTile
+  int side_num = 0;
+  PrimitiveTile newSample(tile);
   newSample.drawSquare(p_area);
-  int side_num = 2;
   newSample.drawPentagon(side_num,side_num);
   Link link1(tile.side[side_num], tile.side[side_num]);
   if (newSample.isLinkable(link1)){

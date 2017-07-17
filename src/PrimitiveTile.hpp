@@ -41,6 +41,10 @@ public:
     this->size = 1; // Obviously we need atleast one tile.
     this->count = 1;// Obviously we need atleast one primitive tile.
   }
-  };
+  ~PrimitiveTile() {
+    this->lines.clear();
+    this->connector_sides.clear();
+  }
+};
 
 #endif /* PRIMITIVETILE_HPP */

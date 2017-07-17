@@ -12,33 +12,34 @@ double getGap(Tile tile) {
    * tiles when arranged with any particular order. Current this only
    * calculates gap between primitive tiles of size 2.
    */
-  if (!validateTile(tile)){
+  if (!validateTile(tile)) {
     exit(1);
-    printf("\nThe tile inputted is invalid");
+    printf("\nThe tile inputted was invalid");
   }
-  PrimitiveTile newSample(tile);
+
   double tile_area = getTileArea(tile);
   double p_area = 2 * tile_area; // This is the area of the primitiveTile
-  newSample.drawSquare(p_area);
-  newSample.drawPentagon(1,1); // Draw the first pentagon
   int gap_index = 0;
   double gap_list[25];
   for (int i = 0; i < 5; ++i) {
     for (int j = 0; j < 5; ++i) {
+      PrimitiveTile newSample(tile);
+      newSample.drawSquare(p_area);
+      newSample.drawPentagon(0,0); // Draw the first pentagon
       Link link(tile.side[i], tile.side[j]);
       if (newSample.isLinkable(link)) {
-        newSample.drawPentagon(i,j);
-        newSample.doTiling(0, 0, 0, 0); // For now TODO Remove this
-        printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
-        double gap = ((25 - newSample.count) * p_area);
-        gap_list[gap_index] = gap;
-        gap_index++;
-        printf("The gap for the inputted tile is: %f", gap);
-        newSample.writeToFileRaw();
-        newSample.writeToFile();
-        // TODO Empty Primitivetile after this for new one
+	newSample.drawPentagon(i,j);
+	newSample.doTiling(0, 0, 0, 0); // For now TODO Remove this
+	printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
+	double gap = ((25 - newSample.count) * p_area);
+	gap_list[gap_index] = gap;
+	gap_index++;
+	printf("The gap for the inputted tile is: %f", gap);
+	newSample.writeToFileRaw();
+	newSample.writeToFile();
       } else
         continue;
+      printf("One gap calculated");
     }
   }
   // Returning the minimumgap in the gap list
@@ -153,9 +154,9 @@ double getTileArea(Tile tile) {
   double ac = getThirdSide(tile.side[0], tile.side[1], tile.angle[1]);
   double ce = getThirdSide(tile.side[2], tile.side[3], tile.angle[3]);
   double triangle1 =
-      getTriangleArea(tile.side[0].value, tile.side[1].value, ac);
+    getTriangleArea(tile.side[0].value, tile.side[1].value, ac);
   double triangle2 =
-      getTriangleArea(tile.side[2].value, tile.side[3].value, ce);
+    getTriangleArea(tile.side[2].value, tile.side[3].value, ce);
   double triangle3 = getTriangleArea(ac, ce, tile.side[4].value);
   double pentagonArea = triangle1 + triangle2 + triangle3;
   return pentagonArea;
