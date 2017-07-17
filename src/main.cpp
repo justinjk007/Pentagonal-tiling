@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-using namespace std;
-
 #define VERSION "1.0"
 #define PROG_NAME "main"
 #define YEAR "2017"
