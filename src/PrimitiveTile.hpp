@@ -36,10 +36,20 @@ public:
   Square drawSquare(double area);
   void doTiling(double,double,double,double);
   std::list<Line> translate(double,double,std::list<Line>);
+  PrimitiveTile() {
+    this->size = 1; // Obviously we need atleast one tile.
+    this->count = 1;// Obviously we need atleast one primitive tile.
+  }
   PrimitiveTile(Tile tile) {
     this->pentagon = tile;
     this->size = 1; // Obviously we need atleast one tile.
     this->count = 1;// Obviously we need atleast one primitive tile.
+  }
+  ~PrimitiveTile() {
+    this->size = 1; // Obviously we need atleast one tile.
+    this->count = 1;// Obviously we need atleast one primitive tile.
+    this->lines.clear();
+    this->connector_sides.clear();
   }
 };
 

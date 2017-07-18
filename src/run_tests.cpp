@@ -61,13 +61,7 @@ BOOST_AUTO_TEST_CASE(get_triangle_area) { // #9
   BOOST_CHECK_CLOSE(ans, 558.5552, 0.001); // 0.001% is the tolerance
 }
 
-BOOST_AUTO_TEST_CASE(get_tile_area) { // #10
-  Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  double ans = getTileArea(tile1);
-  BOOST_CHECK_CLOSE(ans, 43.01, 0.01); // 0.01% is the tolerance
-}
-
-BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
+BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
   Tile tile = {10, 7, 21, 20, 20, 54, 54, 45, 45};
   PrimitiveTile newSample(tile);
   Link link1(tile.side[2], tile.side[2]);
@@ -84,7 +78,7 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
   BOOST_CHECK_EQUAL(answer4, true);
 }
 
-// BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #12
+// BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #11
 //   Line line1 = {{0, 0}, {4.76, 0.10}};
 //   Line line2;
 //   line2 = line1.getLineWithRespectTo(49, 3.53,0); // Angle and length
@@ -102,7 +96,7 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #11
 //   BOOST_CHECK_CLOSE(line2.end.y_cord, 2.812957, 0.01);
 // }
 
-BOOST_AUTO_TEST_CASE(drawing_methods) { // #13 There is no test here, just to print the data
+BOOST_AUTO_TEST_CASE(drawing_methods) { // #12 There is no test here, just to print the data
   // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
@@ -110,7 +104,9 @@ BOOST_AUTO_TEST_CASE(drawing_methods) { // #13 There is no test here, just to pr
   // Tile tile = {66, 80, 66, 54, 38.54,106.31,110, 70, 135, 118.69}; // Type 1.2
   double tile_area = getTileArea(tile);
   double p_area = 2 * tile_area; // This is the area of the primitiveTile
-  int side_num = 1;
+  int side_num = 0;
+  // PrimitiveTile newSample = new PrimitiveTile;
+  // newSample.pentagon = tile;
   PrimitiveTile newSample(tile);
   newSample.drawSquare(p_area);
   newSample.drawPentagon(side_num,side_num);
@@ -124,6 +120,12 @@ BOOST_AUTO_TEST_CASE(drawing_methods) { // #13 There is no test here, just to pr
   printf("The gap for the inputted tile is: %f", gap);
   newSample.writeToFileRaw();
   newSample.writeToFile();
+}
+
+BOOST_AUTO_TEST_CASE(get_tile_area) { // #13
+  Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  double ans = getTileArea(tile1);
+  BOOST_CHECK_CLOSE(ans, 43.01, 0.01); // 0.01% is the tolerance
 }
 
 // BOOST_AUTO_TEST_CASE(get_gap_the_main_funtion) { // #14

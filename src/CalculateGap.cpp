@@ -21,7 +21,7 @@ double getGap(Tile tile) {
   int gap_index = 0;
   double gap_list[25];
   for (int i = 0; i < 5; ++i) {
-    for (int j = 0; j < 5; ++i) {
+    for (int j = 0; j < 5; ++j) {
       gap_list[gap_index] = calculateGap(tile, i, j);
       gap_index++;
     }
@@ -31,7 +31,7 @@ double getGap(Tile tile) {
   double min_gap = gap_list[0];
   double gap_list_size = sizeof(gap_list);
   for (int i = 0; i < gap_list_size; ++i) {
-    if (gap_list[i] <= 0 && gap_list[i] < min_gap)
+    if (gap_list[i] >= 0 && gap_list[i] < min_gap)
       min_gap = gap_list[i];
   }
   return min_gap;
@@ -42,7 +42,7 @@ double calculateGap(Tile tile, int i, int j) {
   double p_area = 2 * tile_area; // This is the area of the primitiveTile
   PrimitiveTile newSample(tile);
   newSample.drawSquare(p_area);
-  newSample.drawPentagon(0,0); // Draw the first pentagon
+  newSample.drawPentagon(i,j); // Draw the first pentagon
   Link link(tile.side[i], tile.side[j]);
   if (newSample.isLinkable(link)) {
     newSample.drawPentagon(i,j);
