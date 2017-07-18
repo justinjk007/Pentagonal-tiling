@@ -9,7 +9,7 @@
 #include "Tile.hpp"
 
 double getGap(Tile);
-double calculateGap(PrimitiveTile, double);
+double calculateGap(Tile, int, int);
 bool validateTile(Tile);
 double getMaxSide(Tile);
 double getMaxAngle(Tile);

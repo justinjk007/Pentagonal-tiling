@@ -10,46 +10,52 @@ double getGap(Tile tile) {
   /*
    * This is the main method that returns the gap minimum between the
    * tiles when arranged with any particular order. Current this only
-   * calculates gap between primitive tiles of size 2.
+   * calculates gap between primitive tiles of size 2. This returns
+   * the minimum gap from the list of combinateions.
    */
   if (!validateTile(tile)) {
     exit(1);
     printf("\nThe tile inputted was invalid");
   }
 
-  double tile_area = getTileArea(tile);
-  double p_area = 2 * tile_area; // This is the area of the primitiveTile
   int gap_index = 0;
   double gap_list[25];
   for (int i = 0; i < 5; ++i) {
     for (int j = 0; j < 5; ++i) {
-      PrimitiveTile newSample(tile);
-      newSample.drawSquare(p_area);
-      newSample.drawPentagon(0,0); // Draw the first pentagon
-      Link link(tile.side[i], tile.side[j]);
-      if (newSample.isLinkable(link)) {
-	newSample.drawPentagon(i,j);
-	newSample.doTiling(0, 0, 0, 0); // For now TODO Remove this
-	printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
-	double gap = ((25 - newSample.count) * p_area);
-	gap_list[gap_index] = gap;
-	gap_index++;
-	printf("The gap for the inputted tile is: %f", gap);
-	newSample.writeToFileRaw();
-	newSample.writeToFile();
-      } else
-        continue;
-      printf("One gap calculated");
+      gap_list[gap_index] = calculateGap(tile, i, j);
+      gap_index++;
     }
   }
+
   // Returning the minimumgap in the gap list
   double min_gap = gap_list[0];
   double gap_list_size = sizeof(gap_list);
   for (int i = 0; i < gap_list_size; ++i) {
-    if (gap_list[i] < min_gap)
+    if (gap_list[i] <= 0 && gap_list[i] < min_gap)
       min_gap = gap_list[i];
   }
   return min_gap;
+}
+
+double calculateGap(Tile tile, int i, int j) {
+  double tile_area = getTileArea(tile);
+  double p_area = 2 * tile_area; // This is the area of the primitiveTile
+  PrimitiveTile newSample(tile);
+  newSample.drawSquare(p_area);
+  newSample.drawPentagon(0,0); // Draw the first pentagon
+  Link link(tile.side[i], tile.side[j]);
+  if (newSample.isLinkable(link)) {
+    newSample.drawPentagon(i,j);
+    newSample.doTiling(0, 0, 0, 0); // For now TODO Remove this
+    printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
+    double gap = ((25 - newSample.count) * p_area);
+    printf("The gap for the inputted tile is: %f", gap);
+    newSample.writeToFileRaw();
+    newSample.writeToFile();
+    return gap;
+  }
+  else
+    return -101;
 }
 
 bool validateTile(Tile tile) {
