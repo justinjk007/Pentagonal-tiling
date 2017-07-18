@@ -29,7 +29,7 @@ double getGap(Tile tile) {
 
   // Returning the minimumgap in the gap list
   double min_gap = gap_list[0];
-  double gap_list_size = sizeof(gap_list);
+  int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
   for (int i = 0; i < gap_list_size; ++i) {
     if (gap_list[i] >= 0 && gap_list[i] < min_gap)
       min_gap = gap_list[i];
