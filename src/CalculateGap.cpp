@@ -47,9 +47,9 @@ double calculateGap(Tile tile, int i, int j) {
   if (newSample.isLinkable(link)) {
     newSample.drawPentagon(i,j);
     newSample.doTiling(0, 0, 0, 0); // For now TODO Remove this
-    printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
+    // printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
     double gap = ((25 - newSample.count) * p_area);
-    printf("The gap for the inputted tile is: %f", gap);
+    // printf("The gap for the inputted tile is: %f", gap);
     newSample.writeToFileRaw();
     newSample.writeToFile();
     return gap;

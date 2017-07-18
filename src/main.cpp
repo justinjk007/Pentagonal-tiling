@@ -78,7 +78,7 @@ void helper() {
 
 void calculateWithDimensions(Tile tile) {
   double minimum_gap = getGap(tile);
-  printf("\nMinimum gap calculated is : %f\n", minimum_gap);
+  printf("Minimum gap calculated is : %f\n", minimum_gap);
 }
 
 void readFromFile() {}
