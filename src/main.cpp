@@ -1,8 +1,11 @@
 #include "CalculateGap.hpp"
 #include "Tile.hpp"
 #include <stdio.h>
+#include <iostream>
+#include <fstream>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
 
 #define VERSION "1.0"
 #define PROG_NAME "main"
@@ -12,8 +15,10 @@
 
 void helper();
 void calculateWithDimensions(Tile);
-void readFromFile();
+void readFromFile(std::string);
 void errorInArguments();
+
+using namespace std;
 
 int main(int argc, char *argv[]) {
   if (argc < 2) {
@@ -41,7 +46,7 @@ int main(int argc, char *argv[]) {
       } else
         errorInArguments();
     } else if (strcmp(argv[1], "-f") == 0)
-      readFromFile();
+      readFromFile(argv[2]);
     else
       errorInArguments();
   }
@@ -81,7 +86,32 @@ void calculateWithDimensions(Tile tile) {
   printf("Minimum gap calculated is : %f\n", minimum_gap);
 }
 
-void readFromFile() {}
+void readFromFile(string file_name) {
+  double value[9];
+  string data;
+  ifstream file_in(file_name);
+  ofstream file_out;
+  file_out.open("results.dat");
+  file_out << "Gap calculated" << "\n";
+  file_out.close();
+  if (!file_in.is_open())
+    printf("\nERROR: Requested file was not found!!\n");
+  while (file_in.good()) {
+    for (int i = 0; i < 8; ++i) {
+      getline(file_in, data,','); // Fisrt 8 values
+      value[i] = atof(data.c_str());
+    }
+    getline(file_in, data, '\n'); // Next one value
+    value[8] = atof(data.c_str());
+    Tile tile = {value[0], value[1], value[2], value[3], value[4],
+                 value[5], value[6], value[7], value[8]};
+    double minimum_gap = getGap(tile);
+    file_out.open("results.dat", std::ios_base::app);
+    file_out << minimum_gap << "\n";
+    file_out.close();
+  }
+  file_in.close();
+}
 
 void errorInArguments() {
   printf("Pentagonal Tiling %s\n", VERSION);
