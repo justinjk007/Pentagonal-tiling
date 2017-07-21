@@ -10,7 +10,7 @@
 #define VERSION "1.0"
 #define PROG_NAME "main"
 #define YEAR "2017"
-#define LICENSE "unlicense"
+#define LICENSE "GPLv3"
 #define AUTHOR "Justin Kaipada"
 
 void helper();
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     printf("Pentagonal Tiling %s\n", VERSION);
     printf("Copyright (c) %s, %s.  All rights reserved.\n", YEAR, AUTHOR);
     printf("This program was made available under %s\n", LICENSE);
-    printf("See LICENSE file included with the distribution for details and "
+    printf("See LICENSE.org file included with the distribution for details and "
            "disclaimer.\n");
     printf("\nError : No arguments specified (use -help or -h for help)\n\n");
   } else {
