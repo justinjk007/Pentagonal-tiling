@@ -129,8 +129,8 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
 // }
 
 BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
-  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   double tile_area1 = getTileArea(tile);
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2,2);
