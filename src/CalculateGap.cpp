@@ -167,3 +167,37 @@ double getTileArea(Tile tile) {
   double pentagonArea = triangle1 + triangle2 + triangle3;
   return pentagonArea;
 }
+
+double getPolygonArea(std::list<Line> polygon) {
+  /**
+   * This method implements calculating the area of a polygon using
+   * the shoelace formula. The list the passed should contain the
+   * lines that create the polygon/polygons.
+   */
+  double sum = 0, diff = 0, area = 0;
+  double size = polygon.size(); // Stores number if sides in the polygon
+  double x1, y1, x2, y2;
+  list<Line>::iterator it = polygon.begin();
+
+  for (int i = 0; i < size; ++i) {
+    x1 = it->start.x_cord;
+    y1 = it->start.y_cord;
+    x2 = it->end.x_cord;
+    y2 = it->end.y_cord;
+    printf(" (%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
+    sum += x1 * y2;
+    diff -= y1 * x2;
+    if(i <= size-2)
+      it++;
+  }
+  printf("\n\nThe sum is %f -- The diff is %f\n\n",sum,diff);
+  area = (1 / 2) * (abs(sum - diff));
+  return area;
+
+// (0.000000 x 0.000000)  ---   (0.000000 x 5.650000)
+// (5.650000 x 2.822832)  ---   (0.000000 x 7.025216)
+// (7.025216 x 5.781677)  ---   (2.822832 x 5.100083)
+// (5.100083 x 4.863375)  ---   (5.781677 x 1.691620)
+// (1.691620 x 0.000000)  ---   (4.863375 x 0.000000)
+// The sum is 81.370149 -- The diff is -24.177076
+}
