@@ -7,7 +7,7 @@
 #include <string.h>
 #include <string>
 
-#define VERSION "1.0"
+#define VERSION "1.2"
 #define PROG_NAME "main"
 #define YEAR "2017"
 #define LICENSE "GPLv3"
