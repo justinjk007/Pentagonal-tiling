@@ -78,57 +78,39 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
   BOOST_CHECK_EQUAL(answer4, true);
 }
 
-// BOOST_AUTO_TEST_CASE(my_geometry_line_finder) { // #11
-//   Line line1 = {{0, 0}, {4.76, 0.10}};
-//   Line line2;
-//   line2 = line1.getLineWithRespectTo(49, 3.53,0); // Angle and length
+BOOST_AUTO_TEST_CASE(drawing_methods) { // #11 There is no test here, just to print the data
+  // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81, 122.23}; // Type 1.1
+  // Tile tile = {66, 80, 66, 54, 38.54,106.31,110, 70, 135, 118.69}; // Type 1.2
+  double tile_area = getTileArea(tile);
+  double p_area = 2 * tile_area; // This is the area of the primitiveTile
+  int side_num = 0;
+  // PrimitiveTile newSample = new PrimitiveTile;
+  // newSample.pentagon = tile;
+  PrimitiveTile newSample(tile);
+  newSample.drawSquare(p_area);
+  newSample.drawPentagon(side_num,side_num);
+  Link link1(tile.side[side_num], tile.side[side_num]);
+  if (newSample.isLinkable(link1)){
+    newSample.drawPentagon(side_num,side_num);
+    newSample.doTiling(0,0,0,0);
+  }
+  // printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
+  double gap = ((25 - newSample.count) * p_area);
+  // printf("The gap for the inputted tile is: %f\n\n", gap);
+  newSample.writeToFileRaw();
+  newSample.writeToFile();
+}
 
-//   BOOST_CHECK_CLOSE(line1.getSlope(), 0.02100840, 0.01);
-//   BOOST_CHECK_EQUAL(line1.start.x_cord, 0);
-//   BOOST_CHECK_EQUAL(line1.start.y_cord, 0);
-//   BOOST_CHECK_EQUAL(line1.end.x_cord, 4.76); //(4.76,0.10)
-//   BOOST_CHECK_EQUAL(line1.end.y_cord, 0.10);
+BOOST_AUTO_TEST_CASE(get_tile_area) { // #12
+  Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  double ans = getTileArea(tile1);
+  BOOST_CHECK_CLOSE(ans, 43.01, 0.01); // 0.01% is the tolerance
+}
 
-//   BOOST_CHECK_CLOSE(line2.getSlope(), 1.201227, 0.01);
-//   BOOST_CHECK_CLOSE(line2.start.x_cord, 4.76, 0.01);
-//   BOOST_CHECK_CLOSE(line2.start.y_cord, 0.10, 0.01);
-//   BOOST_CHECK_CLOSE(line2.end.x_cord, 7.01829, 0.01); //(7.00,2.83)
-//   BOOST_CHECK_CLOSE(line2.end.y_cord, 2.812957, 0.01);
-// }
-
-// BOOST_AUTO_TEST_CASE(drawing_methods) { // #12 There is no test here, just to print the data
-//   // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
-//   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-//   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-//   Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81, 122.23}; // Type 1.1
-//   // Tile tile = {66, 80, 66, 54, 38.54,106.31,110, 70, 135, 118.69}; // Type 1.2
-//   double tile_area = getTileArea(tile);
-//   double p_area = 2 * tile_area; // This is the area of the primitiveTile
-//   int side_num = 0;
-//   // PrimitiveTile newSample = new PrimitiveTile;
-//   // newSample.pentagon = tile;
-//   PrimitiveTile newSample(tile);
-//   newSample.drawSquare(p_area);
-//   newSample.drawPentagon(side_num,side_num);
-//   Link link1(tile.side[side_num], tile.side[side_num]);
-//   if (newSample.isLinkable(link1)){
-//     newSample.drawPentagon(side_num,side_num);
-//     newSample.doTiling(0,0,0,0);
-//   }
-//   // printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
-//   double gap = ((25 - newSample.count) * p_area);
-//   // printf("The gap for the inputted tile is: %f\n\n", gap);
-//   newSample.writeToFileRaw();
-//   newSample.writeToFile();
-// }
-
-// BOOST_AUTO_TEST_CASE(get_tile_area) { // #13
-//   Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-//   double ans = getTileArea(tile1);
-//   BOOST_CHECK_CLOSE(ans, 43.01, 0.01); // 0.01% is the tolerance
-// }
-
-BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
+BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #13
   Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   double tile_area1 = getTileArea(tile)*8; // 8 Tiles are used here .sooo
