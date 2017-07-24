@@ -131,10 +131,13 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
 BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  double tile_area1 = getTileArea(tile);
+  double tile_area1 = getTileArea(tile)*8; // 8 Tiles are used here .sooo
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2,2);
+  newSample.drawPentagon(2,2);
+  newSample.drawSquare(0.0);
+  newSample.doSimpleTiling(0,0,0,0); // The simple tiling method
   newSample.writeToFile();
   double tile_area2 = getPolygonArea(newSample.lines);
-  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.001); // 0.01% is the tolerance
+  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.1); // The float is the tolerance.
 }

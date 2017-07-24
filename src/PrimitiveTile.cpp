@@ -456,3 +456,49 @@ bool PrimitiveTile::checkIfFullyInsideForLeft(std::list<Line> checkable) {
   }
   return value;
 }
+
+void PrimitiveTile::doSimpleTiling(double t_x1, double t_y1, double t_x2, double t_y2) {
+  /**
+   * This method does simple tiling by translating the primitive tile
+   * to the right once, then upwards then upwards and rightwards.
+   */
+  std::list<Line> original_p_tile = this->lines; // Stores the lines of the original primitivetile.
+  std::list<Line> temp_p_tile; // Stores the original temporarily for translation.
+  std::list<Line> last_p_tile; // Stores the lines last drawn primitivetile
+  list<Line>::iterator it = this->lines.begin();
+
+  // Get the translation rightwards
+  it = this->lines.begin();
+  double tpx1 = it->end.x_cord;
+  double tpy1 = it->end.y_cord;
+  advance(it, 3);
+  double tpx2 = it->end.x_cord;
+  double tpy2 = it->end.y_cord;
+  t_x1 = tpx1 - tpx2;
+  t_y1 = tpy1 - tpy2;
+  // Get the translation rightwards
+
+  // Get the translation upwards
+  it = this->lines.begin();
+  tpx1 = it->start.x_cord;
+  tpy1 = it->start.y_cord;
+  advance(it, 9);
+  tpx2 = it->start.x_cord;
+  tpy2 = it->start.y_cord;
+  t_x2 = tpx2 - tpx1;
+  t_y2 = tpy2 - tpy1;
+  // Get the translation upwards
+
+  temp_p_tile = original_p_tile;
+  temp_p_tile = translate(t_x1,t_y1,temp_p_tile); // Translate right
+  this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+  this->count++;
+  temp_p_tile = original_p_tile;
+  temp_p_tile = translate(t_x2, t_y2, temp_p_tile); // Translate up
+  last_p_tile = temp_p_tile;
+  this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+  this->count++;
+  temp_p_tile = translate(t_x1,t_y1,last_p_tile); // Translate right and up
+  this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
+  this->count++;
+}

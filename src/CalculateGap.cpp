@@ -2,6 +2,7 @@
 #include "PrimitiveTile.hpp"
 #include "myGeometry.hpp"
 #include <math.h>
+#include <stdlib.h>
 
 #define PI 3.14159265
 using namespace std;

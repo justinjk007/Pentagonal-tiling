@@ -34,8 +34,9 @@ public:
   bool checkIfFullyOutsideForRight(std::list<Line>);
   bool checkIfFullyInsideForLeft(std::list<Line>);
   Square drawSquare(double area);
-  void doTiling(double,double,double,double);
-  std::list<Line> translate(double,double,std::list<Line>);
+  void doTiling(double, double, double, double);
+  void doSimpleTiling(double, double, double, double);
+  std::list<Line> translate(double, double, std::list<Line>);
   PrimitiveTile() {
     this->size = 1; // Obviously we need atleast one tile.
     this->count = 1;// Obviously we need atleast one primitive tile.
