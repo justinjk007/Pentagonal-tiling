@@ -1,9 +1,6 @@
 import csv
 import matplotlib.pyplot as plt
 
-colors = ["r","r", "g","g", "b","b", "c","c", "m", "m"]
-count = -1
-
 def parse(file_name):
     "Parses the data sets from the csv file we are given to work with"
     file = open(file_name)
@@ -31,13 +28,10 @@ def toXandY(unorderedData):
     return orderedData
 
 def main():
-    global count
     newData = []
-    square_x = []
-    square_y = []
-    pent_x = []
-    pent_y = []
-    file_name = "example.csv"
+    line_x = []
+    line_y = []
+    file_name = "rawData.csv"
     data = parse(file_name)   # Calling the parse funtion we made
     labels = data.pop(0)            # Necessary evil
     list_size = len(data)
@@ -46,18 +40,15 @@ def main():
         for j in range(0, 2):       # Append converted data to the new list
             newData[i].append(float(data[i][j]))
     DataXandY = toXandY(newData)     # DataXandY -> [[Xs][Ys]]
-    for i in range(0, 5):
-        square_x.append(DataXandY[0].pop(0))
-        square_y.append(DataXandY[1].pop(0))
-        draw(square_x, square_y, labels[0], labels[1], file_name, "k")
     while len(DataXandY[0]) != 0:
-        count += 1
-        for i in range(0, 6):
-            pent_x.append(DataXandY[0].pop(0))
-            pent_y.append(DataXandY[1].pop(0))
-        draw(pent_x, pent_y, labels[0], labels[1], file_name, colors[count%10])
-        pent_x[:] = []          # Delete the list
-        pent_y[:] = []          # Delete the list
+        # Pop two points to form a line
+        line_x.append(DataXandY[0].pop(0))
+        line_y.append(DataXandY[1].pop(0))
+        line_x.append(DataXandY[0].pop(0))
+        line_y.append(DataXandY[1].pop(0))
+        draw(line_x, line_y, labels[0], labels[1], file_name, "g")
+        line_x[:] = []          # Delete the contents
+        line_y[:] = []          # Delete the contents
 
     # plt.xlim(-5, 15)
     # plt.ylim(-5, 15)
