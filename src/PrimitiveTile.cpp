@@ -156,7 +156,7 @@ void PrimitiveTile::writeToFileRaw() {
   ofstream myfile;
   string file_name = "rawData.csv";
   myfile.open(file_name);
-  myfile << "x,y,\n";
+  myfile << "x,y\n";
   list<Line>::iterator it = this->lines.begin();
   while (it != this->lines.end()) {
     myfile << it->start.x_cord << ","
@@ -191,7 +191,7 @@ Square PrimitiveTile::drawSquare(double area) {
   ofstream myfile;
   string file_name = "example.csv";
   myfile.open(file_name);
-  myfile << "x,y,\n";
+  myfile << "x,y\n";
   myfile << square.point[0].x_cord << "," << square.point[0].y_cord << "\n";
   myfile << square.point[1].x_cord << "," << square.point[1].y_cord << "\n";
   myfile << square.point[2].x_cord << "," << square.point[2].y_cord << "\n";
