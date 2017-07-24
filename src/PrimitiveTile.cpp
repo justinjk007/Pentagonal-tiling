@@ -1,4 +1,5 @@
 #include "PrimitiveTile.hpp"
+#include "myGeometry.hpp"
 #include "CalculateGap.hpp"
 #include <array>
 #include <fstream>
@@ -436,4 +437,14 @@ void PrimitiveTile::doSimpleTiling(double t_x1, double t_y1, double t_x2, double
   temp_p_tile = translate(t_x1,t_y1,last_p_tile); // Translate right and up
   this->lines.splice(this->lines.end(), temp_p_tile); // Append main list with temp_list
   this->count++;
+}
+
+std::list<Line> PrimitiveTile::addLists(std::list<Line> list1,
+                                        std::list<Line> list2) {
+  /**
+   * Compare two all lines in the passed lists and remove any common
+   * lines from both of the lists and then combine them
+   */
+    list1.splice(list1.end(), list2);
+  return list1;
 }
