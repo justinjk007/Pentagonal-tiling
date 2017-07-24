@@ -115,72 +115,7 @@ void PrimitiveTile::drawPentagonRev(int from, int to) {
   /**
    * This draw the pentagon in Reverse
    */
-  Line first_line;
-  Line current_line;
-  Line diagonal; // The line that connects the 1st and the end of the 2nd line.
-  Line next_line;
-  double next_angle = 0;
-  double diagonal_angle = 0;
-  double diagonal_length = 0;
-  Point origin = {0, 0};
-  int moded_index = 0;
-  int type1 = 0;
-  int type2 = 0;
-  int i =1; // Becuase we are already finding line 1 here
-  if (!this->lines.empty()) {
-    moded_index = to % 5; // This is done to rotate the first pentagon
-    list<Line>::iterator it = this->lines.begin();
-    advance(it, 2);
-    current_line = *it;
-    current_line = current_line.reverse();
-    this->lines.push_back(current_line);
-    first_line = current_line;
-  } else {
-    // ---------- Finding the first line here
-    moded_index = (from + 3) % 5; // This is done to rotate the first pentagon
-    current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
-    this->lines.push_back(current_line);
-    first_line = current_line;
-    // ---------- Finding the first line here
-  }
-  moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
-  while (i < 5) {
-    next_angle = this->pentagon.angle[moded_index];
-    // TODO Check if +4 and -1 are the same on paper
-    diagonal_length = getThirdSide(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index],next_angle);
-    diagonal_angle = getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
-    diagonal = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1,'d');
-    next_line = current_line.getLineWithRespectTo(180-next_angle, this->pentagon.side[moded_index].value, type2, 's');
-    double diff = diagonal.end.x_cord - next_line.end.x_cord;
-    if (diff <= 0.1 && diff >= -0.1) {
-      type1 = 0; // Reset types after every line
-      type2 = 0; // Reset types after every line
-      this->lines.push_back(next_line);
-      current_line = next_line;
-      ++i;
-      moded_index = (moded_index + 1) % 5; // Wraparound like a circle array
-    } else {
-      if (type1 == 0 && type2 == 0) {
-	type1 = 1;
-	continue;
-      } else if (type1 == 1 && type2 == 0) {
-	type2 = 1;
-	continue;
-      } else if (type1 == 1 && type2 == 1) {
-	type1 = 0;
-	continue;
-      } else
-	{
-	  std::cout << "*******************************************************************************\n";
-	  std::cout << "All options for finding co-ordinates covered program exited with exit status 1\n";
-	  std::cout << "*******************************************************************************\n";
-	  break;
-	}
-    }
-  }
-  this->lines.pop_back(); // Remove the last added line
-  current_line.end = first_line.start; // This what the origin and end are always the same points
-  this->lines.push_back(current_line); // Add the modified line to the end
+  // TODO Implement this
 }
 
 void PrimitiveTile::writeToFile() {
