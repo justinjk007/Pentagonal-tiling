@@ -198,8 +198,7 @@ double getPolygonArea(std::list<Line> polygon) {
   return area;
 }
 
-
-std::list<Line> removeCommonLines(std::list<Line> lines){
+std::list<Line> removeCommonLines(std::list<Line> lines) {
   /**
    * This method is used remove duplicate lines from the given line
    * list, this will only for the specific case I have. If a duplicate
@@ -207,5 +206,19 @@ std::list<Line> removeCommonLines(std::list<Line> lines){
    * list. This is done to eliminate inner line-segments of the
    * translated structure.
    */
-    return lines;
+  std::list<Line> new_lines;
+  bool flag = false;
+  while (!lines.empty()) {
+    Line line1 = lines.front(); // Get the 1t line from the list
+    lines.pop_front();          // Remove the same line from the list
+    for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+      if (compareLine(line1, *it)) { // Compare to see if same lines exists
+        lines.erase(it);             // Erase the duplicate if it exists
+        flag = true;
+      }
+    }
+    if (!flag) // If duplicate existed, don't push this.
+      new_lines.push_front(line1);
+  }
+  return new_lines;
 }
