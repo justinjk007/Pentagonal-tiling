@@ -28,6 +28,7 @@ public:
   void del();
   void writeToFile();
   void writeToFileRaw();
+  void writeToFileRaw(std::list<Line>);
   bool checkIfOutsideForUp(std::list<Line>); // This checks is the given list of lines are outside sqaure
   bool checkIfOutsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
   bool checkIfFullyOutsideForUp(std::list<Line>);
