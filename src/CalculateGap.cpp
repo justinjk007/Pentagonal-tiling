@@ -197,3 +197,15 @@ double getPolygonArea(std::list<Line> polygon) {
   // printf("The area is %f\n\n",area);
   return area;
 }
+
+
+std::list<Line> removeCommonLines(std::list<Line> lines){
+  /**
+   * This method is used remove duplicate lines from the given line
+   * list, this will only for the specific case I have. If a duplicate
+   * is found both the original and the duplicate are removed from the
+   * list. This is done to eliminate inner line-segments of the
+   * translated structure.
+   */
+    return lines;
+}

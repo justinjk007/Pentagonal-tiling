@@ -18,5 +18,6 @@ double getTriangleArea(double, double, double);
 double getTileArea(Tile);
 double getOtherAngle(Side, Side, double, char);
 double getPolygonArea(std::list<Line>);
+std::list<Line> removeCommonLines(std::list<Line>);
 
 #endif /* CALCULATEGAP_HPP */
