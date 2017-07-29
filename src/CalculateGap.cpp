@@ -220,9 +220,12 @@ std::list<Line> removeCommonLines(std::list<Line> lines) {
 }
 
 std::list<Line> removeLine(std::list<Line> lines, Line val) {
-  std::list<Line> new_lines = lines;
-  for (list<Line>::iterator it = lines.begin(); it != lines.end(); ++it)
-    if (!compareLine(val, *it)) // Compare to see if same Lines exists
-      new_lines.push_back(*it);
-  return new_lines;
+  /**
+   * Override function for list::remove rewritten for list<Line>
+   */
+  for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+    if (!compareLine(val, *it)) // If same lines exists
+      lines.erase(it);
+  }
+  return lines;
 }

@@ -6,7 +6,7 @@
 
 bool compareLine(Line line1, Line line2){
   /**
-   * Compare lines to see if they are equal, true if they are equal else false
+   * Compare lines to see if they are equal, returns true if they are equal else false
    */
   bool first = false, second = false;
   double diff1 = line1.start.x_cord - line2.start.x_cord;
