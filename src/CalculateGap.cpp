@@ -223,9 +223,11 @@ std::list<Line> removeLine(std::list<Line> lines, Line val) {
   /**
    * Override function for list::remove rewritten for list<Line>
    */
-  for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
-    if (!compareLine(val, *it)) // If same lines exists
-      lines.erase(it);
+  for (list<Line>::iterator it = lines.begin(); it != lines.end();) {
+    if (compareLine(val, *it)) // If same lines exists
+      it = lines.erase(it);
+    else
+      ++it;
   }
   return lines;
 }
