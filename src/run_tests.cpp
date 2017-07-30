@@ -113,27 +113,30 @@ BOOST_AUTO_TEST_CASE(get_tile_area) { // #12
 BOOST_AUTO_TEST_CASE(compare_lines_test){ // #13
   Point one = {0,0};
   Point two = {1.12345,2.123};
-  Point three = {1.12345,2.123};
-  Point four = {1.12345,2.123};
+  Point three = {12.12345,23.123};
+  Point four = {1.12345,3.1};
   Line line1 = {one,two};
   Line line2 = {three,four};
   Line line3 = {four,three};
+  Line line4 = {four,two};
   BOOST_CHECK_EQUAL(false,  compareLine(line1, line2));
   BOOST_CHECK_EQUAL(true,  compareLine(line3, line2));
+  BOOST_CHECK_EQUAL(false,  compareLine(line3, line4));
 }
 
 BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
-  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-    // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-    // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81, 122.23}; // Type 1.1
-    double tile_area1 = getTileArea(tile)*8; // 8 Tiles are used here .sooo
-    PrimitiveTile newSample(tile);
-    newSample.drawPentagon(2,2);
-    newSample.drawPentagon(2,2);
-    newSample.doSimpleTiling(0,0,0,0); // The simple tiling method
-    // newSample.writeToFileRaw();
-    std::list<Line> new_lines = removeCommonLines(newSample.lines);
-    newSample.writeToFileRaw(new_lines);
-    double tile_area2 = getPolygonArea(newSample.lines);
-    BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.1); // The float is the tolerance.
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
+  // 	       122.23}; // Type 1.1
+  double tile_area1 = getTileArea(tile) * 8; // 8 Tiles are used here .sooo
+  PrimitiveTile newSample(tile);
+  newSample.drawPentagon(2, 2);
+  newSample.drawPentagon(2, 2);
+  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
+  newSample.writeToFileRaw();
+  std::list<Line> new_lines = removeCommonLines(newSample.lines);
+  newSample.writeToFileRaw(new_lines);
+  double tile_area2 = getPolygonArea(newSample.lines);
+  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.1); // The float is the tolerance.
   }

@@ -4,27 +4,24 @@
 
 #define PI 3.14159265359
 
+using namespace std;
+
 bool compareLine(Line line1, Line line2) {
   /**
    * Compare lines to see if they are equal, returns true if they are equal else
    * false
    */
-  bool first = false, second = false;
+
   // Compare start Point(x,y)
   double diff1 = line1.start.x_cord - line2.start.x_cord;
   double diff2 = line1.start.y_cord - line2.start.y_cord;
   // Compare end Point(x,y)
   double diff3 = line1.end.x_cord - line2.end.x_cord;
   double diff4 = line1.end.y_cord - line2.end.y_cord;
-  if (diff1 <= 0.02 && diff1 >= -0.02)
-    first = true;
-  if (diff3 <= 0.02 && diff4 >= -0.02)
-    second = true;
-
-  if (first && second)
+  if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 &&
+      abs(diff3) <= 0.04 && abs(diff4) <= 0.04)
     return true;
-  first = false, second = false; // Reset flags
-  line1 = line1.reverse(); // Reverse one of the line and check again.
+  line1 = line1.reverse();       // Reverse one of the line and check again.
 
   // Compare start Point(x,y)
   diff1 = line1.start.x_cord - line2.start.x_cord;
@@ -32,12 +29,8 @@ bool compareLine(Line line1, Line line2) {
   // Compare end Point(x,y)
   diff3 = line1.end.x_cord - line2.end.x_cord;
   diff4 = line1.end.y_cord - line2.end.y_cord;
-  if (diff1 <= 0.02 && diff1 >= -0.02)
-    first = true;
-  if (diff3 <= 0.02 && diff4 >= -0.02)
-    second = true;
-
-  if (first && second)
+  if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 &&
+      abs(diff3) <= 0.04 && abs(diff4) <= 0.04)
     return true;
   else
     return false;
