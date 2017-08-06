@@ -22,5 +22,5 @@ myGeometry.o: myGeometry.cpp myGeometry.hpp
 	g++ -std=c++11 -c -g myGeometry.cpp
 
 clean:
-	rm -f *.o main run_test
+	rm -f *.o main run_tests
 	echo Clean done
