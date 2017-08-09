@@ -182,10 +182,10 @@ double getPolygonArea(std::list<Line> polygon) {
 
   printf("\n");
   for (int i = 0; i < size; ++i) {
-    x1 = it->start.x_cord;
-    y1 = it->start.y_cord;
-    x2 = it->end.x_cord;
-    y2 = it->end.y_cord;
+    x1 = it->start.x;
+    y1 = it->start.y;
+    x2 = it->end.x;
+    y2 = it->end.y;
     // printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
     sum += x1 * y2;
     diff += y1 * x2;

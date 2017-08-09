@@ -13,22 +13,22 @@ bool compareLine(Line line1, Line line2) {
    */
 
   // Compare start Point(x,y)
-  double diff1 = line1.start.x_cord - line2.start.x_cord;
-  double diff2 = line1.start.y_cord - line2.start.y_cord;
+  double diff1 = line1.start.x - line2.start.x;
+  double diff2 = line1.start.y - line2.start.y;
   // Compare end Point(x,y)
-  double diff3 = line1.end.x_cord - line2.end.x_cord;
-  double diff4 = line1.end.y_cord - line2.end.y_cord;
+  double diff3 = line1.end.x - line2.end.x;
+  double diff4 = line1.end.y - line2.end.y;
   if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 &&
       abs(diff3) <= 0.04 && abs(diff4) <= 0.04)
     return true;
   line1 = line1.reverse();       // Reverse one of the line and check again.
 
   // Compare start Point(x,y)
-  diff1 = line1.start.x_cord - line2.start.x_cord;
-  diff2 = line1.start.y_cord - line2.start.y_cord;
+  diff1 = line1.start.x - line2.start.x;
+  diff2 = line1.start.y - line2.start.y;
   // Compare end Point(x,y)
-  diff3 = line1.end.x_cord - line2.end.x_cord;
-  diff4 = line1.end.y_cord - line2.end.y_cord;
+  diff3 = line1.end.x - line2.end.x;
+  diff4 = line1.end.y - line2.end.y;
   if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 &&
       abs(diff3) <= 0.04 && abs(diff4) <= 0.04)
     return true;
@@ -37,8 +37,8 @@ bool compareLine(Line line1, Line line2) {
 }
 
 double Line::getSlope() {
-  double diff_y = this->end.y_cord - this->start.y_cord;
-  double diff_x = this->end.x_cord - this->start.x_cord;
+  double diff_y = this->end.y - this->start.y;
+  double diff_x = this->end.x - this->start.x;
   double m = diff_y / diff_x;
   return m;
 }
@@ -63,10 +63,10 @@ Line Line::reverse() {
    * Reverses the start and end points
    */
     Line temp_line;
-    temp_line.start.x_cord = this->end.x_cord;
-    temp_line.start.y_cord = this->end.y_cord;
-    temp_line.end.x_cord = this->start.x_cord;
-    temp_line.end.y_cord = this->start.y_cord;
+    temp_line.start.x = this->end.x;
+    temp_line.start.y = this->end.y;
+    temp_line.end.x = this->start.x;
+    temp_line.end.y = this->start.y;
     return temp_line;
 }
 
@@ -76,10 +76,10 @@ Line Line::getLineWithRespectTo(Point origin, double length) {
    * have an other side for the angle to be based on
    */
   Line line;
-  line.start.x_cord = origin.x_cord;
-  line.start.y_cord = origin.y_cord;
-  line.end.x_cord = length;
-  line.end.y_cord = 0.0;
+  line.start.x = origin.x;
+  line.start.y = origin.y;
+  line.end.x = length;
+  line.end.y = 0.0;
   return line;
 }
 
@@ -101,28 +101,28 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
   if (which == 's') {
     if (type == 0)
       // Type on is when x2 is greater than x1.
-      x2 = this->end.x_cord + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+      x2 = this->end.x + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
     else
       // Type on is when x2 is smaller than x1, ie the line is backward.
-      x2 = this->end.x_cord - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
-    y2 = m2 * (x2 - this->end.x_cord) + this->end.y_cord;
-    line.start.x_cord = this->end.x_cord;
-    line.start.y_cord = this->end.y_cord;
+      x2 = this->end.x - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+    y2 = m2 * (x2 - this->end.x) + this->end.y;
+    line.start.x = this->end.x;
+    line.start.y = this->end.y;
   } else if (which == 'd') // when which = 'd' for diagonal.
     {
       if (type == 0)
 	// Type on is when x2 is greater than x1.
-	x2 = this->start.x_cord + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+	x2 = this->start.x + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
       else
 	// Type on is when x2 is smaller than x1, ie the line is backward.
-	x2 = this->start.x_cord - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
-      y2 = m2 * (x2 - this->start.x_cord) + this->start.y_cord;
-      line.start.x_cord = this->start.x_cord;
-      line.start.y_cord = this->start.y_cord;
+	x2 = this->start.x - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+      y2 = m2 * (x2 - this->start.x) + this->start.y;
+      line.start.x = this->start.x;
+      line.start.y = this->start.y;
     } else
     return line;
 
-  line.end.x_cord = x2;
-  line.end.y_cord = y2;
+  line.end.x = x2;
+  line.end.y = y2;
   return line;
 }

@@ -3,15 +3,15 @@
 
 class Point {
 public:
-  double x_cord;
-  double y_cord;
+  double x;
+  double y;
   Point() {
-    this->x_cord = 0.0;
-    this->y_cord = 0.0;
+    this->x = 0.0;
+    this->y = 0.0;
   }
-  Point(double x, double y) {
-    this->x_cord = x;
-    this->y_cord = y;
+  Point(double x_cord, double y_cord) {
+    this->x = x_cord;
+    this->y = y_cord;
   }
 };
 
@@ -26,10 +26,10 @@ public:
   Line getLineWithRespectTo(double, double, int, char);
   Line reverse(); // Reverse the start and end points of the line.
   Line() {
-    this->start.x_cord = 0.0;
-    this->start.y_cord = 0.0;
-    this->end.x_cord = 0.0;
-    this->end.y_cord = 0.0;
+    this->start.x = 0.0;
+    this->start.y = 0.0;
+    this->end.x = 0.0;
+    this->end.y = 0.0;
   }
   Line(Point a, Point b) {
     this->start = a;

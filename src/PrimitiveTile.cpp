@@ -80,7 +80,7 @@ void PrimitiveTile::drawPentagon(int from, int to) {
     diagonal_angle = getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
     diagonal = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1,'d');
     next_line = current_line.getLineWithRespectTo(180-next_angle, this->pentagon.side[moded_index].value, type2, 's');
-    double diff = diagonal.end.x_cord - next_line.end.x_cord;
+    double diff = diagonal.end.x - next_line.end.x;
     if (diff <= 0.1 && diff >= -0.1) {
       type1 = 0; // Reset types after every line
       type2 = 0; // Reset types after every line
@@ -132,14 +132,14 @@ void PrimitiveTile::writeToFile() {
   int i = 0;
   Point i_need_this = this->lines.begin()->start;
   while (it != this->lines.end()) {
-    myfile << it->start.x_cord << ","
-           << it->start.y_cord << "\n";
+    myfile << it->start.x << ","
+           << it->start.y << "\n";
     temp_it = it;
     ++it;
     i += 1;
     if (i % 5 == 0) {
       temp_it--;
-      myfile << i_need_this.x_cord << "," << i_need_this.y_cord << "\n";
+      myfile << i_need_this.x << "," << i_need_this.y << "\n";
       advance(temp_it,2);
       if(temp_it != this->lines.end())
 	i_need_this = temp_it->start;
@@ -160,10 +160,10 @@ void PrimitiveTile::writeToFileRaw() {
   myfile << "x,y\n";
   list<Line>::iterator it = this->lines.begin();
   while (it != this->lines.end()) {
-    myfile << it->start.x_cord << ","
-           << it->start.y_cord << "\n";
-    myfile << it->end.x_cord << ","
-           << it->end.y_cord << "\n";
+    myfile << it->start.x << ","
+           << it->start.y << "\n";
+    myfile << it->end.x << ","
+           << it->end.y << "\n";
     ++it;
   }
   myfile.close();
@@ -182,10 +182,10 @@ void PrimitiveTile::writeToFileRaw(std::list<Line> this_lines) {
   myfile << "x,y\n";
   list<Line>::iterator it = this_lines.begin();
   while (it != this_lines.end()) {
-    myfile << it->start.x_cord << ","
-           << it->start.y_cord << "\n";
-    myfile << it->end.x_cord << ","
-           << it->end.y_cord << "\n";
+    myfile << it->start.x << ","
+           << it->start.y << "\n";
+    myfile << it->end.x << ","
+           << it->end.y << "\n";
     ++it;
   }
   myfile.close();
@@ -203,23 +203,23 @@ Square PrimitiveTile::drawSquare(double area) {
   Square square;
   area = area * 25; // Make the area of the sqaure 25 times the primtive tile
   square.side = sqrt(area); // Get the side length of the square.
-  square.point[0].x_cord = 0;
-  square.point[0].y_cord = 0;
-  square.point[1].x_cord = square.side;
-  square.point[1].y_cord = 0;
-  square.point[2].x_cord = square.side;
-  square.point[2].y_cord = square.side;
-  square.point[3].x_cord = 0;
-  square.point[3].y_cord = square.side;
+  square.point[0].x = 0;
+  square.point[0].y = 0;
+  square.point[1].x = square.side;
+  square.point[1].y = 0;
+  square.point[2].x = square.side;
+  square.point[2].y = square.side;
+  square.point[3].x = 0;
+  square.point[3].y = square.side;
   ofstream myfile;
   string file_name = "example.csv";
   myfile.open(file_name);
   myfile << "x,y\n";
-  myfile << square.point[0].x_cord << "," << square.point[0].y_cord << "\n";
-  myfile << square.point[1].x_cord << "," << square.point[1].y_cord << "\n";
-  myfile << square.point[2].x_cord << "," << square.point[2].y_cord << "\n";
-  myfile << square.point[3].x_cord << "," << square.point[3].y_cord << "\n";
-  myfile << square.point[0].x_cord << "," << square.point[0].y_cord << "\n"; // Complete circle
+  myfile << square.point[0].x << "," << square.point[0].y << "\n";
+  myfile << square.point[1].x << "," << square.point[1].y << "\n";
+  myfile << square.point[2].x << "," << square.point[2].y << "\n";
+  myfile << square.point[3].x << "," << square.point[3].y << "\n";
+  myfile << square.point[0].x << "," << square.point[0].y << "\n"; // Complete circle
   myfile.close();
   this->this_square = square;
   return square;
@@ -239,22 +239,22 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 
   // Get the translation rightwards
   it = this->lines.begin();
-  double tpx1 = it->end.x_cord;
-  double tpy1 = it->end.y_cord;
+  double tpx1 = it->end.x;
+  double tpy1 = it->end.y;
   advance(it, 3);
-  double tpx2 = it->end.x_cord;
-  double tpy2 = it->end.y_cord;
+  double tpx2 = it->end.x;
+  double tpy2 = it->end.y;
   t_x1 = tpx1 - tpx2;
   t_y1 = tpy1 - tpy2;
   // Get the translation rightwards
 
   // Get the translation upwards
   it = this->lines.begin();
-  tpx1 = it->start.x_cord;
-  tpy1 = it->start.y_cord;
+  tpx1 = it->start.x;
+  tpy1 = it->start.y;
   advance(it, 9);
-  tpx2 = it->start.x_cord;
-  tpy2 = it->start.y_cord;
+  tpx2 = it->start.x;
+  tpy2 = it->start.y;
   t_x2 = tpx2 - tpx1;
   t_y2 = tpy2 - tpy1;
   // Get the translation upwards
@@ -325,10 +325,10 @@ std::list<Line> PrimitiveTile::translate(double t_x, double t_y, std::list<Line>
   list<Line>::iterator it;
   for (it = tile.begin(); it != tile.end(); ++it) {
     // Translation rightwards is applied here
-    it->start.x_cord += t_x;
-    it->start.y_cord += t_y;
-    it->end.x_cord += t_x;
-    it->end.y_cord += t_y;
+    it->start.x += t_x;
+    it->start.y += t_y;
+    it->end.x += t_x;
+    it->end.y += t_y;
   }
   return tile;
 }
@@ -342,9 +342,9 @@ bool PrimitiveTile::checkIfOutsideForRight(std::list<Line> checkable) {
    * "checkable" is the list to be checked.
    */
   for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
-    if(it->start.x_cord >= this->this_square.point[1].x_cord)
+    if(it->start.x >= this->this_square.point[1].x)
       return false;
-    if (it->start.y_cord <= 0 )
+    if (it->start.y <= 0 )
       return false;
   }
   return true;
@@ -359,9 +359,9 @@ bool PrimitiveTile::checkIfOutsideForUp(std::list<Line> checkable) {
    * "checkable" is the list to be checked.
    */
   for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
-    // if(it->start.x_cord >= this->this_square.point[1].x_cord)
+    // if(it->start.x >= this->this_square.point[1].x)
     //   return false;
-    if (it->start.y_cord <= 0 || it->start.y_cord >= this->this_square.point[2].y_cord)
+    if (it->start.y <= 0 || it->start.y >= this->this_square.point[2].y)
       return false;
   }
   return true;
@@ -375,7 +375,7 @@ bool PrimitiveTile::checkIfFullyOutsideForUp(std::list<Line> checkable) {
    */
   bool value = true;
   for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
-    if (it->start.y_cord >= this->this_square.point[2].y_cord && value)
+    if (it->start.y >= this->this_square.point[2].y && value)
       ;
     else
       value = false;
@@ -391,7 +391,7 @@ bool PrimitiveTile::checkIfFullyOutsideForRight(std::list<Line> checkable) {
    */
   bool value = true;
   for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
-    if(it->start.x_cord >= this->this_square.point[1].x_cord)
+    if(it->start.x >= this->this_square.point[1].x)
       ;
     else
       value = false;
@@ -407,7 +407,7 @@ bool PrimitiveTile::checkIfFullyInsideForLeft(std::list<Line> checkable) {
    */
   bool value = true;
   for (list<Line>::iterator it = checkable.begin(); it != checkable.end(); ++it) {
-    if(it->start.x_cord >= this->this_square.point[0].x_cord)
+    if(it->start.x >= this->this_square.point[0].x)
       ;
     else
       value = false;
@@ -427,22 +427,22 @@ void PrimitiveTile::doSimpleTiling(double t_x1, double t_y1, double t_x2, double
 
   // Get the translation rightwards
   it = this->lines.begin();
-  double tpx1 = it->end.x_cord;
-  double tpy1 = it->end.y_cord;
+  double tpx1 = it->end.x;
+  double tpy1 = it->end.y;
   advance(it, 3);
-  double tpx2 = it->end.x_cord;
-  double tpy2 = it->end.y_cord;
+  double tpx2 = it->end.x;
+  double tpy2 = it->end.y;
   t_x1 = tpx1 - tpx2;
   t_y1 = tpy1 - tpy2;
   // Get the translation rightwards
 
   // Get the translation upwards
   it = this->lines.begin();
-  tpx1 = it->start.x_cord;
-  tpy1 = it->start.y_cord;
+  tpx1 = it->start.x;
+  tpy1 = it->start.y;
   advance(it, 9);
-  tpx2 = it->start.x_cord;
-  tpy2 = it->start.y_cord;
+  tpx2 = it->start.x;
+  tpy2 = it->start.y;
   t_x2 = tpx2 - tpx1;
   t_y2 = tpy2 - tpy1;
   // Get the translation upwards
