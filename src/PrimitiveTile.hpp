@@ -38,6 +38,7 @@ public:
   void doTiling(double, double, double, double);
   void doSimpleTiling(double, double, double, double);
   std::list<Line> translate(double, double, std::list<Line>);
+  std::list<Point> getPointsFromLines(std::list<Line>); // Returns the start points of everyline on the given list
   PrimitiveTile() {
     this->size = 1; // Obviously we need atleast one tile.
     this->count = 1;// Obviously we need atleast one primitive tile.
