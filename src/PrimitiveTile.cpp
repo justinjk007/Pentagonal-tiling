@@ -468,8 +468,8 @@ std::list<Point> PrimitiveTile::getPointsFromLines(std::list<Line> lines){
   * for getting the concave hull of a set of lines or points
   */
   std::list<Point> list_of_points; // Stores the lines of the original primitivetile.
-  Point point;
-  for (list<Line>::iterator it = this->lines.begin(); it != lines.end(); ++it) {
+  for (list<Line>::iterator it = lines.begin(); it != lines.end(); ++it) {
+    Point point;
     point.x = it->start.x;
     point.y = it->start.y;
     list_of_points.push_back(point);

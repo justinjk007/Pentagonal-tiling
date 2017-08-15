@@ -135,8 +135,11 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
   newSample.writeToFileRaw();
-  std::list<Line> new_lines = removeCommonLines(newSample.lines);
-  newSample.writeToFileRaw(new_lines);
+  // std::list<Line> new_lines = removeCommonLines(newSample.lines);
+  // newSample.writeToFileRaw(new_lines);
   double tile_area2 = getPolygonArea(newSample.lines);
-  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.1); // The float is the tolerance.
+  std::list<Point> list_of_points = newSample.getPointsFromLines(newSample.lines);
+  double tile_area_point = getPolygonArea(list_of_points);
+  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.01); // The float is the tolerance.
+  BOOST_CHECK_CLOSE(tile_area_point, tile_area2, 0.01); // The float is the tolerance.
   }

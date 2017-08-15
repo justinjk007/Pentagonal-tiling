@@ -189,12 +189,45 @@ double getPolygonArea(std::list<Line> polygon) {
     // printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
     sum += x1 * y2;
     diff += y1 * x2;
-    if(i <= size-2)
+    if(i <= size-1)
       it++;
   }
-  // printf("The sum is %f -- The diff is %f\n",sum,diff);
+  printf("The sum is %f -- The diff is %f\n",sum,diff);
   area = (1.0/2.0) * abs((sum - diff));
   // printf("The area is %f\n\n",area);
+  return area;
+}
+
+double getPolygonArea(std::list<Point> polygon) {
+  /**
+   * This method implements calculating the area of a polygon using
+   * the shoelace formula. The list the passed should contain the
+   * points that create the polygon/polygons.
+   */
+  double sum = 0, diff = 0, area = 0;
+  double size = polygon.size(); // Stores number of sides in the polygon
+  double x1, y1, x2, y2;
+  list<Point>::iterator it = polygon.begin();
+  printf("\n");
+  for (int i = 0; i < size; ++i) {
+    bool flag = false;
+    x1 = it->x;
+    y1 = it->y;
+    if(i <= size-2)
+      it++;
+    else {
+      it = polygon.begin();
+      flag = true;
+    }
+    x2 = it->x;
+    y2 = it->y;
+    sum += x1 * y2;
+    diff += y1 * x2;
+    if(flag)
+      break;
+  }
+  printf("The sum is %f -- The diff is %f\n",sum,diff);
+  area = (1.0/2.0) * abs((sum - diff));
   return area;
 }
 
