@@ -1,33 +1,35 @@
 %********************************************************************
-% Script file for the initialization and run of the differential 
-% evolution optimizer.
+% Script file for the initialization and run of the differential
+% evolution optimizer for Pentagonal Tiling
+% Author: Rainer Storn, Ken Price, Arnold Neumaier, Jim Van Zandt
+% Edited for Pentagonal Tiling by Justin Kaipada
 %********************************************************************
 
 % F_VTR		"Value To Reach" (stop when ofunc < F_VTR)
-		F_VTR = 0.00001; 
+		F_VTR = 0.00001;
 
-% I_D		number of parameters of the objective function 
-		I_D = 13; 
+% I_D		number of parameters of the objective function
+		I_D = 9;
 
 % FVr_minbound,FVr_maxbound   vector of lower and bounds of initial population
-%    		the algorithm seems to work especially well if [FVr_minbound,FVr_maxbound] 
+%    		the algorithm seems to work especially well if [FVr_minbound,FVr_maxbound]
 %    		covers the region where the global minimum is expected
 %               *** note: these are no bound constraints!! ***
-      FVr_minbound = -100*ones(1,I_D); 
-      FVr_maxbound = +100*ones(1,I_D); 
-      I_bnd_constr = 0;  %1: use bounds as bound constraints, 0: no bound constraints      
-            
+      FVr_minbound = -100*ones(1,I_D);
+      FVr_maxbound = +100*ones(1,I_D);
+      I_bnd_constr = 0;  %1: use bounds as bound constraints, 0: no bound constraints
+
 % I_NP            number of population members
-		I_NP = 100; 
+		I_NP = 100;
 
 % I_itermax       maximum number of iterations (generations)
-		I_itermax = 50000; 
-       
+		I_itermax = 50000;
+
 % F_weight        DE-stepsize F_weight ex [0, 2]
-		F_weight = 0.85; 
+		F_weight = 0.85;
 
 % F_CR            crossover probabililty constant ex [0, 1]
-		F_CR = 1; 
+		F_CR = 1;
 
 % I_strategy     1 --> DE/rand/1:
 %                      the classical version of DE.
@@ -45,9 +47,9 @@
 %                      Choosing F_weight = 0.3 is a good start here.
 %                6 --> DE/rand/1 either-or-algorithm:
 %                      Alternates between differential mutation and three-point-
-%                      recombination.           
+%                      recombination.
 
-		I_strategy = 3
+		I_strategy = 1
 
 % I_refresh     intermediate output will be produced after "I_refresh"
 %               iterations. No intermediate output will be produced
@@ -58,7 +60,7 @@
       I_plotting = 1;
 
 %***************************************************************************
-% Problem dependent but constant values. For speed reasons these values are 
+% Problem dependent but constant values. For speed reasons these values are
 % defined here. Otherwise we have to redefine them again and again in the
 % cost function or pass a large amount of parameters values.
 %***************************************************************************
@@ -113,4 +115,3 @@ end
 %********************************************************************
 
 [FVr_x,S_y,I_nf] = deopt('objfun',S_struct)
-
