@@ -27,6 +27,10 @@
 *.o
 *.obj
 
+# Log files
+
+*.tlog
+
 # Ignore cmake build dirs
 /src/build
 /src/CMakeFiles
