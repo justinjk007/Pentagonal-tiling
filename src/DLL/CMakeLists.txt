@@ -1,12 +1,12 @@
 cmake_minimum_required (VERSION 3.0)
 project (pentagonlib)
-
+set (CMAKE_BUILD_TYPE Debug)
 
 #include *.h files under include folder and
 #the project's output folder e.g. Debug
 INCLUDE_DIRECTORIES (${PROJECT_BINARY_DIR})
 
-#compile all *.cpp source files under src folder
+#compile all *.cpp source files
 file (GLOB SOURCES "*.cpp")
 
 #output library export file *.lib and
