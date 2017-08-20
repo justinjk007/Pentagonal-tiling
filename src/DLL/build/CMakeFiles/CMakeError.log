@@ -1,38 +1,38 @@
 Performing C++ SOURCE FILE Test COMPILER_HAS_DEPRECATED_ATTR failed with the following output:
 Change Dir: D:/Repos/PentagonLib/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_52519.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
+Run Build Command:"C:/Program Files (x86)/MSBuild/14.0/bin/MSBuild.exe" "cmTC_31a2e.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=14.0"
 Microsoft (R) Build Engine version 14.0.25420.1
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-Build started 19-Aug-17 8:52:58 PM.
-Project "D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj" on node 1 (default targets).
+Build started 20-Aug-17 12:22:48 PM.
+Project "D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj" on node 1 (default targets).
 PrepareForBuild:
-  Creating directory "cmTC_52519.dir\Debug\".
+  Creating directory "cmTC_31a2e.dir\Debug\".
   Creating directory "D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\Debug\".
-  Creating directory "cmTC_52519.dir\Debug\cmTC_52519.tlog\".
+  Creating directory "cmTC_31a2e.dir\Debug\cmTC_31a2e.tlog\".
 InitializeBuildStatus:
-  Creating "cmTC_52519.dir\Debug\cmTC_52519.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Creating "cmTC_31a2e.dir\Debug\cmTC_31a2e.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
 ClCompile:
-  D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_52519.dir\Debug\\" /Fd"cmTC_52519.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx
+  D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_31a2e.dir\Debug\\" /Fd"cmTC_31a2e.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx
   Microsoft (R) C/C++ Optimizing Compiler Version 19.00.24215.1 for x86
   Copyright (C) Microsoft Corporation.  All rights reserved.
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_52519.dir\Debug\\" /Fd"cmTC_52519.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx
+  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D COMPILER_HAS_DEPRECATED_ATTR /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_31a2e.dir\Debug\\" /Fd"cmTC_31a2e.dir\Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:queue D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx
   
   src.cxx
-D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2065: '__deprecated__': undeclared identifier [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj]
-D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj]
-D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2448: '__attribute__': function-style initializer appears to be a function definition [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj]
-Done Building Project "D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj" (default targets) -- FAILED.
+D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2065: '__deprecated__': undeclared identifier [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj]
+D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj]
+D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2448: '__attribute__': function-style initializer appears to be a function definition [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj]
+Done Building Project "D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj" (default targets) -- FAILED.
 
 Build FAILED.
 
-"D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj" (default target) (1) ->
+"D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj" (default target) (1) ->
 (ClCompile target) -> 
-  D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2065: '__deprecated__': undeclared identifier [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj]
-  D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj]
-  D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2448: '__attribute__': function-style initializer appears to be a function definition [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_52519.vcxproj]
+  D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2065: '__deprecated__': undeclared identifier [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj]
+  D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj]
+  D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\src.cxx(1): error C2448: '__attribute__': function-style initializer appears to be a function definition [D:\Repos\PentagonLib\build\CMakeFiles\CMakeTmp\cmTC_31a2e.vcxproj]
 
     0 Warning(s)
     3 Error(s)

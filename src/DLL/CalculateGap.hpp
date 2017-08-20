@@ -5,9 +5,13 @@
 #ifndef CALCULATEGAP_HPP
 #define CALCULATEGAP_HPP
 #include "PrimitiveTile.hpp"
+#include "pentagonlib_Export.h" // Include the linker header file for the dll
 #include "Side.hpp"
 #include "Tile.hpp"
 
+typedef double dd; // Neat
+
+pentagonlib_EXPORT double getFitness(dd, dd, dd, dd, dd, dd, dd, dd, dd);
 double getGap(Tile);
 double calculateGap(Tile, int, int);
 bool validateTile(Tile);
