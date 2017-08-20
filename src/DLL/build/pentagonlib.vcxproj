@@ -316,7 +316,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="D:\Repos\PentagonLib\CalculateGap.cpp"  />
     <ClCompile Include="D:\Repos\PentagonLib\PrimitiveTile.cpp"  />
-    <ClCompile Include="D:\Repos\PentagonLib\main.cpp"  />
     <ClCompile Include="D:\Repos\PentagonLib\myGeometry.cpp"  />
   </ItemGroup>
   <ItemGroup>

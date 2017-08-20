@@ -7,9 +7,6 @@
     <ClCompile Include="D:\Repos\PentagonLib\PrimitiveTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Repos\PentagonLib\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\Repos\PentagonLib\myGeometry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

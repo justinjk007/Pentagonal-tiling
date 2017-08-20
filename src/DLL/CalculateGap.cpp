@@ -6,6 +6,18 @@
 #define PI 3.14159265
 using namespace std;
 
+typedef double dd; // Neat
+
+pentagonlib_EXPORT double getFitness(dd a, dd b, dd c, dd d, dd e, dd f, dd g, dd h, dd i) {
+  /**
+   * This function was written as the API callable function using the
+   * .dll file.
+   */
+  Tile pentagon = {a, b, c, d, e, f, g, h, i};
+  double minimum_gap = getGap(pentagon);
+  return minimum_gap;
+}
+
 double getGap(Tile tile) {
   /*
    * This is the main method that returns the gap minimum between the
