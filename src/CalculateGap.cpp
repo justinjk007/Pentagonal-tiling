@@ -178,14 +178,14 @@ double getPolygonArea(std::list<Line> polygon) {
    */
   double sum = 0, diff = 0, area = 0;
   double x1, y1, x2, y2;
-  cout << "Begin ---\n";
+  // cout << "Begin ---\n";
 
   for (list<Line>::iterator it = polygon.begin(); it != polygon.end(); it++) {
       x1 = it->start.x;
       y1 = it->start.y;
       x2 = it->end.x;
       y2 = it->end.y;
-      printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
+      // printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
       sum += x1 * y2;
       diff += y1 * x2;
   }
@@ -202,7 +202,7 @@ double getPolygonArea(std::list<Point> polygon) {
    */
   double sum = 0, diff = 0, area = 0;
   double x1, y1, x2, y2;
-  cout << "Begin ---\n";
+  // cout << "Begin ---\n";
 
   for (list<Point>::iterator it = polygon.begin(); it != polygon.end();) {
     bool flag = false;
@@ -215,7 +215,7 @@ double getPolygonArea(std::list<Point> polygon) {
     }
     x2 = it->x;
     y2 = it->y;
-    printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
+    // printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
     sum += x1 * y2;
     diff += y1 * x2;
     if (flag) break;
