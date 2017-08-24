@@ -3,6 +3,7 @@
 #include "myGeometry.hpp"
 #include <math.h>
 #include <stdlib.h>
+#include <iostream>
 
 #define PI 3.14159265
 using namespace std;
@@ -176,21 +177,19 @@ double getPolygonArea(std::list<Line> polygon) {
    * lines that create the polygon/polygons.
    */
   double sum = 0, diff = 0, area = 0;
-  double size = polygon.size(); // Stores number if sides in the polygon
   double x1, y1, x2, y2;
-  list<Line>::iterator it = polygon.begin();
+  cout << "Begin ---\n";
 
-  for (int i = 0; i < size; ++i) {
-    x1 = it->start.x;
-    y1 = it->start.y;
-    x2 = it->end.x;
-    y2 = it->end.y;
-    // printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
-    sum += x1 * y2;
-    diff += y1 * x2;
-    if(i <= size-1)
-      it++;
+  for (list<Line>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->start.x;
+      y1 = it->start.y;
+      x2 = it->end.x;
+      y2 = it->end.y;
+      printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
+      sum += x1 * y2;
+      diff += y1 * x2;
   }
+
   area = (1.0/2.0) * abs((sum - diff));
   return area;
 }
@@ -202,27 +201,26 @@ double getPolygonArea(std::list<Point> polygon) {
    * points that create the polygon/polygons.
    */
   double sum = 0, diff = 0, area = 0;
-  double size = polygon.size(); // Stores number of sides in the polygon
   double x1, y1, x2, y2;
-  list<Point>::iterator it = polygon.begin();
+  cout << "Begin ---\n";
 
-  for (int i = 0; i < size; ++i) {
+  for (list<Point>::iterator it = polygon.begin(); it != polygon.end();) {
     bool flag = false;
     x1 = it->x;
     y1 = it->y;
-    if(i <= size-2)
-      it++;
-    else {
+    it++;
+    if (it == polygon.end()) {
       it = polygon.begin();
       flag = true;
     }
     x2 = it->x;
     y2 = it->y;
+    printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
     sum += x1 * y2;
     diff += y1 * x2;
-    if(flag)
-      break;
+    if (flag) break;
   }
+
   area = (1.0/2.0) * abs((sum - diff));
   return area;
 }

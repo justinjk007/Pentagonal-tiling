@@ -140,6 +140,7 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   double tile_area2 = getPolygonArea(newSample.lines);
   std::list<Point> list_of_points = newSample.getPointsFromLines(newSample.lines);
   double tile_area_point = getPolygonArea(list_of_points);
-  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
-  BOOST_CHECK_CLOSE(tile_area_point, tile_area2, 0.5); // The float is the tolerance in percentage
+  cout<<"\n\n";
+  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.0); // The float is the tolerance in percentage
+  BOOST_CHECK_CLOSE(tile_area_point, tile_area2, 0.0); // The float is the tolerance in percentage
   }
