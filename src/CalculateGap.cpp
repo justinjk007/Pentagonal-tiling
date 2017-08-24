@@ -180,7 +180,6 @@ double getPolygonArea(std::list<Line> polygon) {
   double x1, y1, x2, y2;
   list<Line>::iterator it = polygon.begin();
 
-  printf("\n");
   for (int i = 0; i < size; ++i) {
     x1 = it->start.x;
     y1 = it->start.y;
@@ -192,9 +191,7 @@ double getPolygonArea(std::list<Line> polygon) {
     if(i <= size-1)
       it++;
   }
-  printf("The sum is %f -- The diff is %f\n",sum,diff);
   area = (1.0/2.0) * abs((sum - diff));
-  // printf("The area is %f\n\n",area);
   return area;
 }
 
@@ -208,7 +205,7 @@ double getPolygonArea(std::list<Point> polygon) {
   double size = polygon.size(); // Stores number of sides in the polygon
   double x1, y1, x2, y2;
   list<Point>::iterator it = polygon.begin();
-  printf("\n");
+
   for (int i = 0; i < size; ++i) {
     bool flag = false;
     x1 = it->x;
@@ -226,7 +223,6 @@ double getPolygonArea(std::list<Point> polygon) {
     if(flag)
       break;
   }
-  printf("The sum is %f -- The diff is %f\n",sum,diff);
   area = (1.0/2.0) * abs((sum - diff));
   return area;
 }
