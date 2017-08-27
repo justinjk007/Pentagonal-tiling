@@ -125,8 +125,8 @@ BOOST_AUTO_TEST_CASE(compare_lines_test){ // #13
 }
 
 BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
-  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
   // 	       122.23}; // Type 1.1
   double tile_area1 = getTileArea(tile) * 8; // 8 Tiles are used here .sooo
@@ -140,6 +140,6 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   double tile_area2 = getPolygonArea(newSample.lines);
   std::list<Point> list_of_points = newSample.getPointsFromLines(newSample.lines);
   double tile_area_point = getPolygonArea(list_of_points);
-  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.0); // The float is the tolerance in percentage
-  BOOST_CHECK_CLOSE(tile_area_point, tile_area2, 0.0); // The float is the tolerance in percentage
+  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
+  BOOST_CHECK_CLOSE(tile_area_point, tile_area2, 0.5); // The float is the tolerance in percentage
   }
