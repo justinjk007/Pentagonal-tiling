@@ -12,12 +12,7 @@
 #include "myGeometry.hpp"
 #include <algorithm>
 #include <list>
-#include <CGAL/Cartesian.h>
-#include <CGAL/Point_2.h>
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-
-typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
-typedef K::Point_2 Point_2;
+#include "concaveHull.hpp"
 
 class PrimitiveTile {
 public:
@@ -35,6 +30,7 @@ public:
   void writeToFile();
   void writeToFileRaw();
   void writeToFileRaw(std::list<Line>);
+  void writeToFileRaw(std::list<Segment>);
   bool checkIfOutsideForUp(std::list<Line>); // This checks is the given list of lines are outside sqaure
   bool checkIfOutsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
   bool checkIfFullyOutsideForUp(std::list<Line>);

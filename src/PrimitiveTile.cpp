@@ -191,6 +191,27 @@ void PrimitiveTile::writeToFileRaw(std::list<Line> this_lines) {
   myfile.close();
 }
 
+void PrimitiveTile::writeToFileRaw(std::list<Segment> this_lines) {
+  /**
+   * Write the lines list to file in raw, meaning the coordinates of
+   * points of each line in the list, this is just for viewing and not
+   * for plotting.
+   */
+  ofstream myfile;
+  string file_name = "rawData.csv";
+  myfile.open(file_name);
+  myfile << "x,y\n";
+  list<Segment>::iterator it = this_lines.begin();
+  while (it != this_lines.end()) {
+    myfile << it->source().x() << ","
+           << it->source().y() << "\n";
+    myfile << it->target().x() << ","
+           << it->target().y() << "\n";
+    ++it;
+  }
+  myfile.close();
+}
+
 Square PrimitiveTile::drawSquare(double area) {
   /**
    * [3](0,side) +----------+ [2](side,side)
