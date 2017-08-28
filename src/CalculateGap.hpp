@@ -21,6 +21,7 @@ double getOtherAngle(Side, Side, double, char);
 double getPolygonArea(std::list<Line>);
 double getPolygonArea(std::list<Segment>);
 void printData(std::list<Line>);
+void printData(std::list<Segment>);
 void printData(std::list<Point_2>);
 std::list<Line> removeCommonLines(std::list<Line>);
 std::list<Line> removeLine(std::list<Line>, Line);

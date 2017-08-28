@@ -265,6 +265,21 @@ void printData(std::list<Line> polygon) {
   }
 }
 
+void printData(std::list<Segment> polygon) {
+  /**
+   * Prints out the given list of lines
+   */
+  cout << "Displaying list of Segments\n";
+  double x1, y1, x2, y2;
+  for (list<Segment>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->source().x();
+      y1 = it->source().y();
+      x2 = it->target().x();
+      y2 = it->target().y();
+      printf("(%f, %f)  ---   (%f, %f)\n", x1, y1, x2, y2);
+  }
+}
+
 void printData(std::list<Point_2> polygon) {
   /**
    * Prints out the given list of points
@@ -284,17 +299,32 @@ std::list<Point_2> addPoints(Line line) {
    * returns a list of points(Points_2 <list>).
    */
   std::list<Point_2> list_of_points;
-  double x1, y1, x2, y2;
+  double x1, y1, x2, y2, mx, my;
+  // double mx1, my1, mx2, my2;
   x1 = line.start.x;
   y1 = line.start.y;
   x2 = line.end.x;
   y2 = line.end.y;
-  Point_2 point1(x1, y1);
+
+  mx = (x1+x2)/2.0;		// Calculate the mid-point of the line
+  my = (y1+y2)/2.0;
+  // mx1 = (mx+x1)/2.0;		// Midpoint of midpoint and line-origin
+  // my1 = (my+y1)/2.0;
+  // mx2 = (mx+x2)/2.0;		// Midpoint of midpoint and line-target
+  // my2 = (my+y2)/2.0;
+
+  Point_2 point1(x1, y1);	// Create points out of the above data
   Point_2 point2(x2, y2);
-  Point_2 midpoint((x1+x2)/2.0, (y1+y2)/2.0); // Calculating the midpoint of the line
-  list_of_points.push_back(point1);
-  list_of_points.push_back(midpoint);
+  Point_2 m(mx, my);
+  // Point_2 m1(mx1, my1);
+  // Point_2 m2(mx2, my2);
+
+  list_of_points.push_back(point1); // Add points created to the lists
+  // list_of_points.push_back(m1);
+  list_of_points.push_back(m);
+  // list_of_points.push_back(m2);
   list_of_points.push_back(point2);
+
   return list_of_points;
 }
 
