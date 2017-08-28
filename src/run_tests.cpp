@@ -154,14 +154,14 @@ BOOST_AUTO_TEST_CASE(concave_hull) { // #15
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
   newSample.writeToFileRaw();
-  list<Point_2> list_of_points = newSample.getPointsFromLines(newSample.lines);
+  list<Point_2> list_of_points = getMorePoints(newSample.lines);
   list<Segment> concave_hull = getConcaveHull(list_of_points);
   double whole_area = getPolygonArea(concave_hull);
   double gap = whole_area - tile_area;
-  cout << "Total area of the 8 tiles are: " << tile_area << "\n";
-  cout << "Area of the concave hull is: " << whole_area << "\n";
-  cout << "Gap =  " << gap << "\n";
-  // BOOST_CHECK_CLOSE(gap, 0, 0.5); // The float is the tolerance in percentage
+  // cout << "Total area of the 8 tiles are: " << tile_area << "\n";
+  // cout << "Area of the concave hull is: " << whole_area << "\n";
+  // cout << "Gap =  " << gap << "\n";
+  // boost  // BOOST_CHECK_CLOSE(gap, 0, 0.5); // The float is the tolerance in percentage
   }
 
 BOOST_AUTO_TEST_CASE(concave_hull_display) { // #16
@@ -174,7 +174,16 @@ BOOST_AUTO_TEST_CASE(concave_hull_display) { // #16
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-  list<Point_2> list_of_points = newSample.getPointsFromLines(newSample.lines);
+
+  list<Point_2> list_of_points ;
+
+  list_of_points = newSample.getPointsFromLines(newSample.lines);
+  printData(list_of_points);
+
+  cout << "\nAfter creating more points ... \n";
+  list_of_points = getMorePoints(newSample.lines);
+  printData(list_of_points);
+
   list<Segment> concave_hull = getConcaveHull(list_of_points);
   newSample.writeToFileRaw(concave_hull);
   }

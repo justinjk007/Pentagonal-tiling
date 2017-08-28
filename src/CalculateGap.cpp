@@ -277,3 +277,37 @@ void printData(std::list<Point_2> polygon) {
       printf("(%f, %f)\n", x1, y1);
   }
 }
+
+std::list<Point_2> addPoints(Line line) {
+  /**
+   * Populate some more points that belongs in the given line and
+   * returns a list of points(Points_2 <list>).
+   */
+  std::list<Point_2> list_of_points;
+  double x1, y1, x2, y2;
+  x1 = line.start.x;
+  y1 = line.start.y;
+  x2 = line.end.x;
+  y2 = line.end.y;
+  Point_2 point1(x1, y1);
+  Point_2 point2(x2, y2);
+  Point_2 midpoint((x1+x2)/2.0, (y1+y2)/2.0); // Calculating the midpoint of the line
+  list_of_points.push_back(point1);
+  list_of_points.push_back(midpoint);
+  list_of_points.push_back(point2);
+  return list_of_points;
+}
+
+std::list<Point_2> getMorePoints(std::list<Line> lines) {
+  /**
+   * Return points from the list of points including its midpoints
+   */
+  std::list<Point_2> list_of_points;
+
+  for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+    std::list<Point_2> more_points = addPoints(*it);
+    list_of_points.splice(list_of_points.end(), more_points); // Add new points into the same list
+  }
+
+  return list_of_points;
+}
