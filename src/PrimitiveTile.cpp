@@ -461,17 +461,17 @@ void PrimitiveTile::doSimpleTiling(double t_x1, double t_y1, double t_x2, double
   this->count++;
 }
 
-std::list<Point> PrimitiveTile::getPointsFromLines(std::list<Line> lines){
+std::list<Point_2> PrimitiveTile::getPointsFromLines(std::list<Line> lines){
  /**
   * Returns the start points of everyline on the given list, which can
   * be then used for other functions like getPolygonArea() and even
   * for getting the concave hull of a set of lines or points
   */
-  std::list<Point> list_of_points; // Stores the lines of the original primitivetile.
+  std::list<Point_2> list_of_points; // Stores the lines of the original primitivetile.
   for (list<Line>::iterator it = lines.begin(); it != lines.end(); ++it) {
-    Point point;
-    point.x = it->start.x;
-    point.y = it->start.y;
+    double x = it->start.x;
+    double y = it->start.y;
+    Point_2 point(x, y);
     list_of_points.push_back(point);
   }
   return list_of_points;

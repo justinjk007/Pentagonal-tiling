@@ -13,7 +13,7 @@
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 
 typedef K::FT FT;
-typedef K::Point_2 Point;
+typedef K::Point_2 Point_2;
 typedef K::Segment_2 Segment;
 
 typedef CGAL::Alpha_shape_vertex_base_2<K> Vb;
@@ -29,6 +29,6 @@ template <class OutputIterator>
 void alpha_edges(const Alpha_shape_2&, OutputIterator);
 template <class OutputIterator>
 bool file_input(OutputIterator);
-int getConcaveHull();
+int getConcaveHull(std::list<Point_2>);
 
 #endif /* CONCAVEHULL_HPP */

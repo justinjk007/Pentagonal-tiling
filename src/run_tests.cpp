@@ -5,9 +5,13 @@
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "myGeometry.hpp"
+#include "concaveHull.hpp"
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
+
+typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
+typedef K::Point_2 Point_2;
 
 using namespace std;
 

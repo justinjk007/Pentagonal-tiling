@@ -12,6 +12,12 @@
 #include "myGeometry.hpp"
 #include <algorithm>
 #include <list>
+#include <CGAL/Cartesian.h>
+#include <CGAL/Point_2.h>
+#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+
+typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
+typedef K::Point_2 Point_2;
 
 class PrimitiveTile {
 public:
@@ -38,7 +44,7 @@ public:
   void doTiling(double, double, double, double);
   void doSimpleTiling(double, double, double, double);
   std::list<Line> translate(double, double, std::list<Line>);
-  std::list<Point> getPointsFromLines(std::list<Line>); // Returns the start points of everyline on the given list
+  std::list<Point_2> getPointsFromLines(std::list<Line>); // Returns the start points of everyline on the given list
   PrimitiveTile() {
     this->size = 1; // Obviously we need atleast one tile.
     this->count = 1;// Obviously we need atleast one primitive tile.
