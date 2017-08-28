@@ -7,6 +7,7 @@
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
+#include "concaveHull.hpp"
 
 double getGap(Tile);
 double calculateGap(Tile, int, int);
@@ -18,7 +19,7 @@ double getTriangleArea(double, double, double);
 double getTileArea(Tile);
 double getOtherAngle(Side, Side, double, char);
 double getPolygonArea(std::list<Line>);
-double getPolygonArea(std::list<Point>);
+double getPolygonArea(std::list<Segment>);
 std::list<Line> removeCommonLines(std::list<Line>);
 std::list<Line> removeLine(std::list<Line>, Line);
 

@@ -8,7 +8,7 @@ void alpha_edges(const Alpha_shape_2& A, OutputIterator out) {
     }
 }
 
-int getConcaveHull(std::list<Point_2> points) {
+std::list<Segment> getConcaveHull(std::list<Point_2> points) {
   /**
    * Reads a list of points and returns a list of segments
    * corresponding to the concave hull also known as α-Shape
@@ -17,11 +17,6 @@ int getConcaveHull(std::list<Point_2> points) {
     Alpha_shape_2 A(points.begin(), points.end(), FT(10000), Alpha_shape_2::GENERAL);
 
     std::list<Segment> segments;
-    alpha_edges(A, std::back_inserter(segments));
-
-    std::cout << "Alpha Shape computed" << std::endl;
-    std::cout << segments.size() << " alpha shape edges" << std::endl;
-    std::cout << "Optimal alpha: " << *A.find_optimal_alpha(1) << std::endl;
-
-    return 0;
+    alpha_edges(A, std::back_inserter(segments)); // Inserting the α-shape into the list
+    return segments; // Return the segements that are in the hull
 }

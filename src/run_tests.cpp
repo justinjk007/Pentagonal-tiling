@@ -139,11 +139,24 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
   newSample.writeToFileRaw();
-  // std::list<Line> new_lines = removeCommonLines(newSample.lines);
-  // newSample.writeToFileRaw(new_lines);
   double tile_area2 = getPolygonArea(newSample.lines);
-  std::list<Point> list_of_points = newSample.getPointsFromLines(newSample.lines);
-  double tile_area_point = getPolygonArea(list_of_points);
   BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
-  BOOST_CHECK_CLOSE(tile_area_point, tile_area2, 0.5); // The float is the tolerance in percentage
+  }
+
+BOOST_AUTO_TEST_CASE(concave_hull) { // #15
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
+  	       122.23}; // Type 1.1
+  double tile_area1 = getTileArea(tile) * 8; // 8 Tiles are used here .sooo
+  PrimitiveTile newSample(tile);
+  newSample.drawPentagon(2, 2);
+  newSample.drawPentagon(2, 2);
+  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
+  newSample.writeToFileRaw();
+  list<Point_2> list_of_points = newSample.getPointsFromLines(newSample.lines);
+  list<Segment> concave_hull = getConcaveHull(list_of_points);
+  double whole_area = getPolygonArea(concave_hull);
+  double gap = whole_area - tile_area1;
+  BOOST_CHECK_CLOSE(gap, 0, 0.5); // The float is the tolerance in percentage
   }

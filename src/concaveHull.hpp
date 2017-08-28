@@ -29,6 +29,6 @@ template <class OutputIterator>
 void alpha_edges(const Alpha_shape_2&, OutputIterator);
 template <class OutputIterator>
 bool file_input(OutputIterator);
-int getConcaveHull(std::list<Point_2>);
+std::list<Segment> getConcaveHull(std::list<Point_2>);
 
 #endif /* CONCAVEHULL_HPP */

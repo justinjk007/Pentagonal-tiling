@@ -174,7 +174,8 @@ double getPolygonArea(std::list<Line> polygon) {
   /**
    * This method implements calculating the area of a polygon using
    * the shoelace formula. The list the passed should contain the
-   * lines that create the polygon/polygons.
+   * lines that create the polygon/polygons, sorted clockwise or
+   * anti-clockwise
    */
   double sum = 0, diff = 0, area = 0;
   double x1, y1, x2, y2;
@@ -194,31 +195,25 @@ double getPolygonArea(std::list<Line> polygon) {
   return area;
 }
 
-double getPolygonArea(std::list<Point> polygon) {
+double getPolygonArea(std::list<Segment> polygon) {
   /**
    * This method implements calculating the area of a polygon using
    * the shoelace formula. The list the passed should contain the
-   * points that create the polygon/polygons.
+   * Segment_2d defined in cgal that creates the polygon/polygons
+   * sorted clockwise or anti-clockwise
    */
   double sum = 0, diff = 0, area = 0;
   double x1, y1, x2, y2;
   cout << "Begin ---\n";
 
-  for (list<Point>::iterator it = polygon.begin(); it != polygon.end();) {
-    bool flag = false;
-    x1 = it->x;
-    y1 = it->y;
-    it++;
-    if (it == polygon.end()) {
-      it = polygon.begin();
-      flag = true;
-    }
-    x2 = it->x;
-    y2 = it->y;
-    printf("(%f, %f)  ---   (%f, %f)\n",x1,y1,x2,y2);
-    sum += x1 * y2;
-    diff += y1 * x2;
-    if (flag) break;
+  for (list<Segment>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->source().x();
+      y1 = it->source().y();
+      x2 = it->target().x();
+      y2 = it->target().y();
+      printf("(%f, %f)  ---   (%f, %f)\n", x1, y1, x2, y2);
+      sum += x1 * y2;
+      diff += y1 * x2;
   }
 
   area = (1.0/2.0) * abs((sum - diff));
