@@ -237,6 +237,26 @@ std::list<Line> removeCommonLines(std::list<Line> lines) {
   return new_lines;
 }
 
+
+std::list<Point_2> removeCommonPoints(std::list<Point_2> points) {
+  /**
+   * This method is used remove duplicate points, both original and
+   * dupe are removed.
+   */
+
+  std::list<Point_2> new_points = points;
+
+  while (!points.empty()) {
+    Point_2 point1 = points.front(); // Get the 1st line from the list
+    points.pop_front();          // Remove the same line from the list
+    for (list<Point_2>::iterator it = points.begin(); it != points.end(); ++it)
+      if (comparePoint(point1, *it)) // Compare to see if same Point_2s exists
+        new_points = removePoint(new_points, point1);
+  }
+
+  return new_points;
+}
+
 std::list<Line> removeLine(std::list<Line> lines, Line val) {
   /**
    * Override function for list::remove rewritten for list<Line>
@@ -248,6 +268,30 @@ std::list<Line> removeLine(std::list<Line> lines, Line val) {
       ++it;
   }
   return lines;
+}
+
+std::list<Point_2> removePoint(std::list<Point_2> points, Point_2 val) {
+  /**
+   * Override function for list::remove rewritten for list<Point_2>
+   */
+  for (list<Point_2>::iterator it = points.begin(); it != points.end();) {
+    if (comparePoint(val, *it)) // If same lines exists
+      it = points.erase(it);
+    else
+      ++it;
+  }
+  return points;
+}
+
+bool comparePoint(Point_2 a,Point_2 b) {
+  /**
+   * Compare points to see if they are equal.
+   */
+  double diff1 = a.x() - b.x();
+  double diff2 = a.y() - b.y();
+  if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 )
+    return true;
+  return false;
 }
 
 void printData(std::list<Line> polygon) {
@@ -332,7 +376,7 @@ std::list<Point_2> addPoints(Line line) {
   // list_of_points.push_back(m);
   // list_of_points.push_back(m2); // mid-mid-point
   // list_of_points.push_back(m4); // mid-mid-point
-  list_of_points.push_back(point2);
+  // list_of_points.push_back(point2);
 
   return list_of_points;
 }
