@@ -338,6 +338,34 @@ std::list<Point_2> getMorePoints(std::list<Line> lines) {
     std::list<Point_2> more_points = addPoints(*it);
     list_of_points.splice(list_of_points.end(), more_points); // Add new points into the same list
   }
-
+  sortClockwise(list_of_points);
   return list_of_points;
+}
+
+double getClockwiseAngle(const Point_2& p) {
+  /**
+   * Calculates and returns the clockwise angle
+   * Got it from here -> https://stackoverflow.com/a/39187213/5382384
+   */
+    double angle = 0.0;
+    /*calculate angle and return it*/
+    angle = -atan2(p.x(), -p.y());
+    return angle;
+}
+
+bool comparePoints(Point_2 a,Point_2 b) {
+  /**
+   * Caculates and compares the slope of two points with the origin
+   */
+  double angle1 = getClockwiseAngle(a);
+  double angle2 = getClockwiseAngle(b);
+  return (angle1 < angle2);
+}
+
+std::list<Point_2> sortClockwise(std::list<Point_2> points) {
+  /**
+   * Sort the given points in the list in a clockwise order.
+   */
+  points.sort(comparePoints);
+  return points;
 }
