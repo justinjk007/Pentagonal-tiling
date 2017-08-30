@@ -12,6 +12,7 @@
 #include "myGeometry.hpp"
 #include <algorithm>
 #include <list>
+#include "concaveHull.hpp"
 
 class PrimitiveTile {
 public:
@@ -29,6 +30,7 @@ public:
   void writeToFile();
   void writeToFileRaw();
   void writeToFileRaw(std::list<Line>);
+  void writeToFileRaw(std::list<Segment>);
   bool checkIfOutsideForUp(std::list<Line>); // This checks is the given list of lines are outside sqaure
   bool checkIfOutsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
   bool checkIfFullyOutsideForUp(std::list<Line>);
@@ -38,6 +40,7 @@ public:
   void doTiling(double, double, double, double);
   void doSimpleTiling(double, double, double, double);
   std::list<Line> translate(double, double, std::list<Line>);
+  std::list<Point_2> getPointsFromLines(std::list<Line>); // Returns the start points of everyline on the given list
   PrimitiveTile() {
     this->size = 1; // Obviously we need atleast one tile.
     this->count = 1;// Obviously we need atleast one primitive tile.

@@ -5,9 +5,13 @@
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "myGeometry.hpp"
+#include "concaveHull.hpp"
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
+
+typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
+typedef K::Point_2 Point_2;
 
 using namespace std;
 
@@ -100,8 +104,8 @@ BOOST_AUTO_TEST_CASE(drawing_methods) { // #11 There is no test here, just to pr
   // printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
   double gap = ((25 - newSample.count) * p_area);
   // printf("The gap for the inputted tile is: %f\n\n", gap);
-  newSample.writeToFileRaw();
-  newSample.writeToFile();
+  // newSample.writeToFileRaw();
+  // newSample.writeToFile();
 }
 
 BOOST_AUTO_TEST_CASE(get_tile_area) { // #12
@@ -125,18 +129,55 @@ BOOST_AUTO_TEST_CASE(compare_lines_test){ // #13
 }
 
 BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
-  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
   // 	       122.23}; // Type 1.1
-  double tile_area1 = getTileArea(tile) * 8; // 8 Tiles are used here .sooo
+  double tile_area1 = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-  newSample.writeToFileRaw();
-  std::list<Line> new_lines = removeCommonLines(newSample.lines);
-  newSample.writeToFileRaw(new_lines);
   double tile_area2 = getPolygonArea(newSample.lines);
-  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.1); // The float is the tolerance.
+  BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
+  }
+
+BOOST_AUTO_TEST_CASE(concave_hull) { // #15
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
+  	       122.23}; // Type 1.1
+  double tile_area = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
+  PrimitiveTile newSample(tile);
+  newSample.drawPentagon(2, 2);
+  newSample.drawPentagon(2, 2);
+  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
+  list<Point_2> list_of_points = getMorePoints(newSample.lines);
+  list<Segment> concave_hull = getConcaveHull(list_of_points);
+  double whole_area = getPolygonArea(concave_hull);
+  double gap = whole_area - tile_area;
+  // cout << "Total area of the 8 tiles are: " << tile_area << "\n";
+  // cout << "Area of the concave hull is: " << whole_area << "\n";
+  // cout << "Gap =  " << gap << "\n";
+  // boost  // BOOST_CHECK_CLOSE(gap, 0, 0.5); // The float is the tolerance in percentage
+  }
+
+BOOST_AUTO_TEST_CASE(concave_hull_display) { // #16
+  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
+  // 	       122.23}; // Type 1.1
+  double tile_area1 = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
+  PrimitiveTile newSample(tile);
+  newSample.drawPentagon(2, 2);
+  newSample.drawPentagon(2, 2);
+  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
+  list<Line> clean_lines = removeCommonLines(newSample.lines);
+  // newSample.writeToFileRaw(lines);
+  list<Point_2> list_of_points ;
+  list_of_points = getMorePoints(newSample.lines);
+  // printData(list_of_points);
+  list<Segment> concave_hull = getConcaveHull(list_of_points);
+  // printData(concave_hull);
+  newSample.writeToFileRaw(concave_hull);
   }

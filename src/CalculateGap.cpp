@@ -3,6 +3,7 @@
 #include "myGeometry.hpp"
 #include <math.h>
 #include <stdlib.h>
+#include <iostream>
 
 #define PI 3.14159265
 using namespace std;
@@ -173,28 +174,45 @@ double getPolygonArea(std::list<Line> polygon) {
   /**
    * This method implements calculating the area of a polygon using
    * the shoelace formula. The list the passed should contain the
-   * lines that create the polygon/polygons.
+   * lines that create the polygon/polygons, sorted clockwise or
+   * anti-clockwise
    */
   double sum = 0, diff = 0, area = 0;
-  double size = polygon.size(); // Stores number if sides in the polygon
   double x1, y1, x2, y2;
-  list<Line>::iterator it = polygon.begin();
 
-  printf("\n");
-  for (int i = 0; i < size; ++i) {
-    x1 = it->start.x_cord;
-    y1 = it->start.y_cord;
-    x2 = it->end.x_cord;
-    y2 = it->end.y_cord;
-    // printf("(%f x %f)  ---   (%f x %f)\n",x1,y2,y1,x2);
-    sum += x1 * y2;
-    diff += y1 * x2;
-    if(i <= size-2)
-      it++;
+  for (list<Line>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->start.x;
+      y1 = it->start.y;
+      x2 = it->end.x;
+      y2 = it->end.y;
+      sum += x1 * y2;
+      diff += y1 * x2;
   }
-  // printf("The sum is %f -- The diff is %f\n",sum,diff);
+
   area = (1.0/2.0) * abs((sum - diff));
-  // printf("The area is %f\n\n",area);
+  return area;
+}
+
+double getPolygonArea(std::list<Segment> polygon) {
+  /**
+   * This method implements calculating the area of a polygon using
+   * the shoelace formula. The list the passed should contain the
+   * Segment_2d defined in cgal that creates the polygon/polygons
+   * sorted clockwise or anti-clockwise
+   */
+  double sum = 0, diff = 0, area = 0;
+  double x1, y1, x2, y2;
+
+  for (list<Segment>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->source().x();
+      y1 = it->source().y();
+      x2 = it->target().x();
+      y2 = it->target().y();
+      sum += x1 * y2;
+      diff += y1 * x2;
+  }
+
+  area = (1.0/2.0) * abs((sum - diff));
   return area;
 }
 
@@ -219,6 +237,26 @@ std::list<Line> removeCommonLines(std::list<Line> lines) {
   return new_lines;
 }
 
+
+std::list<Point_2> removeCommonPoints(std::list<Point_2> points) {
+  /**
+   * This method is used remove duplicate points, both original and
+   * dupe are removed.
+   */
+
+  std::list<Point_2> new_points = points;
+
+  while (!points.empty()) {
+    Point_2 point1 = points.front(); // Get the 1st line from the list
+    points.pop_front();          // Remove the same line from the list
+    for (list<Point_2>::iterator it = points.begin(); it != points.end(); ++it)
+      if (comparePoint(point1, *it)) // Compare to see if same Point_2s exists
+        new_points = removePoint(new_points, point1);
+  }
+
+  return new_points;
+}
+
 std::list<Line> removeLine(std::list<Line> lines, Line val) {
   /**
    * Override function for list::remove rewritten for list<Line>
@@ -230,4 +268,157 @@ std::list<Line> removeLine(std::list<Line> lines, Line val) {
       ++it;
   }
   return lines;
+}
+
+std::list<Point_2> removePoint(std::list<Point_2> points, Point_2 val) {
+  /**
+   * Override function for list::remove rewritten for list<Point_2>
+   */
+  for (list<Point_2>::iterator it = points.begin(); it != points.end();) {
+    if (comparePoint(val, *it)) // If same lines exists
+      it = points.erase(it);
+    else
+      ++it;
+  }
+  return points;
+}
+
+bool comparePoint(Point_2 a,Point_2 b) {
+  /**
+   * Compare points to see if they are equal.
+   */
+  double diff1 = a.x() - b.x();
+  double diff2 = a.y() - b.y();
+  if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 )
+    return true;
+  return false;
+}
+
+void printData(std::list<Line> polygon) {
+  /**
+   * Prints out the given list of lines
+   */
+  cout << "Displaying list of Lines\n";
+  double x1, y1, x2, y2;
+  for (list<Line>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->start.x;
+      y1 = it->start.y;
+      x2 = it->end.x;
+      y2 = it->end.y;
+      printf("(%f, %f)  ---   (%f, %f)\n",x1,y1,x2,y2);
+  }
+}
+
+void printData(std::list<Segment> polygon) {
+  /**
+   * Prints out the given list of lines
+   */
+  cout << "Displaying list of Segments\n";
+  double x1, y1, x2, y2;
+  for (list<Segment>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->source().x();
+      y1 = it->source().y();
+      x2 = it->target().x();
+      y2 = it->target().y();
+      printf("(%f, %f)  ---   (%f, %f)\n", x1, y1, x2, y2);
+  }
+}
+
+void printData(std::list<Point_2> polygon) {
+  /**
+   * Prints out the given list of points
+   */
+  cout << "Displaying list of Point_2s\n";
+  double x1, y1;
+  for (list<Point_2>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+      x1 = it->x();
+      y1 = it->y();
+      printf("(%f, %f)\n", x1, y1);
+  }
+}
+
+std::list<Point_2> addPoints(Line line) {
+  /**
+   * Populate some more points that belongs in the given line and
+   * returns a list of points(Points_2 <list>).
+   */
+  std::list<Point_2> list_of_points;
+  double x1, y1, x2, y2, mx, my;
+  // double mx1, my1, mx2, my2;
+  // double mx3, my3, mx4, my4;
+  x1 = line.start.x;
+  y1 = line.start.y;
+  x2 = line.end.x;
+  y2 = line.end.y;
+
+  mx = (x1+x2)/2.0;		// Calculate the mid-point of the line
+  my = (y1+y2)/2.0;
+  // mx1 = (mx+x1)/2.0;		// Midpoint of midpoint and line-origin
+  // my1 = (my+y1)/2.0;
+  // mx2 = (mx+x2)/2.0;		// Midpoint of midpoint and line-target
+  // my2 = (my+y2)/2.0;
+  // mx3 = (mx1+x1)/2.0;		// Midpoint of midpoint-2 and line-source
+  // my3 = (my1+y1)/2.0;
+  // mx4 = (mx2+x2)/2.0;		// Midpoint of midpoint-2 and line-target
+  // my4 = (my2+y2)/2.0;
+
+  Point_2 point1(x1, y1);	// Create points out of the above data
+  Point_2 point2(x2, y2);
+  Point_2 m(mx, my);
+  // Point_2 m1(mx1, my1);
+  // Point_2 m2(mx2, my2);
+  // Point_2 m3(mx3, my3);
+  // Point_2 m4(mx4, my4);
+
+  list_of_points.push_back(point1); // Add points created to the lists
+  // list_of_points.push_back(m3); // mid-mid-point
+  // list_of_points.push_back(m1); // mid-mid-point
+  // list_of_points.push_back(m);
+  // list_of_points.push_back(m2); // mid-mid-point
+  // list_of_points.push_back(m4); // mid-mid-point
+  // list_of_points.push_back(point2);
+
+  return list_of_points;
+}
+
+std::list<Point_2> getMorePoints(std::list<Line> lines) {
+  /**
+   * Return points from the list of points including its midpoints
+   */
+  std::list<Point_2> list_of_points;
+
+  for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+    std::list<Point_2> more_points = addPoints(*it);
+    list_of_points.splice(list_of_points.end(), more_points); // Add new points into the same list
+  }
+  sortClockwise(list_of_points);
+  return list_of_points;
+}
+
+double getClockwiseAngle(const Point_2& p) {
+  /**
+   * Calculates and returns the clockwise angle
+   * Got it from here -> https://stackoverflow.com/a/39187213/5382384
+   */
+    double angle = 0.0;
+    /*calculate angle and return it*/
+    angle = -atan2(p.x(), -p.y());
+    return angle;
+}
+
+bool comparePoints(Point_2 a,Point_2 b) {
+  /**
+   * Caculates and compares the slope of two points with the origin
+   */
+  double angle1 = getClockwiseAngle(a);
+  double angle2 = getClockwiseAngle(b);
+  return (angle1 < angle2);
+}
+
+std::list<Point_2> sortClockwise(std::list<Point_2> points) {
+  /**
+   * Sort the given points in the list in a clockwise order.
+   */
+  points.sort(comparePoints);
+  return points;
 }
