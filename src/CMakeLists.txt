@@ -1,11 +1,11 @@
-cmake_minimum_required (VERSION 3.5)
-project (PentagonalTiling)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.5)
+PROJECT (PentagonalTiling)
 
-set (CMAKE_CXX_STANDARD 11)
+SET (CMAKE_CXX_STANDARD 11)
 
 # The version number.
-set (Tutorial_VERSION_MAJOR 1)
-set (Tutorial_VERSION_MINOR 0)
+SET (Tutorial_VERSION_MAJOR 1)
+SET (Tutorial_VERSION_MINOR 2)
 
 INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}")
 
