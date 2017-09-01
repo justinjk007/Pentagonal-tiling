@@ -1,6 +1,6 @@
 #include "myGeometry.hpp"
 #include "iostream"
-#include <math.h>
+#include <cmath>
 
 #define PI 3.14159265359
 
