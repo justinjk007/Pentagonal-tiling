@@ -1,7 +1,7 @@
 #include "CalculateGap.hpp"
 #include "PrimitiveTile.hpp"
 #include "myGeometry.hpp"
-#include <math.h>
+#include <cmath>
 #include <stdlib.h>
 #include <iostream>
 
