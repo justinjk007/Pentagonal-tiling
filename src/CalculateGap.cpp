@@ -373,10 +373,10 @@ std::list<Point_2> addPoints(Line line) {
   list_of_points.push_back(point1); // Add points created to the lists
   // list_of_points.push_back(m3); // mid-mid-point
   // list_of_points.push_back(m1); // mid-mid-point
-  // list_of_points.push_back(m);
+  list_of_points.push_back(m);
   // list_of_points.push_back(m2); // mid-mid-point
   // list_of_points.push_back(m4); // mid-mid-point
-  // list_of_points.push_back(point2);
+  list_of_points.push_back(point2);
 
   return list_of_points;
 }

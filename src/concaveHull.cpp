@@ -14,7 +14,7 @@ std::list<Segment> getConcaveHull(std::list<Point_2> points) {
    * corresponding to the concave hull also known as α-Shape
    */
 
-    Alpha_shape_2 A(points.begin(), points.end(), FT(30), Alpha_shape_2::REGULARIZED);
+    Alpha_shape_2 A(points.begin(), points.end(), FT(25), Alpha_shape_2::REGULARIZED);
 
     std::list<Segment> segments;
     alpha_edges(A, std::back_inserter(segments)); // Inserting the α-shape into the list
