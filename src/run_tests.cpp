@@ -5,8 +5,7 @@
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "myGeometry.hpp"
-// #include "concaveHull.hpp"
-#include "sweepLine.hpp"
+#include "concaveHull.hpp"
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
@@ -143,49 +142,27 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
   }
 
-// BOOST_AUTO_TEST_CASE(concave_hull) { // #15
-//   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-//   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-//   Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
-//   	       122.23}; // Type 1.1
-//   double tile_area = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
-//   PrimitiveTile newSample(tile);
-//   newSample.drawPentagon(2, 2);
-//   newSample.drawPentagon(2, 2);
-//   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-//   list<Point_2> list_of_points = getMorePoints(newSample.lines);
-//   list<Segment> concave_hull = getConcaveHull(list_of_points);
-//   double whole_area = getPolygonArea(concave_hull);
-//   double gap = whole_area - tile_area;
-//   // cout << "Total area of the 8 tiles are: " << tile_area << "\n";
-//   // cout << "Area of the concave hull is: " << whole_area << "\n";
-//   // cout << "Gap =  " << gap << "\n";
-//   // boost  // BOOST_CHECK_CLOSE(gap, 0, 0.5); // The float is the tolerance in percentage
-//   }
+BOOST_AUTO_TEST_CASE(concave_hull) { // #15
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
+  	       122.23}; // Type 1.1
+  double tile_area = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
+  PrimitiveTile newSample(tile);
+  newSample.drawPentagon(2, 2);
+  newSample.drawPentagon(2, 2);
+  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
+  list<Point_2> list_of_points = getMorePoints(newSample.lines);
+  list<Segment> concave_hull = getConcaveHull(list_of_points);
+  double whole_area = getPolygonArea(concave_hull);
+  double gap = whole_area - tile_area;
+  // cout << "Total area of the 8 tiles are: " << tile_area << "\n";
+  // cout << "Area of the concave hull is: " << whole_area << "\n";
+  // cout << "Gap =  " << gap << "\n";
+  // boost  // BOOST_CHECK_CLOSE(gap, 0, 0.5); // The float is the tolerance in percentage
+  }
 
-// BOOST_AUTO_TEST_CASE(concave_hull_display) { // #16
-//   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-//   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-//   // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
-//   // 	       122.23}; // Type 1.1
-//   double tile_area1 = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
-//   PrimitiveTile newSample(tile);
-//   newSample.drawPentagon(2, 2);
-//   newSample.drawPentagon(2, 2);
-//   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-//   newSample.writeToFileRaw();
-//   // list<Line> clean_lines = removeCommonLines(newSample.lines);
-//   // newSample.writeToFileRaw(lines);
-//   list<Point_2> list_of_points ;
-//   list_of_points = getMorePoints(newSample.lines);
-//   // printData(list_of_points);
-//   list<Segment> concave_hull = getConcaveHull(list_of_points);
-//   // printData(concave_hull);
-//   // newSample.writeToFileRaw(concave_hull);
-//   }
-
-
-BOOST_AUTO_TEST_CASE(concave_hull_display) { // #17
+BOOST_AUTO_TEST_CASE(concave_hull_display) { // #16
   // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
@@ -201,4 +178,7 @@ BOOST_AUTO_TEST_CASE(concave_hull_display) { // #17
   list<Point_2> list_of_points ;
   list_of_points = getMorePoints(newSample.lines);
   // printData(list_of_points);
+  list<Segment> concave_hull = getConcaveHull(list_of_points);
+  // printData(concave_hull);
+  // newSample.writeToFileRaw(concave_hull);
   }

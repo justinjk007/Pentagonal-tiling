@@ -9,8 +9,7 @@
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
-// #include "concaveHull.hpp"
-#include "sweepLine.hpp"
+#include "concaveHull.hpp"
 
 double getGap(Tile);
 double calculateGap(Tile, int, int);
@@ -36,5 +35,7 @@ std::list<Point_2> getMorePoints(std::list<Line>);
 double getClockwiseAngle(const Point_2&) ;
 bool comparePoints(Point_2,Point_2);
 std::list<Point_2> sortClockwise(std::list<Point_2>);
+bool comparePosition(Point_2,Point_2);
+std::list<Point_2> sortByPosition(std::list<Point_2>);
 
 #endif /* CALCULATEGAP_HPP */
