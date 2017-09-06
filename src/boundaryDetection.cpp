@@ -30,3 +30,28 @@ Rect getBoundingBox(std::list<Point_2> points)
   // std::cout << box << std::endl;
   return box;
 }
+
+std::list<Segment> removeInnerLines(std::list<Line> lines) {
+  /**
+   * Returns the lines that lies outside-most in the given list of
+   * lines. Special algorithm , slow now thou.
+   */
+
+  // Make the lines into points
+
+  // Get the bounding box of the points
+
+  // In a loop start servicing each line
+
+          // Get the midpoint
+
+          // Make line from midpoint to one of the sides of the bounding box
+
+          // If the line does not touch any other lines in the list, this is a boundry.
+
+          // If the lines does touch , draw lines to other sides of the bounding box and make sure.
+
+         // Add boundry lines to new list
+
+  // Return boundaries
+}

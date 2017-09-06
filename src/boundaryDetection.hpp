@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <list>
+#include "myGeometry.hpp"
 
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
@@ -33,6 +34,8 @@ void alpha_edges(const Alpha_shape_2&, OutputIterator);
 template <class OutputIterator>
 bool file_input(OutputIterator);
 std::list<Segment> getConcaveHull(std::list<Point_2>);
+
 Rect getBoundingBox(std::list<Point_2>);
+std::list<Segment> removeInnerLines(std::list<Line>);
 
 #endif /* CONCAVEHULL_HPP */
