@@ -1,4 +1,4 @@
-#include "concaveHull.hpp"
+#include "boundaryDetection.hpp"
 
 template <class OutputIterator>
 void alpha_edges(const Alpha_shape_2& A, OutputIterator out) {
