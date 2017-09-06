@@ -80,18 +80,31 @@ std::list<Segment> removeInnerLines(std::list<Line> temp_lines) {
     for (list<Segment>::iterator it = lines.begin(); it != lines.end(); it++) {
         // Test 01: Check for intersections to the left
         Point_2 midpoint = getMidPoint(*it);  // Get the midpoint
-        // // Make line from midpoint to one of the sides of the bounding box
+
+        // Make line from midpoint to sides of the bounding box
         Point_2 point_left(box.xmin(), midpoint.y());
-        Segment test_line(midpoint, point_left);
-        // If the test line does not touch any other lines in the list, this is a boundry.
-        if (!doIntersect(test_line, lines, *it)) {
+        Point_2 point_right(box.xmax(), midpoint.y());
+        Point_2 point_up(midpoint.x(), box.ymax());
+        Point_2 point_down(midpoint.x(), box.ymin());
+
+        Segment test_line1(midpoint, point_left);
+        Segment test_line2(midpoint, point_right);
+        Segment test_line3(midpoint, point_up);
+        Segment test_line4(midpoint, point_down);
+
+        // If the test lines does not intersect in any one of the side
+        // then that is a boundary
+        if (!doIntersect(test_line1, lines, *it)) {
             boundaries.push_back(*it);
-        }
-
-        // If the lines does touch , draw lines to other sides of the bounding box and make sure.
-
-        // Add boundry lines to new list
-    } // End of Test 01
+        } else if (!doIntersect(test_line2, lines, *it)) {
+            boundaries.push_back(*it);
+        } else if (!doIntersect(test_line3, lines, *it)) {
+            boundaries.push_back(*it);
+        } else if (!doIntersect(test_line4, lines, *it)) {
+            boundaries.push_back(*it);
+        } else
+            continue;
+    }
 
     return boundaries;
 }

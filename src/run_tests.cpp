@@ -199,10 +199,10 @@ BOOST_AUTO_TEST_CASE(bounding_box) { // #17
   }
 
 BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) { // #18
-  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
-  // 	       122.23}; // Type 1.1
+  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
+  	       122.23}; // Type 1.1
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);
