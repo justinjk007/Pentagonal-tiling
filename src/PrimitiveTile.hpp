@@ -12,7 +12,7 @@
 #include "myGeometry.hpp"
 #include <algorithm>
 #include <list>
-#include "concaveHull.hpp"
+#include "boundaryDetection.hpp"
 
 class PrimitiveTile {
 public:

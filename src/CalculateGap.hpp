@@ -9,7 +9,7 @@
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
-#include "concaveHull.hpp"
+#include "boundaryDetection.hpp"
 
 double getGap(Tile);
 double calculateGap(Tile, int, int);

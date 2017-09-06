@@ -5,7 +5,7 @@
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "myGeometry.hpp"
-#include "concaveHull.hpp"
+#include "boundaryDetection.hpp"
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
 #include <iostream>
@@ -172,9 +172,9 @@ BOOST_AUTO_TEST_CASE(concave_hull_display) { // #16
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-  newSample.writeToFileRaw();
-  // list<Line> clean_lines = removeCommonLines(newSample.lines);
-  // newSample.writeToFileRaw(lines);
+  // newSample.writeToFileRaw();
+  list<Line> clean_lines = removeCommonLines(newSample.lines);
+  newSample.writeToFileRaw(clean_lines);
   list<Point_2> list_of_points ;
   list_of_points = getMorePoints(newSample.lines);
   // printData(list_of_points);
