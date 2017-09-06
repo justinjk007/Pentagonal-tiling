@@ -20,3 +20,13 @@ std::list<Segment> getConcaveHull(std::list<Point_2> points) {
     alpha_edges(A, std::back_inserter(segments)); // Inserting the α-shape into the list
     return segments; // Return the segements that are in the hull
 }
+
+Rect getBoundingBox(std::list<Point_2> points)
+{
+  /**
+   * Returns axis-aligned bounding box of 2D points
+   */
+  Rect box = CGAL::bounding_box(points.begin(), points.end());
+  // std::cout << box << std::endl;
+  return box;
+}

@@ -391,8 +391,41 @@ std::list<Point_2> getMorePoints(std::list<Line> lines) {
     std::list<Point_2> more_points = addPoints(*it);
     list_of_points.splice(list_of_points.end(), more_points); // Add new points into the same list
   }
-  sortClockwise(list_of_points);
   return list_of_points;
+}
+
+std::list<Point_2> getSources(std::list<Line> lines) {
+  /**
+   * Returns a list of points representing the source of each line given
+   * Used to find the Bounding box of the given line segments basically.
+   */
+  std::list<Point_2> list_of_points;
+
+  for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+    double xx =it->start.x;
+    double yy =it->start.y;
+    Point_2 point(xx, yy);
+    list_of_points.push_back(point); // Add the point to the list
+  }
+
+  return list_of_points;
+}
+
+Point_2 getMidPoint(Line line) {
+  /**
+   * Returns the mid point of the given line
+   */
+  double x1, y1, x2, y2, mx, my;
+  x1 = line.start.x;
+  y1 = line.start.y;
+  x2 = line.end.x;
+  y2 = line.end.y;
+
+  mx = (x1+x2)/2.0;		// Calculate the mid-point of the line
+  my = (y1+y2)/2.0;
+
+  Point_2 point(mx, my);
+  return point;
 }
 
 double getClockwiseAngle(const Point_2& p) {
