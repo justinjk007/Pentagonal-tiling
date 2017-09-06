@@ -37,5 +37,7 @@ std::list<Segment> getConcaveHull(std::list<Point_2>);
 
 Rect getBoundingBox(std::list<Point_2>);
 std::list<Segment> removeInnerLines(std::list<Line>);
+std::list<Segment> getSegments(std::list<Line>); // TODO: Remove this
+bool doIntersect(Segment, std::list<Segment>, Segment);
 
 #endif /* CONCAVEHULL_HPP */

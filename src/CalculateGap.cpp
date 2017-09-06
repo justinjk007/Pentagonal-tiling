@@ -411,15 +411,15 @@ std::list<Point_2> getSources(std::list<Line> lines) {
   return list_of_points;
 }
 
-Point_2 getMidPoint(Line line) {
+Point_2 getMidPoint(Segment line) {
   /**
    * Returns the mid point of the given line
    */
   double x1, y1, x2, y2, mx, my;
-  x1 = line.start.x;
-  y1 = line.start.y;
-  x2 = line.end.x;
-  y2 = line.end.y;
+  x1 = line.source().x();
+  y1 = line.source().y();
+  x2 = line.target().x();
+  y2 = line.target().y();
 
   mx = (x1+x2)/2.0;		// Calculate the mid-point of the line
   my = (y1+y2)/2.0;

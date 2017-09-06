@@ -33,7 +33,7 @@ bool comparePoint(Point_2,Point_2);
 std::list<Point_2> addPoints(Line);
 std::list<Point_2> getMorePoints(std::list<Line>);
 std::list<Point_2> getSources(std::list<Line>);
-Point_2 getMidPoint(Line);
+Point_2 getMidPoint(Segment);
 double getClockwiseAngle(const Point_2&) ;
 bool comparePoints(Point_2,Point_2);
 std::list<Point_2> sortClockwise(std::list<Point_2>);
