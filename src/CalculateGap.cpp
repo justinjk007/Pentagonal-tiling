@@ -40,6 +40,10 @@ double getGap(Tile tile) {
 }
 
 double calculateGap(Tile tile, int i, int j) {
+  /**
+   * This methods integrates all the core methods into finding the gap
+   * of the given polygon when tiled in many ways.
+   */
   double tile_area = getTileArea(tile);
   double p_area = 2 * tile_area; // This is the area of the primitiveTile
   PrimitiveTile newSample(tile);
