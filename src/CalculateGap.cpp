@@ -370,63 +370,6 @@ void printData(std::list<Point_2> polygon) {
   }
 }
 
-std::list<Point_2> addPoints(Line line) {
-  /**
-   * Populate some more points that belongs in the given line and
-   * returns a list of points(Points_2 <list>).
-   */
-  std::list<Point_2> list_of_points;
-  double x1, y1, x2, y2, mx, my;
-  // double mx1, my1, mx2, my2;
-  // double mx3, my3, mx4, my4;
-  x1 = line.start.x;
-  y1 = line.start.y;
-  x2 = line.end.x;
-  y2 = line.end.y;
-
-  mx = (x1+x2)/2.0;		// Calculate the mid-point of the line
-  my = (y1+y2)/2.0;
-  // mx1 = (mx+x1)/2.0;		// Midpoint of midpoint and line-origin
-  // my1 = (my+y1)/2.0;
-  // mx2 = (mx+x2)/2.0;		// Midpoint of midpoint and line-target
-  // my2 = (my+y2)/2.0;
-  // mx3 = (mx1+x1)/2.0;		// Midpoint of midpoint-2 and line-source
-  // my3 = (my1+y1)/2.0;
-  // mx4 = (mx2+x2)/2.0;		// Midpoint of midpoint-2 and line-target
-  // my4 = (my2+y2)/2.0;
-
-  Point_2 point1(x1, y1);	// Create points out of the above data
-  Point_2 point2(x2, y2);
-  Point_2 m(mx, my);
-  // Point_2 m1(mx1, my1);
-  // Point_2 m2(mx2, my2);
-  // Point_2 m3(mx3, my3);
-  // Point_2 m4(mx4, my4);
-
-  list_of_points.push_back(point1); // Add points created to the lists
-  // list_of_points.push_back(m3); // mid-mid-point
-  // list_of_points.push_back(m1); // mid-mid-point
-  list_of_points.push_back(m);
-  // list_of_points.push_back(m2); // mid-mid-point
-  // list_of_points.push_back(m4); // mid-mid-point
-  list_of_points.push_back(point2);
-
-  return list_of_points;
-}
-
-std::list<Point_2> getMorePoints(std::list<Line> lines) {
-  /**
-   * Return points from the list of points including its midpoints
-   */
-  std::list<Point_2> list_of_points;
-
-  for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
-    std::list<Point_2> more_points = addPoints(*it);
-    list_of_points.splice(list_of_points.end(), more_points); // Add new points into the same list
-  }
-  return list_of_points;
-}
-
 std::list<Point_2> getSources(std::list<Line> lines) {
   /**
    * Returns a list of points representing the source of each line given
@@ -476,17 +419,6 @@ Point_2 getMidPoint(Segment line) {
 
   Point_2 point(mx, my);
   return point;
-}
-
-double getClockwiseAngle(const Point_2& p) {
-  /**
-   * Calculates and returns the clockwise angle
-   * Got it from here -> https://stackoverflow.com/a/39187213/5382384
-   */
-    double angle = 0.0;
-    /*calculate angle and return it*/
-    angle = -atan2(p.x(), -p.y());
-    return angle;
 }
 
 Point_2 getCentroid(std::list<Point_2> points) {
