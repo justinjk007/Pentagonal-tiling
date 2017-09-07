@@ -202,9 +202,9 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) { // #18
   Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
   	       122.23}; // Type 1.1
   PrimitiveTile newSample(tile);
-  double tile_area = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
+  // double tile_area = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
   newSample.drawPentagon(2, 2);
-  // double tile_area = getPolygonArea(newSample.lines) * 8;
+  double tile_area = getPolygonArea(newSample.lines) * 8;
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
   // newSample.writeToFileRaw();
@@ -215,8 +215,5 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) { // #18
   Polygon_2 p                        = getPolygon(boundary_points);
   double total_area                  = getPolygonArea(boundary_points);
   double total_area_cgal             = p.area();
-  // BOOST_CHECK_CLOSE(tile_area, total_area, 0.01);
-  cout << "Tile area: " << tile_area<<endl;
-  cout << "Total area: " << total_area<<endl;
-  cout << "Tile area CGAL way: " << total_area_cgal<<endl;
+  BOOST_CHECK_CLOSE(tile_area, total_area, 0.01);
   }
