@@ -216,6 +216,34 @@ double getPolygonArea(std::list<Segment> polygon) {
   return area;
 }
 
+double getPolygonArea(std::list<Point_2> polygon) {
+  /**
+   * This method implements calculating the area of a polygon using
+   * the shoelace formula. The list the passed should contain the
+   * points that create the polygon/polygons.
+   */
+  double sum = 0, diff = 0, area = 0;
+  double x1, y1, x2, y2;
+  for (list<Point_2>::iterator it = polygon.begin(); it != polygon.end();) {
+    bool flag = false;
+    x1 = it->x();
+    y1 = it->y();
+    it++;
+    if (it == polygon.end()) {
+      it = polygon.begin();
+      flag = true;
+    }
+    x2 = it->x();
+    y2 = it->y();
+    sum += x1 * y2;
+    diff += y1 * x2;
+    if (flag) break;
+  }
+
+  area = (1.0/2.0) * abs((sum - diff));
+  return area;
+}
+
 std::list<Line> removeCommonLines(std::list<Line> lines) {
   /**
    * This method is used remove duplicate Lines from the given Line
@@ -411,6 +439,23 @@ std::list<Point_2> getSources(std::list<Line> lines) {
   return list_of_points;
 }
 
+std::list<Point_2> getSources(std::list<Segment> lines) {
+  /**
+   * Returns a list of points representing the source of each line given
+   * Used to find the Bounding box of the given line segments basically.
+   */
+  std::list<Point_2> list_of_points;
+
+  for (list<Segment>::iterator it = lines.begin(); it != lines.end(); it++) {
+    double xx =it->source().x();
+    double yy =it->source().y();
+    Point_2 point(xx, yy);
+    list_of_points.push_back(point); // Add the point to the list
+  }
+
+  return list_of_points;
+}
+
 Point_2 getMidPoint(Segment line) {
   /**
    * Returns the mid point of the given line
@@ -439,19 +484,64 @@ double getClockwiseAngle(const Point_2& p) {
     return angle;
 }
 
-bool comparePoints(Point_2 a,Point_2 b) {
+Point_2 getCentroid(std::list<Point_2> points) {
   /**
-   * Caculates and compares the slope of two points with the origin
+   * Returns the centroid of the given list of points
    */
-  double angle1 = getClockwiseAngle(a);
-  double angle2 = getClockwiseAngle(b);
-  return (angle1 < angle2);
+  double sum_x = 0, sum_y = 0;
+  int count = 0;
+  for (list<Point_2>::iterator it = points.begin(); it != points.end(); it++) {
+      count++;
+      sum_x += it->x();
+      sum_y += it->y();
+  }
+  Point_2 center(sum_x/count, sum_y/count); // Getting the average of the points
+  return center;
 }
 
-std::list<Point_2> sortClockwise(std::list<Point_2> points) {
-  /**
-   * Sort the given points in the list in a clockwise order.
-   */
-  points.sort(comparePoints);
-  return points;
+// bool comparePoints(Point_2 a,Point_2 b) {
+//   /**
+//    * Caculates and compares the slope of two points with the origin
+//    */
+//   double angle1 = getClockwiseAngle(a);
+//   double angle2 = getClockwiseAngle(b);
+//   return (angle1 < angle2);
+// }
+
+bool comparePoints(Point_2 a,Point_2 b) {
+    /**
+     * Compare points based on there angle with centroid
+     * https://stackoverflow.com/questions/6989100/sort-points-in-clockwise-order
+     */
+
+    if (a.x() - centroid.x() >= 0 && b.x() - centroid.x() < 0) return true;
+    if (a.x() - centroid.x() < 0 && b.x() - centroid.x() >= 0) return false;
+    if (a.x() - centroid.x() == 0 && b.x() - centroid.x() == 0) {
+      if (a.y() - centroid.y() >= 0 || b.y() - centroid.y() >= 0) return (a.y() > b.y());
+      return (b.y() > a.y());
+    }
+
+    int det,d1,d2;
+
+    // Compute the cross product of vectors (centroid -> a) x (centroid -> b)
+    det = (a.x() - centroid.x()) * (b.y() - centroid.y()) - (b.x() - centroid.x()) * (a.y() - centroid.y());
+    if (det < 0) return true;
+    if (det > 0) return false;
+
+    // Points a and b are on the same line from the center
+    // Check which point is closer to the center
+    d1 = (a.x() - centroid.x()) * (a.x() - centroid.x()) + (a.y() - centroid.y()) * (a.y() - centroid.y());
+    d2 = (b.x() - centroid.x()) * (b.x() - centroid.x()) + (b.y() - centroid.y()) * (b.y() - centroid.y());
+    return d1 > d2;
+}
+
+std::list<Point_2> sortClockwise(std::list<Point_2> points)
+{
+    /**
+     * Sort the given points in the list in a clockwise order.
+     */
+    centroid = getCentroid(points);
+    points.sort(comparePoints);
+    return points;
+    // det = (a.x - centroid.x) * (b.y - centroid.y) - (b.x - centroid.x) * (a.y - centroid.y)
 }
