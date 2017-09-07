@@ -45,13 +45,6 @@ BOOST_AUTO_TEST_CASE(AngleE) { // #6
   BOOST_CHECK_EQUAL(tile.angle[4], 200);
 }
 
-BOOST_AUTO_TEST_CASE(tile_values_test) { // #7
-  Tile tile = {10, 7, 21, 20, 30, 54, 54, 45, 45};
-  BOOST_CHECK_EQUAL(tile.side[0].value, 10);
-  BOOST_CHECK_EQUAL(tile.side[0].next->value, 7);
-  BOOST_CHECK_EQUAL(tile.side[0].previous->value, 30);
-}
-
 BOOST_AUTO_TEST_CASE(get_third_side) { // #8
   Tile tile1 = {11, 8, 21, 20, 30, 23, 37, 45, 45};
   double ans = getThirdSide(tile1.side[0], tile1.side[1], tile1.angle[1]);

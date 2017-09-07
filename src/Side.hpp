@@ -11,17 +11,11 @@
 
 struct Side {
   double value;
-  Side *next;
-  Side *previous;
   Side() {
     this->value = 0;
-    this->next = NULL;
-    this->previous = NULL;
   }
-  Side(double val, Side *nex, Side *prev) {
+  Side(double val) {
     this->value = val;
-    this->next = nex;
-    this->previous = prev;
   }
 };
 
