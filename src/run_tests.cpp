@@ -15,50 +15,50 @@ typedef K::Point_2 Point_2;
 
 using namespace std;
 
-BOOST_AUTO_TEST_CASE(validate) { // #1
+BOOST_AUTO_TEST_CASE(validate) {
   Tile tile = {5, 10, 5, 4.3197516, 5, 150, 60, 135, 90};
   BOOST_CHECK_EQUAL(validateTile(tile), true);
 }
 
-BOOST_AUTO_TEST_CASE(validate2) { // Complex pentagon #2
+BOOST_AUTO_TEST_CASE(validate2) { // Complex pentagon
   Tile tile = {3.22, 3.10, 2.20, 2.63, 3.43, 118, 39, 330, 66};
   BOOST_CHECK_EQUAL(validateTile(tile), false);
 }
 
-BOOST_AUTO_TEST_CASE(validate3) { // #3
+BOOST_AUTO_TEST_CASE(validate3) {
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 130, 60};
   BOOST_CHECK_EQUAL(validateTile(tile), false);
 }
 
-BOOST_AUTO_TEST_CASE(max_side_test) { // #4
+BOOST_AUTO_TEST_CASE(max_side_test) {
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 120, 60};
   BOOST_CHECK_EQUAL(getMaxSide(tile), 434);
 }
 
-BOOST_AUTO_TEST_CASE(max_angle_test) { // #5
+BOOST_AUTO_TEST_CASE(max_angle_test) {
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 130, 60};
   BOOST_CHECK_EQUAL(getMaxAngle(tile), 190);
 }
 
-BOOST_AUTO_TEST_CASE(AngleE) { // #6
+BOOST_AUTO_TEST_CASE(AngleE) {
   Tile tile = {21, 24, 434, 54, 4, 40, 120, 120, 60};
   BOOST_CHECK_EQUAL(tile.angle[4], 200);
 }
 
-BOOST_AUTO_TEST_CASE(get_third_side) { // #8
+BOOST_AUTO_TEST_CASE(get_third_side) {
   Tile tile1 = {11, 8, 21, 20, 30, 23, 37, 45, 45};
   double ans = getThirdSide(tile1.side[0], tile1.side[1], tile1.angle[1]);
   BOOST_CHECK_CLOSE(ans, 6.6663, 0.001); // 0.001% is the tolerance
 }
 
-BOOST_AUTO_TEST_CASE(get_triangle_area) { // #9
+BOOST_AUTO_TEST_CASE(get_triangle_area) {
   Tile tile1 = {54, 45, 25, 20, 30, 23, 37, 45, 45};
   double ans = getTriangleArea(tile1.side[0].value, tile1.side[1].value,
                                tile1.side[2].value);
   BOOST_CHECK_CLOSE(ans, 558.5552, 0.001); // 0.001% is the tolerance
 }
 
-BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
+BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) {
   Tile tile = {10, 7, 21, 20, 20, 54, 54, 45, 45};
   PrimitiveTile newSample(tile);
   Link link1(tile.side[2], tile.side[2]);
@@ -75,13 +75,13 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
   BOOST_CHECK_EQUAL(answer4, true);
 }
 
-BOOST_AUTO_TEST_CASE(get_tile_area) { // #12
+BOOST_AUTO_TEST_CASE(get_tile_area) {
   Tile tile1 = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
   double ans = getTileArea(tile1);
   BOOST_CHECK_CLOSE(ans, 43.01, 0.01); // 0.01% is the tolerance
 }
 
-BOOST_AUTO_TEST_CASE(compare_lines_test){ // #13
+BOOST_AUTO_TEST_CASE(compare_lines_test){
   Point one = {0,0};
   Point two = {1.12345,2.123};
   Point three = {12.12345,23.123};
@@ -95,7 +95,7 @@ BOOST_AUTO_TEST_CASE(compare_lines_test){ // #13
   BOOST_CHECK_EQUAL(false,  compareLine(line3, line4));
 }
 
-BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
+BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) {
   Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
   }
 
-BOOST_AUTO_TEST_CASE(bounding_box) { // #17
+BOOST_AUTO_TEST_CASE(bounding_box) {
   Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2, 2);
@@ -124,7 +124,7 @@ BOOST_AUTO_TEST_CASE(bounding_box) { // #17
   BOOST_CHECK_CLOSE(box.ymax(),24.894 , 0.1);
   }
 
-BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) { // #18
+BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) {
   Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
   	       122.23}; // Type 1.1
   PrimitiveTile newSample(tile);
