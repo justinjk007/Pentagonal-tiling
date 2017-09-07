@@ -41,28 +41,29 @@ double getGap(Tile tile) {
 }
 
 double calculateGap(Tile tile, int i, int j) {
-  /**
-   * This methods integrates all the core methods into finding the gap
-   * of the given polygon when tiled in many ways.
-   */
-  double tile_area = getTileArea(tile);
-  double p_area = 2.0 * tile_area; // This is the area of the primitiveTile
-  PrimitiveTile newSample(tile);
-  newSample.drawSquare(p_area);
-  newSample.drawPentagon(i,j); // Draw the first pentagon
-  Link link(tile.side[i], tile.side[j]);
-  if (newSample.isLinkable(link)) {
-    newSample.drawPentagon(i,j);
-    newSample.doTiling(0, 0, 0, 0); // For now TODO Remove this
-    // printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
-    double gap = ((25 - newSample.count) * p_area);
-    // printf("The gap for the inputted tile is: %f", gap);
-    newSample.writeToFileRaw();
-    newSample.writeToFile();
-    return gap;
-  }
-  else
-    return -101;
+    /**
+     * This method integrates all the core methods into finding the gap
+     * of the given polygon when tiled in many ways.
+     */
+    PrimitiveTile newSample(tile);
+    newSample.drawPentagon(i, j);  // Draw the first pentagon
+    double tile_area = getPolygonArea(newSample.lines) * 8.0;
+    Link link(tile.side[i], tile.side[j]);
+    if (newSample.isLinkable(link)) {
+        newSample.drawPentagon(i, j);
+        newSample.doTiling(0, 0, 0, 0);  // TODO pass the
+                                               // appropiate arguments
+                                               // when transition is
+                                               // programmable
+        std::list<Segment> boundary        = removeInnerLines(newSample.lines);
+        std::list<Point_2> boundary_points = getSources(boundary);
+        boundary_points                    = sortClockwise(boundary_points);
+        double total_area                  = getPolygonArea(boundary_points);
+        double gap                         = total_area - tile_area;
+        // newSample.writeToFileRaw();
+        return abs(gap);
+    } else
+        return -101;
 }
 
 bool validateTile(Tile tile) {

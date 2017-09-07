@@ -7,7 +7,6 @@
 #define PRIMITIVETILE_HPP
 #include "Link.hpp"
 #include "Side.hpp"
-#include "Square.hpp"
 #include "Tile.hpp"
 #include "myGeometry.hpp"
 #include <algorithm>
@@ -21,7 +20,6 @@ public:
   Tile pentagon; // Stores the measurements of the tile or pentagon used.
   int size; // This accounts for the number of tiles in the primitive tile.
   int count; // Stores the number of primitivetile used in tiling or drawing.
-  Square this_square;
   bool isLinkable(Link);
   void drawPentagon(int, int);
   void drawPentagonRev(int, int);
@@ -31,14 +29,7 @@ public:
   void writeToFileRaw();
   void writeToFileRaw(std::list<Line>);
   void writeToFileRaw(std::list<Segment>);
-  bool checkIfOutsideForUp(std::list<Line>); // This checks is the given list of lines are outside sqaure
-  bool checkIfOutsideForRight(std::list<Line>); // This checks is the given list of lines are outside sqaure
-  bool checkIfFullyOutsideForUp(std::list<Line>);
-  bool checkIfFullyOutsideForRight(std::list<Line>);
-  bool checkIfFullyInsideForLeft(std::list<Line>);
-  Square drawSquare(double area);
   void doTiling(double, double, double, double);
-  void doSimpleTiling(double, double, double, double);
   std::list<Line> translate(double, double, std::list<Line>);
   std::list<Point_2> getPointsFromLines(std::list<Line>); // Returns the start points of everyline on the given list
   PrimitiveTile() {

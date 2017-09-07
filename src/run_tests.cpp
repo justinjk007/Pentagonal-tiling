@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) {
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);
-  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
+  newSample.doTiling(0, 0, 0, 0);
   double tile_area2 = getPolygonArea(newSample.lines);
   BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
   }
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(bounding_box) {
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);
-  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
+  newSample.doTiling(0, 0, 0, 0);
   list<Point_2> list_of_points = getSources(newSample.lines);
   Rect box = getBoundingBox(list_of_points);
   // Cout gives the following -1.546 -4.74584 21.1579 24.8939
@@ -129,16 +129,40 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) {
   	       122.23}; // Type 1.1
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2, 2);
-  double tile_area = getPolygonArea(newSample.lines) * 8; // Here area of one pentagon * 8
+  double tile_area = getPolygonArea(newSample.lines) * 8.0; // Here area of one pentagon * 8
   newSample.drawPentagon(2, 2);
-  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-  // newSample.writeToFileRaw();
+  newSample.doTiling(0, 0, 0, 0);
+  newSample.writeToFileRaw();
   std::list<Segment> boundary        = removeInnerLines(newSample.lines);
-  newSample.writeToFileRaw(boundary);
+  // newSample.writeToFileRaw(boundary);
   std::list<Point_2> boundary_points = getSources(boundary);
   boundary_points                    = sortClockwise(boundary_points);
-  Polygon_2 p                        = getPolygon(boundary_points);
   double total_area                  = getPolygonArea(boundary_points);
-  double total_area_cgal             = p.area();
-  BOOST_CHECK_CLOSE(tile_area, total_area, 0.1); // 0.01 is the tolerance %
+  BOOST_CHECK_CLOSE(tile_area, total_area, 0.1); // 0.1 is the tolerance %
+  }
+
+  BOOST_AUTO_TEST_CASE(Gap_test_or_Integration_test) {
+      Tile tile1  = {32.72,  73.59,  78.67, 49.06, 57.68,
+                    122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
+      double gap1 = getGap(tile1);
+      // cout << "gap1: "<<gap1<<endl;
+
+      Tile tile2  = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
+      double gap2 = getGap(tile2);
+      // cout << "gap2: "<<gap2<<endl;
+      // Points that make up gaps in tile2
+      // (5.0,0.0),(9.04062,2.94506),(10.5746,7.69479),(6.54268,4.75606) These points where found
+      // when debugging using the python script.
+      Point_2 p1(5.0, 0.0), p2(9.04062, 2.94506), p3(10.5746, 7.69479), p4(6.54268, 4.75606);
+      list<Point_2> gap_polygon;
+      gap_polygon.push_back(p1);
+      gap_polygon.push_back(p2);
+      gap_polygon.push_back(p3);
+      gap_polygon.push_back(p4);
+      double gap2_calculated = getPolygonArea(gap_polygon) * 2;  // Two gaps are formed when tiling
+                                                                 // this particular tile so the gap
+                                                                 // area is multiplied by two.
+
+      BOOST_CHECK_CLOSE(gap1, 0, 0.1);
+      BOOST_CHECK_CLOSE(gap2, gap2_calculated, 0.5);
   }
