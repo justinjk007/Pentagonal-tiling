@@ -12,7 +12,7 @@
 struct Side {
   double value;
   Side() {
-    this->value = 0;
+    this->value = 0.0;
   }
   Side(double val) {
     this->value = val;

@@ -48,10 +48,10 @@ void PrimitiveTile::drawPentagon(int from, int to) {
   Line current_line;
   Line diagonal; // The line that connects the 1st and the end of the 2nd line.
   Line next_line;
-  double next_angle = 0;
-  double diagonal_angle = 0;
-  double diagonal_length = 0;
-  Point origin = {0, 0};
+  double next_angle = 0.0;
+  double diagonal_angle = 0.0;
+  double diagonal_length = 0.0;
+  Point origin = {0.0, 0.0};
   int moded_index = 0;
   int type1 = 0;
   int type2 = 0;
@@ -79,7 +79,7 @@ void PrimitiveTile::drawPentagon(int from, int to) {
     diagonal_length = getThirdSide(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index],next_angle);
     diagonal_angle = getOtherAngle(this->pentagon.side[(moded_index + 4) % 5], this->pentagon.side[moded_index], next_angle, 'a');
     diagonal = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1,'d');
-    next_line = current_line.getLineWithRespectTo(180-next_angle, this->pentagon.side[moded_index].value, type2, 's');
+    next_line = current_line.getLineWithRespectTo(180.0-next_angle, this->pentagon.side[moded_index].value, type2, 's');
     double diff = diagonal.end.x - next_line.end.x;
     if (diff <= 0.1 && diff >= -0.1) {
       type1 = 0; // Reset types after every line
@@ -222,7 +222,7 @@ Square PrimitiveTile::drawSquare(double area) {
    * The area passed is the area of the primitive tile.
    */
   Square square;
-  area = area * 25; // Make the area of the sqaure 25 times the primtive tile
+  area = area * 25.0; // Make the area of the sqaure 25 times the primtive tile
   square.side = sqrt(area); // Get the side length of the square.
   square.point[0].x = 0;
   square.point[0].y = 0;

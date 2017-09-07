@@ -6,9 +6,9 @@
 
 struct Square {
   double side;
-  Point point[4] = {{0,0}}; 	// Initialize x and y to 0
+  Point point[4] = {{0.0,0.0}}; 	// Initialize x and y to 0
   Square() {
-    this->side = 0;
+    this->side = 0.0;
   }
   Square(double side_length) {
     this->side = side_length;

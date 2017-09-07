@@ -7,8 +7,8 @@
 #include <algorithm>
 
 struct Tile {
-    Side side[5]    = {{0}, {0}, {0}, {0}, {0}};
-    double angle[5] = {0};
+    Side side[5]    = {{0.0}, {0.0}, {0.0}, {0.0}, {0.0}};
+    double angle[5] = {0.0};
     Tile(double sab, double sbc, double scd, double sde, double sea, double a, double b, double c,
          double d)
     {
@@ -21,7 +21,7 @@ struct Tile {
         this->angle[1]      = b;
         this->angle[2]      = c;
         this->angle[3]      = d;
-        this->angle[4]      = 540 - (angle[0] + angle[1] + angle[2] + angle[3]);
+        this->angle[4]      = 540.0 - (angle[0] + angle[1] + angle[2] + angle[3]);
   }
   Tile(double sab, double sbc, double scd, double sde, double sea, double a,
        double b, double c, double d, double e) {
@@ -42,7 +42,7 @@ struct Tile {
     this->side[2].value = 0;
     this->side[3].value = 0;
     this->side[4].value = 0;
-    std::fill_n(this->angle, 5, 0);
+    std::fill_n(this->angle, 5, 0.0);
   }
 };
 

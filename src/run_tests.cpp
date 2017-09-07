@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
 }
 
 BOOST_AUTO_TEST_CASE(get_tile_area) { // #12
-  Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile1 = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
   double ans = getTileArea(tile1);
   BOOST_CHECK_CLOSE(ans, 43.01, 0.01); // 0.01% is the tolerance
 }
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE(compare_lines_test){ // #13
 }
 
 BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
-  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
   // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
   // 	       122.23}; // Type 1.1
@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   }
 
 BOOST_AUTO_TEST_CASE(bounding_box) { // #17
-  Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
+  Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
   PrimitiveTile newSample(tile);
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);

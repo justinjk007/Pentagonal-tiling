@@ -5,7 +5,8 @@
 #include <stdlib.h>
 #include <iostream>
 
-#define PI 3.14159265
+const double PI = 3.14159265359;
+
 using namespace std;
 
 double getGap(Tile tile) {
@@ -45,7 +46,7 @@ double calculateGap(Tile tile, int i, int j) {
    * of the given polygon when tiled in many ways.
    */
   double tile_area = getTileArea(tile);
-  double p_area = 2 * tile_area; // This is the area of the primitiveTile
+  double p_area = 2.0 * tile_area; // This is the area of the primitiveTile
   PrimitiveTile newSample(tile);
   newSample.drawSquare(p_area);
   newSample.drawPentagon(i,j); // Draw the first pentagon
@@ -72,7 +73,7 @@ bool validateTile(Tile tile) {
   double max_side = getMaxSide(tile);
   double max_angle = getMaxAngle(tile);
   if (max_angle <= 180.00)
-    if (tile.angle[4] > 0)
+    if (tile.angle[4] > 0.0)
       if (tile.side[0].value + tile.side[1].value + tile.side[2].value +
 	  tile.side[3].value + tile.side[4].value >
           (2 * max_side))
@@ -121,7 +122,7 @@ double getThirdSide(Side a, Side b, double angle) {
    */
   angle = angle * PI / 180.0;
   double side_c = sqrt((a.value * a.value) + (b.value * b.value) -
-                       (2 * a.value * b.value * cos(angle)));
+                       (2.0 * a.value * b.value * cos(angle)));
   return side_c;
 }
 
@@ -153,7 +154,7 @@ double getTriangleArea(double a, double b, double c) {
    * This method returns the Area of the triagle using Heron's
    * Formulae
    */
-  double S = (a + b + c) / 2;
+  double S = (a + b + c) / 2.0;
   double area = sqrt(S * (S - a) * (S - b) * (S - c));
   return area;
 }
@@ -181,7 +182,7 @@ double getPolygonArea(std::list<Line> polygon) {
    * lines that create the polygon/polygons, sorted clockwise or
    * anti-clockwise
    */
-  double sum = 0, diff = 0, area = 0;
+  double sum = 0.0, diff = 0.0, area = 0.0;
   double x1, y1, x2, y2;
 
   for (list<Line>::iterator it = polygon.begin(); it != polygon.end(); it++) {
@@ -204,7 +205,7 @@ double getPolygonArea(std::list<Segment> polygon) {
    * Segment_2d defined in cgal that creates the polygon/polygons
    * sorted clockwise or anti-clockwise
    */
-  double sum = 0, diff = 0, area = 0;
+  double sum = 0.0, diff = 0.0, area = 0.0;
   double x1, y1, x2, y2;
 
   for (list<Segment>::iterator it = polygon.begin(); it != polygon.end(); it++) {
@@ -226,7 +227,7 @@ double getPolygonArea(std::list<Point_2> polygon) {
    * the shoelace formula. The list the passed should contain the
    * points that create the polygon/polygons.
    */
-  double sum = 0, diff = 0, area = 0;
+  double sum = 0.0, diff = 0.0, area = 0.0;
   double x1, y1, x2, y2;
   for (list<Point_2>::iterator it = polygon.begin(); it != polygon.end();) {
     bool flag = false;
@@ -492,7 +493,7 @@ Point_2 getCentroid(std::list<Point_2> points) {
   /**
    * Returns the centroid of the given list of points
    */
-  double sum_x = 0, sum_y = 0;
+  double sum_x = 0.0, sum_y = 0.0;
   int count = 0;
   for (list<Point_2>::iterator it = points.begin(); it != points.end(); it++) {
       count++;
@@ -502,15 +503,6 @@ Point_2 getCentroid(std::list<Point_2> points) {
   Point_2 center(sum_x/count, sum_y/count); // Getting the average of the points
   return center;
 }
-
-// bool comparePoints(Point_2 a,Point_2 b) {
-//   /**
-//    * Caculates and compares the slope of two points with the origin
-//    */
-//   double angle1 = getClockwiseAngle(a);
-//   double angle2 = getClockwiseAngle(b);
-//   return (angle1 < angle2);
-// }
 
 bool comparePoints(Point_2 a,Point_2 b) {
     /**

@@ -2,7 +2,7 @@
 #include "iostream"
 #include <cmath>
 
-#define PI 3.14159265359
+const double PI = 3.14159265359;
 
 using namespace std;
 
@@ -44,17 +44,17 @@ double Line::getSlope() {
 }
 
 double Line::getInclineAngle() {
-  double angle = 0;
+  double angle = 0.0;
   double m = this->getSlope();
   angle = atan(m);
-  angle = angle * (180 / 22 / 7); // Convert Rad into degrees
+  angle = angle * (180.0 / 22.0 / 7.0); // Convert Rad into degrees
   return angle;
 }
 
 double Line::getInclineAngle(double m) {
-  double angle = 0;
+  double angle = 0.0;
   angle = atan(m);
-  angle = angle * (180 / 22 / 7); // Convert Rad into degrees
+  angle = angle * (180.0 / 22.0 / 7.0); // Convert Rad into degrees
   return angle;
 }
 
@@ -96,15 +96,15 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
   double x2 = 0.0;
   double y2 = 0.0;
   double m = this->getSlope();
-  m2 = (tan(angle2 * 22 / 7 / 180) + m) / (1 - (tan(angle2 * 22 / 7 / 180) * m));
+  m2 = (tan(angle2 * 22.0 / 7.0 / 180.0) + m) / (1.0 - (tan(angle2 * 22.0 / 7.0 / 180.0) * m));
   check++;
   if (which == 's') {
     if (type == 0)
       // Type on is when x2 is greater than x1.
-      x2 = this->end.x + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+      x2 = this->end.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
     else
       // Type on is when x2 is smaller than x1, ie the line is backward.
-      x2 = this->end.x - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+      x2 = this->end.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
     y2 = m2 * (x2 - this->end.x) + this->end.y;
     line.start.x = this->end.x;
     line.start.y = this->end.y;
@@ -112,10 +112,10 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
     {
       if (type == 0)
 	// Type on is when x2 is greater than x1.
-	x2 = this->start.x + sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+	x2 = this->start.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
       else
 	// Type on is when x2 is smaller than x1, ie the line is backward.
-	x2 = this->start.x - sqrt(pow(length, 2) / (1 + pow(m2, 2)));
+	x2 = this->start.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
       y2 = m2 * (x2 - this->start.x) + this->start.y;
       line.start.x = this->start.x;
       line.start.y = this->start.y;
