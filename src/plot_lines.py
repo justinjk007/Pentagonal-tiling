@@ -1,6 +1,9 @@
 import csv
 import matplotlib.pyplot as plt
 
+fig = plt.figure()
+ax = fig.add_subplot(111)
+
 def parse(file_name):
     "Parses the data sets from the csv file we are given to work with"
     file = open(file_name)
@@ -14,6 +17,8 @@ def draw(xCords, yCords, xLabel, yLabel, filename, col):
     plt.ylabel(yLabel)
     plt.title("Pentagon - "+filename)
     plt.plot(xCords, yCords, '-o', color=col, markersize = 1, linewidth = 2)
+    for xy in zip(xCords, yCords):                                       # <--
+        ax.annotate('(%s, %s)' % xy, xy=xy, textcoords='data') # <--
 
 def toXandY(unorderedData):
     "This method converts seperates x and y co-ordinates for plotting"
