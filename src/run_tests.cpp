@@ -82,32 +82,6 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile) { // #10
   BOOST_CHECK_EQUAL(answer4, true);
 }
 
-BOOST_AUTO_TEST_CASE(drawing_methods) { // #11 There is no test here, just to print the data
-  // (5.09,5.80), (1.68,4.90), (0.00,0.00), (5.65,0.00), (7.00,2.83)
-  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81, 122.23}; // Type 1.1
-  // Tile tile = {66, 80, 66, 54, 38.54,106.31,110, 70, 135, 118.69}; // Type 1.2
-  double tile_area = getTileArea(tile);
-  double p_area = 2 * tile_area; // This is the area of the primitiveTile
-  int side_num = 0;
-  // PrimitiveTile newSample = new PrimitiveTile;
-  // newSample.pentagon = tile;
-  PrimitiveTile newSample(tile);
-  newSample.drawSquare(p_area);
-  newSample.drawPentagon(side_num,side_num);
-  Link link1(tile.side[side_num], tile.side[side_num]);
-  if (newSample.isLinkable(link1)){
-    newSample.drawPentagon(side_num,side_num);
-    newSample.doTiling(0,0,0,0);
-  }
-  // printf("\nNumber of primitive tiles drawn is %d\n", newSample.count);
-  double gap = ((25 - newSample.count) * p_area);
-  // printf("The gap for the inputted tile is: %f\n\n", gap);
-  // newSample.writeToFileRaw();
-  // newSample.writeToFile();
-}
-
 BOOST_AUTO_TEST_CASE(get_tile_area) { // #12
   Tile tile1 = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   double ans = getTileArea(tile1);
@@ -142,47 +116,6 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula) { // #14
   BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5); // The float is the tolerance in percentage
   }
 
-BOOST_AUTO_TEST_CASE(concave_hull) { // #15
-  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
-  	       122.23}; // Type 1.1
-  double tile_area = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
-  PrimitiveTile newSample(tile);
-  newSample.drawPentagon(2, 2);
-  newSample.drawPentagon(2, 2);
-  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-  list<Point_2> list_of_points = getMorePoints(newSample.lines);
-  list<Segment> concave_hull = getConcaveHull(list_of_points);
-  double whole_area = getPolygonArea(concave_hull);
-  double gap = whole_area - tile_area;
-  // cout << "Total area of the 8 tiles are: " << tile_area << "\n";
-  // cout << "Area of the concave hull is: " << whole_area << "\n";
-  // cout << "Gap =  " << gap << "\n";
-  // boost  // BOOST_CHECK_CLOSE(gap, 0, 0.5); // The float is the tolerance in percentage
-  }
-
-BOOST_AUTO_TEST_CASE(concave_hull_display) { // #16
-  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-  // Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
-  // 	       122.23}; // Type 1.1
-  double tile_area1 = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
-  PrimitiveTile newSample(tile);
-  newSample.drawPentagon(2, 2);
-  newSample.drawPentagon(2, 2);
-  newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
-  // newSample.writeToFileRaw();
-  list<Line> clean_lines = removeCommonLines(newSample.lines);
-  // newSample.writeToFileRaw(clean_lines);
-  list<Point_2> list_of_points ;
-  list_of_points = getMorePoints(newSample.lines);
-  // printData(list_of_points);
-  list<Segment> concave_hull = getConcaveHull(list_of_points);
-  // printData(concave_hull);
-  // newSample.writeToFileRaw(concave_hull);
-  }
-
 BOOST_AUTO_TEST_CASE(bounding_box) { // #17
   Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
   PrimitiveTile newSample(tile);
@@ -215,5 +148,5 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) { // #18
   Polygon_2 p                        = getPolygon(boundary_points);
   double total_area                  = getPolygonArea(boundary_points);
   double total_area_cgal             = p.area();
-  BOOST_CHECK_CLOSE(tile_area, total_area, 0.01);
+  BOOST_CHECK_CLOSE(tile_area, total_area, 0.01); // 0.01 is the tolerance %
   }
