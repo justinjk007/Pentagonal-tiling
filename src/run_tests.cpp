@@ -199,15 +199,17 @@ BOOST_AUTO_TEST_CASE(bounding_box) { // #17
   }
 
 BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) { // #18
-  // Tile tile = {5, 5, 5, 5, 5, 108, 108, 108, 108};
-  // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
   Tile tile = {32.72, 73.59, 78.67, 49.06, 57.68,122.03,115.73, 84.19, 95.81,
   	       122.23}; // Type 1.1
   PrimitiveTile newSample(tile);
+  double tile_area1 = getTileArea(tile) * 8.0; // 8 Tiles are used here .sooo
   newSample.drawPentagon(2, 2);
   newSample.drawPentagon(2, 2);
   newSample.doSimpleTiling(0, 0, 0, 0); // The simple tiling method
   // newSample.writeToFileRaw();
   std::list<Segment> boundary = removeInnerLines(newSample.lines);
   newSample.writeToFileRaw(boundary);
+  double tile_area2 = getPolygonArea(boundary); // 8 Tiles are used here .sooo
+  double gap = tile_area2-tile_area1;
+  BOOST_CHECK_CLOSE(gap,0 , 0.001);
   }
