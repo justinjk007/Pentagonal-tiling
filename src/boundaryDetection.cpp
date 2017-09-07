@@ -108,3 +108,16 @@ std::list<Segment> removeInnerLines(std::list<Line> temp_lines) {
 
     return boundaries;
 }
+
+Polygon_2 getPolygon(std::list<Point_2> points){
+    /**
+     * Returns a cgal polygon from the given list of points. Remember
+     * points passed should already be sorted clockwise. Or error will thrown.
+     */
+
+    Polygon_2 polygon;
+    for (list<Point_2>::iterator it = points.begin(); it != points.end(); it++) {
+        polygon.push_back(*it);
+    }
+    return polygon;
+}

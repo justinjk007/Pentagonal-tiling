@@ -7,6 +7,7 @@
 #include <CGAL/algorithm.h>
 #include <CGAL/Simple_cartesian.h>
 #include <CGAL/bounding_box.h>
+#include <CGAL/Polygon_2.h>
 #include <fstream>
 #include <iostream>
 #include <list>
@@ -19,6 +20,7 @@ typedef K::FT FT;
 typedef K::Point_2 Point_2;
 typedef K::Segment_2 Segment;
 typedef K::Iso_rectangle_2 Rect;
+typedef CGAL::Polygon_2<K> Polygon_2;
 
 typedef CGAL::Alpha_shape_vertex_base_2<K> Vb;
 typedef CGAL::Alpha_shape_face_base_2<K> Fb;
@@ -39,5 +41,6 @@ Rect getBoundingBox(std::list<Point_2>);
 std::list<Segment> removeInnerLines(std::list<Line>);
 std::list<Segment> getSegments(std::list<Line>); // TODO: Remove this
 bool doIntersect(Segment, std::list<Segment>, Segment);
+Polygon_2 getPolygon(std::list<Point_2>);
 
 #endif /* CONCAVEHULL_HPP */
