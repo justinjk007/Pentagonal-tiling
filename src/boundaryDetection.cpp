@@ -57,13 +57,10 @@ bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line) {
    */
 
   for (std::list<Segment>::iterator it = lines.begin(); it != lines.end(); it++)
-    if(*it == except_line) {
+    if(*it == except_line)
       continue;
-    }
-    else {
-      if(doIntersect(line , *it))
-    	return true;
-    }
+    else if(doIntersect(line , *it))
+      return true;
   return false;
 }
 
