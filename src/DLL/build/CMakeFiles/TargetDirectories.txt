@@ -1,3 +1,0 @@
-D:/Repos/PentagonLib/build/CMakeFiles/pentagonlib.dir
-D:/Repos/PentagonLib/build/CMakeFiles/ALL_BUILD.dir
-D:/Repos/PentagonLib/build/CMakeFiles/ZERO_CHECK.dir
