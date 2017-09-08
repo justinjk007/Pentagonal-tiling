@@ -1,7 +1,7 @@
 * Pentagonal tiling
 #+CAPTION: Image representing pentagonal tiling, in a way
 #+NAME: face of the repository
-     [[./face.png]]
+     [[./img/face.png]]
 
 
 ** TODO Tile the given tile for all possibilities of a primitive tile for just two of the tiles.
@@ -27,7 +27,7 @@ This is what the corresponding angles and sides looks like in an
 image:
 #+CAPTION: Image representing angles and sides respectively
 #+NAME: Sample image for representation
-[[./sample.png]]
+[[./img/sample.png]]
 
 PS : We are only considering convex pentagons here, concave and
 complex pentagons are a story for an other day.
