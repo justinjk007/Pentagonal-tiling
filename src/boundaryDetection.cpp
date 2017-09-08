@@ -31,6 +31,23 @@ list<Segment> getSegments(std::list<Line> lines) {
   return segments;
 }
 
+bool doIntersect(Segment a, Segment b ){
+ /**
+  * This replaces CGAL::do_intersect(), becuase it does not work with VS2017 compiler.
+  * This returns true if the two given line segments intersects
+  * https://stackoverflow.com/questions/14176776/find-out-if-2-lines-intersect
+  */
+
+  Point_2 p1 = a.source();
+  Point_2 p2 = a.target();
+  Point_2 q1 = b.source();
+  Point_2 q2 = b.target();
+
+  bool ans1 =  (((q1.x()-p1.x())*(p2.y()-p1.y()) - (q1.y()-p1.y())*(p2.x()-p1.x())) * ((q2.x()-p1.x())*(p2.y()-p1.y()) - (q2.y()-p1.y())*(p2.x()-p1.x())) < 0);
+  bool ans2 = (((p1.x()-q1.x())*(q2.y()-q1.y()) - (p1.y()-q1.y())*(q2.x()-q1.x())) * ((p2.x()-q1.x())*(q2.y()-q1.y()) - (p2.y()-q1.y())*(q2.x()-q1.x())) < 0);
+
+ return (ans1 && ans2);
+}
 
 bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line) {
   /**
@@ -44,8 +61,7 @@ bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line) {
       continue;
     }
     else {
-      // if(CGAL::do_intersect(line , *it)) // CHANGE THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-      if(true)
+      if(doIntersect(line , *it))
     	return true;
     }
   return false;
