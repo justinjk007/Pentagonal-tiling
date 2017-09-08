@@ -32,16 +32,22 @@ list<Segment> getSegments(std::list<Line> lines) {
 }
 
 
-bool doIntersect(Segment line, std::list<Segment> lines, Segment exception) {
+bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line) {
   /**
    * Check if the passed line segments intersects with any of the
    * lines inside the given list of lines without checking for the
    * line that is an exception.
    */
 
-  for (list<Segment>::iterator it = lines.begin(); it != lines.end(); it++)
-    if(*it != exception && CGAL::do_intersect(line , *it))
-      return true;
+  for (std::list<Segment>::iterator it = lines.begin(); it != lines.end(); it++)
+    if(*it == except_line) {
+      continue;
+    }
+    else {
+      // if(CGAL::do_intersect(line , *it)) // CHANGE THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+      if(true)
+    	return true;
+    }
   return false;
 }
 
