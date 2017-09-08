@@ -20,6 +20,8 @@
 
 using namespace std;
 
+#define PI 3.14159265358979323846264338327950288
+
 typedef  double variable;
 typedef variable *Individual;
 typedef  double Fitness;
@@ -61,7 +63,7 @@ protected:
     http://www.sat.t.u-tokyo.ac.jp/~omi/random_variables_generation.html#Cauchy
   */
   inline double cauchy_g(double mu, double gamma) {
-    return mu + gamma * tan(M_PI*(randDouble() - 0.5));
+    return mu + gamma * tan(PI*(randDouble() - 0.5));
   }
 
   /*
@@ -69,7 +71,7 @@ protected:
     http://www.sat.t.u-tokyo.ac.jp/~omi/random_variables_generation.html#Gauss
   */
   inline double gauss(double mu, double sigma){
-    return mu + sigma * sqrt(-2.0 * log(randDouble())) * sin(2.0 * M_PI * randDouble());
+    return mu + sigma * sqrt(-2.0 * log(randDouble())) * sin(2.0 * PI * randDouble());
   }
 
   //Recursive quick sort with index array
