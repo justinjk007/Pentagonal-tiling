@@ -1,3 +1,4 @@
+#include "DE/de.h"
 #include "CalculateGap.hpp"
 #include "Config.h"
 #include "Tile.hpp"
