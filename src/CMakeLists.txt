@@ -4,10 +4,15 @@ PROJECT (PentagonalTiling)
 SET (CMAKE_CXX_STANDARD 11)
 
 # The version number.
-SET (Tutorial_VERSION_MAJOR 1)
-SET (Tutorial_VERSION_MINOR 2)
+SET (VERSION_MAJOR 2)
+SET (VERSION_MINOR 0)
 
-INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}")
+CONFIGURE_FILE (
+  "${PROJECT_SOURCE_DIR}/Config.h.in"
+  "${PROJECT_BINARY_DIR}/Config.h"
+  )
+
+INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}") # This is done to include Config.h
 
 # Boost config
 SET(Boost_USE_STATIC_LIBS ON)

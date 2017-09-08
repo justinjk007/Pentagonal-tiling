@@ -1,0 +1,3 @@
+// The configured options and settings for the project
+#define VERSION_MAJOR @VERSION_MAJOR@
+#define VERSION_MINOR @VERSION_MINOR@

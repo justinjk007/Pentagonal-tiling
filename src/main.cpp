@@ -1,4 +1,5 @@
 #include "CalculateGap.hpp"
+#include "Config.h"
 #include "Tile.hpp"
 #include <stdio.h>
 #include <iostream>
@@ -7,7 +8,6 @@
 #include <string.h>
 #include <string>
 
-#define VERSION "1.2"
 #define PROG_NAME "main"
 #define YEAR "2017"
 #define LICENSE "GPLv3"
@@ -22,7 +22,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   if (argc < 2) {
-    printf("Pentagonal Tiling %s\n", VERSION);
+    printf("Pentagonal Tiling %d.%d\n", VERSION_MAJOR, VERSION_MINOR);
     printf("Copyright (c) %s, %s.  All rights reserved.\n", YEAR, AUTHOR);
     printf("This program was made available under %s\n", LICENSE);
     printf("See LICENSE.org file included with the distribution for details and "
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]) {
 }
 
 void helper() {
-  printf("Pentagonal Tiling %s\n", VERSION);
+  printf("Pentagonal Tiling %d.%d\n", VERSION_MAJOR, VERSION_MINOR);
   printf("Copyright (c) %s, %s.  All rights reserved.\n", YEAR, AUTHOR);
   printf(
          "\nTo use the program call the executable and pass either 9 or 10 \n"
@@ -114,7 +114,7 @@ void readFromFile(string file_name) {
 }
 
 void errorInArguments() {
-  printf("Pentagonal Tiling %s\n", VERSION);
+  printf("Pentagonal Tiling %d.d\n", VERSION_MAJOR, VERSION_MINOR);
   printf("Copyright (c) %s, %s.  All rights reserved.\n", YEAR, AUTHOR);
   printf("\nError : Unrecognized flag or arguments(use -help or -h for "
          "help)\n\n");
