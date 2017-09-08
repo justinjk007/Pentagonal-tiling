@@ -1,4 +1,3 @@
-#include "DE/de.h" // Bread and butter of this whole summer
 #include "CalculateGap.hpp"
 #include "Config.h"
 #include "Tile.hpp"

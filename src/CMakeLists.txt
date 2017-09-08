@@ -42,8 +42,10 @@ MESSAGE("-- All files linked")
 
 ADD_EXECUTABLE(main main.cpp)
 ADD_EXECUTABLE(run_tests run_tests.cpp)
+ADD_EXECUTABLE(run_de run_de.cpp)
 MESSAGE("-- All executables added")
 
-TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry boundaryDetection DE)
-TARGET_LINK_LIBRARIES (run_tests CalculateGap PrimitiveTile myGeometry boundaryDetection DE ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+TARGET_LINK_LIBRARIES (run_tests CalculateGap PrimitiveTile myGeometry boundaryDetection ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry boundaryDetection)
+TARGET_LINK_LIBRARIES (run_de CalculateGap PrimitiveTile myGeometry boundaryDetection DE)
 MESSAGE("-- All libraries connected")
