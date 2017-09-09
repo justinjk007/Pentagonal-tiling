@@ -132,9 +132,9 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon) {
   double tile_area = getPolygonArea(newSample.lines) * 8.0; // Here area of one pentagon * 8
   newSample.drawPentagon(2, 2);
   newSample.doTiling(0, 0, 0, 0);
-  // newSample.writeToFileRaw();
+  newSample.writeToFileRaw();
   std::list<Segment> boundary        = removeInnerLines(newSample.lines);
-  newSample.writeToFileRaw(boundary);
+  // newSample.writeToFileRaw(boundary);
   std::list<Point_2> boundary_points = getSources(boundary);
   boundary_points                    = sortClockwise(boundary_points);
   double total_area                  = getPolygonArea(boundary_points);

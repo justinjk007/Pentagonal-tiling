@@ -31,22 +31,58 @@ list<Segment> getSegments(std::list<Line> lines) {
   return segments;
 }
 
-bool do_intersect(Segment a, Segment b ){
- /**
-  * This replaces CGAL::do_intersect(), becuase it does not work with VS2017 compiler.
-  * This returns true if the two given line segments intersects
-  * https://stackoverflow.com/questions/14176776/find-out-if-2-lines-intersect
-  */
+bool onSegment(Point_2 p, Point_2 q, Point_2 r) {
+  /**
+   * Check if point r is on the line segment made by point p and q.
+   */
+    if (q.x() <= max(p.x(), r.x()) && q.x() >= min(p.x(), r.x()) &&
+        q.y() <= max(p.y(), r.y()) && q.y() >= min(p.y(), r.y()))
+       return true;
+    return false;
+}
 
-  Point_2 p1 = a.source();
-  Point_2 p2 = a.target();
-  Point_2 q1 = b.source();
-  Point_2 q2 = b.target();
+int orientation(Point_2 p, Point_2 q, Point_2 r) {
+  /**
+   * To find orientation of ordered triplet (p, q, r).
+   * The function returns following values
+   * 0 --> p, q and r are colinear
+   * 1 --> Clockwise
+   * 2 --> Counterclockwise
+   */
+    int val = (double)(q.y() - p.y()) * (r.x() - q.x()) -
+              (q.x() - p.x()) * (r.y() - q.y());
 
-  bool ans1 =  (((q1.x()-p1.x())*(p2.y()-p1.y()) - (q1.y()-p1.y())*(p2.x()-p1.x())) * ((q2.x()-p1.x())*(p2.y()-p1.y()) - (q2.y()-p1.y())*(p2.x()-p1.x())) < 0);
-  bool ans2 = (((p1.x()-q1.x())*(q2.y()-q1.y()) - (p1.y()-q1.y())*(q2.x()-q1.x())) * ((p2.x()-q1.x())*(q2.y()-q1.y()) - (p2.y()-q1.y())*(q2.x()-q1.x())) < 0);
+    if (val == 0) return 0;  // colinear
+    return (val > 0)? 1: 2; // clock or counterclock wise
+}
 
- return (ans1 && ans2);
+bool do_intersect(Segment a, Segment b) {
+    /**
+      * Find the four orientations needed for general and special
+      * cases, and returns true if the line segments intersect.
+     */
+    Point_2 p1 = a.source();
+    Point_2 q1 = a.target();
+    Point_2 p2 = b.source();
+    Point_2 q2 = b.target();
+
+    int o1 = orientation(p1, q1, p2);
+    int o2 = orientation(p1, q1, q2);
+    int o3 = orientation(p2, q2, p1);
+    int o4 = orientation(p2, q2, q1);
+
+    // General case
+    if (o1 != o2 && o3 != o4) return true;
+    // Special Cases
+    // p1, q1 and p2 are colinear and p2 lies on segment p1q1
+    if (o1 == 0 && onSegment(p1, p2, q1)) return true;
+    // p1, q1 and p2 are colinear and q2 lies on segment p1q1
+    if (o2 == 0 && onSegment(p1, q2, q1)) return true;
+    // p2, q2 and p1 are colinear and p1 lies on segment p2q2
+    if (o3 == 0 && onSegment(p2, p1, q2)) return true;
+    // p2, q2 and q1 are colinear and q1 lies on segment p2q2
+    if (o4 == 0 && onSegment(p2, q1, q2)) return true;
+    return false;  // Doesn't fall in any of the above cases
 }
 
 bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line) {
@@ -59,7 +95,7 @@ bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line) {
   for (std::list<Segment>::iterator it = lines.begin(); it != lines.end(); it++)
     if(*it == except_line)
       continue;
-    else if(doIntersect(line , *it))
+    else if(do_intersect(line , *it))
       return true;
   return false;
 }
