@@ -31,7 +31,7 @@ list<Segment> getSegments(std::list<Line> lines) {
   return segments;
 }
 
-bool doIntersect(Segment a, Segment b ){
+bool do_intersect(Segment a, Segment b ){
  /**
   * This replaces CGAL::do_intersect(), becuase it does not work with VS2017 compiler.
   * This returns true if the two given line segments intersects

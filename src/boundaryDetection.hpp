@@ -25,6 +25,6 @@ std::list<Segment> removeInnerLines(std::list<Line>);
 std::list<Segment> getSegments(std::list<Line>); // TODO: Remove this
 bool doIntersect(Segment, std::list<Segment>, Segment);
 Polygon_2 getPolygon(std::list<Point_2>);
-bool doIntersect(Segment, Segment );
+bool do_intersect(Segment, Segment );
 
 #endif /* BOUNDARYDETECTION_HPP */
