@@ -7,16 +7,18 @@
  */
 #ifndef SIDE_HPP
 #define SIDE_HPP
-#include <cstddef> // This library is included so that the NULL pointer works
+#include <cstddef>  // This library is included so that the NULL pointer works
 
 struct Side {
-  double value;
-  Side() {
-    this->value = 0.0;
-  }
-  Side(double val) {
-    this->value = val;
-  }
+    double value;
+    Side()
+    {
+        this->value = 0.0;
+    }
+    Side(double val)
+    {
+        this->value = val;
+    }
 };
 
 #endif /* SIDE_HPP */

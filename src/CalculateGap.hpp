@@ -32,12 +32,12 @@ std::list<Line> removeCommonLines(std::list<Line>);
 std::list<Point_2> removeCommonPoints(std::list<Point_2>);
 std::list<Line> removeLine(std::list<Line>, Line);
 std::list<Point_2> removePoint(std::list<Point_2>, Point_2);
-bool comparePoint(Point_2,Point_2);
+bool comparePoint(Point_2, Point_2);
 std::list<Point_2> getSources(std::list<Line>);
 std::list<Point_2> getSources(std::list<Segment>);
 Point_2 getMidPoint(Segment);
 Point_2 getCentroid(std::list<Point_2>);
-bool comparePoints(Point_2,Point_2);
+bool comparePoints(Point_2, Point_2);
 std::list<Point_2> sortClockwise(std::list<Point_2>);
 
 #endif /* CALCULATEGAP_HPP */

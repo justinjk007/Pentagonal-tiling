@@ -5,58 +5,60 @@ using namespace std;
 
 Rect getBoundingBox(std::list<Point_2> points)
 {
-  /**
-   * Returns axis-aligned bounding box of 2D points
-   */
-  Rect box = CGAL::bounding_box(points.begin(), points.end());
-  // std::cout << box << std::endl;
-  return box;
+    /**
+     * Returns axis-aligned bounding box of 2D points
+     */
+    Rect box = CGAL::bounding_box(points.begin(), points.end());
+    // std::cout << box << std::endl;
+    return box;
 }
 
+list<Segment> getSegments(std::list<Line> lines)
+{
+    /**
+     * Return CGAL::segments from myGeometry lines, this weill removed later
+     * TODO : Remove this method.
+     */
+    list<Segment> segments;
 
-list<Segment> getSegments(std::list<Line> lines) {
-  /**
-   * Return CGAL::segments from myGeometry lines, this weill removed later
-   * TODO : Remove this method.
-   */
-  list<Segment> segments;
+    for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+        Point_2 start(it->start.x, it->start.y);
+        Point_2 end(it->end.x, it->end.y);
+        Segment segment(start, end);
+        segments.push_back(segment);
+    }
 
-  for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
-    Point_2 start(it->start.x, it->start.y);
-    Point_2 end(it->end.x, it->end.y);
-    Segment segment(start, end);
-    segments.push_back(segment);
-  }
-
-  return segments;
+    return segments;
 }
 
-bool onSegment(Point_2 p, Point_2 q, Point_2 r) {
-  /**
-   * Check if point r is on the line segment made by point p and q.
-   */
-    if (q.x() <= max(p.x(), r.x()) && q.x() >= min(p.x(), r.x()) &&
-        q.y() <= max(p.y(), r.y()) && q.y() >= min(p.y(), r.y()))
-       return true;
+bool onSegment(Point_2 p, Point_2 q, Point_2 r)
+{
+    /**
+     * Check if point r is on the line segment made by point p and q.
+     */
+    if (q.x() <= max(p.x(), r.x()) && q.x() >= min(p.x(), r.x()) && q.y() <= max(p.y(), r.y()) &&
+        q.y() >= min(p.y(), r.y()))
+        return true;
     return false;
 }
 
-int orientation(Point_2 p, Point_2 q, Point_2 r) {
-  /**
-   * To find orientation of ordered triplet (p, q, r).
-   * The function returns following values
-   * 0 --> p, q and r are colinear
-   * 1 --> Clockwise
-   * 2 --> Counterclockwise
-   */
-    int val = (double)(q.y() - p.y()) * (r.x() - q.x()) -
-              (q.x() - p.x()) * (r.y() - q.y());
+int orientation(Point_2 p, Point_2 q, Point_2 r)
+{
+    /**
+     * To find orientation of ordered triplet (p, q, r).
+     * The function returns following values
+     * 0 --> p, q and r are colinear
+     * 1 --> Clockwise
+     * 2 --> Counterclockwise
+     */
+    int val = (double)(q.y() - p.y()) * (r.x() - q.x()) - (q.x() - p.x()) * (r.y() - q.y());
 
-    if (val == 0) return 0;  // colinear
-    return (val > 0)? 1: 2; // clock or counterclock wise
+    if (val == 0) return 0;    // colinear
+    return (val > 0) ? 1 : 2;  // clock or counterclock wise
 }
 
-bool do_intersect(Segment a, Segment b) {
+bool do_intersect(Segment a, Segment b)
+{
     /**
       * Find the four orientations needed for general and special
       * cases, and returns true if the line segments intersect.
@@ -85,22 +87,24 @@ bool do_intersect(Segment a, Segment b) {
     return false;  // Doesn't fall in any of the above cases
 }
 
-bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line) {
-  /**
-   * Check if the passed line segments intersects with any of the
-   * lines inside the given list of lines without checking for the
-   * line that is an exception.
-   */
+bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line)
+{
+    /**
+     * Check if the passed line segments intersects with any of the
+     * lines inside the given list of lines without checking for the
+     * line that is an exception.
+     */
 
-  for (std::list<Segment>::iterator it = lines.begin(); it != lines.end(); it++)
-    if(*it == except_line)
-      continue;
-    else if(do_intersect(line , *it))
-      return true;
-  return false;
+    for (std::list<Segment>::iterator it = lines.begin(); it != lines.end(); it++)
+        if (*it == except_line)
+            continue;
+        else if (do_intersect(line, *it))
+            return true;
+    return false;
 }
 
-std::list<Segment> removeInnerLines(std::list<Line> temp_lines) {
+std::list<Segment> removeInnerLines(std::list<Line> temp_lines)
+{
     /**
      * Returns the lines that lies outside-most in the given list of
      * lines. Special algorithm , slow now thou.
@@ -143,7 +147,8 @@ std::list<Segment> removeInnerLines(std::list<Line> temp_lines) {
     return boundaries;
 }
 
-Polygon_2 getPolygon(std::list<Point_2> points){
+Polygon_2 getPolygon(std::list<Point_2> points)
+{
     /**
      * Returns a cgal polygon from the given list of points. Remember
      * points passed should already be sorted clockwise. Or error will thrown.
