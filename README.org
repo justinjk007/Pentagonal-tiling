@@ -1,7 +1,7 @@
 * Pentagonal tiling
 #+CAPTION: Banner image of the repository
-[[./img/face.png]]
-
+# [[./img/uni_tile.jpg]]
+#+html: <p align="center"><img src="./img/uni_tile.jpg" /></p>
 
 ** Preface
 
