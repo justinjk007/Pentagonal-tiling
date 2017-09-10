@@ -66,7 +66,7 @@ int main(int argc, char** argv)
     // g_pop_size = (int)round(sqrt(g_problem_size) * log(g_problem_size) * 30);    // iL-SHADE=12;
     // sqrt()*ln()*30 ... E3  g_pop_size = (int)round(sqrt(g_problem_size) * log(g_problem_size) *
     // 20);    // iL-SHADE=12;     sqrt()*ln()*30 ... E4
-    g_pop_size    = (int)round(sqrt(g_problem_size) * log(g_problem_size) *
+    g_pop_size = (int)round(sqrt(g_problem_size) * log(g_problem_size) *
                             25);  // iL-SHADE=12;     sqrt()*ln()*30 ... E5
     g_memory_size = 5;
     g_arc_rate    = 1;
