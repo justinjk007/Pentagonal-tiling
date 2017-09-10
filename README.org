@@ -56,3 +56,10 @@ Now run =make= to build the executables. 3 executables should be generated.
 
 - http://www.redblobgames.com/grids/hexagons/
 - [[https://www.mathsisfun.com/geometry/pentagon.html][Pentagon applet]]
+
+** LICENSE
+
+- My source code follows [[https://www.gnu.org/licenses/gpl.html][GPLv3.0]] license.
+- The directory =DE_matlab= although not in use any more was sourced from [[http://www1.icsi.berkeley.edu/~storn/code.html][here]].
+- The directory =DE= contains C/C++ source code that was lent to me by
+  the author, contact [[mailto:janez.brest@um.si][Janez Brest]] for the license of that code.
