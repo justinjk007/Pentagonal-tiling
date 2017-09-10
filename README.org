@@ -16,6 +16,10 @@ You can generate 3 executables by compiling this source code.
 - =run_tests.exe= - Runs unit tests to see if things are not broken.
 - =run_de.exe= - Runs the optimization algorithm which is coupled with my fit function.
 
+*PS:* As of now for the optimization algorithm to run, you need to move
+the =input_data= folder to the directory where you are running the
+=run_de.exe= executable.
+
 The source is written C++ and is developed to be build and compile on
 any platform or environment that supports C++.
 

@@ -23,7 +23,7 @@ ofstream outFile;
 
 using namespace std;
 
-int main(int argc, char* argv[])
+int main()
 {
     int num_runs          = 51;  // number of runs
     g_problem_size        = 10;  // dimension size. please select from 10, 30, 50, 100
