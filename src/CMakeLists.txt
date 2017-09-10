@@ -22,7 +22,7 @@ MESSAGE("-- Boost Library was found")
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 # CGAL config
-# For linux CGAL to work also install package- libcgal-qt5-dev
+# For linux CGAL to work also install package " libcgal-qt5-dev " as well
 FIND_PACKAGE(CGAL REQUIRED)
 MESSAGE("-- CGAL Library was found")
 INCLUDE( ${CGAL_USE_FILE} )
