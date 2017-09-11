@@ -13,7 +13,10 @@
 
 static Point_2 centroid;
 
+typedef double dd;
+
 double getGap(Tile);
+double getGap(dd, dd, dd, dd, dd, dd, dd, dd, dd);
 double calculateGap(Tile, int, int);
 bool validateTile(Tile);
 double getMaxSide(Tile);

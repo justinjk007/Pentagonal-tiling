@@ -40,6 +40,38 @@ double getGap(Tile tile)
     return min_gap;
 }
 
+double getGap(dd a, dd b, dd c, dd d, dd e, dd f, dd g, dd h, dd i)
+{
+    /**
+     * This is an overloaded variant of getGap(Tile) that takes in the raw arguments instead of a
+     * tile
+     */
+
+    Tile tile = {a, b, c, d, e, f, g, h, i}; // Create a tile structure with the passed arguments
+
+    if (!validateTile(tile)) {
+        exit(1);
+        printf("\nThe tile inputted was invalid");
+    }
+
+    int gap_index = 0;
+    double gap_list[25];
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            gap_list[gap_index] = calculateGap(tile, i, j);
+            gap_index++;
+        }
+    }
+
+    // Returning the minimumgap in the gap list
+    double min_gap    = gap_list[0];
+    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
+    for (int i = 0; i < gap_list_size; ++i) {
+        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
+    }
+    return min_gap;
+}
+
 double calculateGap(Tile tile, int i, int j)
 {
     /**
