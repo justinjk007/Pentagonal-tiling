@@ -8,6 +8,7 @@
 #include <malloc.h>
 #include <math.h>
 #include <stdio.h>
+#include "../CalculateGap.hpp"
 
 #define INF 1.0e99
 #define EPS 1.0e-14
@@ -20,6 +21,7 @@ void bent_cigar_func(double*, double*, int, double*, double*, int, int);  /* Dis
 void discus_func(double*, double*, int, double*, double*, int, int);      /* Bent_Cigar */
 void dif_powers_func(double*, double*, int, double*, double*, int, int);  /* Different Powers */
 void rosenbrock_func(double*, double*, int, double*, double*, int, int);  /* Rosenbrock's */
+void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag);
 void schaffer_F7_func(double*, double*, int, double*, double*, int, int); /* Schwefel's F7 */
 void ackley_func(double*, double*, int, double*, double*, int, int);      /* Ackley's */
 void rastrigin_func(double*, double*, int, double*, double*, int, int);   /* Rastrigin's  */
@@ -214,7 +216,7 @@ void cec17_test_func(double* x, double* f, int nx, int mx, int func_num)
                 f[i] += 500.0;
                 break;
             case 6:
-                schaffer_F7_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
+                getGap(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
                 f[i] += 600.0;
                 break;
             case 7:
@@ -568,6 +570,38 @@ void rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_
 
     for (i = 0; i < nx; i++) {
         f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
+    }
+}
+
+void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag)
+{
+    int i;
+    f[0] = 0.0;
+
+    for (i = 0; i < nx; i++)
+        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
+
+    Tile tile = {a, b, c, d, e, f, g, h, i}; // Create a tile structure with the passed arguments
+
+    if (!validateTile(tile)) {
+        exit(1);
+        printf("\nThe tile inputted was invalid");
+    }
+
+    int gap_index = 0;
+    double gap_list[25];
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            gap_list[gap_index] = calculateGap(tile, i, j);
+            gap_index++;
+        }
+    }
+
+    // Returning the minimumgap in the gap list
+    double min_gap    = gap_list[0];
+    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
+    for (int i = 0; i < gap_list_size; ++i) {
+        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
     }
 }
 
