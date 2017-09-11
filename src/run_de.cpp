@@ -45,7 +45,7 @@ int main()
     strcpy(fileName, fileNameStr.c_str());
     outFile.open(fileName, ios::out);
 
-    g_function_number = 1;
+    g_function_number = 5;
     cout << "\n-------------------------------------------------------" << endl;
     cout << "Function = " << g_function_number << ", Dimension size = " << g_problem_size
          << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
