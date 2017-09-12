@@ -33,7 +33,7 @@ int main()
     srand((unsigned)time(NULL));
 
     g_pop_size    = (int)round(sqrt(g_problem_size) * log(g_problem_size) * 25);
-    g_memory_size = 5;
+    g_memory_size = 7;
     g_arc_rate    = 1;
     g_p_best_rate = 0.25;
 

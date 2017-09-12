@@ -15,13 +15,13 @@
 #define E 2.7182818284590452353602874713526625
 #define PI 3.1415926535897932384626433832795029
 
+void getGap(double*, double* , int, double* , double*, int, int); /* Justin's Fitness Function */
 void sphere_func(double*, double*, int, double*, double*, int, int);      /* Sphere */
 void ellips_func(double*, double*, int, double*, double*, int, int);      /* Ellipsoidal */
 void bent_cigar_func(double*, double*, int, double*, double*, int, int);  /* Discus */
 void discus_func(double*, double*, int, double*, double*, int, int);      /* Bent_Cigar */
 void dif_powers_func(double*, double*, int, double*, double*, int, int);  /* Different Powers */
 void rosenbrock_func(double*, double*, int, double*, double*, int, int);  /* Rosenbrock's */
-void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag);
 void schaffer_F7_func(double*, double*, int, double*, double*, int, int); /* Schwefel's F7 */
 void ackley_func(double*, double*, int, double*, double*, int, int);      /* Ackley's */
 void rastrigin_func(double*, double*, int, double*, double*, int, int);   /* Rastrigin's  */
@@ -216,11 +216,11 @@ void cec17_test_func(double* x, double* f, int nx, int mx, int func_num)
                 f[i] += 500.0;
                 break;
             case 6:
-                getGap(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
+                bi_rastrigin_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
                 f[i] += 600.0;
                 break;
             case 7:
-                bi_rastrigin_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
+                getGap(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
                 f[i] += 700.0;
                 break;
             case 8:
@@ -323,8 +323,51 @@ void cec17_test_func(double* x, double* f, int nx, int mx, int func_num)
     }
 }
 
-void sphere_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,
-                 int r_flag) /* Sphere */
+void rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,
+                    int r_flag) /* Rastrigin's  */
+{
+    int i;
+    f[0] = 0.0;
+
+    sr_func(x, z, nx, Os, Mr, 5.12 / 100.0, s_flag, r_flag); /* shift and rotate */
+
+    for (i = 0; i < nx; i++) {
+        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
+    }
+}
+
+void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag)
+{
+    f[0] = 0.0;
+
+    for (int i = 0; i < nx; i++)
+        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
+
+    Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]}; // Create a tile
+
+    if (!validateTile(tile)) {
+        exit(1);
+        printf("\nThe tile inputted was invalid\n");
+    }
+
+    int gap_index = 0;
+    double gap_list[25];
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            gap_list[gap_index] = calculateGap(tile, i, j);
+            gap_index++;
+        }
+    }
+
+    // Returning the minimumgap in the gap list
+    double min_gap    = gap_list[0];
+    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
+    for (int i = 0; i < gap_list_size; ++i) {
+        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
+    }
+}
+
+void sphere_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag) /* Sphere */
 {
     int i;
     f[0] = 0.0;
@@ -558,51 +601,6 @@ void griewank_func(double* x, double* f, int nx, double* Os, double* Mr, int s_f
         p *= cos(z[i] / sqrt(1.0 + i));
     }
     f[0] = 1.0 + s / 4000.0 - p;
-}
-
-void rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,
-                    int r_flag) /* Rastrigin's  */
-{
-    int i;
-    f[0] = 0.0;
-
-    sr_func(x, z, nx, Os, Mr, 5.12 / 100.0, s_flag, r_flag); /* shift and rotate */
-
-    for (i = 0; i < nx; i++) {
-        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
-    }
-}
-
-void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag)
-{
-    int i;
-    f[0] = 0.0;
-
-    for (i = 0; i < nx; i++)
-        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
-
-    Tile tile = {a, b, c, d, e, f, g, h, i}; // Create a tile structure with the passed arguments
-
-    if (!validateTile(tile)) {
-        exit(1);
-        printf("\nThe tile inputted was invalid");
-    }
-
-    int gap_index = 0;
-    double gap_list[25];
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            gap_list[gap_index] = calculateGap(tile, i, j);
-            gap_index++;
-        }
-    }
-
-    // Returning the minimumgap in the gap list
-    double min_gap    = gap_list[0];
-    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
-    for (int i = 0; i < gap_list_size; ++i) {
-        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
-    }
 }
 
 void step_rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,
