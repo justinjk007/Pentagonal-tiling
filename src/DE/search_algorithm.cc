@@ -12,6 +12,7 @@
 */
 
 #include "de.h"
+#include "../CalculateGap.hpp"
 
 void searchAlgorithm::initializeParameters()
 {
@@ -26,7 +27,8 @@ void searchAlgorithm::evaluatePopulation(const vector<Individual>& pop, vector<F
 {
     for (int i = 0; i < pop_size; i++) {
         // cec14_test_func(pop[i],  &fitness[i], problem_size, 1, function_number);
-        cec17_test_func(pop[i], &fitness[i], problem_size, 1, function_number);
+        // cec17_test_func(pop[i], &fitness[i], problem_size, 1, function_number);
+	getGap(pop[i], &fitness[i]);
     }
 }
 

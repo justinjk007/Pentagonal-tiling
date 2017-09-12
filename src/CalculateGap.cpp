@@ -72,6 +72,51 @@ double getGap(dd a, dd b, dd c, dd d, dd e, dd f, dd g, dd h, dd i)
     return min_gap;
 }
 
+void getGap(double* x, double* f)
+{
+    f[0] = 0.0;
+    // sr_func(x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* Shift and Rotate */
+
+    Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]};  // Create a tile
+
+    tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};  // Create a tile
+
+    // Tile tile = {32.72,  73.59,  78.67, 49.06, 57.68, 122.03, 115.73, 84.19, 95.81, 122.23};  //
+    // Type 1.1
+
+    if (!validateTile(tile)) {
+        printf("\nThe tile inputted was invalid\n");
+        exit(1);
+    }
+
+    // std::cout << "Here2\n";
+    int gap_index = 0;
+    double gap_list[25];
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 5; ++j) {
+            gap_list[gap_index] = calculateGap(tile, i, j);
+            gap_index++;
+        }
+    }
+
+    // std::cout << "Here2\n";
+    // Finding the minimumgap in the gap list
+    double min_gap    = gap_list[0];
+    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
+    for (int i = 0; i < gap_list_size; ++i) {
+        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
+    }
+
+    // std::cout << "Here3\n";
+
+    // for (int i = 0; i < nx; i++) {
+    f[0] = min_gap;
+    // }
+
+    // std::cout << "Here4\n";
+    // std::cout << "Testing count: "<< testing_count <<"\n";
+}
+
 double calculateGap(Tile tile, int i, int j)
 {
     /**
