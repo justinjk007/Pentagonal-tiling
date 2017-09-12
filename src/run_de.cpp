@@ -33,7 +33,7 @@ int main()
     srand((unsigned)time(NULL));
 
     g_pop_size    = (int)round(sqrt(g_problem_size) * log(g_problem_size) * 25);
-    g_memory_size = 7;
+    g_memory_size = 5;
     g_arc_rate    = 1;
     g_p_best_rate = 0.25;
 
@@ -45,7 +45,7 @@ int main()
     strcpy(fileName, fileNameStr.c_str());
     outFile.open(fileName, ios::out);
 
-    g_function_number = 5;
+    g_function_number = 7;
     cout << "\n-------------------------------------------------------" << endl;
     cout << "Function = " << g_function_number << ", Dimension size = " << g_problem_size
          << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
@@ -59,7 +59,7 @@ int main()
         searchAlgorithm* alg = new LSHADE();
         bsf_fitness_array[j] = alg->run();
         cout << j + 1 << "th run, "
-             << "error value = " << bsf_fitness_array[j] << endl;
+             << "Minimum fitness = " << bsf_fitness_array[j] << endl;
         delete alg;
     }
 

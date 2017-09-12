@@ -8,6 +8,7 @@
 #include <malloc.h>
 #include <math.h>
 #include <stdio.h>
+#include <iostream>
 #include "../CalculateGap.hpp"
 
 #define INF 1.0e99
@@ -216,7 +217,7 @@ void cec17_test_func(double* x, double* f, int nx, int mx, int func_num)
                 f[i] += 500.0;
                 break;
             case 6:
-                bi_rastrigin_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
+                sphere_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
                 f[i] += 600.0;
                 break;
             case 7:
@@ -339,15 +340,17 @@ void rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_
 void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag)
 {
     f[0] = 0.0;
-
-    for (int i = 0; i < nx; i++)
-        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
+    // sr_func(x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* Shift and Rotate */
 
     Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]}; // Create a tile
 
+    // Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0}; // Create a tile
+
+    // Tile tile = {32.72,  73.59,  78.67, 49.06, 57.68, 122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
+
     if (!validateTile(tile)) {
-        exit(1);
         printf("\nThe tile inputted was invalid\n");
+        exit(1);
     }
 
     int gap_index = 0;
@@ -359,11 +362,15 @@ void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, in
         }
     }
 
-    // Returning the minimumgap in the gap list
+    // Finding the minimumgap in the gap list
     double min_gap    = gap_list[0];
     int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
     for (int i = 0; i < gap_list_size; ++i) {
         if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
+    }
+
+    for (int i = 0; i < nx; i++) {
+        f[0] = min_gap;
     }
 }
 
