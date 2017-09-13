@@ -7,8 +7,14 @@ SET (CMAKE_CXX_STANDARD 11)
 SET (VERSION_MAJOR 2)
 SET (VERSION_MINOR 0)
 
+# Project Configuration Settings
+FILE(
+  WRITE ${PROJECT_BINARY_DIR}/Config.h.in
+  "#define VERSION_MAJOR @VERSION_MAJOR@\n"
+  "#define VERSION_MINOR @VERSION_MINOR@"
+  )
 CONFIGURE_FILE (
-  "${PROJECT_SOURCE_DIR}/Config.h.in"
+  "${PROJECT_BINARY_DIR}/Config.h.in"
   "${PROJECT_BINARY_DIR}/Config.h"
   )
 
