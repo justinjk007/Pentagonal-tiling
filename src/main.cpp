@@ -11,7 +11,7 @@
 #define PROG_NAME "main"
 #define YEAR "2017"
 #define LICENSE "GPLv3"
-#define AUTHOR "Justin Kaipada"
+#define AUTHOR "Justin Kaipada & Georgy Zakharov"
 
 void helper();
 void calculateWithDimensions(Tile);
