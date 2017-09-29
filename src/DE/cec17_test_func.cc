@@ -18,7 +18,7 @@
 
 static int testing_count = 0;
 
-void getGap(double*, double* , int, double* , double*, int, int); /* Justin's Fitness Function */
+// void getGap(double*, double* , int, double* , double*, int, int); /* Justin's Fitness Function */
 void sphere_func(double*, double*, int, double*, double*, int, int);      /* Sphere */
 void ellips_func(double*, double*, int, double*, double*, int, int);      /* Ellipsoidal */
 void bent_cigar_func(double*, double*, int, double*, double*, int, int);  /* Discus */
@@ -223,7 +223,7 @@ void cec17_test_func(double* x, double* f, int nx, int mx, int func_num)
                 f[i] += 600.0;
                 break;
             case 7:
-                getGap(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
+                sphere_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
                 f[i] += 700.0;
                 break;
             case 8:
