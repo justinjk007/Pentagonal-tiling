@@ -10,7 +10,6 @@
 double *OShift, *M, *y, *z, *x_bound;
 int ini_flag = 0, n_flag, func_flag, *SS;
 
-int g_function_number;
 int g_problem_size;
 unsigned int g_max_num_evaluations;
 
@@ -45,10 +44,8 @@ int main()
     strcpy(fileName, fileNameStr.c_str());
     outFile.open(fileName, ios::out);
 
-    g_function_number = 7;
     cout << "\n-------------------------------------------------------" << endl;
-    cout << "Function = " << g_function_number << ", Dimension size = " << g_problem_size
-         << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
+    cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
          << endl;
 
     Fitness* bsf_fitness_array = (Fitness*)malloc(sizeof(Fitness) * num_runs);
@@ -71,8 +68,8 @@ int main()
     std_bsf_fitness /= num_runs;
     std_bsf_fitness = sqrt(std_bsf_fitness);
 
-    cout << "\nFunction = " << g_function_number << ", Dimension size = " << g_problem_size
-         << ",  mean = " << mean_bsf_fitness << ", std = " << std_bsf_fitness << endl;
+    cout << ", Dimension size = " << g_problem_size << ",  mean = " << mean_bsf_fitness
+         << ", std = " << std_bsf_fitness << endl;
     free(bsf_fitness_array);
 
     outFile << endl;

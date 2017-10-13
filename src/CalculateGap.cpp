@@ -4,6 +4,8 @@
 #include <iostream>
 #include "PrimitiveTile.hpp"
 #include "myGeometry.hpp"
+#include <chrono>
+#include <thread>
 
 const double PI = 3.14159265358979323846264338327950288;
 
@@ -47,7 +49,7 @@ double getGap(dd a, dd b, dd c, dd d, dd e, dd f, dd g, dd h, dd i)
      * tile
      */
 
-    Tile tile = {a, b, c, d, e, f, g, h, i}; // Create a tile structure with the passed arguments
+    Tile tile = {a, b, c, d, e, f, g, h, i};  // Create a tile structure with the passed arguments
 
     if (!validateTile(tile)) {
         exit(1);
@@ -72,49 +74,47 @@ double getGap(dd a, dd b, dd c, dd d, dd e, dd f, dd g, dd h, dd i)
     return min_gap;
 }
 
-void getGap(double* x, double* f)
+void getGap(double* x, double* fitness)
 {
-    f[0] = 0.0;
-    // sr_func(x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* Shift and Rotate */
-
-    Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]};  // Create a tile
-
-    tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};  // Create a tile
-
-    // Tile tile = {32.72,  73.59,  78.67, 49.06, 57.68, 122.03, 115.73, 84.19, 95.81, 122.23};  //
-    // Type 1.1
+    /**
+     * This is an overloaded variant of getGap that takes in the args
+     * as a vector and append the the gap to the fitness vector which
+     * is the the second argument.
+     */
+    bool alarm = false;
+    double min_gap;
+    Tile tile = {x[0], x[1], x[2], x[3], x[4],
+                 x[5], x[6], x[7], x[8]};  // Create a tile structure with the passed arguments
 
     if (!validateTile(tile)) {
-        printf("\nThe tile inputted was invalid\n");
-        exit(1);
+        printf("\nThe tile inputted was invalid");
+        alarm   = true;
+        min_gap = 100;
+        // exit(1);
     }
 
-    // std::cout << "Here2\n";
-    int gap_index = 0;
-    double gap_list[25];
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            gap_list[gap_index] = calculateGap(tile, i, j);
-            gap_index++;
+    if (!alarm) {
+        int gap_index = 0;
+        double gap_list[25];
+        for (int i = 0; i < 5; ++i) {
+            for (int j = 0; j < 5; ++j) {
+                gap_list[gap_index] = calculateGap(tile, i, j);
+                gap_index++;
+            }
+        }
+
+        // Returning the minimumgap in the gap list
+        min_gap           = gap_list[0];
+        int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
+        for (int i = 0; i < gap_list_size; ++i) {
+            if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
         }
     }
-
-    // std::cout << "Here2\n";
-    // Finding the minimumgap in the gap list
-    double min_gap    = gap_list[0];
-    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
-    for (int i = 0; i < gap_list_size; ++i) {
-        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
-    }
-
-    // std::cout << "Here3\n";
-
-    // for (int i = 0; i < nx; i++) {
-    f[0] = min_gap;
-    // }
-
-    // std::cout << "Here4\n";
-    // std::cout << "Testing count: "<< testing_count <<"\n";
+    cout << "\nMin gap is " << min_gap;
+    printf("\nVector was : %d,%d,%d,%d,%d,%d,%d,%d,%d \n", x[0], x[1], x[2], x[3], x[4], x[5], x[6],
+           x[7], x[8]);
+    this_thread::sleep_for(std::chrono::seconds(1));
+    fitness[0] = min_gap;
 }
 
 double calculateGap(Tile tile, int i, int j)
@@ -155,7 +155,7 @@ bool validateTile(Tile tile)
     if (max_angle <= 180.00)
         if (tile.angle[4] > 0.0)
             if (tile.side[0].value + tile.side[1].value + tile.side[2].value + tile.side[3].value +
-                    tile.side[4].value >
+		tile.side[4].value >
                 (2 * max_side))
                 // 2 x Biggest side becauase we don't know which one is the
                 // biggest side now and we should count that twice on the right

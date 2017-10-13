@@ -16,7 +16,7 @@
 
 void searchAlgorithm::initializeParameters()
 {
-    function_number     = g_function_number;
+    // function_number     = g_function_number;
     problem_size        = g_problem_size;
     max_num_evaluations = g_max_num_evaluations;
     pop_size            = g_pop_size;
