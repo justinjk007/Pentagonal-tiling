@@ -25,7 +25,7 @@ using namespace std;
 int main()
 {
     int num_runs          = 51;  // number of runs
-    g_problem_size        = 10;  // dimension size. please select from 10, 30, 50, 100
+    g_problem_size        = 9;  // dimension size.
     g_max_num_evaluations = g_problem_size * 10000;  // available number of fitness evaluations
 
     // random seed is selected based on time according to competition rules

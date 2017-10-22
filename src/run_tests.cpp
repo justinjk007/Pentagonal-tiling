@@ -163,7 +163,8 @@ BOOST_AUTO_TEST_CASE(Gap_test_or_Integration_test)
     double gap1 = getGap(tile1);
     // cout << "gap1: "<<gap1<<endl;
 
-    double gap2 = getGap(5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0);
+    Tile tile2 = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
+    double gap2 = getGap(tile2);
     // cout << "gap2: "<<gap2<<endl;
     // Points that make up gaps in tile2
     // (5.0,0.0),(9.04062,2.94506),(10.5746,7.69479),(6.54268,4.75606) These points where found

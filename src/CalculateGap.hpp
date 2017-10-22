@@ -13,10 +13,7 @@
 
 static Point_2 centroid;
 
-typedef double dd;
-
 double getGap(Tile);
-double getGap(dd, dd, dd, dd, dd, dd, dd, dd, dd);
 void getGap(double* , double*);
 double calculateGap(Tile, int, int);
 bool validateTile(Tile);

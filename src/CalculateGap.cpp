@@ -42,38 +42,6 @@ double getGap(Tile tile)
     return min_gap;
 }
 
-double getGap(dd a, dd b, dd c, dd d, dd e, dd f, dd g, dd h, dd i)
-{
-    /**
-     * This is an overloaded variant of getGap(Tile) that takes in the raw arguments instead of a
-     * tile
-     */
-
-    Tile tile = {a, b, c, d, e, f, g, h, i};  // Create a tile structure with the passed arguments
-
-    if (!validateTile(tile)) {
-        exit(1);
-        printf("\nThe tile inputted was invalid");
-    }
-
-    int gap_index = 0;
-    double gap_list[25];
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            gap_list[gap_index] = calculateGap(tile, i, j);
-            gap_index++;
-        }
-    }
-
-    // Returning the minimumgap in the gap list
-    double min_gap    = gap_list[0];
-    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
-    for (int i = 0; i < gap_list_size; ++i) {
-        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
-    }
-    return min_gap;
-}
-
 void getGap(double* x, double* fitness)
 {
     /**
@@ -113,7 +81,7 @@ void getGap(double* x, double* fitness)
     cout << "\nMin gap is " << min_gap;
     printf("\nVector was : %d,%d,%d,%d,%d,%d,%d,%d,%d \n", x[0], x[1], x[2], x[3], x[4], x[5], x[6],
            x[7], x[8]);
-    this_thread::sleep_for(std::chrono::seconds(1));
+    this_thread::sleep_for(std::chrono::seconds(1)); // TODO : Remove this during release
     fitness[0] = min_gap;
 }
 
@@ -549,16 +517,16 @@ bool comparePoints(Point_2 a, Point_2 b)
 
     // Compute the cross product of vectors (centroid -> a) x (centroid -> b)
     det = (a.x() - centroid.x()) * (b.y() - centroid.y()) -
-          (b.x() - centroid.x()) * (a.y() - centroid.y());
+	(b.x() - centroid.x()) * (a.y() - centroid.y());
     if (det < 0) return true;
     if (det > 0) return false;
 
     // Points a and b are on the same line from the center
     // Check which point is closer to the center
     d1 = (a.x() - centroid.x()) * (a.x() - centroid.x()) +
-         (a.y() - centroid.y()) * (a.y() - centroid.y());
+	(a.y() - centroid.y()) * (a.y() - centroid.y());
     d2 = (b.x() - centroid.x()) * (b.x() - centroid.x()) +
-         (b.y() - centroid.y()) * (b.y() - centroid.y());
+	(b.y() - centroid.y()) * (b.y() - centroid.y());
     return d1 > d2;
 }
 
