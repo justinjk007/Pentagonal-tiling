@@ -97,39 +97,39 @@ namespace svg
         double height;
     };
 
-    struct SvgPoint
+    struct Point
     {
-        SvgPoint(double x = 0, double y = 0) : x(x), y(y) { }
+        Point(double x = 0, double y = 0) : x(x), y(y) { }
         double x;
         double y;
     };
-    optional<SvgPoint> getMinPoint(std::vector<SvgPoint> const & points)
+    optional<Point> getMinPoint(std::vector<Point> const & points)
     {
         if (points.empty())
-            return optional<SvgPoint>();
+            return optional<Point>();
 
-        SvgPoint min = points[0];
+        Point min = points[0];
         for (unsigned i = 0; i < points.size(); ++i) {
             if (points[i].x < min.x)
                 min.x = points[i].x;
             if (points[i].y < min.y)
                 min.y = points[i].y;
         }
-        return optional<SvgPoint>(min);
+        return optional<Point>(min);
     }
-    optional<SvgPoint> getMaxPoint(std::vector<SvgPoint> const & points)
+    optional<Point> getMaxPoint(std::vector<Point> const & points)
     {
         if (points.empty())
-            return optional<SvgPoint>();
+            return optional<Point>();
 
-        SvgPoint max = points[0];
+        Point max = points[0];
         for (unsigned i = 0; i < points.size(); ++i) {
             if (points[i].x > max.x)
                 max.x = points[i].x;
             if (points[i].y > max.y)
                 max.y = points[i].y;
         }
-        return optional<SvgPoint>(max);
+        return optional<Point>(max);
     }
 
     // Defines the dimensions, scale, origin, and origin offset of the document.
@@ -138,12 +138,12 @@ namespace svg
         enum Origin { TopLeft, BottomLeft, TopRight, BottomRight };
 
         Layout(Dimensions const & dimensions = Dimensions(400, 300), Origin origin = BottomLeft,
-            double scale = 1, SvgPoint const & origin_offset = SvgPoint(0, 0))
+            double scale = 1, Point const & origin_offset = Point(0, 0))
             : dimensions(dimensions), scale(scale), origin(origin), origin_offset(origin_offset) { }
         Dimensions dimensions;
         double scale;
         Origin origin;
-        SvgPoint origin_offset;
+        Point origin_offset;
     };
 
     // Convert coordinates in user space to SVG native space.
@@ -290,7 +290,7 @@ namespace svg
             : fill(fill), stroke(stroke) { }
         virtual ~Shape() { }
         virtual std::string toString(Layout const & layout) const = 0;
-        virtual void offset(SvgPoint const & offset) = 0;
+        virtual void offset(Point const & offset) = 0;
     protected:
         Fill fill;
         Stroke stroke;
@@ -308,7 +308,7 @@ namespace svg
     class Circle : public Shape
     {
     public:
-        Circle(SvgPoint const & center, double diameter, Fill const & fill,
+        Circle(Point const & center, double diameter, Fill const & fill,
             Stroke const & stroke = Stroke())
             : Shape(fill, stroke), center(center), radius(diameter / 2) { }
         std::string toString(Layout const & layout) const
@@ -320,20 +320,20 @@ namespace svg
                 << stroke.toString(layout) << emptyElemEnd();
             return ss.str();
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             center.x += offset.x;
             center.y += offset.y;
         }
     private:
-        SvgPoint center;
+        Point center;
         double radius;
     };
 
     class Elipse : public Shape
     {
     public:
-        Elipse(SvgPoint const & center, double width, double height,
+        Elipse(Point const & center, double width, double height,
             Fill const & fill = Fill(), Stroke const & stroke = Stroke())
             : Shape(fill, stroke), center(center), radius_width(width / 2),
             radius_height(height / 2) { }
@@ -347,13 +347,13 @@ namespace svg
                 << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
             return ss.str();
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             center.x += offset.x;
             center.y += offset.y;
         }
     private:
-        SvgPoint center;
+        Point center;
         double radius_width;
         double radius_height;
     };
@@ -361,7 +361,7 @@ namespace svg
     class Rectangle : public Shape
     {
     public:
-        Rectangle(SvgPoint const & edge, double width, double height,
+        Rectangle(Point const & edge, double width, double height,
             Fill const & fill = Fill(), Stroke const & stroke = Stroke())
             : Shape(fill, stroke), edge(edge), width(width),
             height(height) { }
@@ -375,21 +375,21 @@ namespace svg
                 << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
             return ss.str();
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             edge.x += offset.x;
             edge.y += offset.y;
         }
     private:
-        SvgPoint edge;
+        Point edge;
         double width;
         double height;
     };
 
-    class SvgLine : public Shape
+    class Line : public Shape
     {
     public:
-        SvgLine(SvgPoint const & start_point, SvgPoint const & end_point,
+        Line(Point const & start_point, Point const & end_point,
             Stroke const & stroke = Stroke())
             : Shape(Fill(), stroke), start_point(start_point),
             end_point(end_point) { }
@@ -403,7 +403,7 @@ namespace svg
                 << stroke.toString(layout) << emptyElemEnd();
             return ss.str();
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             start_point.x += offset.x;
             start_point.y += offset.y;
@@ -412,17 +412,17 @@ namespace svg
             end_point.y += offset.y;
         }
     private:
-        SvgPoint start_point;
-        SvgPoint end_point;
+        Point start_point;
+        Point end_point;
     };
 
-    class SvgPolygon : public Shape
+    class Polygon : public Shape
     {
     public:
-        SvgPolygon(Fill const & fill = Fill(), Stroke const & stroke = Stroke())
+        Polygon(Fill const & fill = Fill(), Stroke const & stroke = Stroke())
             : Shape(fill, stroke) { }
-        SvgPolygon(Stroke const & stroke = Stroke()) : Shape(Color::Transparent, stroke) { }
-        SvgPolygon & operator<<(SvgPoint const & point)
+        Polygon(Stroke const & stroke = Stroke()) : Shape(Color::Transparent, stroke) { }
+        Polygon & operator<<(Point const & point)
         {
             points.push_back(point);
             return *this;
@@ -440,7 +440,7 @@ namespace svg
             ss << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
             return ss.str();
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             for (unsigned i = 0; i < points.size(); ++i) {
                 points[i].x += offset.x;
@@ -448,18 +448,18 @@ namespace svg
             }
         }
     private:
-        std::vector<SvgPoint> points;
+        std::vector<Point> points;
     };
 
     class Path : public Shape
     {
     public:
        Path(Fill const & fill = Fill(), Stroke const & stroke = Stroke())
-          : Shape(fill, stroke)
+          : Shape(fill, stroke) 
        {  startNewSubPath(); }
-       Path(Stroke const & stroke = Stroke()) : Shape(Color::Transparent, stroke)
+       Path(Stroke const & stroke = Stroke()) : Shape(Color::Transparent, stroke) 
        {  startNewSubPath(); }
-       Path & operator<<(SvgPoint const & point)
+       Path & operator<<(Point const & point)
        {
           paths.back().push_back(point);
           return *this;
@@ -494,7 +494,7 @@ namespace svg
           return ss.str();
        }
 
-       void offset(SvgPoint const & offset)
+       void offset(Point const & offset)
        {
           for (auto& subpath : paths)
              for (auto& point : subpath)
@@ -504,7 +504,7 @@ namespace svg
              }
        }
     private:
-       std::vector<std::vector<SvgPoint>> paths;
+       std::vector<std::vector<Point>> paths;
     };
 
     class Polyline : public Shape
@@ -513,10 +513,10 @@ namespace svg
         Polyline(Fill const & fill = Fill(), Stroke const & stroke = Stroke())
             : Shape(fill, stroke) { }
         Polyline(Stroke const & stroke = Stroke()) : Shape(Color::Transparent, stroke) { }
-        Polyline(std::vector<SvgPoint> const & points,
+        Polyline(std::vector<Point> const & points,
             Fill const & fill = Fill(), Stroke const & stroke = Stroke())
             : Shape(fill, stroke), points(points) { }
-        Polyline & operator<<(SvgPoint const & point)
+        Polyline & operator<<(Point const & point)
         {
             points.push_back(point);
             return *this;
@@ -534,20 +534,20 @@ namespace svg
             ss << fill.toString(layout) << stroke.toString(layout) << emptyElemEnd();
             return ss.str();
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             for (unsigned i = 0; i < points.size(); ++i) {
                 points[i].x += offset.x;
                 points[i].y += offset.y;
             }
         }
-        std::vector<SvgPoint> points;
+        std::vector<Point> points;
     };
 
     class Text : public Shape
     {
     public:
-        Text(SvgPoint const & origin, std::string const & content, Fill const & fill = Fill(),
+        Text(Point const & origin, std::string const & content, Fill const & fill = Fill(),
              Font const & font = Font(), Stroke const & stroke = Stroke())
             : Shape(fill, stroke), origin(origin), content(content), font(font) { }
         std::string toString(Layout const & layout) const
@@ -559,13 +559,13 @@ namespace svg
                 << ">" << content << elemEnd("text");
             return ss.str();
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             origin.x += offset.x;
             origin.y += offset.y;
         }
     private:
-        SvgPoint origin;
+        Point origin;
         std::string content;
         Font font;
     };
@@ -596,7 +596,7 @@ namespace svg
 
             return ret + axisString(layout);
         }
-        void offset(SvgPoint const & offset)
+        void offset(Point const & offset)
         {
             for (unsigned i = 0; i < polylines.size(); ++i)
                 polylines[i].offset(offset);
@@ -612,8 +612,8 @@ namespace svg
             if (polylines.empty())
                 return optional<Dimensions>();
 
-            optional<SvgPoint> min = getMinPoint(polylines[0].points);
-            optional<SvgPoint> max = getMaxPoint(polylines[0].points);
+            optional<Point> min = getMinPoint(polylines[0].points);
+            optional<Point> max = getMaxPoint(polylines[0].points);
             for (unsigned i = 0; i < polylines.size(); ++i) {
                 if (getMinPoint(polylines[i].points)->x < min->x)
                     min->x = getMinPoint(polylines[i].points)->x;
@@ -639,15 +639,15 @@ namespace svg
 
             // Draw the axis.
             Polyline axis(Color::Transparent, axis_stroke);
-            axis << SvgPoint(margin.width, margin.height + height) << SvgPoint(margin.width, margin.height)
-                << SvgPoint(margin.width + width, margin.height);
+            axis << Point(margin.width, margin.height + height) << Point(margin.width, margin.height)
+                << Point(margin.width + width, margin.height);
 
             return axis.toString(layout);
         }
         std::string polylineToString(Polyline const & polyline, Layout const & layout) const
         {
             Polyline shifted_polyline = polyline;
-            shifted_polyline.offset(SvgPoint(margin.width, margin.height));
+            shifted_polyline.offset(Point(margin.width, margin.height));
 
             std::vector<Circle> vertices;
             for (unsigned i = 0; i < shifted_polyline.points.size(); ++i)

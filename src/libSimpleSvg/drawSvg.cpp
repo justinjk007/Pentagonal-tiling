@@ -12,14 +12,14 @@ void drawSvgfile(int h, int w, std::list<Segment> poly_mess)
     Document doc(file_name, Layout(dimensions, Layout::BottomLeft));
 
     // Balck image border.
-    SvgPolygon border(Stroke(1, Color::Black));
-    border << SvgPoint(0, 0) << SvgPoint(dimensions.width, 0)
-           << SvgPoint(dimensions.width, dimensions.height) << SvgPoint(0, dimensions.height);
+    Polygon border(Stroke(1, Color::Black));
+    border << svg::Point(0, 0) << svg::Point(dimensions.width, 0)
+           << svg::Point(dimensions.width, dimensions.height) << svg::Point(0, dimensions.height);
     doc << border;
 
-    doc << (SvgPolygon(Color(200, 160, 220), Stroke(.5, Color(150, 160, 200)))
-            << SvgPoint(20, 70) << SvgPoint(25, 72) << SvgPoint(33, 70) << SvgPoint(35, 60)
-            << SvgPoint(25, 55) << SvgPoint(18, 63));
+    doc << (Polygon(Color(200, 160, 220), Stroke(.5, Color(150, 160, 200)))
+            << svg::Point(20, 70) << svg::Point(25, 72) << svg::Point(33, 70) << svg::Point(35, 60)
+            << svg::Point(25, 55) << svg::Point(18, 63));
 
     doc.save();
 }
