@@ -20,13 +20,6 @@ CONFIGURE_FILE (
 
 INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}") # This is done to include Config.h
 
-# Remove unwanted from MSVC for simple svg lib
-if(MSVC)
-  add_definitions(/D_CRT_SECURE_NO_WARNINGS)
-  add_definitions(/D_SCL_SECURE_NO_WARNINGS)
-  add_definitions(/DNOMINMAX)
-endif(MSVC)
-
 # Boost config
 SET(Boost_USE_STATIC_LIBS ON)
 SET(Boost_USE_MULTITHREADED ON)
@@ -43,6 +36,11 @@ INCLUDE( CGAL_CreateSingleSourceCGALProgram )
 INCLUDE_DIRECTORIES ("${CGAL_ROOT}/include/CGAL")
 INCLUDE_DIRECTORIES (BEFORE "../../include")
 
+#Simple SVG library
+ADD_LIBRARY(libSimpleSvg "")
+INCLUDE(libSimpleSvg/CMakeLists.txt)
+MESSAGE("-- Liniked svg library")
+
 #DE config
 ADD_LIBRARY(DE "")
 INCLUDE(DE/CMakeLists.txt) # Include libs from subdir
@@ -58,7 +56,7 @@ ADD_EXECUTABLE(run_tests run_tests.cpp)
 ADD_EXECUTABLE(run_de run_de.cpp)
 MESSAGE("-- All executables added")
 
-TARGET_LINK_LIBRARIES (run_tests CalculateGap PrimitiveTile myGeometry boundaryDetection ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
-TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry boundaryDetection)
-TARGET_LINK_LIBRARIES (run_de CalculateGap PrimitiveTile myGeometry boundaryDetection DE)
+TARGET_LINK_LIBRARIES (run_tests CalculateGap PrimitiveTile myGeometry boundaryDetection libSimpleSvg ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
+TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry boundaryDetection libSimpleSvg)
+TARGET_LINK_LIBRARIES (run_de CalculateGap PrimitiveTile myGeometry boundaryDetection DE libSimpleSvg)
 MESSAGE("-- All libraries connected")

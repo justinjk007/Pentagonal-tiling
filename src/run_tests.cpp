@@ -8,6 +8,7 @@
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "boundaryDetection.hpp"
+#include "libSimpleSvg/drawSvg.hpp"
 #include "myGeometry.hpp"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
@@ -148,6 +149,7 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon)
     // newSample.writeToFileRaw();
     std::list<Segment> boundary = removeInnerLines(newSample.lines);
     newSample.writeToFileRaw(boundary);
+    drawSvgfile(100, 100, boundary);
     std::list<Point_2> boundary_points = getSources(boundary);
     boundary_points                    = sortClockwise(boundary_points);
     double total_area                  = getPolygonArea(boundary_points);
@@ -156,8 +158,8 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon)
 
 BOOST_AUTO_TEST_CASE(Gap_test_or_Integration_test)
 {
-    Tile tile1 = {32.72,  73.59,  78.67, 49.06, 57.68,
-                  122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
+    Tile tile1  = {32.72,  73.59,  78.67, 49.06, 57.68,
+		   122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
     double gap1 = getGap(tile1);
     // cout << "gap1: "<<gap1<<endl;
 
