@@ -20,6 +20,13 @@ CONFIGURE_FILE (
 
 INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}") # This is done to include Config.h
 
+# Remove unwanted from MSVC for simple svg lib
+if(MSVC)
+  add_definitions(/D_CRT_SECURE_NO_WARNINGS)
+  add_definitions(/D_SCL_SECURE_NO_WARNINGS)
+  add_definitions(/DNOMINMAX)
+endif(MSVC)
+
 # Boost config
 SET(Boost_USE_STATIC_LIBS ON)
 SET(Boost_USE_MULTITHREADED ON)
@@ -37,7 +44,7 @@ INCLUDE_DIRECTORIES ("${CGAL_ROOT}/include/CGAL")
 INCLUDE_DIRECTORIES (BEFORE "../../include")
 
 #DE config
-ADD_LIBRARY(DE "") # Include libs from subdir
+ADD_LIBRARY(DE "")
 INCLUDE(DE/CMakeLists.txt) # Include libs from subdir
 
 ADD_LIBRARY(boundaryDetection boundaryDetection.cpp)
