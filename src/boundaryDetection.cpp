@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Rect getBoundingBox(std::list<Point_2> points)
+Rect getBoundingBox(const std::list<Point_2>& points)
 {
     /**
      * Returns axis-aligned bounding box of 2D points
@@ -13,7 +13,7 @@ Rect getBoundingBox(std::list<Point_2> points)
     return box;
 }
 
-list<Segment> getSegments(std::list<Line> lines)
+list<Segment> getSegments(const std::list<Line>& lines)
 {
     /**
      * Return CGAL::segments from myGeometry lines, this weill removed later
@@ -21,7 +21,7 @@ list<Segment> getSegments(std::list<Line> lines)
      */
     list<Segment> segments;
 
-    for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+    for (auto it = lines.begin(); it != lines.end(); it++) {
         Point_2 start(it->start.x, it->start.y);
         Point_2 end(it->end.x, it->end.y);
         Segment segment(start, end);
@@ -31,7 +31,7 @@ list<Segment> getSegments(std::list<Line> lines)
     return segments;
 }
 
-bool onSegment(Point_2 p, Point_2 q, Point_2 r)
+bool onSegment(const Point_2& p, const Point_2& q, const Point_2& r)
 {
     /**
      * Check if point r is on the line segment made by point p and q.
@@ -42,7 +42,7 @@ bool onSegment(Point_2 p, Point_2 q, Point_2 r)
     return false;
 }
 
-int orientation(Point_2 p, Point_2 q, Point_2 r)
+int orientation(const Point_2& p, const Point_2& q, const Point_2& r)
 {
     /**
      * To find orientation of ordered triplet (p, q, r).
@@ -57,11 +57,11 @@ int orientation(Point_2 p, Point_2 q, Point_2 r)
     return (val > 0) ? 1 : 2;  // clock or counterclock wise
 }
 
-bool do_intersect(Segment a, Segment b)
+bool do_intersect(const Segment& a,const Segment& b)
 {
     /**
-      * Find the four orientations needed for general and special
-      * cases, and returns true if the line segments intersect.
+     * Find the four orientations needed for general and special
+     * cases, and returns true if the line segments intersect.
      */
     Point_2 p1 = a.source();
     Point_2 q1 = a.target();
@@ -87,7 +87,7 @@ bool do_intersect(Segment a, Segment b)
     return false;  // Doesn't fall in any of the above cases
 }
 
-bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line)
+bool doIntersect(const Segment& line,const std::list<Segment>& lines,const Segment& except_line)
 {
     /**
      * Check if the passed line segments intersects with any of the
@@ -95,7 +95,7 @@ bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line)
      * line that is an exception.
      */
 
-    for (std::list<Segment>::iterator it = lines.begin(); it != lines.end(); it++)
+    for (auto it = lines.begin(); it != lines.end(); it++)
         if (*it == except_line)
             continue;
         else if (do_intersect(line, *it))
@@ -103,7 +103,7 @@ bool doIntersect(Segment line, std::list<Segment> lines, Segment except_line)
     return false;
 }
 
-std::list<Segment> removeInnerLines(std::list<Line> temp_lines)
+std::list<Segment> removeInnerLines(const std::list<Line>& temp_lines)
 {
     /**
      * Returns the lines that lies outside-most in the given list of
@@ -115,7 +115,7 @@ std::list<Segment> removeInnerLines(std::list<Line> temp_lines)
     list<Segment> lines  = getSegments(temp_lines);  // Get CGAL segments from my lines
     Rect box             = getBoundingBox(points);   // Get the bounding box of the points
 
-    for (list<Segment>::iterator it = lines.begin(); it != lines.end(); it++) {
+    for (auto it = lines.begin(); it != lines.end(); it++) {
         // Test 01: Check for intersections to the left
         Point_2 midpoint = getMidPoint(*it);  // Get the midpoint
 
@@ -147,7 +147,7 @@ std::list<Segment> removeInnerLines(std::list<Line> temp_lines)
     return boundaries;
 }
 
-Polygon_2 getPolygon(std::list<Point_2> points)
+Polygon_2 getPolygon(const std::list<Point_2>& points)
 {
     /**
      * Returns a cgal polygon from the given list of points. Remember
@@ -155,7 +155,7 @@ Polygon_2 getPolygon(std::list<Point_2> points)
      */
 
     Polygon_2 polygon;
-    for (list<Point_2>::iterator it = points.begin(); it != points.end(); it++) {
+    for (auto it = points.begin(); it != points.end(); it++) {
         polygon.push_back(*it);
     }
     return polygon;
