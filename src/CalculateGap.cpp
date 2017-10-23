@@ -1,17 +1,17 @@
 #include "CalculateGap.hpp"
 #include <stdlib.h>
+#include <chrono>
 #include <cmath>
 #include <iostream>
+#include <thread>
 #include "PrimitiveTile.hpp"
 #include "myGeometry.hpp"
-#include <chrono>
-#include <thread>
 
 const double PI = 3.14159265358979323846264338327950288;
 
 using namespace std;
 
-double getGap(Tile tile)
+double getGap(const Tile& tile)
 {
     /*
      * This is the main method that returns the gap minimum between the
@@ -81,11 +81,11 @@ void getGap(double* x, double* fitness)
     cout << "\nMin gap is " << min_gap;
     printf("\nVector was : %d,%d,%d,%d,%d,%d,%d,%d,%d \n", x[0], x[1], x[2], x[3], x[4], x[5], x[6],
            x[7], x[8]);
-    this_thread::sleep_for(std::chrono::seconds(1)); // TODO : Remove this during release
+    this_thread::sleep_for(std::chrono::seconds(1));  // TODO : Remove this during release
     fitness[0] = min_gap;
 }
 
-double calculateGap(Tile tile, int i, int j)
+double calculateGap(const Tile& tile, const int& i, const int& j)
 {
     /**
      * This method integrates all the core methods into finding the gap
@@ -112,7 +112,7 @@ double calculateGap(Tile tile, int i, int j)
         return -101;
 }
 
-bool validateTile(Tile tile)
+bool validateTile(const Tile& tile)
 {
     /*
      * This method returns whether the Tile inputted is valid or not.
@@ -123,7 +123,7 @@ bool validateTile(Tile tile)
     if (max_angle <= 180.00)
         if (tile.angle[4] > 0.0)
             if (tile.side[0].value + tile.side[1].value + tile.side[2].value + tile.side[3].value +
-		tile.side[4].value >
+                    tile.side[4].value >
                 (2 * max_side))
                 // 2 x Biggest side becauase we don't know which one is the
                 // biggest side now and we should count that twice on the right
@@ -138,7 +138,7 @@ bool validateTile(Tile tile)
         return false;
 }
 
-double getMaxSide(Tile tile)
+double getMaxSide(const Tile& tile)
 {
     /*
      * This method returns the biggest side of the tile.
@@ -150,7 +150,7 @@ double getMaxSide(Tile tile)
     return max_side;
 }
 
-double getMaxAngle(Tile tile)
+double getMaxAngle(const Tile& tile)
 {
     /*
      * This method returns the biggest angle of the tile.
@@ -162,20 +162,19 @@ double getMaxAngle(Tile tile)
     return max_angle;
 }
 
-double getThirdSide(Side a, Side b, double angle)
+double getThirdSide(const Side& a, const Side& b, const double& angle)
 {
     /*
      * This method returns the third side of the triangle formed inside
      * a polygon used for area calculating purposes. Angle should be
      * passed in degrees
      */
-    angle = angle * PI / 180.0;
-    double side_c =
-        sqrt((a.value * a.value) + (b.value * b.value) - (2.0 * a.value * b.value * cos(angle)));
+    double side_c = sqrt((a.value * a.value) + (b.value * b.value) -
+                         (2.0 * a.value * b.value * cos(angle * PI / 180.0)));
     return side_c;
 }
 
-double getOtherAngle(Side a, Side b, double angle_b, char which_angle)
+double getOtherAngle(const Side& a, const Side& b, const double& angle_b, const char& which_angle)
 {
     /**
      * This method uses sine law to find the angle b/w a and c or b and
@@ -199,7 +198,7 @@ double getOtherAngle(Side a, Side b, double angle_b, char which_angle)
         return other_angle;
 }
 
-double getTriangleArea(double a, double b, double c)
+double getTriangleArea(const double& a, const double& b, const double& c)
 {
     /*
      * This method returns the Area of the triagle using Heron's
@@ -210,7 +209,7 @@ double getTriangleArea(double a, double b, double c)
     return area;
 }
 
-double getTileArea(Tile tile)
+double getTileArea(const Tile& tile)
 {
     /*
      * This method returns the Area of the pentagon dividing it into
@@ -225,7 +224,7 @@ double getTileArea(Tile tile)
     return pentagonArea;
 }
 
-double getPolygonArea(std::list<Line> polygon)
+double getPolygonArea(const std::list<Line>& polygon)
 {
     /**
      * This method implements calculating the area of a polygon using
@@ -236,7 +235,7 @@ double getPolygonArea(std::list<Line> polygon)
     double sum = 0.0, diff = 0.0, area = 0.0;
     double x1, y1, x2, y2;
 
-    for (list<Line>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+    for (auto it = polygon.begin(); it != polygon.end(); it++) {
         x1 = it->start.x;
         y1 = it->start.y;
         x2 = it->end.x;
@@ -249,7 +248,7 @@ double getPolygonArea(std::list<Line> polygon)
     return area;
 }
 
-double getPolygonArea(std::list<Segment> polygon)
+double getPolygonArea(const std::list<Segment>& polygon)
 {
     /**
      * This method implements calculating the area of a polygon using
@@ -260,7 +259,7 @@ double getPolygonArea(std::list<Segment> polygon)
     double sum = 0.0, diff = 0.0, area = 0.0;
     double x1, y1, x2, y2;
 
-    for (list<Segment>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+    for (auto it = polygon.begin(); it != polygon.end(); it++) {
         x1 = it->source().x();
         y1 = it->source().y();
         x2 = it->target().x();
@@ -273,7 +272,7 @@ double getPolygonArea(std::list<Segment> polygon)
     return area;
 }
 
-double getPolygonArea(std::list<Point_2> polygon)
+double getPolygonArea(const std::list<Point_2>& polygon)
 {
     /**
      * This method implements calculating the area of a polygon using
@@ -282,7 +281,7 @@ double getPolygonArea(std::list<Point_2> polygon)
      */
     double sum = 0.0, diff = 0.0, area = 0.0;
     double x1, y1, x2, y2;
-    for (list<Point_2>::iterator it = polygon.begin(); it != polygon.end();) {
+    for (auto it = polygon.begin(); it != polygon.end();) {
         bool flag = false;
         x1        = it->x();
         y1        = it->y();
@@ -316,7 +315,7 @@ std::list<Line> removeCommonLines(std::list<Line> lines)
     while (!lines.empty()) {
         Line line1 = lines.front();  // Get the 1st line from the list
         lines.pop_front();           // Remove the same line from the list
-        for (list<Line>::iterator it = lines.begin(); it != lines.end(); ++it)
+        for (auto it = lines.begin(); it != lines.end(); ++it)
             if (compareLine(line1, *it))  // Compare to see if same Lines exists
                 new_lines = removeLine(new_lines, line1);
     }
@@ -336,7 +335,7 @@ std::list<Point_2> removeCommonPoints(std::list<Point_2> points)
     while (!points.empty()) {
         Point_2 point1 = points.front();  // Get the 1st line from the list
         points.pop_front();               // Remove the same line from the list
-        for (list<Point_2>::iterator it = points.begin(); it != points.end(); ++it)
+        for (auto it = points.begin(); it != points.end(); ++it)
             if (comparePoint(point1, *it))  // Compare to see if same Point_2s exists
                 new_points = removePoint(new_points, point1);
     }
@@ -344,12 +343,12 @@ std::list<Point_2> removeCommonPoints(std::list<Point_2> points)
     return new_points;
 }
 
-std::list<Line> removeLine(std::list<Line> lines, Line val)
+std::list<Line> removeLine(std::list<Line> lines, const Line& val)
 {
     /**
      * Override function for list::remove rewritten for list<Line>
      */
-    for (list<Line>::iterator it = lines.begin(); it != lines.end();) {
+    for (auto it = lines.begin(); it != lines.end();) {
         if (compareLine(val, *it))  // If same lines exists
             it = lines.erase(it);
         else
@@ -358,12 +357,12 @@ std::list<Line> removeLine(std::list<Line> lines, Line val)
     return lines;
 }
 
-std::list<Point_2> removePoint(std::list<Point_2> points, Point_2 val)
+std::list<Point_2> removePoint(std::list<Point_2> points, const Point_2& val)
 {
     /**
      * Override function for list::remove rewritten for list<Point_2>
      */
-    for (list<Point_2>::iterator it = points.begin(); it != points.end();) {
+    for (auto it = points.begin(); it != points.end();) {
         if (comparePoint(val, *it))  // If same lines exists
             it = points.erase(it);
         else
@@ -372,7 +371,7 @@ std::list<Point_2> removePoint(std::list<Point_2> points, Point_2 val)
     return points;
 }
 
-bool comparePoint(Point_2 a, Point_2 b)
+bool comparePoint(const Point_2& a, const Point_2& b)
 {
     /**
      * Compare points to see if they are equal.
@@ -383,14 +382,14 @@ bool comparePoint(Point_2 a, Point_2 b)
     return false;
 }
 
-void printData(std::list<Line> polygon)
+void printData(const std::list<Line>& polygon)
 {
     /**
      * Prints out the given list of lines
      */
     cout << "Displaying list of Lines\n";
     double x1, y1, x2, y2;
-    for (list<Line>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+    for (auto it = polygon.begin(); it != polygon.end(); it++) {
         x1 = it->start.x;
         y1 = it->start.y;
         x2 = it->end.x;
@@ -399,14 +398,14 @@ void printData(std::list<Line> polygon)
     }
 }
 
-void printData(std::list<Segment> polygon)
+void printData(const std::list<Segment>& polygon)
 {
     /**
      * Prints out the given list of lines
      */
     cout << "Displaying list of Segments\n";
     double x1, y1, x2, y2;
-    for (list<Segment>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+    for (auto it = polygon.begin(); it != polygon.end(); it++) {
         x1 = it->source().x();
         y1 = it->source().y();
         x2 = it->target().x();
@@ -415,21 +414,21 @@ void printData(std::list<Segment> polygon)
     }
 }
 
-void printData(std::list<Point_2> polygon)
+void printData(const std::list<Point_2>& polygon)
 {
     /**
      * Prints out the given list of points
      */
     cout << "Displaying list of Point_2s\n";
     double x1, y1;
-    for (list<Point_2>::iterator it = polygon.begin(); it != polygon.end(); it++) {
+    for (auto it = polygon.begin(); it != polygon.end(); it++) {
         x1 = it->x();
         y1 = it->y();
         printf("(%f, %f)\n", x1, y1);
     }
 }
 
-std::list<Point_2> getSources(std::list<Line> lines)
+std::list<Point_2> getSources(const std::list<Line>& lines)
 {
     /**
      * Returns a list of points representing the source of each line given
@@ -437,7 +436,7 @@ std::list<Point_2> getSources(std::list<Line> lines)
      */
     std::list<Point_2> list_of_points;
 
-    for (list<Line>::iterator it = lines.begin(); it != lines.end(); it++) {
+    for (auto it = lines.begin(); it != lines.end(); it++) {
         double xx = it->start.x;
         double yy = it->start.y;
         Point_2 point(xx, yy);
@@ -447,7 +446,7 @@ std::list<Point_2> getSources(std::list<Line> lines)
     return list_of_points;
 }
 
-std::list<Point_2> getSources(std::list<Segment> lines)
+std::list<Point_2> getSources(const std::list<Segment>& lines)
 {
     /**
      * Returns a list of points representing the source of each line given
@@ -455,7 +454,7 @@ std::list<Point_2> getSources(std::list<Segment> lines)
      */
     std::list<Point_2> list_of_points;
 
-    for (list<Segment>::iterator it = lines.begin(); it != lines.end(); it++) {
+    for (auto it = lines.begin(); it != lines.end(); it++) {
         double xx = it->source().x();
         double yy = it->source().y();
         Point_2 point(xx, yy);
@@ -465,7 +464,7 @@ std::list<Point_2> getSources(std::list<Segment> lines)
     return list_of_points;
 }
 
-Point_2 getMidPoint(Segment line)
+Point_2 getMidPoint(const Segment& line)
 {
     /**
      * Returns the mid point of the given line
@@ -483,14 +482,14 @@ Point_2 getMidPoint(Segment line)
     return point;
 }
 
-Point_2 getCentroid(std::list<Point_2> points)
+Point_2 getCentroid(const std::list<Point_2>& points)
 {
     /**
      * Returns the centroid of the given list of points
      */
     double sum_x = 0.0, sum_y = 0.0;
     int count = 0;
-    for (list<Point_2>::iterator it = points.begin(); it != points.end(); it++) {
+    for (auto it = points.begin(); it != points.end(); it++) {
         count++;
         sum_x += it->x();
         sum_y += it->y();
@@ -499,7 +498,7 @@ Point_2 getCentroid(std::list<Point_2> points)
     return center;
 }
 
-bool comparePoints(Point_2 a, Point_2 b)
+bool comparePoints(const Point_2& a, const Point_2& b)
 {
     /**
      * Compare points based on there angle with centroid
@@ -517,16 +516,16 @@ bool comparePoints(Point_2 a, Point_2 b)
 
     // Compute the cross product of vectors (centroid -> a) x (centroid -> b)
     det = (a.x() - centroid.x()) * (b.y() - centroid.y()) -
-	(b.x() - centroid.x()) * (a.y() - centroid.y());
+          (b.x() - centroid.x()) * (a.y() - centroid.y());
     if (det < 0) return true;
     if (det > 0) return false;
 
     // Points a and b are on the same line from the center
     // Check which point is closer to the center
     d1 = (a.x() - centroid.x()) * (a.x() - centroid.x()) +
-	(a.y() - centroid.y()) * (a.y() - centroid.y());
+         (a.y() - centroid.y()) * (a.y() - centroid.y());
     d2 = (b.x() - centroid.x()) * (b.x() - centroid.x()) +
-	(b.y() - centroid.y()) * (b.y() - centroid.y());
+         (b.y() - centroid.y()) * (b.y() - centroid.y());
     return d1 > d2;
 }
 
