@@ -97,10 +97,11 @@ double calculateGap(const Tile& tile, const int& i, const int& j)
     Link link(tile.side[i], tile.side[j]);
     if (newSample.isLinkable(link)) {
         newSample.drawPentagon(i, j);
-        newSample.doTiling(0, 0, 0, 0);  // TODO pass the
-                                         // appropiate arguments
-                                         // when transition is
-                                         // programmable
+        newSample.doTiling(0, 0, 0, 0);  // TODO pass the appropiate
+                                         // arguments when transition
+                                         // is programmable, meaning
+                                         // when you increase the
+                                         // primitive tile size.
         std::list<Segment> boundary        = removeInnerLines(newSample.lines);
         std::list<Point_2> boundary_points = getSources(boundary);
         boundary_points                    = sortClockwise(boundary_points);
