@@ -40,5 +40,7 @@ Point_2 getMidPoint(const Segment&);
 Point_2 getCentroid(const std::list<Point_2>&);
 bool comparePoints(const Point_2&, const Point_2&);
 std::list<Point_2> sortClockwise(std::list<Point_2>);
+template<typename T>
+void examineVector(const std::vector<T>&);
 
 #endif /* CALCULATEGAP_HPP */

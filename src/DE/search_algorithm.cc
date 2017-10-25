@@ -26,14 +26,15 @@ void searchAlgorithm::initializeParameters()
 void searchAlgorithm::evaluatePopulation(const vector<Individual>& pop, vector<Fitness>& fitness)
 {
     for (int i = 0; i < pop_size; i++) {
-	// If you want to enable these also uncomment the
+	// NOTE: If you want to enable these also uncomment the
 	// cec17_test_func.cc file from the CMakeFile so it can be
 	// compiled.
 
         // cec14_test_func(pop[i],  &fitness[i], problem_size, 1, function_number);
         // cec17_test_func(pop[i], &fitness[i], problem_size, 1, function_number);
-
-	getGap(pop[i], &fitness[i]);
+        std::cout << "The size of pop vector is " << pop.size() << "\n";
+	// examineVector(pop[i]);
+        getGap(pop[i], &fitness[i]);
     }
 }
 

@@ -49,6 +49,7 @@ void getGap(double* x, double* fitness)
      * as a vector and append the the gap to the fitness vector which
      * is the the second argument.
      */
+    // examineVector(x);
     bool alarm = false;  // This flag is used to represent the validity of the current tile
     double min_gap;
     Tile tile = {x[0], x[1], x[2], x[3], x[4],
@@ -543,4 +544,17 @@ std::list<Point_2> sortClockwise(std::list<Point_2> points)
     points.sort(comparePoints);
     return points;
     // det = (a.x - centroid.x) * (b.y - centroid.y) - (b.x - centroid.x) * (a.y - centroid.y)
+}
+
+template <typename T>
+void examineVector(const vector<T>& vec)
+{
+    /**
+     * Print whatever vector is passed along with its length
+     */
+    for (auto it = vec.begin(); it != vec.end(); it++) {
+        cout << *it << "\n";
+    }
+    cout << "Size of the vector: " << vec.size();
+    exit(1);
 }
