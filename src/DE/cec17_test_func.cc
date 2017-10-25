@@ -9,7 +9,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <iostream>
-#include "../CalculateGap.hpp"
 
 #define INF 1.0e99
 #define EPS 1.0e-14
@@ -18,7 +17,6 @@
 
 static int testing_count = 0;
 
-// void getGap(double*, double* , int, double* , double*, int, int); /* Justin's Fitness Function */
 void sphere_func(double*, double*, int, double*, double*, int, int);      /* Sphere */
 void ellips_func(double*, double*, int, double*, double*, int, int);      /* Ellipsoidal */
 void bent_cigar_func(double*, double*, int, double*, double*, int, int);  /* Discus */
@@ -337,51 +335,6 @@ void rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_
     for (i = 0; i < nx; i++) {
         f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
     }
-}
-
-void getGap(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag)
-{
-    testing_count++;
-    f[0] = 0.0;
-    // sr_func(x, z, nx, Os, Mr, 1.0, s_flag, r_flag); /* Shift and Rotate */
-
-    Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8]}; // Create a tile
-
-    tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0}; // Create a tile
-
-    // Tile tile = {32.72,  73.59,  78.67, 49.06, 57.68, 122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
-
-    if (!validateTile(tile)) {
-        printf("\nThe tile inputted was invalid\n");
-        exit(1);
-    }
-
-    // std::cout << "Here2\n";
-    int gap_index = 0;
-    double gap_list[25];
-    for (int i = 0; i < 5; ++i) {
-        for (int j = 0; j < 5; ++j) {
-            gap_list[gap_index] = calculateGap(tile, i, j);
-            gap_index++;
-        }
-    }
-
-    // std::cout << "Here2\n";
-    // Finding the minimumgap in the gap list
-    double min_gap    = gap_list[0];
-    int gap_list_size = (sizeof gap_list) / (sizeof gap_list[0]);
-    for (int i = 0; i < gap_list_size; ++i) {
-        if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
-    }
-
-    // std::cout << "Here3\n";
-
-    for (int i = 0; i < nx; i++) {
-        f[0] = min_gap;
-    }
-
-    // std::cout << "Here4\n";
-    // std::cout << "Testing count: "<< testing_count <<"\n";
 }
 
 void sphere_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag) /* Sphere */
