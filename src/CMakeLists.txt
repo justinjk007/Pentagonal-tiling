@@ -58,5 +58,5 @@ MESSAGE("-- All executables added")
 
 TARGET_LINK_LIBRARIES (run_tests CalculateGap PrimitiveTile myGeometry boundaryDetection libSimpleSvg ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
 TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry boundaryDetection libSimpleSvg)
-TARGET_LINK_LIBRARIES (run_de CalculateGap PrimitiveTile myGeometry boundaryDetection DE libSimpleSvg)
+TARGET_LINK_LIBRARIES (run_de CalculateGap PrimitiveTile myGeometry boundaryDetection DE)
 MESSAGE("-- All libraries connected")
