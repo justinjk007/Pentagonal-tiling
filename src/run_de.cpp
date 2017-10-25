@@ -4,6 +4,8 @@
  * pentagonal tiling
  */
 
+#include <chrono>
+#include <thread>
 #include "CalculateGap.hpp"
 #include "DE/de.h"
 
@@ -14,9 +16,6 @@
  * optimization algorithm like region constraints and more constraints
  * after mutation
  */
-
-double *OShift, *M, *y, *z, *x_bound;
-int ini_flag = 0, n_flag, func_flag, *SS;
 
 int g_problem_size;
 unsigned int g_max_num_evaluations;
@@ -32,8 +31,7 @@ using namespace std;
 
 int main()
 {
-    int num_runs          = 51;  // number of runs
-    g_problem_size        = 9;  // dimension size.
+    g_problem_size        = 9;                       // dimension size.
     g_max_num_evaluations = g_problem_size * 10000;  // available number of fitness evaluations
 
     // random seed is selected based on time according to competition rules
@@ -44,41 +42,13 @@ int main()
     g_arc_rate    = 1;
     g_p_best_rate = 0.25;
 
-    stringstream ss;
-    ss << g_problem_size;
-    string tmp(ss.str());
-    string fileNameStr = "DeOutput" + tmp + ".dat";
-    char fileName[500];
-    strcpy(fileName, fileNameStr.c_str());
-    outFile.open(fileName, ios::out);
-
     cout << "\n-------------------------------------------------------" << endl;
     cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
          << endl;
 
-    Fitness* bsf_fitness_array = (Fitness*)malloc(sizeof(Fitness) * num_runs);
-    Fitness mean_bsf_fitness   = 0;
-    Fitness std_bsf_fitness    = 0;
-
-    for (int j = 0; j < num_runs; j++) {
-        searchAlgorithm* alg = new LSHADE();
-        bsf_fitness_array[j] = alg->run();
-        cout << j + 1 << "th run, "
-             << "Minimum fitness = " << bsf_fitness_array[j] << endl;
-        delete alg;
-    }
-
-    for (int j = 0; j < num_runs; j++) mean_bsf_fitness += bsf_fitness_array[j];
-    mean_bsf_fitness /= num_runs;
-
-    for (int j = 0; j < num_runs; j++)
-        std_bsf_fitness += pow((mean_bsf_fitness - bsf_fitness_array[j]), 2.0);
-    std_bsf_fitness /= num_runs;
-    std_bsf_fitness = sqrt(std_bsf_fitness);
-
-    cout << ", Dimension size = " << g_problem_size << ",  mean = " << mean_bsf_fitness
-         << ", std = " << std_bsf_fitness << endl;
-    free(bsf_fitness_array);
+    searchAlgorithm* algorithm = new LSHADE();
+    algorithm->run();
+    delete algorithm;
 
     outFile << endl;
     return 0;
