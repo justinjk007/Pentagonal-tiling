@@ -1,6 +1,6 @@
 TARGET_SOURCES(DE
   PRIVATE
-  "${CMAKE_CURRENT_LIST_DIR}/cec17_test_func.cc"
+  # "${CMAKE_CURRENT_LIST_DIR}/cec17_test_func.cc"
   "${CMAKE_CURRENT_LIST_DIR}/lshade.cc"
   "${CMAKE_CURRENT_LIST_DIR}/search_algorithm.cc"
   PUBLIC
