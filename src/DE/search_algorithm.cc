@@ -42,9 +42,9 @@ void searchAlgorithm::initializeFitnessFunctionParameters()
     // epsilon is an acceptable error value.
     epsilon    = pow(10.0, -8);
     max_region = 100.0;
-    min_region = -100.0;
+    min_region = 0;
 
-    optimum = function_number * 100;
+    optimum = 0;
 }
 
 // set best solution (bsf_solution) and its fitness value (bsf_fitness) in the initial population

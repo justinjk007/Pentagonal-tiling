@@ -49,7 +49,7 @@ void getGap(double* x, double* fitness)
      * as a vector and append the the gap to the fitness vector which
      * is the the second argument.
      */
-    bool alarm = false;
+    bool alarm = false;  // This flag is used to represent the validity of the current tile
     double min_gap;
     Tile tile = {x[0], x[1], x[2], x[3], x[4],
                  x[5], x[6], x[7], x[8]};  // Create a tile structure with the passed arguments
@@ -78,9 +78,13 @@ void getGap(double* x, double* fitness)
             if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
         }
     }
-    cout << "\nMin gap is " << min_gap;
-    printf("\nVector was : %d,%d,%d,%d,%d,%d,%d,%d,%d \n", x[0], x[1], x[2], x[3], x[4], x[5], x[6],
-           x[7], x[8]);
+    // Set the number of decimal to be shown
+    cout.setf(ios::fixed, ios::floatfield);
+    cout.precision(3);
+    // Set the number of decimal to be shown
+    cout << "\nMin gap is " << min_gap << "\n";
+    cout << "Vectors " << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << "\n";
+    cout << "        " << x[4] << " " << x[5] << " " << x[6] << " " << x[7] << " " << x[8] << "\n";
     this_thread::sleep_for(std::chrono::seconds(1));  // TODO : Remove this during release
     fitness[0] = min_gap;
 }

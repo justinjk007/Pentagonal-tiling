@@ -27,7 +27,7 @@ typedef double variable;
 typedef variable* Individual;
 typedef double Fitness;
 
-extern int g_function_number;
+/* extern int g_function_number; */
 extern int g_problem_size;
 extern unsigned int g_max_num_evaluations;
 extern int function_name;
@@ -112,7 +112,7 @@ class searchAlgorithm
         if ((j + 1) < last) sortIndexWithQuickSort(array, j + 1, last, index);
     }
 
-    int function_number;
+    /* int function_number; */
     int problem_size;
     variable max_region;
     variable min_region;
