@@ -7,6 +7,14 @@
 #include "CalculateGap.hpp"
 #include "DE/de.h"
 
+/**
+ * Note: "de.h" file mentions the prototypes of two classes
+ * searchAlgorithm and LSHADE. LSHADE is the actual Optimization
+ * algorithm and searchAlgorithm class are further improvements on the
+ * optimization algorithm like region constraints and more constraints
+ * after mutation
+ */
+
 double *OShift, *M, *y, *z, *x_bound;
 int ini_flag = 0, n_flag, func_flag, *SS;
 
