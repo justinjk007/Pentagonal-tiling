@@ -32,8 +32,6 @@ void searchAlgorithm::evaluatePopulation(const vector<Individual>& pop, vector<F
 
         // cec14_test_func(pop[i],  &fitness[i], problem_size, 1, function_number);
         // cec17_test_func(pop[i], &fitness[i], problem_size, 1, function_number);
-        std::cout << "The size of pop vector is " << pop.size() << "\n";
-	// examineVector(pop[i]);
         getGap(pop[i], &fitness[i]);
     }
 }

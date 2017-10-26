@@ -49,13 +49,13 @@ void getGap(double* x, double* fitness)
      * as a vector and append the the gap to the fitness vector which
      * is the the second argument.
      */
-    // examineVector(x);
     bool alarm = false;  // This flag is used to represent the validity of the current tile
     double min_gap;
     Tile tile = {x[0], x[1], x[2], x[3], x[4],
                  x[5], x[6], x[7], x[8]};  // Create a tile structure with the passed arguments
 
-    if (!validateTile(tile)) {
+    if (!validateTile(tile))
+    {
         printf("\nThe tile inputted was invalid");
         alarm   = true;
         min_gap = 100;
@@ -86,6 +86,7 @@ void getGap(double* x, double* fitness)
     cout << "\nMin gap is " << min_gap << "\n";
     cout << "Vectors " << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << "\n";
     cout << "        " << x[4] << " " << x[5] << " " << x[6] << " " << x[7] << " " << x[8] << "\n";
+
     this_thread::sleep_for(std::chrono::seconds(1));  // TODO : Remove this during release
     fitness[0] = min_gap;
 }
@@ -544,17 +545,4 @@ std::list<Point_2> sortClockwise(std::list<Point_2> points)
     points.sort(comparePoints);
     return points;
     // det = (a.x - centroid.x) * (b.y - centroid.y) - (b.x - centroid.x) * (a.y - centroid.y)
-}
-
-template <typename T>
-void examineVector(const vector<T>& vec)
-{
-    /**
-     * Print whatever vector is passed along with its length
-     */
-    for (auto it = vec.begin(); it != vec.end(); it++) {
-        cout << *it << "\n";
-    }
-    cout << "Size of the vector: " << vec.size();
-    exit(1);
 }
