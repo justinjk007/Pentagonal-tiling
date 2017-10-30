@@ -20,6 +20,12 @@ CONFIGURE_FILE (
 
 INCLUDE_DIRECTORIES("${PROJECT_BINARY_DIR}") # This is done to include Config.h
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+  DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+  DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+MESSAGE("-- Copied python script for plotting")
+
 # Boost config
 SET(Boost_USE_STATIC_LIBS ON)
 SET(Boost_USE_MULTITHREADED ON)
