@@ -4,7 +4,7 @@ using namespace svg;
 
 // Demo page shows sample usage of the Simple SVG library.
 
-void drawSvgfile(int h, int w, std::list<Segment> poly_mess)
+void drawSvgfile(const int& w, const int& h, const std::list<Segment>& poly_mess)
 {
     std::string file_name = "polygons.svg";
 
@@ -17,9 +17,17 @@ void drawSvgfile(int h, int w, std::list<Segment> poly_mess)
            << svg::Point(dimensions.width, dimensions.height) << svg::Point(0, dimensions.height);
     doc << border;
 
-    doc << (Polygon(Color(200, 160, 220), Stroke(.5, Color(150, 160, 200)))
-            << svg::Point(20, 70) << svg::Point(25, 72) << svg::Point(33, 70) << svg::Point(35, 60)
-            << svg::Point(25, 55) << svg::Point(18, 63));
+    for (auto it = poly_mess.begin(); it != poly_mess.end();) {
+        Point_2 single_pentagon[5];  // Get the points needed for one pentagon
+        for (int i = 0; i < 5; ++i) {
+            single_pentagon[i] = it->source();
+            it++;
+        }
+
+        doc << (Polygon(Color(200, 160, 220), Stroke(.5, Color(150, 160, 200)))
+                << svg::Point(20, 70) << svg::Point(25, 72) << svg::Point(33, 70)
+                << svg::Point(35, 60) << svg::Point(25, 55) << svg::Point(18, 63));
+    }
 
     doc.save();
 }

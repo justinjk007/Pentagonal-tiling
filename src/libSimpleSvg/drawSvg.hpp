@@ -5,6 +5,6 @@
 #include "../boundaryDetection.hpp"
 #include "simple_svg_1.0.0.hpp"
 
-void drawSvgfile(int, int, std::list<Segment>);
+void drawSvgfile(const int&, const int&, const std::list<Segment>&);
 
 #endif /* DRAWSVG_HPP */
