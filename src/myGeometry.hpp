@@ -43,18 +43,6 @@ class Line
     }
 };
 
-template <class Point>
-auto getX(Point p) -> decltype(p.x)
-{
-    return p.x;
-}
-
-template <class Point>
-auto getY(Point p) -> decltype(p.y)
-{
-    return p.y;
-}
-
 bool compareLine(Line, Line);
 
 #endif /* MYGEOMETRY_HPP */
