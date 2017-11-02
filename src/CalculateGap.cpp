@@ -54,8 +54,7 @@ void getGap(double* x, double* fitness)
     Tile tile = {x[0], x[1], x[2], x[3], x[4],
                  x[5], x[6], x[7], x[8]};  // Create a tile structure with the passed arguments
 
-    if (!validateTile(tile))
-    {
+    if (!validateTile(tile)) {
         printf("\nThe tile inputted was invalid");
         alarm   = true;
         min_gap = 100;

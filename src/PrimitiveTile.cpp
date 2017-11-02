@@ -116,8 +116,9 @@ void PrimitiveTile::drawPentagon(int from, int to)
             }
         }
     }
-    this->lines.pop_back();               // Remove the last added line
-    current_line.target = first_line.source;  // This what the origin and end are always the same points
+    this->lines.pop_back();  // Remove the last added line
+    current_line.target =
+        first_line.source;                // This what the origin and end are always the same points
     this->lines.push_back(current_line);  // Add the modified line to the end
 }
 

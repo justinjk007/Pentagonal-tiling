@@ -33,15 +33,27 @@ class Line
     {
         this->source.x = 0.0;
         this->source.y = 0.0;
-        this->target.x   = 0.0;
-        this->target.y   = 0.0;
+        this->target.x = 0.0;
+        this->target.y = 0.0;
     }
     Line(Point a, Point b)
     {
         this->source = a;
-        this->target   = b;
+        this->target = b;
     }
 };
+
+template <class Point>
+auto getX(Point p) -> decltype(p.x)
+{
+    return p.x;
+}
+
+template <class Point>
+auto getY(Point p) -> decltype(p.y)
+{
+    return p.y;
+}
 
 bool compareLine(Line, Line);
 

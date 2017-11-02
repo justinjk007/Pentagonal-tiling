@@ -68,8 +68,8 @@ Line Line::reverse()
     Line temp_line;
     temp_line.source.x = this->target.x;
     temp_line.source.y = this->target.y;
-    temp_line.target.x   = this->source.x;
-    temp_line.target.y   = this->source.y;
+    temp_line.target.x = this->source.x;
+    temp_line.target.y = this->source.y;
     return temp_line;
 }
 
@@ -82,8 +82,8 @@ Line Line::getLineWithRespectTo(Point origin, double length)
     Line line;
     line.source.x = origin.x;
     line.source.y = origin.y;
-    line.target.x   = length;
-    line.target.y   = 0.0;
+    line.target.x = length;
+    line.target.y = 0.0;
     return line;
 }
 
@@ -109,22 +109,22 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
             x2 = this->target.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
         else
             // Type on is when x2 is smaller than x1, ie the line is backward.
-            x2 = this->target.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
-        y2           = m2 * (x2 - this->target.x) + this->target.y;
+            x2        = this->target.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+        y2            = m2 * (x2 - this->target.x) + this->target.y;
         line.source.x = this->target.x;
         line.source.y = this->target.y;
     } else if (which == 'd')  // when which = 'd' for diagonal.
-	{
-	    if (type == 0)
-		// Type on is when x2 is greater than x1.
-		x2 = this->source.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
-	    else
-		// Type on is when x2 is smaller than x1, ie the line is backward.
-		x2 = this->source.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
-	    y2           = m2 * (x2 - this->source.x) + this->source.y;
-	    line.source.x = this->source.x;
-	    line.source.y = this->source.y;
-	} else
+    {
+        if (type == 0)
+            // Type on is when x2 is greater than x1.
+            x2 = this->source.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+        else
+            // Type on is when x2 is smaller than x1, ie the line is backward.
+            x2        = this->source.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+        y2            = m2 * (x2 - this->source.x) + this->source.y;
+        line.source.x = this->source.x;
+        line.source.y = this->source.y;
+    } else
         return line;
 
     line.target.x = x2;

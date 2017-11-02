@@ -57,7 +57,7 @@ int orientation(const Point_2& p, const Point_2& q, const Point_2& r)
     return (val > 0) ? 1 : 2;  // clock or counterclock wise
 }
 
-bool do_intersect(const Segment& a,const Segment& b)
+bool do_intersect(const Segment& a, const Segment& b)
 {
     /**
      * Find the four orientations needed for general and special
@@ -87,7 +87,7 @@ bool do_intersect(const Segment& a,const Segment& b)
     return false;  // Doesn't fall in any of the above cases
 }
 
-bool doIntersect(const Segment& line,const std::list<Segment>& lines,const Segment& except_line)
+bool doIntersect(const Segment& line, const std::list<Segment>& lines, const Segment& except_line)
 {
     /**
      * Check if the passed line segments intersects with any of the

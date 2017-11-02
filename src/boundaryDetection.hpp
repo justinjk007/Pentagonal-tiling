@@ -28,4 +28,16 @@ bool onSegment(const Point_2&, const Point_2&, const Point_2&);
 int orientation(const Point_2&, const Point_2&, const Point_2&);
 bool do_intersect(const Segment&, const Segment&);
 
+template <class Point>
+auto getX()(Point p) -> decltype(p.x())
+{
+    return p.x();
+}
+
+template <class Point>
+auto getY()(Point p) -> decltype(p.y())
+{
+    return p.y();
+}
+
 #endif /* BOUNDARYDETECTION_HPP */

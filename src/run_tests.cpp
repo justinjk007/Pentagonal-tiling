@@ -158,12 +158,12 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon)
 
 BOOST_AUTO_TEST_CASE(Gap_test_or_Integration_test)
 {
-    Tile tile1  = {32.72,  73.59,  78.67, 49.06, 57.68,
-		   122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
+    Tile tile1 = {32.72,  73.59,  78.67, 49.06, 57.68,
+                  122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
     double gap1 = getGap(tile1);
     // cout << "gap1: "<<gap1<<endl;
 
-    Tile tile2 = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
+    Tile tile2  = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
     double gap2 = getGap(tile2);
     // cout << "gap2: "<<gap2<<endl;
     // Points that make up gaps in tile2
