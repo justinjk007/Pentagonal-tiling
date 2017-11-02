@@ -32,8 +32,7 @@ class PrimitiveTile
     void writeToFileRaw(std::list<Segment>);
     void doTiling(double, double, double, double);
     std::list<Line> translate(double, double, std::list<Line>);
-    std::list<Point_2> getPointsFromLines(
-        std::list<Line>);  // Returns the start points of everyline on the given list
+    std::list<Point_2> getPointsFromLines(std::list<Line>);  // Returns the start points
     PrimitiveTile()
     {
         this->size  = 1;  // Obviously we need atleast one tile.

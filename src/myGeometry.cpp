@@ -14,21 +14,21 @@ bool compareLine(Line line1, Line line2)
      */
 
     // Compare start Point(x,y)
-    double diff1 = line1.start.x - line2.start.x;
-    double diff2 = line1.start.y - line2.start.y;
+    double diff1 = line1.source.x - line2.source.x;
+    double diff2 = line1.source.y - line2.source.y;
     // Compare end Point(x,y)
-    double diff3 = line1.end.x - line2.end.x;
-    double diff4 = line1.end.y - line2.end.y;
+    double diff3 = line1.target.x - line2.target.x;
+    double diff4 = line1.target.y - line2.target.y;
     if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 && abs(diff3) <= 0.04 && abs(diff4) <= 0.04)
         return true;
     line1 = line1.reverse();  // Reverse one of the line and check again.
 
     // Compare start Point(x,y)
-    diff1 = line1.start.x - line2.start.x;
-    diff2 = line1.start.y - line2.start.y;
+    diff1 = line1.source.x - line2.source.x;
+    diff2 = line1.source.y - line2.source.y;
     // Compare end Point(x,y)
-    diff3 = line1.end.x - line2.end.x;
-    diff4 = line1.end.y - line2.end.y;
+    diff3 = line1.target.x - line2.target.x;
+    diff4 = line1.target.y - line2.target.y;
     if (abs(diff1) <= 0.04 && abs(diff2) <= 0.04 && abs(diff3) <= 0.04 && abs(diff4) <= 0.04)
         return true;
     else
@@ -37,8 +37,8 @@ bool compareLine(Line line1, Line line2)
 
 double Line::getSlope()
 {
-    double diff_y = this->end.y - this->start.y;
-    double diff_x = this->end.x - this->start.x;
+    double diff_y = this->target.y - this->source.y;
+    double diff_x = this->target.x - this->source.x;
     double m      = diff_y / diff_x;
     return m;
 }
@@ -66,10 +66,10 @@ Line Line::reverse()
      * Reverses the start and end points
      */
     Line temp_line;
-    temp_line.start.x = this->end.x;
-    temp_line.start.y = this->end.y;
-    temp_line.end.x   = this->start.x;
-    temp_line.end.y   = this->start.y;
+    temp_line.source.x = this->target.x;
+    temp_line.source.y = this->target.y;
+    temp_line.target.x   = this->source.x;
+    temp_line.target.y   = this->source.y;
     return temp_line;
 }
 
@@ -80,10 +80,10 @@ Line Line::getLineWithRespectTo(Point origin, double length)
      * have an other side for the angle to be based on
      */
     Line line;
-    line.start.x = origin.x;
-    line.start.y = origin.y;
-    line.end.x   = length;
-    line.end.y   = 0.0;
+    line.source.x = origin.x;
+    line.source.y = origin.y;
+    line.target.x   = length;
+    line.target.y   = 0.0;
     return line;
 }
 
@@ -106,28 +106,28 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
     if (which == 's') {
         if (type == 0)
             // Type on is when x2 is greater than x1.
-            x2 = this->end.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+            x2 = this->target.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
         else
             // Type on is when x2 is smaller than x1, ie the line is backward.
-            x2 = this->end.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
-        y2           = m2 * (x2 - this->end.x) + this->end.y;
-        line.start.x = this->end.x;
-        line.start.y = this->end.y;
+            x2 = this->target.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+        y2           = m2 * (x2 - this->target.x) + this->target.y;
+        line.source.x = this->target.x;
+        line.source.y = this->target.y;
     } else if (which == 'd')  // when which = 'd' for diagonal.
-    {
-        if (type == 0)
-            // Type on is when x2 is greater than x1.
-            x2 = this->start.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
-        else
-            // Type on is when x2 is smaller than x1, ie the line is backward.
-            x2 = this->start.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
-        y2           = m2 * (x2 - this->start.x) + this->start.y;
-        line.start.x = this->start.x;
-        line.start.y = this->start.y;
-    } else
+	{
+	    if (type == 0)
+		// Type on is when x2 is greater than x1.
+		x2 = this->source.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+	    else
+		// Type on is when x2 is smaller than x1, ie the line is backward.
+		x2 = this->source.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+	    y2           = m2 * (x2 - this->source.x) + this->source.y;
+	    line.source.x = this->source.x;
+	    line.source.y = this->source.y;
+	} else
         return line;
 
-    line.end.x = x2;
-    line.end.y = y2;
+    line.target.x = x2;
+    line.target.y = y2;
     return line;
 }

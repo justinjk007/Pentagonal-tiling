@@ -22,8 +22,8 @@ list<Segment> getSegments(const std::list<Line>& lines)
     list<Segment> segments;
 
     for (auto it = lines.begin(); it != lines.end(); it++) {
-        Point_2 start(it->start.x, it->start.y);
-        Point_2 end(it->end.x, it->end.y);
+        Point_2 start(it->source.x, it->source.y);
+        Point_2 end(it->target.x, it->target.y);
         Segment segment(start, end);
         segments.push_back(segment);
     }

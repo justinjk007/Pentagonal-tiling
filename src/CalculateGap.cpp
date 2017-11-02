@@ -243,10 +243,10 @@ double getPolygonArea(const std::list<Line>& polygon)
     double x1, y1, x2, y2;
 
     for (auto it = polygon.begin(); it != polygon.end(); it++) {
-        x1 = it->start.x;
-        y1 = it->start.y;
-        x2 = it->end.x;
-        y2 = it->end.y;
+        x1 = it->source.x;
+        y1 = it->source.y;
+        x2 = it->target.x;
+        y2 = it->target.y;
         sum += x1 * y2;
         diff += y1 * x2;
     }
@@ -397,10 +397,10 @@ void printData(const std::list<Line>& polygon)
     cout << "Displaying list of Lines\n";
     double x1, y1, x2, y2;
     for (auto it = polygon.begin(); it != polygon.end(); it++) {
-        x1 = it->start.x;
-        y1 = it->start.y;
-        x2 = it->end.x;
-        y2 = it->end.y;
+        x1 = it->source.x;
+        y1 = it->source.y;
+        x2 = it->target.x;
+        y2 = it->target.y;
         printf("(%f, %f)  ---   (%f, %f)\n", x1, y1, x2, y2);
     }
 }
@@ -444,8 +444,8 @@ std::list<Point_2> getSources(const std::list<Line>& lines)
     std::list<Point_2> list_of_points;
 
     for (auto it = lines.begin(); it != lines.end(); it++) {
-        double xx = it->start.x;
-        double yy = it->start.y;
+        double xx = it->source.x;
+        double yy = it->source.y;
         Point_2 point(xx, yy);
         list_of_points.push_back(point);  // Add the point to the list
     }
@@ -523,16 +523,16 @@ bool comparePoints(const Point_2& a, const Point_2& b)
 
     // Compute the cross product of vectors (centroid -> a) x (centroid -> b)
     det = (a.x() - centroid.x()) * (b.y() - centroid.y()) -
-          (b.x() - centroid.x()) * (a.y() - centroid.y());
+	(b.x() - centroid.x()) * (a.y() - centroid.y());
     if (det < 0) return true;
     if (det > 0) return false;
 
     // Points a and b are on the same line from the center
     // Check which point is closer to the center
     d1 = (a.x() - centroid.x()) * (a.x() - centroid.x()) +
-         (a.y() - centroid.y()) * (a.y() - centroid.y());
+	(a.y() - centroid.y()) * (a.y() - centroid.y());
     d2 = (b.x() - centroid.x()) * (b.x() - centroid.x()) +
-         (b.y() - centroid.y()) * (b.y() - centroid.y());
+	(b.y() - centroid.y()) * (b.y() - centroid.y());
     return d1 > d2;
 }
 

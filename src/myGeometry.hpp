@@ -21,8 +21,8 @@ class Point
 class Line
 {
    public:
-    Point start;
-    Point end;
+    Point source;
+    Point target;
     double getSlope();
     double getInclineAngle();
     double getInclineAngle(double);
@@ -31,15 +31,15 @@ class Line
     Line reverse();  // Reverse the start and end points of the line.
     Line()
     {
-        this->start.x = 0.0;
-        this->start.y = 0.0;
-        this->end.x   = 0.0;
-        this->end.y   = 0.0;
+        this->source.x = 0.0;
+        this->source.y = 0.0;
+        this->target.x   = 0.0;
+        this->target.y   = 0.0;
     }
     Line(Point a, Point b)
     {
-        this->start = a;
-        this->end   = b;
+        this->source = a;
+        this->target   = b;
     }
 };
 

@@ -87,7 +87,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
         diagonal  = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1, 'd');
         next_line = current_line.getLineWithRespectTo(
             180.0 - next_angle, this->pentagon.side[moded_index].value, type2, 's');
-        double diff = diagonal.end.x - next_line.end.x;
+        double diff = diagonal.target.x - next_line.target.x;
         if (diff <= 0.1 && diff >= -0.1) {
             type1 = 0;  // Reset types after every line
             type2 = 0;  // Reset types after every line
@@ -107,17 +107,17 @@ void PrimitiveTile::drawPentagon(int from, int to)
                 continue;
             } else {
                 std::cout << "*********************************************************************"
-                             "**********\n";
+		    "**********\n";
                 std::cout << "All options for finding co-ordinates covered program exited with "
-                             "exit status 1\n";
+		    "exit status 1\n";
                 std::cout << "*********************************************************************"
-                             "**********\n";
+		    "**********\n";
                 break;
             }
         }
     }
     this->lines.pop_back();               // Remove the last added line
-    current_line.end = first_line.start;  // This what the origin and end are always the same points
+    current_line.target = first_line.source;  // This what the origin and end are always the same points
     this->lines.push_back(current_line);  // Add the modified line to the end
 }
 
@@ -141,9 +141,9 @@ void PrimitiveTile::writeToFile()
     list<Line>::iterator it      = this->lines.begin();
     list<Line>::iterator temp_it = it;  // Temporary storage fo the main iterator
     int i                        = 0;
-    Point i_need_this            = this->lines.begin()->start;
+    Point i_need_this            = this->lines.begin()->source;
     while (it != this->lines.end()) {
-        myfile << it->start.x << "," << it->start.y << "\n";
+        myfile << it->source.x << "," << it->source.y << "\n";
         temp_it = it;
         ++it;
         i += 1;
@@ -151,7 +151,7 @@ void PrimitiveTile::writeToFile()
             temp_it--;
             myfile << i_need_this.x << "," << i_need_this.y << "\n";
             advance(temp_it, 2);
-            if (temp_it != this->lines.end()) i_need_this = temp_it->start;
+            if (temp_it != this->lines.end()) i_need_this = temp_it->source;
         }
     }
     myfile.close();
@@ -170,8 +170,8 @@ void PrimitiveTile::writeToFileRaw()
     myfile << "x,y\n";
     list<Line>::iterator it = this->lines.begin();
     while (it != this->lines.end()) {
-        myfile << it->start.x << "," << it->start.y << "\n";
-        myfile << it->end.x << "," << it->end.y << "\n";
+        myfile << it->source.x << "," << it->source.y << "\n";
+        myfile << it->target.x << "," << it->target.y << "\n";
         ++it;
     }
     myfile.close();
@@ -190,8 +190,8 @@ void PrimitiveTile::writeToFileRaw(std::list<Line> this_lines)
     myfile << "x,y\n";
     list<Line>::iterator it = this_lines.begin();
     while (it != this_lines.end()) {
-        myfile << it->start.x << "," << it->start.y << "\n";
-        myfile << it->end.x << "," << it->end.y << "\n";
+        myfile << it->source.x << "," << it->source.y << "\n";
+        myfile << it->target.x << "," << it->target.y << "\n";
         ++it;
     }
     myfile.close();
@@ -222,10 +222,10 @@ std::list<Line> PrimitiveTile::translate(double t_x, double t_y, std::list<Line>
     list<Line>::iterator it;
     for (it = tile.begin(); it != tile.end(); ++it) {
         // Translation rightwards is applied here
-        it->start.x += t_x;
-        it->start.y += t_y;
-        it->end.x += t_x;
-        it->end.y += t_y;
+        it->source.x += t_x;
+        it->source.y += t_y;
+        it->target.x += t_x;
+        it->target.y += t_y;
     }
     return tile;
 }
@@ -244,22 +244,22 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 
     // Get the translation rightwards
     it          = this->lines.begin();
-    double tpx1 = it->end.x;
-    double tpy1 = it->end.y;
+    double tpx1 = it->target.x;
+    double tpy1 = it->target.y;
     advance(it, 3);
-    double tpx2 = it->end.x;
-    double tpy2 = it->end.y;
+    double tpx2 = it->target.x;
+    double tpy2 = it->target.y;
     t_x1        = tpx1 - tpx2;
     t_y1        = tpy1 - tpy2;
     // Get the translation rightwards
 
     // Get the translation upwards
     it   = this->lines.begin();
-    tpx1 = it->start.x;
-    tpy1 = it->start.y;
+    tpx1 = it->source.x;
+    tpy1 = it->source.y;
     advance(it, 9);
-    tpx2 = it->start.x;
-    tpy2 = it->start.y;
+    tpx2 = it->source.x;
+    tpy2 = it->source.y;
     t_x2 = tpx2 - tpx1;
     t_y2 = tpy2 - tpy1;
     // Get the translation upwards
@@ -281,14 +281,14 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
 std::list<Point_2> PrimitiveTile::getPointsFromLines(std::list<Line> lines)
 {
     /**
-     * Returns the start points of everyline on the given list, which can
+     * Returns the source points of everyline on the given list, which can
      * be then used for other functions like getPolygonArea() and even
      * for getting the concave hull of a set of lines or points
      */
     std::list<Point_2> list_of_points;  // Stores the lines of the original primitivetile.
     for (list<Line>::iterator it = lines.begin(); it != lines.end(); ++it) {
-        double x = it->start.x;
-        double y = it->start.y;
+        double x = it->source.x;
+        double y = it->source.y;
         Point_2 point(x, y);
         list_of_points.push_back(point);
     }
