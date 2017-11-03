@@ -6,6 +6,7 @@
 #define CALCULATEGAP_HPP
 #include <algorithm>
 #include <list>
+#include <vector>
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
@@ -17,12 +18,14 @@ double getGap(const Tile&);
 void getGap(double*, double*);
 double calculateGap(const Tile&, const int&, const int&);
 bool validateTile(const Tile&);
+bool validatePolygon(const std::vector<Point_2>&);
 double getMaxSide(const Tile&);
 double getMaxAngle(const Tile&);
 double getThirdSide(const Side&, const Side&, const double&);
 double getTriangleArea(const double&, const double&, const double&);
 double getTileArea(const Tile&);
 double getOtherAngle(const Side&, const Side&, const double&, const char&);
+double getMiddleAngle(const double&, const double&, const double&);
 double getPolygonArea(const std::list<Line>&);
 double getPolygonArea(const std::list<Segment>&);
 double getPolygonArea(const std::list<Point_2>&);

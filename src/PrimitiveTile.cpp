@@ -39,13 +39,46 @@ void PrimitiveTile::del()
     this->size = 1;
 }
 
+Tile PrimitiveTile::createPentagon()
+{
+    /**
+     * This method tries to create the correct pentagon from the 7 dimensions we
+     * have, this way producing less errors than trying to guess all 10
+     * dimensions incorrectly.  Here the inputted tile has only seven dimensions
+     * we will fill the others.
+     */
+    PrimitiveTile newSample(this->pentagon);
+    newSample.drawPentagon(2, 2);  // Keep this 2,2 always. This way the correct
+                                   // sides and angles are referenced.
+    // Create CGAL polygon for validation
+    vector<Point_2> points = getPointsFromLines(newSample.lines);  // Returns the start points
+    if (!validatePolygon(points)) {
+        throw std::logic_error("THE PENTAGON CREATED WAS NOT CONVEX!");
+    }
+
+    // Now to find the missing dimensions
+    // Firstly, find the missing length
+    double side_ea                   = sqrt(CGAL::squared_distance(points[4], points[0]));
+    newSample.pentagon.side[4].value = side_ea;
+
+    // Secondly find the missing angles
+    double diagonal1 = sqrt(CGAL::squared_distance(points[0], points[3]));
+    double diagonal2 = sqrt(CGAL::squared_distance(points[4], points[1]));
+    double angle_e   = getMiddleAngle(newSample.pentagon.side[3].value,
+                                    newSample.pentagon.side[4].value, diagonal1);
+    double angle_a   = getMiddleAngle(newSample.pentagon.side[4].value,
+                                    newSample.pentagon.side[0].value, diagonal2);
+    newSample.pentagon.angle[4] = angle_e;
+    newSample.pentagon.angle[0] = angle_a;
+    return newSample.pentagon;
+}
+
 void PrimitiveTile::drawPentagon(int from, int to)
 {
     /**
-     * This was hard work okay, this draws the pentagon meaning they
-     * give out the co-ordinates from the lengths and angles if a
-     * pentagon. Parameters are the side conneted from and to of a new
-     * pentagon.
+     * This was hard work okay, this draws the pentagon meaning they give out
+     * the co-ordinates from the lengths and angles if a pentagon. Parameters
+     * are the side conneted from and to of a new pentagon.
      */
     Line first_line;
     Line current_line;
@@ -86,7 +119,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
         first_line = current_line;
     }
     index = (index + 1) % 5;  // Wraparound like a circle array
-    while (i < 5) {
+    while (i < 4) {
         next_angle      = this->pentagon.angle[index];
         diagonal_length = getThirdSide(this->pentagon.side[(index + 4) % 5],
                                        this->pentagon.side[index], next_angle);
@@ -121,7 +154,8 @@ void PrimitiveTile::drawPentagon(int from, int to)
             }
         }
     }
-    this->lines.pop_back();                   // Remove the last added line
+    // Now connect the last line drawn to the first line to complete the pentagon
+    current_line        = current_line.reverse();
     current_line.target = first_line.source;  // Start and end of a pentagon should be the same
     this->lines.push_back(current_line);      // Add the modified line to the end
 }
@@ -291,14 +325,14 @@ void PrimitiveTile::doTiling(double t_x1, double t_y1, double t_x2, double t_y2)
     this->count++;
 }
 
-std::list<Point_2> PrimitiveTile::getPointsFromLines(std::list<Line> lines)
+std::vector<Point_2> PrimitiveTile::getPointsFromLines(std::list<Line> lines)
 {
     /**
      * Returns the source points of everyline on the given list, which can
      * be then used for other functions like getPolygonArea() and even
      * for getting the concave hull of a set of lines or points
      */
-    std::list<Point_2> list_of_points;  // Stores the lines of the original primitivetile.
+    std::vector<Point_2> list_of_points;  // Stores the lines of the original primitivetile.
     for (list<Line>::iterator it = lines.begin(); it != lines.end(); ++it) {
         double x = it->source.x;
         double y = it->source.y;

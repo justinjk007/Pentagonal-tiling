@@ -144,6 +144,16 @@ bool validateTile(const Tile& tile)
         return false;
 }
 
+bool validatePolygon(const std::vector<Point_2>& points)
+{
+    /**
+     * Make sure the polygon created is convex and simple
+     */
+    Polygon_2 polygon;
+    for (auto& point : points) polygon.push_back(point);
+    return (polygon.is_convex() && polygon.is_simple());
+}
+
 double getMaxSide(const Tile& tile)
 {
     /*
@@ -202,6 +212,17 @@ double getOtherAngle(const Side& a, const Side& b, const double& angle_b, const 
         return other_angle;
     } else
         return other_angle;
+}
+
+double getMiddleAngle(const double& a, const double& b, const double& c)
+{
+    /**
+     * This methods returns the angle b/w a and b when a,b and c are
+     * sides of a triangle, using Cosine law in reverse.
+     * Reference http://www.teacherschoice.com.au/maths_library/trigonometry/solve_trig_sss.htm
+     */
+    double calc = ((a * a) + (b * b) - (c * c)) / (2 * a * b);
+    return acos(calc) * (180.0 / PI);
 }
 
 double getTriangleArea(const double& a, const double& b, const double& c)
@@ -522,16 +543,16 @@ bool comparePoints(const Point_2& a, const Point_2& b)
 
     // Compute the cross product of vectors (centroid -> a) x (centroid -> b)
     det = (a.x() - centroid.x()) * (b.y() - centroid.y()) -
-	(b.x() - centroid.x()) * (a.y() - centroid.y());
+          (b.x() - centroid.x()) * (a.y() - centroid.y());
     if (det < 0) return true;
     if (det > 0) return false;
 
     // Points a and b are on the same line from the center
     // Check which point is closer to the center
     d1 = (a.x() - centroid.x()) * (a.x() - centroid.x()) +
-	(a.y() - centroid.y()) * (a.y() - centroid.y());
+         (a.y() - centroid.y()) * (a.y() - centroid.y());
     d2 = (b.x() - centroid.x()) * (b.x() - centroid.x()) +
-	(b.y() - centroid.y()) * (b.y() - centroid.y());
+         (b.y() - centroid.y()) * (b.y() - centroid.y());
     return d1 > d2;
 }
 

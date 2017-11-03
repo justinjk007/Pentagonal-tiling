@@ -7,6 +7,7 @@
 #define PRIMITIVETILE_HPP
 #include <algorithm>
 #include <list>
+#include <vector>
 #include "Link.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
@@ -22,6 +23,7 @@ class PrimitiveTile
     int size;                        // This accounts for the number of tiles in the primitive tile.
     int count;  // Stores the number of primitivetile used in tiling or drawing.
     bool isLinkable(Link);
+    Tile createPentagon();
     void drawPentagon(int, int);
     void drawPentagonRev(int, int);
     void addTile(int, int);
@@ -33,7 +35,7 @@ class PrimitiveTile
     void draw();
     void doTiling(double, double, double, double);
     std::list<Line> translate(double, double, std::list<Line>);
-    std::list<Point_2> getPointsFromLines(std::list<Line>);  // Returns the start points
+    std::vector<Point_2> getPointsFromLines(std::list<Line>);  // Returns the start points
     PrimitiveTile()
     {
         this->size  = 1;  // Obviously we need atleast one tile.
