@@ -76,8 +76,9 @@ Line Line::reverse()
 Line Line::getLineWithRespectTo(Point origin, double length)
 {
     /**
-     * This method is to draw the first line in the shape when we don't
-     * have an other side for the angle to be based on
+     * This method is to draw the first line(The first line in the
+     * whole structure) in the shape when we don't have an other side
+     * for the angle to be based on
      */
     Line line;
     line.source.x = origin.x;
@@ -103,13 +104,13 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
     double m  = this->getSlope();
     m2 = (tan(angle2 * 22.0 / 7.0 / 180.0) + m) / (1.0 - (tan(angle2 * 22.0 / 7.0 / 180.0) * m));
     check++;
-    if (which == 's') {
+    if (which == 's') {  // when which = 's' for one of the sides
         if (type == 0)
             // Type on is when x2 is greater than x1.
             x2 = this->target.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
         else
             // Type on is when x2 is smaller than x1, ie the line is backward.
-            x2        = this->target.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+            x2 = this->target.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
         y2            = m2 * (x2 - this->target.x) + this->target.y;
         line.source.x = this->target.x;
         line.source.y = this->target.y;
@@ -120,7 +121,7 @@ Line Line::getLineWithRespectTo(double angle2, double length, int type, char whi
             x2 = this->source.x + sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
         else
             // Type on is when x2 is smaller than x1, ie the line is backward.
-            x2        = this->source.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
+            x2 = this->source.x - sqrt(pow(length, 2.0) / (1.0 + pow(m2, 2.0)));
         y2            = m2 * (x2 - this->source.x) + this->source.y;
         line.source.x = this->source.x;
         line.source.y = this->source.y;

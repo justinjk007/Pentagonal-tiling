@@ -30,6 +30,7 @@ class PrimitiveTile
     void writeToFileRaw();
     void writeToFileRaw(std::list<Line>);
     void writeToFileRaw(std::list<Segment>);
+    void draw();
     void doTiling(double, double, double, double);
     std::list<Line> translate(double, double, std::list<Line>);
     std::list<Point_2> getPointsFromLines(std::list<Line>);  // Returns the start points

@@ -55,38 +55,46 @@ void PrimitiveTile::drawPentagon(int from, int to)
     double diagonal_angle  = 0.0;
     double diagonal_length = 0.0;
     Point origin           = {0.0, 0.0};
-    int moded_index        = 0;
+    int index              = 0;
     int type1              = 0;
     int type2              = 0;
     int i                  = 1;  // Becuase we are already finding line 1 here
     if (!this->lines.empty()) {
-        moded_index             = to % 5;  // This is done to rotate the first pentagon
+        /**
+         * This means we already have a pentagon or more, so we are
+         * connecting a new pentagon to it by starting to draw from
+         * one of its side. So the first line of the new pentagon will
+         * be one of the sides of the last pentagon.
+         */
+        index                   = to % 5;  // This is done to rotate the first pentagon
         list<Line>::iterator it = this->lines.begin();
         advance(it, 2);
         current_line = *it;
         current_line = current_line.reverse();
-        this->lines.push_back(current_line);
+        this->lines.push_back(current_line);  // Add the line discovered to the list of line we have
         first_line = current_line;
     } else {
-        // ---------- Finding the first line here
-        moded_index = (from + 3) % 5;  // This is done to rotate the first pentagon
-        current_line =
-            current_line.getLineWithRespectTo(origin, this->pentagon.side[moded_index].value);
+        /**
+         * If we are here that means we haven't drawn any lines yet so
+         * we are starting from scratch, so for the first line we are
+         * just drawing a line of the length we need on the x-axis
+         * itslef.
+         */
+        index        = (from + 3) % 5;  // This is done to rotate the first pentagon
+        current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[index].value);
         this->lines.push_back(current_line);
         first_line = current_line;
-        // ---------- Finding the first line here
     }
-    moded_index = (moded_index + 1) % 5;  // Wraparound like a circle array
+    index = (index + 1) % 5;  // Wraparound like a circle array
     while (i < 5) {
-        next_angle = this->pentagon.angle[moded_index];
-        // TODO Check if +4 and -1 are the same on paper
-        diagonal_length = getThirdSide(this->pentagon.side[(moded_index + 4) % 5],
-                                       this->pentagon.side[moded_index], next_angle);
-        diagonal_angle = getOtherAngle(this->pentagon.side[(moded_index + 4) % 5],
-                                       this->pentagon.side[moded_index], next_angle, 'a');
+        next_angle      = this->pentagon.angle[index];
+        diagonal_length = getThirdSide(this->pentagon.side[(index + 4) % 5],
+                                       this->pentagon.side[index], next_angle);
+        diagonal_angle  = getOtherAngle(this->pentagon.side[(index + 4) % 5],
+                                       this->pentagon.side[index], next_angle, 'a');
         diagonal  = current_line.getLineWithRespectTo(diagonal_angle, diagonal_length, type1, 'd');
-        next_line = current_line.getLineWithRespectTo(
-            180.0 - next_angle, this->pentagon.side[moded_index].value, type2, 's');
+        next_line = current_line.getLineWithRespectTo(180.0 - next_angle,
+                                                      this->pentagon.side[index].value, type2, 's');
         double diff = diagonal.target.x - next_line.target.x;
         if (diff <= 0.1 && diff >= -0.1) {
             type1 = 0;  // Reset types after every line
@@ -94,7 +102,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
             this->lines.push_back(next_line);
             current_line = next_line;
             ++i;
-            moded_index = (moded_index + 1) % 5;  // Wraparound like a circle array
+            index = (index + 1) % 5;  // Wraparound like a circle array
         } else {
             if (type1 == 0 && type2 == 0) {
                 type1 = 1;
@@ -106,20 +114,16 @@ void PrimitiveTile::drawPentagon(int from, int to)
                 type1 = 0;
                 continue;
             } else {
-                std::cout << "*********************************************************************"
-		    "**********\n";
-                std::cout << "All options for finding co-ordinates covered program exited with "
-		    "exit status 1\n";
-                std::cout << "*********************************************************************"
-		    "**********\n";
-                break;
+                std::cout << "*****************************************************************\n";
+                std::cout << "All options for finding co-ordinates covered, exiting abnormally!\n";
+                std::cout << "*****************************************************************\n";
+                exit(1);
             }
         }
     }
-    this->lines.pop_back();  // Remove the last added line
-    current_line.target =
-        first_line.source;                // This what the origin and end are always the same points
-    this->lines.push_back(current_line);  // Add the modified line to the end
+    this->lines.pop_back();                   // Remove the last added line
+    current_line.target = first_line.source;  // Start and end of a pentagon should be the same
+    this->lines.push_back(current_line);      // Add the modified line to the end
 }
 
 void PrimitiveTile::drawPentagonRev(int from, int to)
@@ -216,6 +220,14 @@ void PrimitiveTile::writeToFileRaw(std::list<Segment> this_lines)
         ++it;
     }
     myfile.close();
+}
+
+void PrimitiveTile::draw()
+{
+    /**
+     * This method will call the python script that shows the plot
+     */
+    system("python plot_lines.py");
 }
 
 std::list<Line> PrimitiveTile::translate(double t_x, double t_y, std::list<Line> tile)

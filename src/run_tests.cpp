@@ -117,6 +117,8 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula)
     newSample.drawPentagon(2, 2);
     newSample.drawPentagon(2, 2);
     newSample.doTiling(0, 0, 0, 0);
+    // newSample.writeToFileRaw();
+    // newSample.draw();
     double tile_area2 = getPolygonArea(newSample.lines);
     BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.5);  // The float is the tolerance in percentage
 }
@@ -148,8 +150,8 @@ BOOST_AUTO_TEST_CASE(getting_the_biggest_polygon)
     newSample.doTiling(0, 0, 0, 0);
     // newSample.writeToFileRaw();
     std::list<Segment> boundary = removeInnerLines(newSample.lines);
-    newSample.writeToFileRaw(boundary);
-    drawSvgfile(100, 100, boundary);
+    // newSample.writeToFileRaw(boundary);
+    // drawSvgfile(100, 100, boundary);
     std::list<Point_2> boundary_points = getSources(boundary);
     boundary_points                    = sortClockwise(boundary_points);
     double total_area                  = getPolygonArea(boundary_points);
