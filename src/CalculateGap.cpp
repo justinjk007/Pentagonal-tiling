@@ -51,14 +51,18 @@ void getGap(double* x, double* fitness)
      */
     bool alarm = false;  // This flag is used to represent the validity of the current tile
     double min_gap;
-    Tile tile = {x[0], x[1], x[2], x[3], x[4],
-                 x[5], x[6], x[7], x[8]};  // Create a tile structure with the passed arguments
-
+    Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6]};  // Create a tile
+    // Set the number of decimal to be shown
+    cout.setf(ios::fixed, ios::floatfield);
+    cout.precision(3);
+    cout << "Sides:  " << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << "\n";
+    cout << "Angles: " << x[4] << " " << x[5] << " " << x[6] << "\n";
+    fillDimensions(tile); // Fill all the dimensions in
     if (!validateTile(tile)) {
-        printf("\nThe tile inputted was invalid");
-        alarm   = true;
-        min_gap = 100;
-        // exit(1);
+	printf("\nThe tile inputted was invalid");
+	alarm   = true;
+	min_gap = 100;
+	// exit(1);
     }
 
     if (!alarm) {
@@ -79,12 +83,7 @@ void getGap(double* x, double* fitness)
         }
     }
     // Set the number of decimal to be shown
-    cout.setf(ios::fixed, ios::floatfield);
-    cout.precision(3);
-    // Set the number of decimal to be shown
     cout << "\nMin gap is " << min_gap << "\n";
-    cout << "Vectors " << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << "\n";
-    cout << "        " << x[4] << " " << x[5] << " " << x[6] << " " << x[7] << " " << x[8] << "\n";
 
     this_thread::sleep_for(std::chrono::seconds(1));  // TODO : Remove this during release
     fitness[0] = min_gap;
@@ -118,26 +117,31 @@ double calculateGap(const Tile& tile, const int& i, const int& j)
         return -101;
 }
 
+void fillDimensions(Tile& tile)
+{
+    /**
+     * This method creates the tile structure with all dimensions filled in
+     */
+    PrimitiveTile newSample(tile);
+    tile = newSample.createPentagon();
+}
+
 bool validateTile(const Tile& tile)
 {
     /*
      * This method returns whether the Tile inputted is valid or not.
      * This method is used by getgap()
      */
-    double max_side  = getMaxSide(tile);
-    double max_angle = getMaxAngle(tile);
-    if (max_angle <= 180.00)
-        if (tile.angle[4] > 0.0)
-            if (tile.side[0].value + tile.side[1].value + tile.side[2].value + tile.side[3].value +
-                    tile.side[4].value >
-                (2 * max_side))
-                // 2 x Biggest side becauase we don't know which one is the
-                // biggest side now and we should count that twice on the right
-                // side because we are taking the sum of all sides instead of
-                // the other 4..soo..
-                return true;
-            else
-                return false;
+    double max_side = getMaxSide(tile);
+    if (tile.angle[4] > 0.0)
+        if (tile.side[0].value + tile.side[1].value + tile.side[2].value + tile.side[3].value +
+                tile.side[4].value >
+            (2 * max_side))
+            // 2 x Biggest side becauase we don't know which one is the
+            // biggest side now and we should count that twice on the right
+            // side because we are taking the sum of all sides instead of
+            // the other 4..soo..
+            return true;
         else
             return false;
     else

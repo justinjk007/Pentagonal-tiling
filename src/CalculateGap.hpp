@@ -16,6 +16,7 @@ static Point_2 centroid;
 
 double getGap(const Tile&);
 void getGap(double*, double*);
+void fillDimensions(Tile&);
 double calculateGap(const Tile&, const int&, const int&);
 bool validateTile(const Tile&);
 bool validatePolygon(const std::vector<Point_2>&);

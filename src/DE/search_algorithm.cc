@@ -40,8 +40,8 @@ void searchAlgorithm::initializeFitnessFunctionParameters()
 {
     // epsilon is an acceptable error value.
     epsilon    = pow(10.0, -8);
-    max_region = 100.0;
-    min_region = 0;
+    min_region = domain_min;
+    max_region = domain_max;
 
     optimum = 0;
 }

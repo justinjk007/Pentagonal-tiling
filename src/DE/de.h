@@ -36,6 +36,8 @@ extern int g_pop_size;
 extern int g_memory_size;
 extern double g_p_best_rate;
 extern double g_arc_rate;
+extern double domain_max;
+extern double domain_min;
 
 extern ofstream outFile;
 

@@ -3,6 +3,8 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <thread>
 #include "CalculateGap.hpp"
 #include "myGeometry.hpp"
 
@@ -150,6 +152,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
                 std::cout << "*****************************************************************\n";
                 std::cout << "All options for finding co-ordinates covered, exiting abnormally!\n";
                 std::cout << "*****************************************************************\n";
+		this_thread::sleep_for(std::chrono::seconds(1));
                 exit(1);
             }
         }

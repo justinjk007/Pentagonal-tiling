@@ -19,6 +19,8 @@
 
 int g_problem_size;
 unsigned int g_max_num_evaluations;
+double domain_max;
+double domain_min;
 
 int g_pop_size;
 double g_arc_rate;
@@ -31,7 +33,7 @@ using namespace std;
 
 int main()
 {
-    g_problem_size        = 9;                       // dimension size.
+    g_problem_size        = 7;                       // dimension size.
     g_max_num_evaluations = g_problem_size * 10000;  // available number of fitness evaluations
 
     // random seed is selected based on time according to competition rules
@@ -41,6 +43,9 @@ int main()
     g_memory_size = 5;
     g_arc_rate    = 1;
     g_p_best_rate = 0.25;
+
+    domain_min = 30;
+    domain_max = 180;
 
     cout << "\n-------------------------------------------------------" << endl;
     cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
