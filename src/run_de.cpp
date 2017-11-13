@@ -44,8 +44,8 @@ int main()
     g_arc_rate    = 1;
     g_p_best_rate = 0.25;
 
-    domain_min = 30;
-    domain_max = 180;
+    domain_min = 90;
+    domain_max = 120;
 
     cout << "\n-------------------------------------------------------" << endl;
     cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size << "\n"

@@ -46,11 +46,11 @@ struct Tile {
     }
     Tile(double sab, double sbc, double scd, double sde, double b, double c, double d)
     {
-	/**
-	 * This constructor takes in 7 arguments other values are
-	 * calculated later. First 4 values are side lengths and other
-	 * 3 are angles.
-	 */
+        /**
+         * This constructor takes in 7 arguments other values are
+         * calculated later. First 4 values are side lengths and other
+         * 3 are angles.
+         */
         this->side[0].value = sab;
         this->side[1].value = sbc;
         this->side[2].value = scd;
