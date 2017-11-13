@@ -54,6 +54,16 @@ Tile PrimitiveTile::createPentagon()
                                    // sides and angles are referenced.
     // Create CGAL polygon for validation
     vector<Point_2> points = getPointsFromLines(newSample.lines);  // Returns the start points
+
+	///////////////////////////////////////////////////
+	// Integrate GUI here, pass the points vector above into setupDrawingParameters function 
+	//before calling the main of the GUI for execution.
+	// This should place a call to the GUI every time the points change.
+	// Draw the polygon to assist visual debugging.
+	
+
+	///////////////////////////////////////////////////
+
     if (!validatePolygon(points)) {
         throw std::logic_error("THE PENTAGON CREATED WAS NOT CONVEX!");
     }
