@@ -51,3 +51,7 @@
 
 # Ignored Qt files
 *.pro.user
+build-QTDrawLine-Desktop_Qt_5_9_2_MSVC2017_64bit-Debug
+build-QTDrawLine-Desktop_Qt_5_9_2_MSVC2015_64bit-Debug
+build-QTDrawLine-Desktop_Qt_5_9_2_MSVC2017_32bit-Debug
+build-QTDrawLine-Desktop_Qt_5_9_2_MSVC2015_32bit-Debug

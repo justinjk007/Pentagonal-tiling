@@ -16,7 +16,6 @@ public:
     ~Widget();
 
     void paintEvent(QPaintEvent* e) override;
-
     void setupDrawParameters(const vector<Point> &c);
 
 private:
