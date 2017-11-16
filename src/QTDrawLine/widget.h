@@ -2,6 +2,8 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <vector>
+//#include "../boundaryDetection.hpp"
 
 namespace Ui {
 class Widget;
@@ -16,7 +18,8 @@ public:
     ~Widget();
 
     void paintEvent(QPaintEvent* e) override;
-    void setupDrawParameters(const vector<Point> &c);
+
+    void updateVector (QVector<QPoint> &pointList);
 
 private:
     Ui::Widget *ui;
