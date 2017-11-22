@@ -51,18 +51,11 @@ MESSAGE("-- Liniked svg library")
 ADD_LIBRARY(DE "")
 INCLUDE(DE/CMakeLists.txt) # Include libs from subdir
 
-ADD_LIBRARY(boundaryDetection boundaryDetection.cpp)
-ADD_LIBRARY(CalculateGap CalculateGap.cpp)
-ADD_LIBRARY(PrimitiveTile PrimitiveTile.cpp)
-ADD_LIBRARY(myGeometry myGeometry.cpp)
-MESSAGE("-- All files linked")
-
-ADD_EXECUTABLE(main main.cpp)
-ADD_EXECUTABLE(run_tests run_tests.cpp)
-ADD_EXECUTABLE(run_de run_de.cpp)
+ADD_EXECUTABLE(main main.cpp CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
+ADD_EXECUTABLE(run_tests run_tests.cpp CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
+ADD_EXECUTABLE(run_de run_de.cpp CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
 MESSAGE("-- All executables added")
 
-TARGET_LINK_LIBRARIES (run_tests CalculateGap PrimitiveTile myGeometry boundaryDetection libSimpleSvg ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
-TARGET_LINK_LIBRARIES (main CalculateGap PrimitiveTile myGeometry boundaryDetection libSimpleSvg)
-TARGET_LINK_LIBRARIES (run_de CalculateGap PrimitiveTile myGeometry boundaryDetection DE)
+TARGET_LINK_LIBRARIES (run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+TARGET_LINK_LIBRARIES (run_de DE)
 MESSAGE("-- All libraries connected")

@@ -8,7 +8,6 @@
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "boundaryDetection.hpp"
-#include "libSimpleSvg/drawSvg.hpp"
 #include "myGeometry.hpp"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
@@ -184,7 +183,6 @@ BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula)
 //     // newSample.writeToFileRaw();
 //     std::list<Segment> boundary = removeInnerLines(newSample.lines);
 //     // newSample.writeToFileRaw(boundary);
-//     // drawSvgfile(100, 100, boundary);
 //     std::list<Point_2> boundary_points = getSources(boundary);
 //     boundary_points                    = sortClockwise(boundary_points);
 //     double total_area                  = getPolygonArea(boundary_points);
