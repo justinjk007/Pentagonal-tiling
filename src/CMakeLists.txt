@@ -72,5 +72,5 @@ MESSAGE("-- All executables added")
 
 TARGET_LINK_LIBRARIES (run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 TARGET_LINK_LIBRARIES (run_de DE)
-TARGET_LINK_LIBRARIES (run_gui Qt5::Widgets Qt5::Charts)
+TARGET_LINK_LIBRARIES (run_gui DE Qt5::Widgets Qt5::Charts)
 MESSAGE("-- All libraries connected")

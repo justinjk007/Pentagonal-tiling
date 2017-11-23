@@ -5,6 +5,7 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
 #include <QtWidgets>
+#include <QString>
 
 namespace Ui
 {
@@ -18,10 +19,10 @@ class MainWindow : public QMainWindow
    public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
-    void updatePentagonInfo(const QString&);
     void updateFitnessGraph();
     void updatePentagonGeneration();
     void updatePrimitiveTileGeneration();
+    void updatePentagonInfo(const QString&);
 
    public slots:
     void on_start_btn_clicked();

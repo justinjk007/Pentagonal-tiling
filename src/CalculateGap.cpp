@@ -120,7 +120,9 @@ double calculateGap(const Tile& tile, const int& i, const int& j)
 void fillDimensions(Tile& tile)
 {
     /**
-     * This method creates the tile structure with all dimensions filled in
+     * This method creates the tile structure with all dimensions
+     * filled in. This is done to fill the missing 3 dimension the DE
+     * does not give us.
      */
     PrimitiveTile newSample(tile);
     tile = newSample.createPentagon();
