@@ -42,6 +42,14 @@ INCLUDE( CGAL_CreateSingleSourceCGALProgram )
 INCLUDE_DIRECTORIES ("${CGAL_ROOT}/include/CGAL")
 INCLUDE_DIRECTORIES (BEFORE "../../include")
 
+# Qt config
+find_package(Qt5 COMPONENTS Widgets Charts REQUIRED) # Rest of the modules will be automatically added
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_INCLUDE_BINARY_DIR ON)
+MESSAGE("-- Liniked Qt library")
+
 #Simple SVG library
 ADD_LIBRARY(libSimpleSvg "")
 INCLUDE(libSimpleSvg/CMakeLists.txt)
@@ -51,11 +59,17 @@ MESSAGE("-- Liniked svg library")
 ADD_LIBRARY(DE "")
 INCLUDE(DE/CMakeLists.txt) # Include libs from subdir
 
-ADD_EXECUTABLE(main main.cpp CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
-ADD_EXECUTABLE(run_tests run_tests.cpp CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
-ADD_EXECUTABLE(run_de run_de.cpp CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
+# Add files into one variable, seperate them into frontend and backend...cause
+SET(BACKEND CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
+SET(FRONTEND mainwindow.cpp pentagonGen.cpp tilingGen.cpp)
+
+ADD_EXECUTABLE(main main.cpp ${BACKEND})
+ADD_EXECUTABLE(run_tests run_tests.cpp ${BACKEND})
+ADD_EXECUTABLE(run_de run_de.cpp ${BACKEND})
+ADD_EXECUTABLE(run_gui run_gui.cpp ${BACKEND} ${FRONTEND})
 MESSAGE("-- All executables added")
 
 TARGET_LINK_LIBRARIES (run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
 TARGET_LINK_LIBRARIES (run_de DE)
+TARGET_LINK_LIBRARIES (run_gui Qt5::Widgets Qt5::Charts)
 MESSAGE("-- All libraries connected")
