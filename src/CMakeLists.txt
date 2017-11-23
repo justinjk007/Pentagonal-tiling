@@ -50,11 +50,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_BINARY_DIR ON)
 MESSAGE("-- Liniked Qt library")
 
-#Simple SVG library
-ADD_LIBRARY(libSimpleSvg "")
-INCLUDE(libSimpleSvg/CMakeLists.txt)
-MESSAGE("-- Liniked svg library")
-
 #DE config
 ADD_LIBRARY(DE "")
 INCLUDE(DE/CMakeLists.txt) # Include libs from subdir
