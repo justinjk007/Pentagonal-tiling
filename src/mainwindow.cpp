@@ -55,3 +55,31 @@ void MainWindow::updateFitnessGraph()
     fitness_graph->setMinimumSize(300, 100);
     ui->left_side->addWidget(fitness_graph);
 }
+
+void MainWindow::on_start_btn_clicked()
+{
+    QString side1 = QString::number(233);
+    QString content =
+        QString("<span style=\" font-size:18pt; font-weight:300; font-family:Hack,Arial;\"\\>") +
+        "Sides: " + side1 + "</span>";
+    this->updatePentagonInfo(content);  // Update data
+}
+
+void MainWindow::on_stop_btn_clicked()
+{
+	QString side1 = QString::number(2344);
+	QString content =
+		QString("<span style=\" font-size:18pt; font-weight:300; font-family:Hack,Arial;\"\\>") +
+		"Sides: " + side1 + "</span>";
+	this->updatePentagonInfo(content);  // Update data
+}
+
+void MainWindow::on_pause_btn_clicked()
+{
+
+}
+
+void MainWindow::on_resume_btn_clicked()
+{
+
+}

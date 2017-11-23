@@ -23,6 +23,12 @@ class MainWindow : public QMainWindow
     void updatePentagonGeneration();
     void updatePrimitiveTileGeneration();
 
+   public slots:
+    void on_start_btn_clicked();
+    void on_stop_btn_clicked();
+    void on_pause_btn_clicked();
+    void on_resume_btn_clicked();
+
    private:
     Ui::MainWindow* ui;
 };
