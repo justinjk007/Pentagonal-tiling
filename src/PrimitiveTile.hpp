@@ -58,16 +58,16 @@ class PrimitiveTile : public QObject
         this->lines.clear();
         this->connector_sides.clear();
     }
-	/**
-	* Slots and signals used for connecting backend with Qt
-	* frontend. Everytime a new pentagon is created, slot is called
-	* which will emit a signal. Any classes that want to watch the
-	* signal will get the info we pass
-	*/
-	public slots:
-	void setValue(Segment line);
-signals:
-	void valueChanged(Segment new_line);
+    /**
+    * Slots and signals used for connecting backend with Qt
+    * frontend. Everytime a new pentagon is created, slot is called
+    * which will emit a signal. Any classes that want to watch the
+    * signal will get the info we pass
+    */
+   public slots:
+    void setValue(Segment line);
+   signals:
+    void valueChanged(Segment new_line);
 };
 
 #endif /* PRIMITIVETILE_HPP */
