@@ -121,3 +121,8 @@ void MainWindow::on_pause_btn_clicked()
 void MainWindow::on_resume_btn_clicked()
 {
 }
+
+void MainWindow::lineCreated(Segment line)
+{
+
+}

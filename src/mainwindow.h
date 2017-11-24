@@ -6,6 +6,7 @@
 #include <QtCharts/QLineSeries>
 #include <QtWidgets>
 #include <QString>
+#include "PrimitiveTile.hpp"
 
 namespace Ui
 {
@@ -29,6 +30,7 @@ class MainWindow : public QMainWindow
     void on_stop_btn_clicked();
     void on_pause_btn_clicked();
     void on_resume_btn_clicked();
+    void lineCreated(Segment);
 
    private:
     Ui::MainWindow* ui;
