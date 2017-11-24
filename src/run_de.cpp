@@ -7,7 +7,7 @@
 #include <chrono>
 #include <thread>
 #include "CalculateGap.hpp"
-#include "DE/de.h"
+#include "de.h"
 
 /**
  * Note: "de.h" file mentions the prototypes of two classes

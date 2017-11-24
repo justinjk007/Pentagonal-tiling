@@ -56,21 +56,19 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_BINARY_DIR ON)
 MESSAGE("-- Liniked Qt library")
 
-#DE config
-ADD_LIBRARY(DE "")
-INCLUDE(DE/CMakeLists.txt) # Include libs from subdir
-
 # Add files into one variable, seperate them into frontend and backend...cause
 SET(BACKEND CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
 SET(FRONTEND mainwindow.cpp pentagonGen.cpp tilingGen.cpp)
+SET(DE lshade.cc search_algorithm.cc)
 
 ADD_EXECUTABLE(main main.cpp ${BACKEND})
 ADD_EXECUTABLE(run_tests run_tests.cpp ${BACKEND})
-ADD_EXECUTABLE(run_de run_de.cpp ${BACKEND})
-ADD_EXECUTABLE(run_gui run_gui.cpp ${BACKEND} ${FRONTEND})
+ADD_EXECUTABLE(run_de run_de.cpp ${BACKEND} ${DE})
+ADD_EXECUTABLE(run_gui run_gui.cpp ${BACKEND} ${DE} ${FRONTEND})
 MESSAGE("-- All executables added")
 
-TARGET_LINK_LIBRARIES (run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} DE Qt5::Widgets Qt5::Charts)
-TARGET_LINK_LIBRARIES (run_de DE DE Qt5::Widgets Qt5::Charts)
-TARGET_LINK_LIBRARIES (run_gui DE Qt5::Widgets Qt5::Charts)
+TARGET_LINK_LIBRARIES (main Qt5::Widgets Qt5::Charts)
+TARGET_LINK_LIBRARIES (run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} Qt5::Widgets Qt5::Charts)
+TARGET_LINK_LIBRARIES (run_de Qt5::Widgets Qt5::Charts)
+TARGET_LINK_LIBRARIES (run_gui Qt5::Widgets Qt5::Charts)
 MESSAGE("-- All libraries connected")

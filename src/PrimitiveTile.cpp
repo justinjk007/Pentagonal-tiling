@@ -1,9 +1,9 @@
 #include "PrimitiveTile.hpp"
 #include <array>
+#include <chrono>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <chrono>
 #include <thread>
 #include "CalculateGap.hpp"
 #include "myGeometry.hpp"
@@ -55,14 +55,13 @@ Tile PrimitiveTile::createPentagon()
     // Create CGAL polygon for validation
     vector<Point_2> points = getPointsFromLines(newSample.lines);  // Returns the start points
 
-	///////////////////////////////////////////////////
-	// Integrate GUI here, pass the points vector above into setupDrawingParameters function 
-	//before calling the main of the GUI for execution.
-	// This should place a call to the GUI every time the points change.
-	// Draw the polygon to assist visual debugging.
-	
+    ///////////////////////////////////////////////////
+    // Integrate GUI here, pass the points vector above into setupDrawingParameters function
+    // before calling the main of the GUI for execution.
+    // This should place a call to the GUI every time the points change.
+    // Draw the polygon to assist visual debugging.
 
-	///////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
 
     if (!validatePolygon(points)) {
         throw std::logic_error("THE PENTAGON CREATED WAS NOT CONVEX!");
@@ -74,11 +73,11 @@ Tile PrimitiveTile::createPentagon()
     newSample.pentagon.side[4].value = side_ea;
 
     // Secondly find the missing angles
-    double diagonal1 = sqrt(CGAL::squared_distance(points[0], points[3]));
-    double diagonal2 = sqrt(CGAL::squared_distance(points[4], points[1]));
-    double angle_e   = getMiddleAngle(newSample.pentagon.side[3].value,
+    double diagonal1            = sqrt(CGAL::squared_distance(points[0], points[3]));
+    double diagonal2            = sqrt(CGAL::squared_distance(points[4], points[1]));
+    double angle_e              = getMiddleAngle(newSample.pentagon.side[3].value,
                                     newSample.pentagon.side[4].value, diagonal1);
-    double angle_a   = getMiddleAngle(newSample.pentagon.side[4].value,
+    double angle_a              = getMiddleAngle(newSample.pentagon.side[4].value,
                                     newSample.pentagon.side[0].value, diagonal2);
     newSample.pentagon.angle[4] = angle_e;
     newSample.pentagon.angle[0] = angle_a;
@@ -162,7 +161,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
                 std::cout << "*****************************************************************\n";
                 std::cout << "All options for finding co-ordinates covered, exiting abnormally!\n";
                 std::cout << "*****************************************************************\n";
-		this_thread::sleep_for(std::chrono::seconds(1));
+                this_thread::sleep_for(std::chrono::seconds(1));
                 exit(1);
             }
         }
@@ -353,4 +352,12 @@ std::vector<Point_2> PrimitiveTile::getPointsFromLines(std::list<Line> lines)
         list_of_points.push_back(point);
     }
     return list_of_points;
+}
+
+void PrimitiveTile::setValue(Segment line)
+{
+    /**
+     * Slot implementation that emits when a new line is created
+     */
+    emit valueChanged(line);  // Emit the signal
 }

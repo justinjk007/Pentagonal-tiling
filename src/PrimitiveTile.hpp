@@ -5,6 +5,8 @@
  */
 #ifndef PRIMITIVETILE_HPP
 #define PRIMITIVETILE_HPP
+
+#include <QObject>
 #include <algorithm>
 #include <list>
 #include <vector>
@@ -14,8 +16,10 @@
 #include "boundaryDetection.hpp"
 #include "myGeometry.hpp"
 
-class PrimitiveTile
+class PrimitiveTile : public QObject
 {
+    Q_OBJECT
+
    public:
     std::list<Line> lines;           // Stores the lines of the boundaries primitive tile
     std::list<int> connector_sides;  // Stores the indexes of the sides connected.
@@ -54,6 +58,16 @@ class PrimitiveTile
         this->lines.clear();
         this->connector_sides.clear();
     }
+	/**
+	* Slots and signals used for connecting backend with Qt
+	* frontend. Everytime a new pentagon is created, slot is called
+	* which will emit a signal. Any classes that want to watch the
+	* signal will get the info we pass
+	*/
+	public slots:
+	void setValue(Segment line);
+signals:
+	void valueChanged(Segment new_line);
 };
 
 #endif /* PRIMITIVETILE_HPP */

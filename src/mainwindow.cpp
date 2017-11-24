@@ -6,7 +6,7 @@
 #include <chrono>
 #include <thread>
 #include "CalculateGap.hpp"
-#include "DE/de.h"
+#include "de.h"
 #include "ui_mainwindow.h"
 
 /**
