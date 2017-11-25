@@ -42,7 +42,7 @@ extern double domain_min;
 extern ofstream outFile;
 
 // void cec14_test_func(double *, double *,int,int,int);
-void cec17_test_func(double*, double*, int, int, int);
+/* void cec17_test_func(double*, double*, int, int, int); */
 
 class searchAlgorithm
 {
