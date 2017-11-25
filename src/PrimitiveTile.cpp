@@ -19,7 +19,7 @@ bool PrimitiveTile::isLinkable(Link link)
         return false;
     else
         return true;
-}
+} 
 
 void PrimitiveTile::addTile(int from, int to)
 {

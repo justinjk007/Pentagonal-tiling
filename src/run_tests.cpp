@@ -83,77 +83,77 @@ BOOST_AUTO_TEST_CASE(primitive_tile_add_tile)
     BOOST_CHECK_EQUAL(answer4, true);
 }
 
-BOOST_AUTO_TEST_CASE(get_tile_area)
-{
-    Tile tile1 = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
-    double ans = getTileArea(tile1);
-    BOOST_CHECK_CLOSE(ans, 43.01, 0.01);  // 0.01% is the tolerance
-}
+// BOOST_AUTO_TEST_CASE(get_tile_area)
+// {
+//     Tile tile1 = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
+//     double ans = getTileArea(tile1);
+//     BOOST_CHECK_CLOSE(ans, 43.01, 0.01);  // 0.01% is the tolerance
+// }
 
-BOOST_AUTO_TEST_CASE(compare_lines_test)
-{
-    Point one   = {0, 0};
-    Point two   = {1.12345, 2.123};
-    Point three = {12.12345, 23.123};
-    Point four  = {1.12345, 3.1};
-    Line line1  = {one, two};
-    Line line2  = {three, four};
-    Line line3  = {four, three};
-    Line line4  = {four, two};
-    BOOST_CHECK_EQUAL(false, compareLine(line1, line2));
-    BOOST_CHECK_EQUAL(true, compareLine(line3, line2));
-    BOOST_CHECK_EQUAL(false, compareLine(line3, line4));
-}
+// BOOST_AUTO_TEST_CASE(compare_lines_test)
+// {
+//     Point one   = {0, 0};
+//     Point two   = {1.12345, 2.123};
+//     Point three = {12.12345, 23.123};
+//     Point four  = {1.12345, 3.1};
+//     Line line1  = {one, two};
+//     Line line2  = {three, four};
+//     Line line3  = {four, three};
+//     Line line4  = {four, two};
+//     BOOST_CHECK_EQUAL(false, compareLine(line1, line2));
+//     BOOST_CHECK_EQUAL(true, compareLine(line3, line2));
+//     BOOST_CHECK_EQUAL(false, compareLine(line3, line4));
+// }
 
-BOOST_AUTO_TEST_CASE(create_pentagon_from_7_dimension)
-{
-    Tile tile = {32.72, 73.59, 78.67, 49.06, 115.73, 84.19, 95.81};  // Type 1.1
-    PrimitiveTile newSample(tile);
-    newSample.pentagon = newSample.createPentagon();
-    Tile tile2         = {32.72,  73.59,  78.67, 49.06, 57.68,
-			  122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
-    BOOST_CHECK_CLOSE(newSample.pentagon.side[0].value, tile2.side[0].value, 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.side[1].value, tile2.side[1].value, 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.side[2].value, tile2.side[2].value, 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.side[3].value, tile2.side[3].value, 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.side[4].value, tile2.side[4].value, 0.2);  // TODO: Increase precision
-    BOOST_CHECK_CLOSE(newSample.pentagon.angle[0], tile2.angle[0], 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.angle[1], tile2.angle[1], 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.angle[2], tile2.angle[2], 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.angle[3], tile2.angle[3], 0.1);  // The float is the tolerance in percentage
-    BOOST_CHECK_CLOSE(newSample.pentagon.angle[4], tile2.angle[4], 0.1);  // The float is the tolerance in percentage
-}
+// BOOST_AUTO_TEST_CASE(create_pentagon_from_7_dimension)
+// {
+//     Tile tile = {32.72, 73.59, 78.67, 49.06, 115.73, 84.19, 95.81};  // Type 1.1
+//     PrimitiveTile newSample(tile);
+//     newSample.pentagon = newSample.createPentagon();
+//     Tile tile2         = {32.72,  73.59,  78.67, 49.06, 57.68,
+// 			  122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
+//     BOOST_CHECK_CLOSE(newSample.pentagon.side[0].value, tile2.side[0].value, 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.side[1].value, tile2.side[1].value, 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.side[2].value, tile2.side[2].value, 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.side[3].value, tile2.side[3].value, 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.side[4].value, tile2.side[4].value, 0.2);  // TODO: Increase precision
+//     BOOST_CHECK_CLOSE(newSample.pentagon.angle[0], tile2.angle[0], 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.angle[1], tile2.angle[1], 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.angle[2], tile2.angle[2], 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.angle[3], tile2.angle[3], 0.1);  // The float is the tolerance in percentage
+//     BOOST_CHECK_CLOSE(newSample.pentagon.angle[4], tile2.angle[4], 0.1);  // The float is the tolerance in percentage
+// }
 
-BOOST_AUTO_TEST_CASE(create_pentagon_from_7_dimension_visual)
-{
-    // Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
-    // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-    Tile tile = {32.72, 73.59, 78.67, 49.06, 115.73, 84.19, 95.81};  // Type 1.1
-    PrimitiveTile newSample(tile);
-    newSample.pentagon = newSample.createPentagon();
-    newSample.drawPentagon(2, 2);
-    newSample.drawPentagon(2, 2);
-    newSample.doTiling(0, 0, 0, 0);
-    newSample.writeToFileRaw();
-    newSample.draw();
-}
+// BOOST_AUTO_TEST_CASE(create_pentagon_from_7_dimension_visual)
+// {
+//     // Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
+//     // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+//     Tile tile = {32.72, 73.59, 78.67, 49.06, 115.73, 84.19, 95.81};  // Type 1.1
+//     PrimitiveTile newSample(tile);
+//     newSample.pentagon = newSample.createPentagon();
+//     newSample.drawPentagon(2, 2);
+//     newSample.drawPentagon(2, 2);
+//     newSample.doTiling(0, 0, 0, 0);
+//     newSample.writeToFileRaw();
+//     // newSample.draw();
+// }
 
-BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula)
-{
-    // Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
-    // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
-    Tile tile         = {32.72,  73.59,  78.67, 49.06, 57.68,
-			 122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
-    double tile_area1 = getTileArea(tile) * 8.0;                 // 8 Tiles are used here .sooo
-    PrimitiveTile newSample(tile);
-    newSample.drawPentagon(2, 2);
-    newSample.drawPentagon(2, 2);
-    newSample.doTiling(0, 0, 0, 0);
-    // newSample.writeToFileRaw();
-    // newSample.draw();
-    double tile_area2 = getPolygonArea(newSample.lines);
-    BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.1);  // The float is the tolerance in percentage
-}
+// BOOST_AUTO_TEST_CASE(polygon_area_using_shoelace_formula)
+// {
+//     // Tile tile = {5.0, 5.0, 5.0, 5.0, 5.0, 108.0, 108.0, 108.0, 108.0};
+//     // Tile tile = {5.65, 3.14, 3.53, 3.53, 5.18, 71, 116, 121, 108};
+//     Tile tile         = {32.72,  73.59,  78.67, 49.06, 57.68,
+// 			 122.03, 115.73, 84.19, 95.81, 122.23};  // Type 1.1
+//     double tile_area1 = getTileArea(tile) * 8.0;                 // 8 Tiles are used here .sooo
+//     PrimitiveTile newSample(tile);
+//     newSample.drawPentagon(2, 2);
+//     newSample.drawPentagon(2, 2);
+//     newSample.doTiling(0, 0, 0, 0);
+//     // newSample.writeToFileRaw();
+//     // newSample.draw();
+//     double tile_area2 = getPolygonArea(newSample.lines);
+//     BOOST_CHECK_CLOSE(tile_area1, tile_area2, 0.1);  // The float is the tolerance in percentage
+// }
 
 // BOOST_AUTO_TEST_CASE(bounding_box)
 // {
