@@ -1,97 +1,43 @@
 #+TITLE: Pentagonal Tiling
-#+AUTHOR: By: Justin Kaipada
+#+AUTHOR: Justin Kaipada && George Zakharov
 #+REVEAL_THEME: solarized
 #+OPTIONS: reveal_slide_number:nil num:nil toc:nil
-#+REVEAL_MARGIN: 0.2
+#+REVEAL_MARGIN: 0.1
 #+REVEAL_TRANS: fade
 #+REVEAL_MIN_SCALE: 0.5
 #+REVEAL_MAX_SCALE: 2.5
 #+REVEAL_PLUGINS: (highlight)
 #+REVEAL_HIGHLIGHT_CSS: https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css
 
-* What is pentagonal tiling ?
-[[./img/pentagon.PNG]]
-** Tiling
-- The aim here is to tile the given surface without leaving any
-  gaps. Many geometrical shapes do so very easily.
-- Example for this can be found all around us.
-** Squares and rectangles
-Most common tiling used and found around us.
+* What is tiling ?
 [[./img/sqaure.PNG]]
-** Triangles
-All though not common, these can be also easily tiled.
+* Triangles
 [[./img/triangle.PNG]]
-- Equilateral triangles can be also tiled without any gaps
-** Hexagons
-- Hexagons can also be tiled but not all of them. But many of them are
-  easily tiled.
-- Every Regular pentagons can be easily tiled
+* Hexagons
 [[./img/hex.PNG]]
 * The problem with 5
-- Unlike other geometrical shapes all pentagons cannot be tiled.
-- Which means they leave behind gaps, not fully covering the surface
-  they are tiling.
+- Unlike other geometrical shapes all pentagons cannot be tiled perfectly.
 [[./img/gap.PNG]]
-** Some particular pentagons tile
-- Until now there has been 15 different pentagons found that can tile
-  without any gaps of area.
+* Goal
+[[./img/pentagon.PNG]]
+* List of all the pentagons found
+ [[./img/tiles.PNG]]
+* Primitive tile
 - Last one was found in 2015 by three mathematicians from *University of Washington Bothell*
 [[./img/primitive.PNG]]
-** I can quickly show a rundown of them
-- Thanks to *Jaap Scherphuis* and his awesome applet.
-* My task was to write an algorithm that will determine this unwanted gap.
-** I/O
-- The data given to me for each iteration is the lengths of the 5
-  sides of the pentagon and the corresponding angles.
-- The data output should be the minimum gap between these tiles when tiled.
-* Design
-** Breakdown
-- Our idea was to use my algorithm coupled with a evolutionary algorithm
-  to find a new pentagon that could tile without leaving any gaps.
-- Many challenges are ahead of us.
-** Algorithm
-#+BEGIN_SRC c++
-validate(Pentagon);
-generateCo-ordinates(Pentagon);
-createPrimitiveTile(Pentagon);
-doTiling(primitiveTile);
-return(minimumGap);
-#+END_SRC
-** Challenges faced
-*** Generating co-ordinates
-- Creating co-ordinates for the pentagon was one of the challenge.
-- Write now each side of the pentagon requires 4 iteration of the
-  equation to find the co-ordinates.
-- This doesn't slow the algorithm down because this is done only once
-  when drawing the primitive tile and rest of the time this original
-  pentagon is just translated.
-*** This was least of the problems
-- Combinations and permutations for everything else came after this.
-*** Creating a primitive Tile
-[[./img/primitive.PNG]]
-- Once we have the *correct* primitive tile we only have to translate
-  this =primitiveTile= to tile the given surface.
-- This way we reduce the permutations significantly growing after
-  adding each tile to a regular tiling without the =primitiveTile=.
-*** Finding the right translation
-[[./img/translation.png]]
-*** Back to the permutations base
-- Finding the correct primitive tile of size 2 takes =5 x 5= = *25* tries
-- So increasing the size of the primitive tile means exponential
-  growth in the number of combinations available.
-- Combine this together with number of possible translations,
-  combinations becomes even more bigger.
-*** What we have come down to
-- Let the size of primitive tile be two for now.
-- And return the minimum gap for all the primitive tiles possible
-* Demo
+* News !!
+[[./img/michael.jpg]]
+* Problems
+- Generating co-ordinates from the given *7* dimensions.
+- Making a primitive tile, what is the correct translation ?
+- All tiles are invalid !!
+* 1011011
  Source Code Available : https://github.com/justinjk007/Pentagonal-tiling
-[[./img/src.png]]
 * References
 - http://paulbourke.net/texture_colour/tilingplane/
+- https://www.quantamagazine.org/pentagon-tiling-proof-solves-century-old-math-problem-20170711/
 - http://jaapsch.net/tilings
 - https://arxiv.org/abs/1510.01186
-FINITO
 # * Single Image Background
 #     :PROPERTIES:
 #     :reveal_background: ./face.png
