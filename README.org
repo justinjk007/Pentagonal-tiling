@@ -7,29 +7,21 @@
 
 ** Preface
 
-Here I am trying to develop a fit function, which can be coupled
-together with any Differential Evolution / Optimization algorithm out
-there to find possible solutions for pentagonal tiling.
-
-You can generate 3 executables by compiling this source code.
+You can generate 4 executables by compiling this source code.
 - =main.exe= - Runs the fit function alone.
 - =run_tests.exe= - Runs unit tests to see if things are not broken.
 - =run_de.exe= - Runs the optimization algorithm which is coupled with my fit function.
+- =run_gui.exe= - Runs the GUI interface of the algorithm that haven't been fully coupled yet.
 
-*PS:* As of now for the optimization algorithm to run, you need to move
-the =input_data= folder to the directory where you are running the
-=run_de.exe= executable.
-
-The source is written C++ and is developed to be build and compile on
-any platform or environment that supports C++.
+The source is written *C++* and is developed to be build and compile on
+any platform or environment that supports *C++*.
 
 ** Dependencies
 
 - [[https://www.cgal.org/][CGAL]] - As a helper library for tackling polygons.
 - [[http://www.boost.org/][Boost]] - *CGAL requires boost*, I am also using Boost for Unit Testing.
+- [[https://www1.qt.io/download-open-source/?hsCtaTracking=f977210e-de67-475f-a32b-65cec207fd03%7Cd62710cd-e1db-46aa-8d4d-2f1c1ffdacea#section-2][Qt]] - Qt is required to build the front end GUI.
 - [[https://cmake.org/][CMake]] - Required to build the source code for your platform.
-
-PS: In linux CGAL to work you also require to install =libcgal-qt5-dev=
 
 ** Building the source code
 
@@ -42,7 +34,7 @@ Source code supports Visual Studio 2010 or later.
 
 To build a =.sln= file.
 - *cd* to *src* directory, run cmake for the respected architecture.
-- Open the =.sln= file and build =run_tests= or =main= or =run_de=
+- Open the =.sln= file and build =run_tests= or =main= or =run_de= or =run_gui=
 - =main.exe= requires parameters so try running that from the command line.
 - Executables can be found in the =Debug= or =Release= Directory in the
   build directory, depending on your build setup.
@@ -50,18 +42,26 @@ To build a =.sln= file.
 *** On Linux
 Source code requires G++ 6.0 or later.
 
-[[https://doc.cgal.org/latest/Manual/installation.html][Make sure the dependencies are installed]] and also =libcgal-qt5-dev=
+[[https://doc.cgal.org/latest/Manual/installation.html][Make sure the dependencies are installed]]
 
 To build a =MakeFile=.
 - *cd* to *src* directory.
 - Run =cmake=
 
-Now run =make= to build the executables. 3 executables should be generated.
+Now run =make= to build the executables. 4 executables should be generated.
 
 ** Resources
 
-- http://www.redblobgames.com/grids/hexagons/
 - [[https://www.mathsisfun.com/geometry/pentagon.html][Pentagon applet]]
+- http://www.redblobgames.com/grids/hexagons/
+- https://doc.cgal.org/4.5.2/Kernel_23/index.html
+- http://doc.qt.io/
+- http://paulbourke.net/texture_colour/tilingplane/
+- https://www.quantamagazine.org/pentagon-tiling-proof-solves-century-old-math-problem-20170711/
+- http://jaapsch.net/tilings
+- https://arxiv.org/abs/1510.01186
+- https://perso.ens-lyon.fr/michael.rao/publi.php?lang=fr
+- https://perso.ens-lyon.fr/michael.rao/publi/penta.pdf
 
 ** LICENSE
 
