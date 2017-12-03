@@ -25,7 +25,9 @@ any platform or environment that supports *C++*.
 
 ** Building the source code
 
-Source code Follows C++11 standard.
+Source code Follows C++11 standard and uses [[https://cmake.org/][CMake]] build system
+generator which will allows the code to build on any platform where
+the dependencies can be installed.
 
 *** On Windows
 Source code supports Visual Studio 2010 or later.
