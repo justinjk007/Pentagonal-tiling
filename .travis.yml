@@ -11,6 +11,7 @@ addons:
    - libboost-all-dev
    - libcgal-dev
    - qtbase5-dev
+   - qtdeclarative5-dev
 
 script:
  - cd src
