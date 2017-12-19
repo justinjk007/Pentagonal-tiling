@@ -1,4 +1,3 @@
-os:linux
 dist: trusty
 sudo: required
 language: cpp
