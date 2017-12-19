@@ -35,7 +35,7 @@ MESSAGE("-- Copied ICON file")
 # Boost config
 SET(Boost_USE_STATIC_LIBS ON)
 SET(Boost_USE_MULTITHREADED ON)
-FIND_PACKAGE( Boost 1.58 COMPONENTS unit_test_framework REQUIRED )
+FIND_PACKAGE( Boost 1.54 COMPONENTS unit_test_framework REQUIRED )
 MESSAGE("-- Boost Library was found")
 INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
