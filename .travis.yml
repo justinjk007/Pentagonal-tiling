@@ -8,6 +8,9 @@ addons:
    - ubuntu-toolchain-r-test
   packages:
    - g++-5
+   - libboost-all-dev
+   - libcgal-dev
+   - qtbase5-dev
 
 script:
  - cd src
