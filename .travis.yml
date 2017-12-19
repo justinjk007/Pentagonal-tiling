@@ -2,6 +2,9 @@ dist: trusty
 sudo: false
 language: cpp
 
+notifications:
+ email: false
+
 addons:
  apt:
   sources:
