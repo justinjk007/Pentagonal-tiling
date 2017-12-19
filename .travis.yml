@@ -9,13 +9,16 @@ addons:
  apt:
   sources:
    - ubuntu-toolchain-r-test
+   - beineri/opt-qt592-trusty
   packages:
    - g++-5
    - libboost-all-dev
    - libcgal-dev
-   - qtbase5-dev
-   - qtdeclarative5-dev
-   - libqt5charts5-dev
+   - qt59-meta-full
+   # Install these if you have a newer version of Qt libs on your package manager
+   # - qtbase5-dev
+   # - qtdeclarative5-dev
+   # - libqt5charts5-dev
 
 script:
  - cd src
