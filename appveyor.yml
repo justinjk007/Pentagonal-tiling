@@ -5,6 +5,8 @@ clone_folder: c:\Repos\source
 
 build_script:
   - cmd: >-
+      cd src
+
       mkdir build
 
       cd build
