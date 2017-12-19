@@ -15,6 +15,7 @@ addons:
    - libcgal-dev
    - qtbase5-dev
    - qtdeclarative5-dev
+   - libqt5charts5-dev
 
 script:
  - cd src
