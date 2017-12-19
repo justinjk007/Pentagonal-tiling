@@ -26,4 +26,4 @@ addons:
 script:
  - cd src
  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake .
- - cmake --build . -- -jg2
+ - cmake --build . -- -j2
