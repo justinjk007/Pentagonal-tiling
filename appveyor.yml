@@ -1,8 +1,20 @@
+version: '2.1.{build}'
+
 image:
   - Visual Studio 2017
 
 clone_folder: c:\Repos\source
 
+# Install dependencies before build using vcpkg
+before_build:
+  - cmd: >-
+      vcpkg install boost
+
+      vcpkg install cgal
+
+      vcpkg install qt5
+
+# Build using repo using Cmake Visual Studio 2017
 build_script:
   - cmd: >-
       cd src
@@ -11,6 +23,6 @@ build_script:
 
       cd build
 
-      cmake c:\Repos\source\src -G "Visual Studio 15"
+      cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake c:\Repos\source\src -G "Visual Studio 15"
 
       cmake --build . --config "Debug"
