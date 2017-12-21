@@ -9,12 +9,9 @@ clone_folder: c:\Repos\source
 cache: c:\tools\vcpkg\installed\
 
 # Install dependencies before build using vcpkg
+# Seems like CGAL will install everything
 before_build:
   - cmd: >-
-      vcpkg install boost:x64-windows
-
-      vcpkg install qt5:x64-windows
-
       vcpkg install cgal:x64-windows
 
 build_script:
