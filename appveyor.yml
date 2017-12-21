@@ -13,9 +13,9 @@ before_build:
   - cmd: >-
       vcpkg install boost:x64-windows
 
-      vcpkg install cgal:x64-windows
-
       vcpkg install qt5:x64-windows
+
+      vcpkg install cgal:x64-windows
 
 build_script:
   - cmd: >-
