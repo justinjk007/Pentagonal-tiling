@@ -16,7 +16,7 @@ environment:
 # Seems like CGAL will install everything
 before_build:
   # Remove qt5 from cgal dependency, becuase Qt is already set with the above commands
-  - pws: (Get-Content c:\tools\vcpkg\ports\cgal\CONTROL).replace('qt5,', '') | Set-Content c:\tools\vcpkg\ports\cgal\CONTROL
+  - ps: (Get-Content c:\tools\vcpkg\ports\cgal\CONTROL).replace('qt5,', '') | Set-Content c:\tools\vcpkg\ports\cgal\CONTROL
 
   - cmd: >-
       vcpkg install cgal:x64-windows
