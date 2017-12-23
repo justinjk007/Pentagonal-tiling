@@ -8,9 +8,16 @@ clone_folder: c:\Repos\source
 # Enable catched builds, this is much faster
 cache: c:\tools\vcpkg\installed\
 
+environment:
+  BOOST_ROOT: C:\Libraries\boost
+  QT5_ROOT: C:\Qt\5.9.2
+
 # Install dependencies before build using vcpkg
 # Seems like CGAL will install everything
 before_build:
+  # Remove qt5 from cgal dependency, becuase Qt is already set with the above commands
+  - pws: (Get-Content c:\tools\vcpkg\ports\cgal\CONTROL).replace('qt5,', '') | Set-Content c:\tools\vcpkg\ports\cgal\CONTROL
+
   - cmd: >-
       vcpkg install cgal:x64-windows
 
