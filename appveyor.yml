@@ -12,6 +12,7 @@ cache:
 
 environment:
   BOOST_ROOT: C:\Libraries\boost_1_58_0
+  BOOST_INCLUDEDIR: C:\Libraries\boost_1_58_0
   QT5_ROOT: C:\Qt\5.9.2
   CGAL_ROOT: C:\CGAL\
 
