@@ -19,7 +19,7 @@ environment:
 before_build:
 # Install CGAL
   - if not exist CGAL-Setup.exe
-      appveyor DownloadFile https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.10.1/CGAL-4.10.1-Setup.exe
+      appveyor DownloadFile https://github.com/CGAL/cgal/releases/download/releases/CGAL-4.10.1/CGAL-4.10.1-Setup.exe
       -FileName CGAL-Setup.exe
   - if not exist %CGAL_ROOT%
       CGAL-Setup.exe /S /D=c:\CGAL
