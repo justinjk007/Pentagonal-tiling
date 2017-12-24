@@ -26,6 +26,7 @@ before_build:
       CGAL-Setup.exe /S /D=c:\CGAL
 # Build CGAL
   - set CGAL_ROOT=C:\CGAL\
+  - set BOOST_INCLUDEDIR:C:\Libraries\boost_1_58_0
   - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - cd %CGAL_ROOT%
   - if not exist C:\CGAL\CGAL.sln
