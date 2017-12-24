@@ -6,20 +6,36 @@ image:
 clone_folder: c:\Repos\source
 
 # Enable catched builds, this is much faster
-cache: c:\tools\vcpkg\installed\
+cache:
+  - CGAL-Setup.exe -> appveyor.yml
+  - C:\CGAL -> appveyor.yml
 
 environment:
   BOOST_ROOT: C:\Libraries\boost
   QT5_ROOT: C:\Qt\5.9.2
+  CGAL_ROOT: C:\CGAL\
 
-# Install dependencies before build using vcpkg
-# Seems like CGAL will install everything
+# QT and Boost are already installed in Appveyor, I just need to get CGAL
 before_build:
-  # Remove qt5 from cgal dependency, becuase Qt is already set with the above commands
-  - ps: (Get-Content c:\tools\vcpkg\ports\cgal\CONTROL).replace('qt5,', '') | Set-Content c:\tools\vcpkg\ports\cgal\CONTROL
-
-  - cmd: >-
-      vcpkg install cgal:x64-windows
+# Install CGAL
+  - if not exist CGAL-Setup.exe
+      appveyor DownloadFile https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.10.1/CGAL-4.10.1-Setup.exe
+      -FileName CGAL-Setup.exe
+  - if not exist %CGAL_ROOT%
+      CGAL-Setup.exe /S /D=c:\CGAL
+# Build CGAL
+  - set CGAL_ROOT=C:\CGAL\
+  - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
+  - cd %CGAL_ROOT%
+  - if not exist C:\CGAL\Makefile
+      cmake -G"MinGW Makefiles" .
+  - if not exist C:\CGAL\bin\libCGAL.dll
+       mingw32-make
+  # Setup environment
+  - set PATH=%PATH%;%CGAL_ROOT%\bin
+  - set PATH=%PATH%;%CGAL_ROOT%\auxiliary\gmp\lib
+  - set PATH=%PATH%;%QTDIR%\bin
+  - set PATH=C:\Program Files\Git\usr\bin;%PATH%
 
 build_script:
   - cmd: >-
