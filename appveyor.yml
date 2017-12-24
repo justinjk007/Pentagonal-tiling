@@ -27,10 +27,10 @@ before_build:
   - set CGAL_ROOT=C:\CGAL\
   - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
   - cd %CGAL_ROOT%
-  - if not exist C:\CGAL\Makefile
-      cmake -G"MinGW Makefiles" .
+  - if not exist C:\CGAL\CGAL.sln
+      cmake -G "Visual Studio 15 Win64" .
   - if not exist C:\CGAL\bin\libCGAL.dll
-       mingw32-make
+      cmake --build .
   # Setup environment
   - set PATH=%PATH%;%CGAL_ROOT%\bin
   - set PATH=%PATH%;%CGAL_ROOT%\auxiliary\gmp\lib
@@ -45,6 +45,6 @@ build_script:
 
       cd build
 
-      cmake -DCMAKE_TOOLCHAIN_FILE=c:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake c:\Repos\source\src -G "Visual Studio 15 Win64"
+      cmake c:\Repos\source\src -G "Visual Studio 15 Win64"
 
       cmake --build . --config "Debug"
