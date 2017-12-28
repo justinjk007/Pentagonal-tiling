@@ -14,7 +14,7 @@ install:
   - mkdir Pentagonal_Tiling_Dependencies
   - cd Pentagonal_Tiling_Dependencies
   - if not exist deps.7z (
-      appveyor DownloadFile 'https://github.com/justinjk007/Pentagonal-tiling/releases/download/v2.1/vcpkg-export-20171227-202250.7z'
+      appveyor DownloadFile https://github.com/justinjk007/Pentagonal-tiling/releases/download/v2.1/vcpkg-export-20171227-202250.7z
       -FileName deps.7z )
   - if not exist C:\Repos\source\Pentagonal_Tiling_Dependencies\vcpkg-export-20171227-202250\.vcpkg-root (
       7z e deps.7z -y -spf -oC:\Repos\source\Pentagonal_Tiling_Dependencies )
