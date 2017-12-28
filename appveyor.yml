@@ -7,43 +7,19 @@ clone_folder: c:\Repos\source
 
 # Enable catched builds, this is much faster
 cache:
-  - CGAL-Setup.exe -> appveyor.yml
-  - C:\CGAL -> appveyor.yml
+  - C:\Repos\source\Pentagonal_Tiling_Dependencies
 
-environment:
-  BOOST_ROOT: C:\Libraries\boost_1_58_0
-  BOOST_INCLUDEDIR: C:\Libraries\boost_1_58_0
-  Boost_INCLUDE_DIR: C:\Libraries\boost_1_58_0
-  BOOST_LIBRARYDIR: C:\Libraries\boost_1_58_0\lib64-msvc-15.0
-  QT5_ROOT: C:\Qt\5.9.2
-  CGAL_ROOT: C:\CGAL\
-
-# QT and Boost are already installed in Appveyor, I just need to get CGAL
-before_build:
-# Install CGAL
-  - if not exist CGAL-Setup.exe
-      appveyor DownloadFile https://github.com/CGAL/cgal/releases/download/releases/CGAL-4.10.1/CGAL-4.10.1-Setup.exe
-      -FileName CGAL-Setup.exe
-  - if not exist %CGAL_ROOT%
-      CGAL-Setup.exe /S /D=c:\CGAL
-# Build CGAL
-  - set CGAL_ROOT=C:\CGAL\
-  - set BOOST_ROOT=C:\Libraries\boost_1_58_0
-  - set BOOST_INCLUDEDIR=C:\Libraries\boost_1_58_0
-  - set Boost_INCLUDE_DIR=C:\Libraries\boost_1_58_0
-  - set BOOST_LIBRARYDIR=C:\Libraries\boost_1_58_0\lib64-msvc-15.0
-  - set PATH=%PATH:C:\local\boost_1_64_0;=%
-  - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
-  - cd %CGAL_ROOT%
-  - if not exist C:\CGAL\CGAL.sln
-      cmake -G "Visual Studio 15 Win64" .
-  - if not exist C:\CGAL\bin\libCGAL.dll
-      cmake --build .
-  # Setup environment
-  - set PATH=%PATH%;%CGAL_ROOT%\bin
-  - set PATH=%PATH%;%CGAL_ROOT%\auxiliary\gmp\lib
-  - set PATH=%PATH%;%QTDIR%\bin
-  - set PATH=C:\Program Files\Git\usr\bin;%PATH%
+# Download dependencies
+install:
+  - mkdir Pentagonal_Tiling_Dependencies
+  - cd Pentagonal_Tiling_Dependencies
+  - if not exist deps.7z
+      - ps: Start-FileDownload 'https://github.com/justinjk007/Pentagonal-tiling/releases/download/v2.1/vcpkg-export-20171227-202250.7z' -FileName deps.7z
+  - if not exist C:\Repos\source\Pentagonal_Tiling_Dependencies\vcpkg-export-20171227-202250\.vcpkg-root
+      - 7z e deps.7z -y -spf -oC:\Repos\source\Pentagonal_Tiling_Dependencies
+      # -y   => Yes to all prompts
+      # -spf => Use fully qualified file paths
+      # -o   => Set Output directory
 
 build_script:
   - cmd: >-
@@ -53,6 +29,6 @@ build_script:
 
       cd build
 
-      cmake c:\Repos\source\src -G "Visual Studio 15 Win64"
+      cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20171227-202250/scripts/buildsystems/vcpkg.cmake C:\Repos\source\src -G "Visual Studio 15 Win64"
 
       cmake --build . --config "Debug"
