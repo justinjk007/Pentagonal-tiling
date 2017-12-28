@@ -7,7 +7,7 @@ clone_folder: c:\Repos\source
 
 # Enable catched builds, this is much faster
 cache:
-  - C:\Repos\source\Pentagonal_Tiling_Dependencies
+  - C:\Repos\source\Pentagonal_Tiling_Dependencies -> appveyor.yml
 
 # Download dependencies
 install:
@@ -23,7 +23,7 @@ install:
       # -o   => Set Output directory
 
 build_script:
-  - ps:ls
+  - ps:ls .\
   # - cd src
   # - mkdir build
   # - cd build
