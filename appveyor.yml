@@ -23,7 +23,7 @@ install:
       # -o   => Set Output directory
 
 build_script:
-  - ps:pwd
+  - pwd
   # - cd src
   # - mkdir build
   # - cd build
