@@ -23,7 +23,7 @@ install:
       # -o   => Set Output directory
 
 build_script:
-  - cd C:\Repos\source\Pentagonal-tiling\src\
+  - cd C:\Repos\source\src\
   - mkdir build
   - cd build
   - cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20171227-202250/scripts/buildsystems/vcpkg.cmake C:\Repos\source\src -G "Visual Studio 15 Win64"
