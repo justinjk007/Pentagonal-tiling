@@ -43,7 +43,6 @@ INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 # For linux CGAL to work also install package " libcgal-qt5-dev " as well
 FIND_PACKAGE(CGAL REQUIRED)
 MESSAGE("-- CGAL Library was found")
-MESSAGE("The use file is located in " ${CGAL_USE_FILE})
 INCLUDE( ${CGAL_USE_FILE} )
 INCLUDE( CGAL_CreateSingleSourceCGALProgram )
 INCLUDE_DIRECTORIES ("${CGAL_ROOT}/include/CGAL")
@@ -51,11 +50,11 @@ INCLUDE_DIRECTORIES (BEFORE "../../include")
 
 # Qt config
 find_package(Qt5 COMPONENTS Widgets Charts REQUIRED) # Rest of the modules will be automatically added
+MESSAGE("-- Qt5 Library was found")
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_BINARY_DIR ON)
-MESSAGE("-- Liniked Qt library")
 
 # Add files into one variable, seperate them into frontend and backend...cause
 SET(BACKEND CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
