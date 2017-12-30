@@ -32,6 +32,7 @@ script:
  - cd CGAL-4.11
  - cmake .
  - sudo make install
+ # Build my code
  - cd ..
  - cd src
  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake .
