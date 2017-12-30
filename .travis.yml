@@ -5,6 +5,11 @@ language: cpp
 notifications:
  email: false
 
+# Install the latest cgal library
+before_install:
+  - wget https://launchpad.net/ubuntu/+archive/primary/+files/libcgal-dev_4.11-2_amd64.deb
+  - sudo dpkg -i libcgal-dev_4.11-2_amd64.deb
+
 addons:
  apt:
   sources:
@@ -12,8 +17,8 @@ addons:
    - sourceline: 'ppa:beineri/opt-qt592-trusty'
   packages:
    - g++-5
+   # Install other dependencies
    - libboost-all-dev
-   - libcgal-dev
    - qt59base
    - qt59declarative
    - qt59charts-no-lgpl
