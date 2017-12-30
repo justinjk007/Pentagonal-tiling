@@ -5,13 +5,6 @@ language: cpp
 notifications:
  email: false
 
-# Install the latest cgal library
-before_install:
-  - wget https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.11/CGAL-4.11.tar.xz
-  - tar -xf CGAL-4.11.tar.xz
-  - cd CGAL-4.11
-  - cmake .
-  - sudo make install
 
 addons:
  apt:
@@ -33,6 +26,13 @@ addons:
    # - libqt5charts5-dev
 
 script:
+# Install the latest cgal library
+ - wget https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.11/CGAL-4.11.tar.xz
+ - tar -xf CGAL-4.11.tar.xz
+ - cd CGAL-4.11
+ - cmake .
+ - sudo make install
+ - cd ..
  - cd src
  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake .
  - cmake --build . -- -j2
