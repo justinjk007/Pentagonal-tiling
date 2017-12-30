@@ -5,7 +5,6 @@ language: cpp
 notifications:
  email: false
 
-
 addons:
  apt:
   sources:
