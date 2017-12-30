@@ -11,7 +11,7 @@ before_install:
   - tar -xf CGAL-4.11.tar.xz
   - cd CGAL-4.11
   - cmake .
-  - make install
+  - sudo make install
 
 addons:
  apt:
