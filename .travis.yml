@@ -7,8 +7,11 @@ notifications:
 
 # Install the latest cgal library
 before_install:
-  - wget https://launchpad.net/ubuntu/+archive/primary/+files/libcgal-dev_4.11-2_amd64.deb
-  - sudo dpkg -i libcgal-dev_4.11-2_amd64.deb
+  - wget https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.11/CGAL-4.11.tar.xz
+  - tar -xf CGAL-4.11.tar.xz
+  - cd CGAL-4.11
+  - cmake .
+  - make install
 
 addons:
  apt:
