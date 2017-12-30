@@ -17,7 +17,6 @@ configure_file (
   "${PROJECT_BINARY_DIR}/Config.h.in"
   "${PROJECT_BINARY_DIR}/Config.h"
   )
-
 include_directories("${PROJECT_BINARY_DIR}") # This is done to include Config.h
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
@@ -40,7 +39,6 @@ message("-- Boost Library was found")
 include_directories( ${Boost_INCLUDE_DIR} )
 
 # CGAL config
-# For linux CGAL to work also install package " libcgal-qt5-dev " as well
 find_package(CGAL REQUIRED)
 message("-- CGAL Library was found")
 
