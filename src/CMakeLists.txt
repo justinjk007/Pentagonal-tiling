@@ -19,17 +19,30 @@ configure_file (
   )
 include_directories("${PROJECT_BINARY_DIR}") # This is done to include Config.h
 
+# Move resource files to directories where the executable can find it
+# This is the python script that was used for visual debugging in the
+# earlier versions of the program this being kept until the C++ gui is
+# usable
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 message("-- Copied python script for plotting")
 
+# This is the icon file used to represent the program temporary way to
+# make things pretty before resources can be managed correctly
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../img/favicon.ico
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../img/favicon.ico
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 message("-- Copied ICON file")
+
+# Set compiler specific options
+# if (MSVC)
+#   add_compile_options(/MP /Gm-)
+#   # else()
+#   #   add_compile_options(-Wall -Wextra -Wpedantic)
+# endif()
 
 # Boost config
 set(Boost_USE_STATIC_LIBS ON)
