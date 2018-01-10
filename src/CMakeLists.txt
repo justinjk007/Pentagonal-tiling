@@ -54,6 +54,10 @@ include_directories( ${Boost_INCLUDE_DIR} )
 # CGAL config
 find_package(CGAL REQUIRED)
 message("-- CGAL Library was found")
+include( ${CGAL_USE_FILE} )
+include( CGAL_CreateSingleSourceCGALProgram )
+include_directories ("${CGAL_ROOT}/include/CGAL")
+include_directories (BEFORE "../../include")
 
 # Qt config
 find_package(Qt5 COMPONENTS Widgets Charts REQUIRED) # Rest of the modules will be automatically added

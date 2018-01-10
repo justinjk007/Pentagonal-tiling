@@ -1,7 +1,6 @@
 #include <QApplication>
 #include <QString>
 #include "mainwindow.h"
-#include "CalculateGap.hpp"
 
 using namespace std;
 using namespace QtCharts;
@@ -15,7 +14,6 @@ int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    connect(ptr_to_obj_a, &PrimitiveTile::mySignal, &w, &MainWindow::mySlot);
 
     // Window settings
     w.setWindowTitle("Pentagonal Tiling - Visulization");

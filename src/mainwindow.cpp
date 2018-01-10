@@ -5,8 +5,6 @@
 #include <QtGui>
 #include <chrono>
 #include <thread>
-#include "CalculateGap.hpp"
-#include "de.h"
 #include "ui_mainwindow.h"
 
 /**
@@ -81,33 +79,6 @@ void MainWindow::updateFitnessGraph()
 
 void MainWindow::on_start_btn_clicked()
 {
-    /**
-     * Implements the start button, here we initialize variables for
-     * Differential evolution and start the algorithm
-     */
-    g_problem_size        = 7;                       // dimension size.
-    g_max_num_evaluations = g_problem_size * 10000;  // available number of fitness evaluations
-    // random seed is selected based on time according to competition rules
-    srand((unsigned)time(NULL));
-    g_pop_size    = (int)round(sqrt(g_problem_size) * log(g_problem_size) * 25);
-    g_memory_size = 5;
-    g_arc_rate    = 1;
-    g_p_best_rate = 0.25;
-    // Set domain for each dimension
-    domain_min = 90;
-    domain_max = 120;
-    // Display information
-    QString problem_size = QString::number(g_problem_size);
-    QString pop_size = QString::number(g_pop_size);
-    QString content =
-        QString("<span style=\" font-size:10pt; color:blue; font-weight:200; font-family:Hack,Arial;\"\\>") +
-        "Dimension size = " + problem_size + ", g_pop_size[_INIT] = " + pop_size+ "</span>";
-    updatePentagonInfo(content);  // Update data
-    // Finally start DE
-    // searchAlgorithm* algorithm = new LSHADE();
-    // algorithm->run();
-    // delete algorithm;
-    // outFile << endl;
 }
 
 void MainWindow::on_stop_btn_clicked()
