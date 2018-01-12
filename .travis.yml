@@ -32,6 +32,7 @@ script:
  - cmake .
  - sudo make install
  # Build my code
+ - pwd
  - cd ..
  - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake .
- - cmake --build . -- -j2
+ - cmake --build . -- -j

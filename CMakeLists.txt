@@ -82,4 +82,7 @@ target_link_libraries(run_de Qt5::Widgets Qt5::Charts CGAL::CGAL)
 target_link_libraries(run_gui Qt5::Widgets Qt5::Charts CGAL::CGAL)
 message("-- All libraries connected")
 
+# This is done so that the auto-generated header file by Qt's GUI
+# system can find all the widget header files which exist in the
+# directory i'm including.
 target_include_directories(run_gui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
