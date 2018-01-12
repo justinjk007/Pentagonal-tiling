@@ -26,5 +26,5 @@ build_script:
   - cd C:\Repos\source\
   - mkdir build
   - cd build
-  - cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20171228-214948/scripts/buildsystems/vcpkg.cmake C:\Repos\source\src -G "Visual Studio 15 Win64"
+  - cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20171228-214948/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
   - cmake --build . --config "Debug"
