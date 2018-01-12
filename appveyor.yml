@@ -14,9 +14,9 @@ install:
   - mkdir Pentagonal_Tiling_Dependencies
   - cd Pentagonal_Tiling_Dependencies
   - if not exist deps.7z (
-      appveyor DownloadFile https://github.com/justinjk007/Pentagonal-tiling/releases/download/v2.1/vcpkg-export-20171228-214948.7z
+      appveyor DownloadFile https://github.com/justinjk007/Pentagonal-tiling/releases/download/v2.1/vcpkg-export-20180112-110203.7z
       -FileName deps.7z )
-  - if not exist C:\Repos\source\Pentagonal_Tiling_Dependencies\vcpkg-export-20171228-214948\.vcpkg-root (
+  - if not exist C:\Repos\source\Pentagonal_Tiling_Dependencies\vcpkg-export-20180112-110203\.vcpkg-root (
       7z e deps.7z -y -spf -oC:\Repos\source\Pentagonal_Tiling_Dependencies )
       # -y   => Yes to all prompts
       # -spf => Use fully qualified file paths
@@ -26,5 +26,5 @@ build_script:
   - cd C:\Repos\source\
   - mkdir build
   - cd build
-  - cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20171228-214948/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
+  - cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
   - cmake --build . --config "Debug"
