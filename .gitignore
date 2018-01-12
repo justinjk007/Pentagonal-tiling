@@ -32,9 +32,9 @@
 *.tlog
 
 # Ignore cmake build dirs
-/src/build
-/src/CMakeFiles
-/src/DLL
+/build
+/CMakeFiles
+/DLL
 
 #Don't ignore these files from build
 !/src/build/debug/plot_lines.py

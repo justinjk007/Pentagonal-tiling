@@ -23,17 +23,17 @@ include_directories("${PROJECT_BINARY_DIR}") # This is done to include Config.h
 # This is the python script that was used for visual debugging in the
 # earlier versions of the program this being kept until the C++ gui is
 # usable
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/scripts/plot_lines.py
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/plot_lines.py
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/scripts/plot_lines.py
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 message("-- Copied python script for plotting")
 
 # This is the icon file used to represent the program temporary way to
 # make things pretty before resources can be managed correctly
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../img/favicon.ico
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/img/favicon.ico
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/../img/favicon.ico
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/img/favicon.ico
   DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 message("-- Copied ICON file")
 
@@ -68,14 +68,14 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_INCLUDE_BINARY_DIR ON)
 
 # Add files into one variable, seperate them into frontend and backend...cause
-set(BACKEND CalculateGap.cpp PrimitiveTile.cpp myGeometry.cpp boundaryDetection.cpp)
-set(FRONTEND mainwindow.cpp pentagonGen.cpp tilingGen.cpp)
-set(DE lshade.cc search_algorithm.cc)
+set(BACKEND src/CalculateGap.cpp src/PrimitiveTile.cpp src/myGeometry.cpp src/boundaryDetection.cpp)
+set(FRONTEND src/mainwindow.cpp src/pentagonGen.cpp src/tilingGen.cpp)
+set(DE src/lshade.cc src/search_algorithm.cc)
 
-add_executable(main main.cpp ${BACKEND})
-add_executable(run_tests run_tests.cpp ${BACKEND})
-add_executable(run_de run_de.cpp ${BACKEND} ${DE})
-add_executable(run_gui run_gui.cpp ${BACKEND} ${DE} ${FRONTEND})
+add_executable(main src/main.cpp ${BACKEND})
+add_executable(run_tests src/run_tests.cpp ${BACKEND})
+add_executable(run_de src/run_de.cpp ${BACKEND} ${DE})
+add_executable(run_gui src/run_gui.cpp ${BACKEND} ${DE} ${FRONTEND})
 message("-- All executables added")
 
 target_link_libraries(main Qt5::Widgets Qt5::Charts CGAL::CGAL)
