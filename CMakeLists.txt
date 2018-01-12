@@ -47,7 +47,7 @@ message("-- Copied ICON file")
 # Boost config
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
-find_package( Boost 1.54 COMPONENTS unit_test_framework REQUIRED )
+find_package( Boost COMPONENTS unit_test_framework REQUIRED )
 message("-- Boost Library was found")
 include_directories( ${Boost_INCLUDE_DIR} )
 
@@ -81,3 +81,5 @@ target_link_libraries(run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} Qt5::Widget
 target_link_libraries(run_de Qt5::Widgets Qt5::Charts CGAL::CGAL)
 target_link_libraries(run_gui Qt5::Widgets Qt5::Charts CGAL::CGAL)
 message("-- All libraries connected")
+
+target_include_directories(run_gui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
