@@ -70,7 +70,7 @@ set(BACKEND src/CalculateGap.cpp src/PrimitiveTile.cpp src/myGeometry.cpp src/bo
 set(FRONTEND src/mainwindow.cpp src/pentagonGen.cpp src/tilingGen.cpp)
 set(DE src/lshade.cc src/search_algorithm.cc)
 
-add_executable(run_tests src/run_tests.cpp ${BACKEND})
+add_executable(run_tests test/run_tests.cpp ${BACKEND})
 add_executable(run_de src/run_de.cpp ${BACKEND} ${DE})
 add_executable(run_gui src/run_gui.cpp ${BACKEND} ${DE} ${FRONTEND})
 message("-- All executables added")
@@ -84,3 +84,4 @@ message("-- All libraries connected")
 # system can find all the widget header files which exist in the
 # directory i'm including.
 target_include_directories(run_gui PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(run_tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
