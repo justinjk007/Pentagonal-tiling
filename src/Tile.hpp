@@ -55,12 +55,12 @@ struct Tile {
         this->side[1].value = sbc;
         this->side[2].value = scd;
         this->side[3].value = sde;
-        this->side[4].value = NULL;
-        this->angle[0]      = NULL;
+        this->side[4].value = 0.0;
+        this->angle[0]      = 0.0;
         this->angle[1]      = b;
         this->angle[2]      = c;
         this->angle[3]      = d;
-        this->angle[4]      = NULL;
+        this->angle[4]      = 0.0;
     }
     Tile()
     {
