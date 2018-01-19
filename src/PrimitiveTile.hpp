@@ -1,12 +1,11 @@
 /**
- * This structure defines a primitive tile, which is linkedlist of
- * connected tiles making use of the Link, Side and the Tile
- * strcuture.
- */
+    * This structure defines a primitive tile, which is linkedlist of
+    * connected tiles making use of the Link, Side and the Tile
+    * strcuture.
+    */
 #ifndef PRIMITIVETILE_HPP
 #define PRIMITIVETILE_HPP
 
-#include <QObject>
 #include <algorithm>
 #include <list>
 #include <vector>
@@ -16,11 +15,9 @@
 #include "boundaryDetection.hpp"
 #include "myGeometry.hpp"
 
-class PrimitiveTile : public QObject
+class PrimitiveTile
 {
-    Q_OBJECT
-
-   public:
+public:
     std::list<Line> lines;           // Stores the lines of the boundaries primitive tile
     std::list<int> connector_sides;  // Stores the indexes of the sides connected.
     Tile pentagon;                   // Stores the measurements of the tile or pentagon used.
@@ -42,32 +39,22 @@ class PrimitiveTile : public QObject
     std::vector<Point_2> getPointsFromLines(std::list<Line>);  // Returns the start points
     PrimitiveTile()
     {
-        this->size  = 1;  // Obviously we need atleast one tile.
-        this->count = 1;  // Obviously we need atleast one primitive tile.
+    this->size  = 1;  // Obviously we need atleast one tile.
+    this->count = 1;  // Obviously we need atleast one primitive tile.
     }
     PrimitiveTile(Tile tile)
     {
-        this->pentagon = tile;
-        this->size     = 1;  // Obviously we need atleast one tile.
-        this->count    = 1;  // Obviously we need atleast one primitive tile.
+    this->pentagon = tile;
+    this->size     = 1;  // Obviously we need atleast one tile.
+    this->count    = 1;  // Obviously we need atleast one primitive tile.
     }
     ~PrimitiveTile()
     {
-        this->size  = 1;  // Obviously we need atleast one tile.
-        this->count = 1;  // Obviously we need atleast one primitive tile.
-        this->lines.clear();
-        this->connector_sides.clear();
+    this->size  = 1;  // Obviously we need atleast one tile.
+    this->count = 1;  // Obviously we need atleast one primitive tile.
+    this->lines.clear();
+    this->connector_sides.clear();
     }
-    /**
-    * Slots and signals used for connecting backend with Qt
-    * frontend. Everytime a new pentagon is created, slot is called
-    * which will emit a signal. Any classes that want to watch the
-    * signal will get the info we pass
-    */
-   public slots:
-    void setValue(Segment line);
-   signals:
-    void valueChanged(Segment new_line);
 };
 
 #endif /* PRIMITIVETILE_HPP */

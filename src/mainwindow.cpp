@@ -1,11 +1,11 @@
 #include "mainwindow.h"
 #include <QTextBrowser>
+#include <QThread>
 #include <QWidget>
 #include <QtCore>
 #include <QtGui>
-#include <chrono>
-#include <thread>
 #include "ui_mainwindow.h"
+#include "Worker.hpp"
 
 /**
  * Note: "de.h" file mentions the prototypes of two classes
@@ -17,17 +17,6 @@
 
 using namespace QtCharts;
 using namespace std;
-
-// Global Variables for DE library
-int g_problem_size;
-unsigned int g_max_num_evaluations;
-double domain_max;
-double domain_min;
-int g_pop_size;
-double g_arc_rate;
-int g_memory_size;
-double g_p_best_rate;
-ofstream outFile;
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -79,6 +68,17 @@ void MainWindow::updateFitnessGraph()
 
 void MainWindow::on_start_btn_clicked()
 {
+    QThread* worker_thread = new QThread;
+    Worker* de_algo        = new Worker();
+    de_algo->moveToThread(worker_thread);
+    connect(de_algo, &Worker::updatePentagonInfo, this, &MainWindow::updatePentagonInfo);
+    connect(worker_thread, SIGNAL(started()), de_algo, SLOT(mainProcess()));
+    // Delete thread signals
+    connect(de_algo, SIGNAL(finished()), worker_thread, SLOT(quit()));
+    connect(de_algo, SIGNAL(finished()), de_algo, SLOT(deleteLater()));
+    connect(worker_thread, SIGNAL(finished()), worker_thread, SLOT(deleteLater()));
+    // Finally start the thread
+    worker_thread->start();
 }
 
 void MainWindow::on_stop_btn_clicked()

@@ -19,7 +19,7 @@ bool PrimitiveTile::isLinkable(Link link)
         return false;
     else
         return true;
-} 
+}
 
 void PrimitiveTile::addTile(int from, int to)
 {
@@ -352,12 +352,4 @@ std::vector<Point_2> PrimitiveTile::getPointsFromLines(std::list<Line> lines)
         list_of_points.push_back(point);
     }
     return list_of_points;
-}
-
-void PrimitiveTile::setValue(Segment line)
-{
-    /**
-     * Slot implementation that emits when a new line is created
-     */
-    emit valueChanged(line);  // Emit the signal
 }

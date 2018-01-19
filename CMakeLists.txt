@@ -67,7 +67,7 @@ set(CMAKE_INCLUDE_BINARY_DIR ON)
 
 # Add files into one variable, seperate them into frontend and backend...cause
 set(BACKEND src/CalculateGap.cpp src/PrimitiveTile.cpp src/myGeometry.cpp src/boundaryDetection.cpp)
-set(FRONTEND src/mainwindow.cpp src/pentagonGen.cpp src/tilingGen.cpp)
+set(FRONTEND src/mainwindow.cpp src/pentagonGen.cpp src/tilingGen.cpp src/Worker.cpp)
 set(DE src/lshade.cc src/search_algorithm.cc)
 
 add_executable(run_tests test/run_tests.cpp ${BACKEND})
@@ -76,7 +76,7 @@ add_executable(run_gui src/run_gui.cpp ${BACKEND} ${DE} ${FRONTEND})
 message("-- All executables added")
 
 target_link_libraries(run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} Qt5::Widgets Qt5::Charts CGAL::CGAL)
-target_link_libraries(run_de Qt5::Widgets Qt5::Charts CGAL::CGAL)
+target_link_libraries(run_de CGAL::CGAL)
 target_link_libraries(run_gui Qt5::Widgets Qt5::Charts CGAL::CGAL)
 message("-- All libraries connected")
 

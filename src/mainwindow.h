@@ -17,21 +17,21 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-   public:
+    public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
+    void updatePentagonInfo(const QString&);
     void updateFitnessGraph();
     void updatePentagonGeneration();
     void updatePrimitiveTileGeneration();
-    void updatePentagonInfo(const QString&);
 
-   public slots:
-    void on_start_btn_clicked();
-    void on_stop_btn_clicked();
+    private slots:
+	void on_start_btn_clicked();
+	void on_stop_btn_clicked();
     void on_pause_btn_clicked();
     void on_resume_btn_clicked();
 
-   private:
+ private:
     Ui::MainWindow* ui;
 };
 
