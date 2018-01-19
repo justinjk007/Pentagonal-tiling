@@ -71,12 +71,10 @@ set(FRONTEND src/mainwindow.cpp src/pentagonGen.cpp src/tilingGen.cpp src/Worker
 set(DE src/lshade.cc src/search_algorithm.cc)
 
 add_executable(run_tests test/run_tests.cpp ${BACKEND})
-add_executable(run_de src/run_de.cpp ${BACKEND} ${DE})
 add_executable(run_gui src/run_gui.cpp ${BACKEND} ${DE} ${FRONTEND})
 message("-- All executables added")
 
 target_link_libraries(run_tests ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} Qt5::Widgets Qt5::Charts CGAL::CGAL)
-target_link_libraries(run_de CGAL::CGAL)
 target_link_libraries(run_gui Qt5::Widgets Qt5::Charts CGAL::CGAL)
 message("-- All libraries connected")
 

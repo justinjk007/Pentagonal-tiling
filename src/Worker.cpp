@@ -1,9 +1,23 @@
+/**
+ * Author: Justin Kaipada (c) This file couples together the DE
+ * algorithm and fitness function written by me to perform tests on
+ * pentagonal tiling
+ */
+
 #include "Worker.hpp"
-#include <QDebug>
+#include "de.h"
 #include <fstream>
 #include <QString>
 #include <chrono>
 #include <thread>
+
+/**
+ * Note: "de.h" file mentions the prototypes of two classes
+ * searchAlgorithm and LSHADE. LSHADE is the actual Optimization
+ * algorithm and searchAlgorithm class are further improvements on the
+ * optimization algorithm like region constraints and more constraints
+ * after mutation
+ */
 
 using namespace std;
 
@@ -16,6 +30,7 @@ int g_pop_size;
 double g_arc_rate;
 int g_memory_size;
 double g_p_best_rate;
+
 ofstream outFile;
 
 void Worker::mainProcess()
@@ -26,16 +41,35 @@ void Worker::mainProcess()
     * in a seperate thread than the GUI for smooth running and performance
     * reasons
     */
-    qDebug("run de method is called");
-    QString content =
-    QString(
-    "<span style=\" font-size:12pt; font-weight:300; font-family:Hack,Arial;\"\\>") +
-    "Main method has emitted a signal" + "</span>";
+
+    g_problem_size        = 7;                       // dimension size.
+    g_max_num_evaluations = g_problem_size * 10000;  // available number of fitness evaluations
+
+    // random seed is selected based on time according to competition rules
+    srand((unsigned)time(NULL));
+
+    g_pop_size    = (int)round(sqrt(g_problem_size) * log(g_problem_size) * 25);
+    g_memory_size = 5;
+    g_arc_rate    = 1;
+    g_p_best_rate = 0.25;
+
+    domain_min = 90;
+    domain_max = 120;
+
+
+    // cout << "\n-------------------------------------------------------" << endl;
+    // cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
+    //      << endl;
+
+    QString content = QString("Dimension size ="+QString::number(g_problem_size));
     emit updatePentagonInfo(content);
-    content = QString("Waiting for 5 seconds");
+    content = QString("pop_size ="+QString::number(g_pop_size));
     emit updatePentagonInfo(content);
-    this_thread::sleep_for(std::chrono::seconds(5));
-    content = QString("Done Waiting");
-    emit updatePentagonInfo(content);
+
+    searchAlgorithm* algorithm = new LSHADE();
+    algorithm->run();
+    delete algorithm;
+
+    outFile << endl;
     emit finished();
 }
