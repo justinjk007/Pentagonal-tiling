@@ -415,52 +415,6 @@ bool comparePoint(const Point_2& a, const Point_2& b)
     return false;
 }
 
-void printData(const std::list<Line>& polygon)
-{
-    /**
-     * Prints out the given list of lines
-     */
-    cout << "Displaying list of Lines\n";
-    double x1, y1, x2, y2;
-    for (auto it = polygon.begin(); it != polygon.end(); it++) {
-        x1 = it->source.x;
-        y1 = it->source.y;
-        x2 = it->target.x;
-        y2 = it->target.y;
-        printf("(%f, %f)  ---   (%f, %f)\n", x1, y1, x2, y2);
-    }
-}
-
-void printData(const std::list<Segment>& polygon)
-{
-    /**
-     * Prints out the given list of lines
-     */
-    cout << "Displaying list of Segments\n";
-    double x1, y1, x2, y2;
-    for (auto it = polygon.begin(); it != polygon.end(); it++) {
-        x1 = it->source().x();
-        y1 = it->source().y();
-        x2 = it->target().x();
-        y2 = it->target().y();
-        printf("(%f, %f)  ---   (%f, %f)\n", x1, y1, x2, y2);
-    }
-}
-
-void printData(const std::list<Point_2>& polygon)
-{
-    /**
-     * Prints out the given list of points
-     */
-    cout << "Displaying list of Point_2s\n";
-    double x1, y1;
-    for (auto it = polygon.begin(); it != polygon.end(); it++) {
-        x1 = it->x();
-        y1 = it->y();
-        printf("(%f, %f)\n", x1, y1);
-    }
-}
-
 std::list<Point_2> getSources(const std::list<Line>& lines)
 {
     /**
@@ -475,7 +429,6 @@ std::list<Point_2> getSources(const std::list<Line>& lines)
         Point_2 point(xx, yy);
         list_of_points.push_back(point);  // Add the point to the list
     }
-
     return list_of_points;
 }
 
