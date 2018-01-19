@@ -26,3 +26,8 @@
 
 # Ignored Qt files
 *.user
+
+# Ignore GTags
+GPATH
+GRTAGS
+GTAGS
