@@ -14,6 +14,7 @@
 #include "Tile.hpp"
 #include "boundaryDetection.hpp"
 #include "myGeometry.hpp"
+#include "cgal.hpp"
 
 class PrimitiveTile
 {
