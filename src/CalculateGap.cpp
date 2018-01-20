@@ -8,7 +8,7 @@
 
 using namespace std;
 
-double getGap(const Tile& tile)
+double CalculateGap::getGap(const Tile& tile)
 {
     /*
      * This is the main method that returns the gap minimum between the
@@ -39,7 +39,7 @@ double getGap(const Tile& tile)
     return min_gap;
 }
 
-void getGap(double* x, double* fitness)
+void CalculateGap::getGap(double* x, double* fitness)
 {
     /**
      * This is an overloaded variant of getGap that takes in the args
@@ -86,7 +86,7 @@ void getGap(double* x, double* fitness)
     fitness[0] = min_gap;
 }
 
-double calculateGap(const Tile& tile, const int& i, const int& j)
+double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
 {
     /**
      * This method integrates all the core methods into finding the gap

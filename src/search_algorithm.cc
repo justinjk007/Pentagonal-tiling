@@ -32,7 +32,8 @@ void searchAlgorithm::evaluatePopulation(const vector<Individual>& pop, vector<F
 
         // cec14_test_func(pop[i],  &fitness[i], problem_size, 1, function_number);
         // cec17_test_func(pop[i], &fitness[i], problem_size, 1, function_number);
-        getGap(pop[i], &fitness[i]);
+	CalculateGap algo;
+        algo.getGap(pop[i], &fitness[i]);
     }
 }
 

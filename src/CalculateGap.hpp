@@ -10,8 +10,11 @@
 #include "boundaryDetection.hpp"
 #include "myGeometry.hpp"
 
-double getGap(const Tile&);
-void getGap(double*, double*);
-double calculateGap(const Tile&, const int&, const int&);
-
+class CalculateGap
+{
+   public:
+    double getGap(const Tile&);
+    void getGap(double*, double*);
+    double calculateGap(const Tile&, const int&, const int&);
+};
 #endif /* CALCULATEGAP_HPP */
