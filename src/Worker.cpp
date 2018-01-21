@@ -5,11 +5,11 @@
  */
 
 #include "Worker.hpp"
-#include "de.h"
-#include <fstream>
 #include <QString>
 #include <chrono>
+#include <fstream>
 #include <thread>
+#include "de.h"
 
 /**
  * Note: "de.h" file mentions the prototypes of two classes
@@ -36,11 +36,11 @@ ofstream outFile;
 void Worker::mainProcess()
 {
     /**
-    * This method integreates everything together , connecting the DE
-    * and GUI together using Qt's signals and slot system. DE is ran
-    * in a seperate thread than the GUI for smooth running and performance
-    * reasons
-    */
+     * This method integreates everything together , connecting the DE
+     * and GUI together using Qt's signals and slot system. DE is ran
+     * in a seperate thread than the GUI for smooth running and performance
+     * reasons
+     */
 
     g_problem_size        = 7;                       // dimension size.
     g_max_num_evaluations = g_problem_size * 10000;  // available number of fitness evaluations
@@ -56,18 +56,22 @@ void Worker::mainProcess()
     domain_min = 90;
     domain_max = 120;
 
-
     // cout << "\n-------------------------------------------------------" << endl;
-    // cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size << "\n"
+    // cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size <<
+    // "\n"
     //      << endl;
 
-    QString content = QString("Dimension size ="+QString::number(g_problem_size));
+    QString content = QString("Dimension size =" + QString::number(g_problem_size));
     emit updatePentagonInfo(content);
-    content = QString("pop_size ="+QString::number(g_pop_size));
+    content = QString("pop_size =" + QString::number(g_pop_size));
     emit updatePentagonInfo(content);
 
     CalculateGap* fitness_algo = new CalculateGap();
-    searchAlgorithm* algorithm = new LSHADE();
+
+    // Connect signals
+    connect(fitness_algo, &CalculateGap::tileInfo, this, &Worker::generalInfo);
+
+    searchAlgorithm* algorithm     = new LSHADE();
     algorithm->fitness_algo_object = fitness_algo;
     algorithm->run();
     delete fitness_algo;
@@ -75,4 +79,13 @@ void Worker::mainProcess()
 
     outFile << endl;
     emit finished();
+}
+
+void Worker::generalInfo(const QString& info)
+{
+    /**
+     * This is a slot that the fitness algorithm can connect too, to
+     * pass information to the text browser.
+     */
+    emit updatePentagonInfo(info);
 }

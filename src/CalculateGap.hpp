@@ -4,17 +4,22 @@
  */
 #ifndef CALCULATEGAP_HPP
 #define CALCULATEGAP_HPP
+#include <QObject>
+#include <QString>
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "boundaryDetection.hpp"
 #include "myGeometry.hpp"
 
-class CalculateGap
+class CalculateGap : public QObject
 {
-   public:
+    Q_OBJECT
+public:
     double getGap(const Tile&);
     void getGap(double*, double*);
     double calculateGap(const Tile&, const int&, const int&);
+signals:
+    void tileInfo(const QString&);
 };
 #endif /* CALCULATEGAP_HPP */

@@ -3,8 +3,8 @@
 #include <chrono>
 #include <cmath>
 #include <iostream>
-#include <thread>
 #include <list>
+#include <thread>
 
 using namespace std;
 
@@ -25,7 +25,7 @@ double CalculateGap::getGap(const Tile& tile)
     double gap_list[25];
     for (int i = 0; i < 5; ++i) {
         for (int j = 0; j < 5; ++j) {
-            gap_list[gap_index] = calculateGap(tile, i, j);
+            gap_list[gap_index] = this->calculateGap(tile, i, j);
             gap_index++;
         }
     }
@@ -49,17 +49,20 @@ void CalculateGap::getGap(double* x, double* fitness)
     bool alarm = false;  // This flag is used to represent the validity of the current tile
     double min_gap;
     Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6]};  // Create a tile
-    // Set the number of decimal to be shown
-    cout.setf(ios::fixed, ios::floatfield);
-    cout.precision(3);
-    cout << "Sides:  " << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << "\n";
-    cout << "Angles: " << x[4] << " " << x[5] << " " << x[6] << "\n";
-    fillDimensions(tile); // Fill all the dimensions in
+    // Send the information about the tile to the front-end GUI -----------------------------------
+    QString tile_info =
+        QString("Sides: " + QString::number(x[0], 'g', 5) + " " + QString::number(x[1], 'g', 5) +
+                " " + QString::number(x[2], 'g', 5) + " " + QString::number(x[3], 'g', 5) + "\n" +
+                "Angles: " + QString::number(x[4], 'g', 5) + " " + QString::number(x[5], 'g', 5) +
+                " " + QString::number(x[6], 'g', 5) + "\n");
+    emit tileInfo(tile_info);
+    // Send the information about the tile to the front-end GUI -----------------------------------
+    fillDimensions(tile);  // Fill all the dimensions in
     if (!validateTile(tile)) {
-	printf("\nThe tile inputted was invalid");
-	alarm   = true;
-	min_gap = 100;
-	// exit(1);
+        printf("\nThe tile inputted was invalid");
+        alarm   = true;
+        min_gap = 100;
+        // exit(1);
     }
 
     if (!alarm) {
@@ -67,7 +70,7 @@ void CalculateGap::getGap(double* x, double* fitness)
         double gap_list[25];
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 5; ++j) {
-                gap_list[gap_index] = calculateGap(tile, i, j);
+                gap_list[gap_index] = this->calculateGap(tile, i, j);
                 gap_index++;
             }
         }
@@ -79,11 +82,12 @@ void CalculateGap::getGap(double* x, double* fitness)
             if (gap_list[i] >= 0 && gap_list[i] < min_gap) min_gap = gap_list[i];
         }
     }
-    // Set the number of decimal to be shown
-    cout << "\nMin gap is " << min_gap << "\n";
-
-    this_thread::sleep_for(std::chrono::seconds(1));  // TODO : Remove this during release
+    // Send the information about the tile to the front-end GUI -----------------------------------
+    QString min_gap_info = QString("<span style=\" color:green\"\\>") +
+                           "Minimum gap is : " + QString::number(min_gap) + "</span>";
     fitness[0] = min_gap;
+    emit tileInfo(min_gap_info);
+    // Send the information about the tile to the front-end GUI -----------------------------------
 }
 
 double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
