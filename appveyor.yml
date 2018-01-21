@@ -21,6 +21,7 @@ install:
       # -y   => Yes to all prompts
       # -spf => Use fully qualified file paths
       # -o   => Set Output directory
+  - dir
 
 build_script:
   - cd C:\Repos\source\
