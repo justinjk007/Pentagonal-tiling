@@ -18,6 +18,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include "CalculateGap.hpp"
 
 using namespace std;
 
@@ -48,6 +49,7 @@ class searchAlgorithm
 {
    public:
     virtual Fitness run() = 0;
+    CalculateGap* fitness_algo_object;
 
    protected:
     void evaluatePopulation(const vector<Individual>& pop, vector<Fitness>& fitness);

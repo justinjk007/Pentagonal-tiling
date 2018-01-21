@@ -66,8 +66,11 @@ void Worker::mainProcess()
     content = QString("pop_size ="+QString::number(g_pop_size));
     emit updatePentagonInfo(content);
 
+    CalculateGap* fitness_algo = new CalculateGap();
     searchAlgorithm* algorithm = new LSHADE();
+    algorithm->fitness_algo_object = fitness_algo;
     algorithm->run();
+    delete fitness_algo;
     delete algorithm;
 
     outFile << endl;
