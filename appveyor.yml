@@ -3,6 +3,8 @@ version: '2.1.{build}'
 image:
   - Visual Studio 2017
 
+test: off
+
 clone_folder: c:\Repos\source
 
 # Enable catched builds, this is much faster
