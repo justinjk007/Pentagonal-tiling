@@ -21,8 +21,6 @@ install:
       # -y   => Yes to all prompts
       # -spf => Use fully qualified file paths
       # -o   => Set Output directory
-  - cd vcpkg-export-20180112-110203
-  - dir
 
 build_script:
   - cd C:\Repos\source\
