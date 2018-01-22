@@ -13,7 +13,7 @@ cache:
 
 # Download dependencies
 install:
-  - mkdir Pentagonal_Tiling_Dependencies
+  - if not exist Pentagonal_Tiling_Dependencies (mkdir Pentagonal_Tiling_Dependencies)
   - cd Pentagonal_Tiling_Dependencies
   - if not exist deps.7z (
       appveyor DownloadFile https://github.com/justinjk007/Pentagonal-tiling/releases/download/v2.1/vcpkg-export-20180112-110203.7z
