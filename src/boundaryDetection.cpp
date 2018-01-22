@@ -52,7 +52,7 @@ int orientation(const Point_2& p, const Point_2& q, const Point_2& r)
      * 1 --> Clockwise
      * 2 --> Counterclockwise
      */
-    int val = (double)(q.y() - p.y()) * (r.x() - q.x()) - (q.x() - p.x()) * (r.y() - q.y());
+    int val = (int)((q.y() - p.y()) * (r.x() - q.x()) - (q.x() - p.x()) * (r.y() - q.y()));
 
     if (val == 0) return 0;    // colinear
     return (val > 0) ? 1 : 2;  // clock or counterclock wise
@@ -546,17 +546,17 @@ bool comparePoints(const Point_2& a, const Point_2& b)
     int det, d1, d2;
 
     // Compute the cross product of vectors (centroid -> a) x (centroid -> b)
-    det = (a.x() - centroid.x()) * (b.y() - centroid.y()) -
-          (b.x() - centroid.x()) * (a.y() - centroid.y());
+    det = (int)((a.x() - centroid.x()) * (b.y() - centroid.y()) -
+                (b.x() - centroid.x()) * (a.y() - centroid.y()));
     if (det < 0) return true;
     if (det > 0) return false;
 
     // Points a and b are on the same line from the center
     // Check which point is closer to the center
-    d1 = (a.x() - centroid.x()) * (a.x() - centroid.x()) +
-         (a.y() - centroid.y()) * (a.y() - centroid.y());
-    d2 = (b.x() - centroid.x()) * (b.x() - centroid.x()) +
-         (b.y() - centroid.y()) * (b.y() - centroid.y());
+    d1 = (int)((a.x() - centroid.x()) * (a.x() - centroid.x()) +
+               (a.y() - centroid.y()) * (a.y() - centroid.y()));
+    d2 = (int)((b.x() - centroid.x()) * (b.x() - centroid.x()) +
+               (b.y() - centroid.y()) * (b.y() - centroid.y()));
     return d1 > d2;
 }
 

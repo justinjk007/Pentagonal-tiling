@@ -5,22 +5,16 @@
  */
 #ifndef LINK_HPP
 #define LINK_HPP
-#include <cstddef>  // This library is included so that the NULL pointer works
 #include "Side.hpp"
 
 struct Link {
     Side from;
     Side to;
-    Link()
+    Link() : from(Side()), to(Side())
     {
-        Side nullside;
-        this->from = nullside;
-        this->to   = nullside;
     }
-    Link(Side connected_from, Side connected_to)
+    Link(Side connected_from, Side connected_to) : from(connected_from), to(connected_to)
     {
-        this->from = connected_from;
-        this->to   = connected_to;
     }
 };
 
