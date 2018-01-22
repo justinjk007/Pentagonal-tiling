@@ -13,7 +13,7 @@ struct Link {
     Link() : from(Side()), to(Side())
     {
     }
-    Link(Side connected_from, Side connected_to) : from(connected_from), to(connected_to)
+    Link(const Side& connect_from, const Side& connect_to) : from(connect_from), to(connect_to)
     {
     }
 };

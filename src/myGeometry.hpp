@@ -3,7 +3,7 @@
 
 class Point
 {
-   public:
+    public:
     double x;
     double y;
     Point() : x(0.0), y(0.0)
@@ -16,7 +16,7 @@ class Point
 
 class Line
 {
-   public:
+    public:
     Point source;
     Point target;
 
@@ -26,10 +26,10 @@ class Line
     Line getLineWithRespectTo(Point, double);
     Line getLineWithRespectTo(double, double, int, char);
     Line reverse();  // Reverse the start and end points of the line.
-    Line() : source(Point()), target(Point())
+    Line() : source(), target()
     {
     }
-    Line(Point a, Point b) : source(a), target(b)
+    Line(const Point& a,const Point& b) : source(a), target(b)
     {
     }
 };
