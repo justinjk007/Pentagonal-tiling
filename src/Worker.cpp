@@ -63,7 +63,7 @@ void Worker::mainProcess()
 
     QString content = QString("Dimension size =" + QString::number(g_problem_size));
     emit updatePentagonInfo(content);
-    content = QString("pop_size =" + QString::number(g_pop_size));
+    content = QString("pop_size =" + QString::number(g_pop_size) + "\n");
     emit updatePentagonInfo(content);
 
     CalculateGap* fitness_algo = new CalculateGap();

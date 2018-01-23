@@ -54,7 +54,7 @@ void CalculateGap::getGap(double* x, double* fitness)
         QString("Sides: " + QString::number(x[0], 'g', 5) + " " + QString::number(x[1], 'g', 5) +
                 " " + QString::number(x[2], 'g', 5) + " " + QString::number(x[3], 'g', 5) + "\n" +
                 "Angles: " + QString::number(x[4], 'g', 5) + " " + QString::number(x[5], 'g', 5) +
-                " " + QString::number(x[6], 'g', 5) + "\n");
+                " " + QString::number(x[6], 'g', 5));
     emit tileInfo(tile_info);
     // Send the information about the tile to the front-end GUI -----------------------------------
     fillDimensions(tile);  // Fill all the dimensions in
@@ -84,9 +84,10 @@ void CalculateGap::getGap(double* x, double* fitness)
     }
     // Send the information about the tile to the front-end GUI -----------------------------------
     QString min_gap_info = QString("<span style=\" color:green\"\\>") +
-                           "Minimum gap is : " + QString::number(min_gap) + "</span>";
+	"Minimum gap is : " + QString::number(min_gap) + "</span>";
     fitness[0] = min_gap;
     emit tileInfo(min_gap_info);
+    emit tileInfo(QString("\n"));
     // Send the information about the tile to the front-end GUI -----------------------------------
 }
 
