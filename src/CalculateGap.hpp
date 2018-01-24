@@ -21,5 +21,6 @@ public:
     double calculateGap(const Tile&, const int&, const int&);
 signals:
     void tileInfo(const QString&);
+    void minimumGap(const double&);
 };
 #endif /* CALCULATEGAP_HPP */

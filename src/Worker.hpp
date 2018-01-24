@@ -10,6 +10,7 @@ public slots:
     void mainProcess();
 signals:
     void updatePentagonInfo(const QString&);
+    void updateFitnessGraph(const double&);
     void finished();
 };
 
