@@ -69,7 +69,7 @@ void Worker::mainProcess()
     CalculateGap* fitness_algo = new CalculateGap();
 
     // Connect signals
-    connect(fitness_algo, &CalculateGap::tileInfo, this, &Worker::generalInfo);
+    connect(fitness_algo, &CalculateGap::tileInfo, this, &Worker::updatePentagonInfo);
 
     searchAlgorithm* algorithm     = new LSHADE();
     algorithm->fitness_algo_object = fitness_algo;
@@ -79,13 +79,4 @@ void Worker::mainProcess()
 
     outFile << endl;
     emit finished();
-}
-
-void Worker::generalInfo(const QString& info)
-{
-    /**
-     * This is a slot that the fitness algorithm can connect too, to
-     * pass information to the text browser.
-     */
-    emit updatePentagonInfo(info);
 }

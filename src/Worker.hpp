@@ -8,7 +8,6 @@ class Worker : public QObject
     Q_OBJECT
 public slots:
     void mainProcess();
-    void generalInfo(const QString&);
 signals:
     void updatePentagonInfo(const QString&);
     void finished();

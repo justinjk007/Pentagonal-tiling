@@ -4,8 +4,8 @@
 #include <QWidget>
 #include <QtCore>
 #include <QtGui>
-#include "ui_mainwindow.h"
 #include "Worker.hpp"
+#include "ui_mainwindow.h"
 
 /**
  * Note: "de.h" file mentions the prototypes of two classes
@@ -69,13 +69,13 @@ void MainWindow::updateFitnessGraph()
 void MainWindow::on_start_btn_clicked()
 {
     QThread* worker_thread = new QThread;
-    Worker* de_algo        = new Worker();
-    de_algo->moveToThread(worker_thread);
-    connect(de_algo, &Worker::updatePentagonInfo, this, &MainWindow::updatePentagonInfo);
-    connect(worker_thread, SIGNAL(started()), de_algo, SLOT(mainProcess()));
+    Worker* new_worker_obj = new Worker();
+    new_worker_obj->moveToThread(worker_thread);
+    connect(new_worker_obj, &Worker::updatePentagonInfo, this, &MainWindow::updatePentagonInfo);
+    connect(worker_thread, SIGNAL(started()), new_worker_obj, SLOT(mainProcess()));
     // Delete thread signals
-    connect(de_algo, SIGNAL(finished()), worker_thread, SLOT(quit()));
-    connect(de_algo, SIGNAL(finished()), de_algo, SLOT(deleteLater()));
+    connect(new_worker_obj, SIGNAL(finished()), worker_thread, SLOT(quit()));
+    connect(new_worker_obj, SIGNAL(finished()), new_worker_obj, SLOT(deleteLater()));
     connect(worker_thread, SIGNAL(finished()), worker_thread, SLOT(deleteLater()));
     // Finally start the thread
     worker_thread->start();
