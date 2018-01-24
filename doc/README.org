@@ -1,1 +1,1 @@
-* These charts were made using [[https://www.draw.io/][draw.io]]
+* The xml docs can we viewed using [[https://www.draw.io/][draw.io]]
