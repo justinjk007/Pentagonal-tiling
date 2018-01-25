@@ -38,19 +38,13 @@ void MainWindow::updatePentagonInfo(const QString& content)
     ui->pentagon_info->append(content);
 }
 
-void MainWindow::updateFitnessGraph()
+void MainWindow::updateFitnessGraph(const long& iteration_version, const double& fitness)
 {
     /**
      * This method updates the content of Fitnessgraph
      */
     QLineSeries* series = new QLineSeries();
-    series->append(0, 6);
-    series->append(2, 4);
-    series->append(3, 8);
-    series->append(7, 4);
-    series->append(10, 5);
-    *series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3)
-            << QPointF(20, 2);
+    series->append(iteration_version,fitness);
 
     QChart* chart = new QChart();
     chart->legend()->hide();
@@ -72,6 +66,7 @@ void MainWindow::on_start_btn_clicked()
     Worker* new_worker_obj = new Worker();
     new_worker_obj->moveToThread(worker_thread);
     connect(new_worker_obj, &Worker::updatePentagonInfo, this, &MainWindow::updatePentagonInfo);
+    connect(new_worker_obj, &Worker::updateFitnessGraph, this, &MainWindow::updateFitnessGraph);
     connect(worker_thread, SIGNAL(started()), new_worker_obj, SLOT(mainProcess()));
     // Delete thread signals
     connect(new_worker_obj, SIGNAL(finished()), worker_thread, SLOT(quit()));

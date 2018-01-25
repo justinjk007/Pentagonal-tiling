@@ -50,6 +50,7 @@ class searchAlgorithm
    public:
     virtual Fitness run() = 0;
     CalculateGap* fitness_algo_object;
+    long iteration_number = 0; // Stores the number of iterations the algorithm has mutated too
 
    protected:
     void evaluatePopulation(const vector<Individual>& pop, vector<Fitness>& fitness);

@@ -70,6 +70,7 @@ void Worker::mainProcess()
 
     // Connect signals
     connect(fitness_algo, &CalculateGap::tileInfo, this, &Worker::updatePentagonInfo);
+    connect(fitness_algo, &CalculateGap::minimumGap, this, &Worker::updateFitnessGraph);
 
     searchAlgorithm* algorithm     = new LSHADE();
     algorithm->fitness_algo_object = fitness_algo;

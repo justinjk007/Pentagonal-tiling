@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
     void updatePentagonInfo(const QString&);
-    void updateFitnessGraph();
+    void updateFitnessGraph(const long&, const double&);
     void updatePentagonGeneration();
     void updatePrimitiveTileGeneration();
 

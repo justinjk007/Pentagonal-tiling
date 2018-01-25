@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
     w.setStyleSheet("QMainWindow {background: rgb(147,161,161);}");  // Set background color
 
     // Update the fitness graph
-    w.updateFitnessGraph();  // Update data
+    w.updateFitnessGraph(0,0);  // Update data
 
     // After all this time
     w.show();

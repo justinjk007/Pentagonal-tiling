@@ -6,11 +6,11 @@
 class Worker : public QObject
 {
     Q_OBJECT
-public slots:
+   public slots:
     void mainProcess();
-signals:
+   signals:
     void updatePentagonInfo(const QString&);
-    void updateFitnessGraph(const double&);
+    void updateFitnessGraph(const long&, const double&);
     void finished();
 };
 

@@ -39,7 +39,7 @@ double CalculateGap::getGap(const Tile& tile)
     return min_gap;
 }
 
-void CalculateGap::getGap(double* x, double* fitness)
+void CalculateGap::getGap(double* x, double* fitness, const long& iteration_num)
 {
     /**
      * This is an overloaded variant of getGap that takes in the args
@@ -56,6 +56,7 @@ void CalculateGap::getGap(double* x, double* fitness)
                 "Angles: " + QString::number(x[4], 'g', 5) + " " + QString::number(x[5], 'g', 5) +
                 " " + QString::number(x[6], 'g', 5));
     emit tileInfo(tile_info);
+    emit tileInfo(QString("Iteration version: " + QString::number(iteration_num)));
     // Send the information about the tile to the front-end GUI -----------------------------------
     fillDimensions(tile);  // Fill all the dimensions in
     if (!validateTile(tile)) {
@@ -87,6 +88,7 @@ void CalculateGap::getGap(double* x, double* fitness)
 	"Minimum gap is : " + QString::number(min_gap) + "</span>";
     fitness[0] = min_gap;
     emit tileInfo(min_gap_info);
+    emit minimumGap(iteration_num,min_gap);
     emit tileInfo(QString("\n"));
     // Send the information about the tile to the front-end GUI -----------------------------------
 }

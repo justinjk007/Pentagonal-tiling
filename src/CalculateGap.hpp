@@ -17,10 +17,10 @@ class CalculateGap : public QObject
     Q_OBJECT
 public:
     double getGap(const Tile&);
-    void getGap(double*, double*);
+    void getGap(double*, double*, const long&);
     double calculateGap(const Tile&, const int&, const int&);
 signals:
     void tileInfo(const QString&);
-    void minimumGap(const double&);
+    void minimumGap(const long&,const double&);
 };
 #endif /* CALCULATEGAP_HPP */
