@@ -20,6 +20,8 @@ class MainWindow : public QMainWindow
    public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
+    QtCharts::QLineSeries* fitness_line_series;
+    QtCharts::QChartView* fitness_chart_view;
     void updatePentagonInfo(const QString&);
     void updateFitnessGraph(const long&, const double&);
     void updatePentagonGeneration();
