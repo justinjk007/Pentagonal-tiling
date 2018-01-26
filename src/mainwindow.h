@@ -6,7 +6,7 @@
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
 #include <QtWidgets>
-#include "PrimitiveTile.hpp"
+#include "Worker.hpp"
 
 namespace Ui
 {

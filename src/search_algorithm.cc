@@ -12,7 +12,6 @@
 */
 
 #include "de.h"
-#include "CalculateGap.hpp"
 
 void searchAlgorithm::initializeParameters()
 {

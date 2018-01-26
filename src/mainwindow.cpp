@@ -4,7 +4,6 @@
 #include <QWidget>
 #include <QtCore>
 #include <QtGui>
-#include "Worker.hpp"
 #include "ui_mainwindow.h"
 
 /**
@@ -21,9 +20,9 @@ using namespace std;
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // Setup the QChart Widget on the bottom left of the window
     QLineSeries* series = new QLineSeries();
     this->fitness_line_series = series;
-
     QChart* chart = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
@@ -31,12 +30,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     chart->layout()->setContentsMargins(0, 0, 0, 0);
     chart->setBackgroundRoundness(0);
     chart->setTitle("Fitness of generated samples");
-
     QChartView* fitness_graph = new QChartView(chart);
     fitness_graph->setRenderHint(QPainter::Antialiasing);
     fitness_graph->setMinimumSize(300, 100);
     ui->left_side->addWidget(fitness_graph);
-    fitness_chart_view = fitness_graph;
+    this->fitness_chart_view = fitness_graph;
 }
 
 MainWindow::~MainWindow()
@@ -59,7 +57,6 @@ void MainWindow::updateFitnessGraph(const long& iteration_version, const double&
     /**
      * This method updates the content of Fitnessgraph
      */
-    // this->fitness_line_series->append(fitness,iteration_version);
     this->fitness_line_series->append(iteration_version,fitness);
     this->fitness_chart_view->repaint();
 }
