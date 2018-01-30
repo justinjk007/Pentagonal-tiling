@@ -5,7 +5,7 @@
 #include <QString>
 #include <QValueAxis>
 #include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
+#include <QtCharts/QSplineSeries>
 #include <QtWidgets>
 #include "Worker.hpp"
 
@@ -21,11 +21,10 @@ class MainWindow : public QMainWindow
    public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
-    QtCharts::QLineSeries* fitness_line_series;
+    QtCharts::QSplineSeries* fitness_line_series;
     QtCharts::QChartView* fitness_chart_view;
     QtCharts::QValueAxis* axisX;
     QtCharts::QValueAxis* axisY;
-    long x_axis;    // Store current maximum X value on the fitness graph
     long y_axis;  // Store current maximum Y value on the fitness graph
     void updatePentagonInfo(const QString&);
     void updateFitnessGraph(const long&, const double&);

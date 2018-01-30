@@ -21,8 +21,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     // Setup the QChart Widget on the bottom left of the window
-    QLineSeries* series = new QLineSeries(this);
-    QChart* chart       = new QChart();
+    QSplineSeries* series = new QSplineSeries(this);
+    QChart* chart         = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
     chart->createDefaultAxes();
@@ -47,7 +47,6 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     this->fitness_chart_view  = fitness_graph;
     this->axisX               = axisX;
     this->axisY               = axisY;
-    this->x_axis              = 10;
     this->y_axis              = 10;
 }
 
@@ -75,17 +74,14 @@ void MainWindow::updateFitnessGraph(const long& iteration_version, const double&
     /**
      * This method updates the content of Fitnessgraph
      */
-    if (iteration_version > this->x_axis) {
-        this->x_axis = iteration_version + 100;
-        this->axisX->setRange(0, this->x_axis);
-    }
 
+    this->axisX->setRange(0, iteration_version + 20);  // Add more space in the x-axis
     if (fitness > this->y_axis) {
-        this->y_axis = fitness + 200;
+        this->y_axis = fitness + 200;  // Add more space in y-axis if necessary
         this->axisY->setRange(0, this->y_axis);
     }
 
-    this->fitness_line_series->append(iteration_version, fitness);
+    this->fitness_line_series->append(iteration_version, fitness); //Finally update the chart
 }
 
 void MainWindow::on_start_btn_clicked()
