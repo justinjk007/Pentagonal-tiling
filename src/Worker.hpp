@@ -2,6 +2,7 @@
 #define WORKER_HPP
 
 #include <QObject>
+#include "myGeometry.hpp"
 
 class Worker : public QObject
 {
@@ -11,6 +12,8 @@ class Worker : public QObject
    signals:
     void updatePentagonInfo(const QString&);
     void updateFitnessGraph(const long&, const double&);
+    void updatePentagonGeneration(const Line&);
+    void updatePrimitiveTileGeneration();
     void finished();
 };
 

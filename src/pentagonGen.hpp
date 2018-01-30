@@ -2,6 +2,7 @@
 #define PENTAGONGEN_HPP
 
 #include <QWidget>
+#include "myGeometry.hpp"
 
 class pentagonGen : public QWidget
 {
@@ -9,6 +10,10 @@ class pentagonGen : public QWidget
 
    public:
     explicit pentagonGen(QWidget* parent = 0);
+    void updateLine(Line);
+
+   private:
+    Line current_line;
 
    protected:
     void paintEvent(QPaintEvent* e) override;

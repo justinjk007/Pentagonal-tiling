@@ -2,6 +2,7 @@
 #define TILINGGEN_HPP
 
 #include <QWidget>
+#include "myGeometry.hpp"
 
 class tilingGen : public QWidget
 {

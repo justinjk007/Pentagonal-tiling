@@ -28,7 +28,7 @@ class MainWindow : public QMainWindow
     long y_axis;  // Store current maximum Y value on the fitness graph
     void updatePentagonInfo(const QString&);
     void updateFitnessGraph(const long&, const double&);
-    void updatePentagonGeneration();
+    void updatePentagonGeneration(const Line&);
     void updatePrimitiveTileGeneration();
 
    private slots:

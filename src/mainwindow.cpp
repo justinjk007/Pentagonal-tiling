@@ -84,6 +84,15 @@ void MainWindow::updateFitnessGraph(const long& iteration_version, const double&
     this->fitness_line_series->append(iteration_version, fitness); //Finally update the chart
 }
 
+void MainWindow::updatePentagonGeneration(const Line& line)
+{
+    /**
+     * This method updates the content of the Widget that draws the
+     * pentagons line by line as they are created.
+     */
+    ui->pentagon_gen->updateLine(line);
+}
+
 void MainWindow::on_start_btn_clicked()
 {
     QThread* worker_thread = new QThread;
@@ -91,6 +100,7 @@ void MainWindow::on_start_btn_clicked()
     new_worker_obj->moveToThread(worker_thread);
     connect(new_worker_obj, &Worker::updatePentagonInfo, this, &MainWindow::updatePentagonInfo);
     connect(new_worker_obj, &Worker::updateFitnessGraph, this, &MainWindow::updateFitnessGraph);
+    connect(new_worker_obj, &Worker::updatePentagonGeneration, this, &MainWindow::updatePentagonGeneration);
     connect(worker_thread, SIGNAL(started()), new_worker_obj, SLOT(mainProcess()));
     // Delete thread signals when they are finished
     connect(new_worker_obj, SIGNAL(finished()), worker_thread, SLOT(quit()));

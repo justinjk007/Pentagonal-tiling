@@ -6,6 +6,7 @@
 #ifndef PRIMITIVETILE_HPP
 #define PRIMITIVETILE_HPP
 
+#include <QObject>
 #include <algorithm>
 #include <list>
 #include <vector>
@@ -16,8 +17,9 @@
 #include "cgal.hpp"
 #include "myGeometry.hpp"
 
-class PrimitiveTile
+class PrimitiveTile : public QObject
 {
+    Q_OBJECT
    public:
     std::list<Line> lines;           // Stores the lines of the boundaries primitive tile
     std::list<int> connector_sides;  // Stores the indexes of the sides connected.
@@ -39,12 +41,8 @@ class PrimitiveTile
     void doTiling(double, double, double, double);
     std::list<Line> translate(double, double, std::list<Line>);
     std::vector<Point_2> getPointsFromLines(std::list<Line>);  // Returns the start points
-    PrimitiveTile() : size(1), count(1)
-    {
-    }
-    PrimitiveTile(Tile tile) : pentagon(tile), size(1), count(1)
-    {
-    }
+    PrimitiveTile() : size(1), count(1) {}
+    PrimitiveTile(Tile tile) : pentagon(tile), size(1), count(1) {}
     ~PrimitiveTile()
     {
         this->lines.clear();
@@ -52,6 +50,9 @@ class PrimitiveTile
         this->size  = 1;  // Obviously we need atleast one tile.
         this->count = 1;  // Obviously we need atleast one primitive tile.
     }
+signals:
+    void sideCreated(const Line&);
+    void tilingCreated();
 };
 
 #endif /* PRIMITIVETILE_HPP */

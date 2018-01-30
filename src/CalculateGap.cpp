@@ -101,6 +101,7 @@ double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
      * of the given polygon when tiled in many ways.
      */
     PrimitiveTile newSample(tile);
+    connect(this, &CalculateGap::sideCreated, &newSample, &PrimitiveTile::sideCreated);
     newSample.drawPentagon(i, j);  // Draw the first pentagon
     double tile_area = getPolygonArea(newSample.lines) * 8.0;
     Link link(tile.side[i], tile.side[j]);

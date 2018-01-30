@@ -22,5 +22,7 @@ public:
 signals:
     void tileInfo(const QString&);
     void minimumGap(const long&,const double&);
+    void sideCreated(const Line&);
+    void tilingCreated();
 };
 #endif /* CALCULATEGAP_HPP */
