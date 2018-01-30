@@ -89,7 +89,7 @@ void CalculateGap::getGap(double* x, double* fitness, const long& iteration_num)
     fitness[0] = min_gap;
     emit tileInfo(min_gap_info);
     emit tileInfo(QString("\n"));
-    this_thread::sleep_for(std::chrono::seconds(1));
+    this_thread::sleep_for(std::chrono::milliseconds(300));
     emit minimumGap(iteration_num,min_gap);
     // Send the information about the tile to the front-end GUI -----------------------------------
 }

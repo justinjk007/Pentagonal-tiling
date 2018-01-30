@@ -21,25 +21,43 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 {
     ui->setupUi(this);
     // Setup the QChart Widget on the bottom left of the window
-    QLineSeries* series = new QLineSeries();
-    this->fitness_line_series = series;
-    QChart* chart = new QChart();
+    QLineSeries* series = new QLineSeries(this);
+    QChart* chart       = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
     chart->createDefaultAxes();
     chart->layout()->setContentsMargins(0, 0, 0, 0);
     chart->setBackgroundRoundness(0);
     chart->setTitle("Fitness of generated samples");
+    chart->setAnimationOptions(QChart::SeriesAnimations);
     QChartView* fitness_graph = new QChartView(chart);
     fitness_graph->setRenderHint(QPainter::Antialiasing);
     fitness_graph->setMinimumSize(300, 100);
     ui->left_side->addWidget(fitness_graph);
-    this->fitness_chart_view = fitness_graph;
+    // Set minimum and maximum range for the graph
+    QValueAxis* axisX = new QValueAxis(this);
+    QValueAxis* axisY = new QValueAxis(this);
+    axisX->setRange(0, 10);
+    axisY->setRange(0, 10);
+    fitness_graph->chart()->setAxisX(axisX, series);
+    fitness_graph->chart()->setAxisY(axisY, series);
+
+    // Add these pointers to the window object so they can be accessed and updated later
+    this->fitness_line_series = series;
+    this->fitness_chart_view  = fitness_graph;
+    this->axisX               = axisX;
+    this->axisY               = axisY;
+    this->x_axis              = 10;
+    this->y_axis              = 10;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete fitness_line_series;
+    delete fitness_chart_view;
+    delete axisX;
+    delete axisY;
 }
 
 void MainWindow::updatePentagonInfo(const QString& content)
@@ -57,8 +75,17 @@ void MainWindow::updateFitnessGraph(const long& iteration_version, const double&
     /**
      * This method updates the content of Fitnessgraph
      */
-    this->fitness_line_series->append(iteration_version,fitness);
-    this->fitness_chart_view->repaint();
+    if (iteration_version > this->x_axis) {
+        this->x_axis = iteration_version + 100;
+        this->axisX->setRange(0, this->x_axis);
+    }
+
+    if (fitness > this->y_axis) {
+        this->y_axis = fitness + 200;
+        this->axisY->setRange(0, this->y_axis);
+    }
+
+    this->fitness_line_series->append(iteration_version, fitness);
 }
 
 void MainWindow::on_start_btn_clicked()
@@ -69,7 +96,7 @@ void MainWindow::on_start_btn_clicked()
     connect(new_worker_obj, &Worker::updatePentagonInfo, this, &MainWindow::updatePentagonInfo);
     connect(new_worker_obj, &Worker::updateFitnessGraph, this, &MainWindow::updateFitnessGraph);
     connect(worker_thread, SIGNAL(started()), new_worker_obj, SLOT(mainProcess()));
-    // Delete thread signals
+    // Delete thread signals when they are finished
     connect(new_worker_obj, SIGNAL(finished()), worker_thread, SLOT(quit()));
     connect(new_worker_obj, SIGNAL(finished()), new_worker_obj, SLOT(deleteLater()));
     connect(worker_thread, SIGNAL(finished()), worker_thread, SLOT(deleteLater()));
