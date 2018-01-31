@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <vector>
+#include <QVector>
 #include "myGeometry.hpp"
 
 class pentagonGen : public QWidget
@@ -14,9 +15,9 @@ class pentagonGen : public QWidget
     void updateLine(std::vector<Line>);
 
    private:
-    Line current_line;
+    std::vector<Line> current_pentagon;
 
-   protected:
+protected:
     void paintEvent(QPaintEvent* e) override;
 };
 
