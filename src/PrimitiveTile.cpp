@@ -80,6 +80,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
      * the co-ordinates from the lengths and angles if a pentagon. Parameters
      * are the side conneted from and to of a new pentagon.
      */
+    std::vector<Line> current_pentagon;
     Line first_line;
     Line current_line;
     Line diagonal;  // The line that connects the 1st and the end of the 2nd line.
@@ -104,7 +105,8 @@ void PrimitiveTile::drawPentagon(int from, int to)
         advance(it, 2);
         current_line = *it;
         current_line = current_line.reverse();
-        emit sideCreated(current_line);
+        current_pentagon.push_back(current_line);  // Add to this vector pass to the plotter in GUI
+        emit sideCreated(current_pentagon);
         this->lines.push_back(current_line);  // Add the line discovered to the list of line we have
         first_line = current_line;
     } else {
@@ -116,6 +118,8 @@ void PrimitiveTile::drawPentagon(int from, int to)
          */
         index        = (from + 3) % 5;  // This is done to rotate the first pentagon
         current_line = current_line.getLineWithRespectTo(origin, this->pentagon.side[index].value);
+        current_pentagon.push_back(current_line);  // Add to this vector pass to the plotter in GUI
+        emit sideCreated(current_pentagon);
         this->lines.push_back(current_line);
         first_line = current_line;
     }
@@ -154,8 +158,10 @@ void PrimitiveTile::drawPentagon(int from, int to)
     }
     // Now connect the last line drawn to the first line to complete the pentagon
     current_line        = current_line.reverse();
-    current_line.target = first_line.source;  // Start and end of a pentagon should be the same
-    this->lines.push_back(current_line);      // Add the modified line to the end
+    current_line.target = first_line.source;   // Start and end of a pentagon should be the same
+    current_pentagon.push_back(current_line);  // Add to this vector pass to the plotter in GUI
+    emit sideCreated(current_pentagon);
+    this->lines.push_back(current_line);  // Add the modified line to the end
 }
 
 void PrimitiveTile::drawPentagonRev(int from, int to)

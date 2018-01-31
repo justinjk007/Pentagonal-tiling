@@ -50,8 +50,8 @@ class PrimitiveTile : public QObject
         this->size  = 1;  // Obviously we need atleast one tile.
         this->count = 1;  // Obviously we need atleast one primitive tile.
     }
-signals:
-    void sideCreated(Line);
+   signals:
+    void sideCreated(std::vector<Line>);
     void tilingCreated();
 };
 

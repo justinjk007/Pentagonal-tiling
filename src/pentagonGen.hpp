@@ -2,6 +2,7 @@
 #define PENTAGONGEN_HPP
 
 #include <QWidget>
+#include <vector>
 #include "myGeometry.hpp"
 
 class pentagonGen : public QWidget
@@ -10,7 +11,7 @@ class pentagonGen : public QWidget
 
    public:
     explicit pentagonGen(QWidget* parent = 0);
-    void updateLine(Line);
+    void updateLine(std::vector<Line>);
 
    private:
     Line current_line;

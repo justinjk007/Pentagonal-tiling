@@ -25,12 +25,14 @@ void pentagonGen::paintEvent(QPaintEvent* e)
     painter.drawLine(line);
 }
 
-void pentagonGen::updateLine(Line line)
+void pentagonGen::updateLine(std::vector<Line> pentagon)
 {
     /**
      * Update the current line so it can drawn on to the widget
      */
-    this->current_line.source = Point(line.source.x, line.source.y);
-    this->current_line.target = Point(line.target.x, line.target.y);
-    this->update();
+    for (auto& line : pentagon) {
+        this->current_line.source = Point(line.source.x, line.source.y);
+        this->current_line.target = Point(line.target.x, line.target.y);
+        this->update();
+    }
 }

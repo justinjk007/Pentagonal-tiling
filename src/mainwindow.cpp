@@ -84,13 +84,13 @@ void MainWindow::updateFitnessGraph(const long& iteration_version, const double&
     this->fitness_line_series->append(iteration_version, fitness);  // Finally update the chart
 }
 
-void MainWindow::updatePentagonGeneration(Line line)
+void MainWindow::updatePentagonGeneration(std::vector<Line> pentagon)
 {
     /**
      * This method updates the content of the Widget that draws the
      * pentagons line by line as they are created.
      */
-    ui->pentagon_gen->updateLine(line);
+    ui->pentagon_gen->updateLine(pentagon);
 }
 
 void MainWindow::on_start_btn_clicked()
