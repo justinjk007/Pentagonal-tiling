@@ -51,7 +51,7 @@ class PrimitiveTile : public QObject
         this->count = 1;  // Obviously we need atleast one primitive tile.
     }
 signals:
-    void sideCreated(const Line&);
+    void sideCreated(Line);
     void tilingCreated();
 };
 

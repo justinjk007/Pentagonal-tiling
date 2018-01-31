@@ -12,7 +12,7 @@ class Worker : public QObject
    signals:
     void updatePentagonInfo(const QString&);
     void updateFitnessGraph(const long&, const double&);
-    void updatePentagonGeneration(const Line&);
+    void updatePentagonGeneration(Line);
     void updatePrimitiveTileGeneration();
     void finished();
 };

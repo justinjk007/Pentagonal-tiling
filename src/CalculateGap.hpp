@@ -15,14 +15,14 @@
 class CalculateGap : public QObject
 {
     Q_OBJECT
-public:
+   public:
     double getGap(const Tile&);
     void getGap(double*, double*, const long&);
     double calculateGap(const Tile&, const int&, const int&);
-signals:
+   signals:
     void tileInfo(const QString&);
-    void minimumGap(const long&,const double&);
-    void sideCreated(const Line&);
+    void minimumGap(const long&, const double&);
     void tilingCreated();
+    void sideCreated(Line);
 };
 #endif /* CALCULATEGAP_HPP */

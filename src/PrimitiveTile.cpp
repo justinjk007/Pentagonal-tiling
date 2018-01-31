@@ -104,7 +104,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
         advance(it, 2);
         current_line = *it;
         current_line = current_line.reverse();
-	emit sideCreated(current_line);
+        emit sideCreated(current_line);
         this->lines.push_back(current_line);  // Add the line discovered to the list of line we have
         first_line = current_line;
     } else {

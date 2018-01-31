@@ -67,7 +67,7 @@ set(CMAKE_INCLUDE_BINARY_DIR ON)
 
 # Add files into one variable, seperate them into frontend and backend...cause
 set(BACKEND src/CalculateGap.cpp src/PrimitiveTile.cpp src/myGeometry.cpp src/boundaryDetection.cpp)
-set(FRONTEND src/mainwindow.cpp src/pentagonGen.cpp src/tilingGen.cpp src/Worker.cpp)
+set(FRONTEND src/mainwindow.cpp src/pentagonGen.cpp src/tilingGen.cpp src/Worker.cpp src/mainwindow.ui)
 set(DE src/lshade.cc src/search_algorithm.cc)
 
 add_executable(run_tests test/run_tests.cpp ${BACKEND})

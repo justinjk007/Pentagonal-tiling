@@ -12,6 +12,7 @@ using namespace QtCharts;
 
 int main(int argc, char* argv[])
 {
+    qRegisterMetaType<Line>("Line"); // This is very important, this is done to Make emitting Line possible
     QApplication a(argc, argv);
     MainWindow w;
 

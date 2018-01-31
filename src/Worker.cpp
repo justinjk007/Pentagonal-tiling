@@ -56,11 +56,6 @@ void Worker::mainProcess()
     domain_min = 90;
     domain_max = 120;
 
-    // cout << "\n-------------------------------------------------------" << endl;
-    // cout << "Dimension size = " << g_problem_size << ", g_pop_size[_INIT] = " << g_pop_size <<
-    // "\n"
-    //      << endl;
-
     QString content = QString("Dimension size =" + QString::number(g_problem_size));
     emit updatePentagonInfo(content);
     content = QString("pop_size =" + QString::number(g_pop_size) + "\n");

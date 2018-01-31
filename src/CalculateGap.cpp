@@ -85,12 +85,12 @@ void CalculateGap::getGap(double* x, double* fitness, const long& iteration_num)
     }
     // Send the information about the tile to the front-end GUI -----------------------------------
     QString min_gap_info = QString("<span style=\" color:green\"\\>") +
-	"Minimum gap is : " + QString::number(min_gap) + "</span>";
+                           "Minimum gap is : " + QString::number(min_gap) + "</span>";
     fitness[0] = min_gap;
     emit tileInfo(min_gap_info);
     emit tileInfo(QString("\n"));
     this_thread::sleep_for(std::chrono::milliseconds(300));
-    emit minimumGap(iteration_num,min_gap);
+    emit minimumGap(iteration_num, min_gap);
     // Send the information about the tile to the front-end GUI -----------------------------------
 }
 
@@ -101,7 +101,7 @@ double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
      * of the given polygon when tiled in many ways.
      */
     PrimitiveTile newSample(tile);
-    connect(this, &CalculateGap::sideCreated, &newSample, &PrimitiveTile::sideCreated);
+    connect(&newSample, &PrimitiveTile::sideCreated, this, &CalculateGap::sideCreated);
     newSample.drawPentagon(i, j);  // Draw the first pentagon
     double tile_area = getPolygonArea(newSample.lines) * 8.0;
     Link link(tile.side[i], tile.side[j]);
