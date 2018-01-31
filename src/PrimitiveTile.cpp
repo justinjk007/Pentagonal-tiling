@@ -77,9 +77,10 @@ void PrimitiveTile::drawPentagon(int from, int to)
 {
     /**
      * This was hard work okay, this draws the pentagon meaning they give out
-     * the co-ordinates from the lengths and angles if a pentagon. Parameters
+     * the co-ordinates from the lengths and angles of a pentagon. Parameters
      * are the side conneted from and to of a new pentagon.
      */
+    auto delay = std::chrono::milliseconds(1000);
     std::vector<Line> current_pentagon;
     Line first_line;
     Line current_line;
@@ -122,6 +123,7 @@ void PrimitiveTile::drawPentagon(int from, int to)
         emit sideCreated(current_pentagon);
         this->lines.push_back(current_line);
         first_line = current_line;
+        this_thread::sleep_for(delay);
     }
     index = (index + 1) % 5;  // Wraparound like a circle array
     while (i < 4) {
@@ -138,7 +140,10 @@ void PrimitiveTile::drawPentagon(int from, int to)
             type1 = 0;  // Reset types after every line
             type2 = 0;  // Reset types after every line
             this->lines.push_back(next_line);
+            current_pentagon.push_back(current_line);  // Add to this vector pass to the  GUI
+            emit sideCreated(current_pentagon);
             current_line = next_line;
+            this_thread::sleep_for(delay);
             ++i;
             index = (index + 1) % 5;  // Wraparound like a circle array
         } else {
@@ -161,7 +166,9 @@ void PrimitiveTile::drawPentagon(int from, int to)
     current_line.target = first_line.source;   // Start and end of a pentagon should be the same
     current_pentagon.push_back(current_line);  // Add to this vector pass to the plotter in GUI
     emit sideCreated(current_pentagon);
+    std::cout<<current_pentagon.size();
     this->lines.push_back(current_line);  // Add the modified line to the end
+    this_thread::sleep_for(delay);
 }
 
 void PrimitiveTile::drawPentagonRev(int from, int to)
