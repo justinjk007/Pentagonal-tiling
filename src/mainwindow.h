@@ -21,7 +21,7 @@ class MainWindow : public QMainWindow
    public:
     explicit MainWindow(QWidget* parent = 0);
     ~MainWindow();
-    QtCharts::QSplineSeries* fitness_line_series;
+    QtCharts::QSplineSeries* fitness_spline_series;
     QtCharts::QChartView* fitness_chart_view;
     QtCharts::QValueAxis* axisX;
     QtCharts::QValueAxis* axisY;

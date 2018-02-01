@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     chart->layout()->setContentsMargins(0, 0, 0, 0);
     chart->setBackgroundRoundness(0);
     chart->setTitle("Fitness of generated samples");
-    chart->setAnimationOptions(QChart::SeriesAnimations);
+    chart->setAnimationOptions(QChart::NoAnimation);
     QChartView* fitness_graph = new QChartView(chart);
     fitness_graph->setRenderHint(QPainter::Antialiasing);
     fitness_graph->setMinimumSize(300, 100);
@@ -39,21 +39,23 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     QValueAxis* axisY = new QValueAxis(this);
     axisX->setRange(0, 10);
     axisY->setRange(0, 10);
+    axisY->setTickCount(10);
+    axisX->setTickCount(5);
     fitness_graph->chart()->setAxisX(axisX, series);
     fitness_graph->chart()->setAxisY(axisY, series);
 
     // Add these pointers to the window object so they can be accessed and updated later
-    this->fitness_line_series = series;
-    this->fitness_chart_view  = fitness_graph;
-    this->axisX               = axisX;
-    this->axisY               = axisY;
-    this->y_axis              = 10;
+    this->fitness_spline_series = series;
+    this->fitness_chart_view    = fitness_graph;
+    this->axisX                 = axisX;
+    this->axisY                 = axisY;
+    this->y_axis                = 10;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete fitness_line_series;
+    delete fitness_spline_series;
     delete fitness_chart_view;
     delete axisX;
     delete axisY;
@@ -69,19 +71,28 @@ void MainWindow::updatePentagonInfo(const QString& content)
     ui->pentagon_info->append(content);
 }
 
-void MainWindow::updateFitnessGraph(const long& iteration_version, const double& fitness)
+void MainWindow::updateFitnessGraph(const long& iteration, const double& fitness)
 {
     /**
      * This method updates the content of Fitnessgraph
      */
+    if (iteration > 70)
+        // This will make sure that when the iteration gets bigger and
+        // bigger we only get to the current and few old relevant
+        // points in the fitness graph. This is what makes the
+        // current point stay somewhat in the middle
+        this->axisX->setRange(iteration - 70, iteration + 50);  // Add more space in the x-axis
+    else
+        this->axisX->setRange(0, iteration + 50);  // Add more space in the x-axis
 
-    this->axisX->setRange(0, iteration_version + 20);  // Add more space in the x-axis
     if (fitness > this->y_axis) {
         this->y_axis = fitness + 200;  // Add more space in y-axis if necessary
         this->axisY->setRange(0, this->y_axis);
     }
 
-    this->fitness_line_series->append(iteration_version, fitness);  // Finally update the chart
+    // Remove some old points as they are out of the chart and can't be seen anymore
+    if (iteration > 70) this->fitness_spline_series->remove(0);
+    this->fitness_spline_series->append(iteration, fitness);  // Finally update the chart
 }
 
 void MainWindow::updatePentagonGeneration(std::vector<Line> pentagon)
