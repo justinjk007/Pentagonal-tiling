@@ -22,7 +22,7 @@ class CalculateGap : public QObject
    signals:
     void tileInfo(const QString&);
     void minimumGap(const long&, const double&);
-    void tilingCreated();
     void sideCreated(std::vector<Line>);
+    void tilingCreated(std::list<Line>);
 };
 #endif /* CALCULATEGAP_HPP */

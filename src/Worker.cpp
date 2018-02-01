@@ -67,6 +67,7 @@ void Worker::mainProcess()
     connect(fitness_algo, &CalculateGap::tileInfo, this, &Worker::updatePentagonInfo);
     connect(fitness_algo, &CalculateGap::minimumGap, this, &Worker::updateFitnessGraph);
     connect(fitness_algo, &CalculateGap::sideCreated, this, &Worker::updatePentagonGeneration);
+    connect(fitness_algo, &CalculateGap::tilingCreated, this, &Worker::updatePrimitiveTileGeneration);
 
     searchAlgorithm* algorithm     = new LSHADE();
     algorithm->fitness_algo_object = fitness_algo;

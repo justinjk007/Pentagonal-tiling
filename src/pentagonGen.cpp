@@ -4,7 +4,8 @@
 
 pentagonGen::pentagonGen(QWidget* parent) : QWidget(parent)
 {
-    // This is just some fake work so that the widget appears on the start, it has something to draw
+    // This is just some fake work so that the widget appears on the
+    // start, it has something to draw
     Line line(Point(0, 0), Point(0, 0));
     this->current_pentagon.push_back(line);
 }
@@ -13,7 +14,7 @@ void pentagonGen::paintEvent(QPaintEvent* e)
 {
     // Convert Line into QLineF....becuase QTTTTTTTTT
     QVector<QLine> qtLines;
-    for (const auto& line : current_pentagon) {
+    for (const auto& line : this->current_pentagon) {
         qtLines.push_back(QLine(line.source.x, line.source.y, line.target.x, line.target.y));
     }
     // Make custom pen
@@ -34,5 +35,6 @@ void pentagonGen::updateLine(std::vector<Line> pentagon)
      * Update the current line so it can drawn on to the widget
      */
     this->current_pentagon = pentagon;
-    this->update();
+    this->update();  // This function is inherited from Qt and it
+                     // repaints the widget automatically
 }

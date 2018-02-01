@@ -104,6 +104,15 @@ void MainWindow::updatePentagonGeneration(std::vector<Line> pentagon)
     ui->pentagon_gen->updateLine(pentagon);
 }
 
+void MainWindow::updatePrimitiveTileGeneration(std::list<Line> tiling)
+{
+    /**
+     * This method updates the content of the Widget that draws the
+     * pentagons after tiling polygon by polygon as they are created.
+     */
+    ui->tiling_gen->updateTiling(tiling);
+}
+
 void MainWindow::on_start_btn_clicked()
 {
     QThread* worker_thread = new QThread;
@@ -113,6 +122,8 @@ void MainWindow::on_start_btn_clicked()
     connect(new_worker_obj, &Worker::updateFitnessGraph, this, &MainWindow::updateFitnessGraph);
     connect(new_worker_obj, &Worker::updatePentagonGeneration, this,
             &MainWindow::updatePentagonGeneration);
+    connect(new_worker_obj, &Worker::updatePrimitiveTileGeneration, this,
+            &MainWindow::updatePrimitiveTileGeneration);
     connect(worker_thread, SIGNAL(started()), new_worker_obj, SLOT(mainProcess()));
     // Delete thread signals when they are finished
     connect(new_worker_obj, SIGNAL(finished()), worker_thread, SLOT(quit()));
@@ -122,14 +133,8 @@ void MainWindow::on_start_btn_clicked()
     worker_thread->start();
 }
 
-void MainWindow::on_stop_btn_clicked()
-{
-}
+void MainWindow::on_stop_btn_clicked() {}
 
-void MainWindow::on_pause_btn_clicked()
-{
-}
+void MainWindow::on_pause_btn_clicked() {}
 
-void MainWindow::on_resume_btn_clicked()
-{
-}
+void MainWindow::on_resume_btn_clicked() {}

@@ -3,6 +3,8 @@
 #include <cmath>
 #include <iostream>
 #include <list>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -102,6 +104,7 @@ double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
     // Send the information about the tile to the front-end GUI -----------------------------------
     std::vector<Line> lines_in_vector{std::begin(newSample.lines), std::end(newSample.lines)};
     emit sideCreated(lines_in_vector);
+    std::this_thread::sleep_for(std::chrono::milliseconds(30));
     // Send the information about the tile to the front-end GUI -----------------------------------
     double tile_area = getPolygonArea(newSample.lines) * 8.0;
     Link link(tile.side[i], tile.side[j]);

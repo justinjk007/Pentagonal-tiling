@@ -2,6 +2,7 @@
 #define TILINGGEN_HPP
 
 #include <QWidget>
+#include <list>
 #include "myGeometry.hpp"
 
 class tilingGen : public QWidget
@@ -10,6 +11,10 @@ class tilingGen : public QWidget
 
    public:
     explicit tilingGen(QWidget* parent = 0);
+    void updateTiling(std::list<Line>);
+
+   private:
+    std::list<Line> current_tiling;
 
    protected:
     void paintEvent(QPaintEvent* e) override;

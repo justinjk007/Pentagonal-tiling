@@ -29,7 +29,7 @@ class MainWindow : public QMainWindow
     void updatePentagonInfo(const QString&);
     void updateFitnessGraph(const long&, const double&);
     void updatePentagonGeneration(std::vector<Line>);
-    void updatePrimitiveTileGeneration();
+    void updatePrimitiveTileGeneration(std::list<Line>);
 
    private slots:
     void on_start_btn_clicked();
