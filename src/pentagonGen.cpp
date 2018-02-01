@@ -23,6 +23,7 @@ void pentagonGen::paintEvent(QPaintEvent* e)
     // Now draw the line to widget
     QPainter painter(this);
     painter.fillRect(e->rect(), QColor(238, 232, 213));  // Background color
+    painter.translate(300, 50);
     painter.setPen(pen);
     painter.drawLines(qtLines);
 }

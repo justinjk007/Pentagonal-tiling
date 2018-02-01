@@ -1,10 +1,8 @@
 #include "CalculateGap.hpp"
 #include <stdlib.h>
-#include <chrono>
 #include <cmath>
 #include <iostream>
 #include <list>
-#include <thread>
 
 using namespace std;
 
@@ -89,7 +87,6 @@ void CalculateGap::getGap(double* x, double* fitness, const long& iteration_num)
     fitness[0] = min_gap;
     emit tileInfo(min_gap_info);
     emit tileInfo(QString("\n"));
-    // this_thread::sleep_for(std::chrono::milliseconds(300));
     emit minimumGap(iteration_num, min_gap);
     // Send the information about the tile to the front-end GUI -----------------------------------
 }
@@ -101,8 +98,11 @@ double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
      * of the given polygon when tiled in many ways.
      */
     PrimitiveTile newSample(tile);
-    connect(&newSample, &PrimitiveTile::sideCreated, this, &CalculateGap::sideCreated);
     newSample.drawPentagon(i, j);  // Draw the first pentagon
+    // Send the information about the tile to the front-end GUI -----------------------------------
+    std::vector<Line> lines_in_vector{std::begin(newSample.lines), std::end(newSample.lines)};
+    emit sideCreated(lines_in_vector);
+    // Send the information about the tile to the front-end GUI -----------------------------------
     double tile_area = getPolygonArea(newSample.lines) * 8.0;
     Link link(tile.side[i], tile.side[j]);
     if (newSample.isLinkable(link)) {
