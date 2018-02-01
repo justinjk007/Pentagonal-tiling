@@ -18,7 +18,7 @@ void tilingGen::paintEvent(QPaintEvent* e)
 {
     // Make custom pen
     QPen pen;
-    pen.setWidthF(0.3);  // Set width with floating point precision
+    pen.setWidth(7);  // Set width with floating point precision
     pen.setColor(QColor(42, 161, 152));
     // Make a brush to fill the polygon
     QBrush fill;
@@ -28,6 +28,8 @@ void tilingGen::paintEvent(QPaintEvent* e)
     QPainter painter(this);
     painter.fillRect(e->rect(), QColor(238, 232, 213));
     painter.setPen(pen);
+    painter.translate(100,100);
+    painter.scale(0.6, 0.6);
     size_t count = 0;  // Count the number of points appended to the polygon
     QPolygon polygon;
     for (const auto& line : this->current_tiling) {
@@ -36,8 +38,6 @@ void tilingGen::paintEvent(QPaintEvent* e)
         if (count == 5) {
             // Draw the polygon
             canvas.addPolygon(polygon);
-            painter.translate(50, 50);
-            painter.scale(20, 20);
             painter.drawPolygon(polygon);
             painter.fillPath(canvas, fill);
             polygon.clear();  // Clear already painted data

@@ -115,7 +115,10 @@ double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
                                          // is programmable, meaning
                                          // when you increase the
                                          // primitive tile size.
-        std::list<Segment> boundary        = removeInnerLines(newSample.lines);
+	// Send the information about the tile to the front-end GUI -----------------------------------
+	emit tilingCreated(newSample.lines);
+	// Send the information about the tile to the front-end GUI -----------------------------------
+	std::list<Segment> boundary        = removeInnerLines(newSample.lines);
         std::list<Point_2> boundary_points = getSources(boundary);
         boundary_points                    = sortClockwise(boundary_points);
         double total_area                  = getPolygonArea(boundary_points);
