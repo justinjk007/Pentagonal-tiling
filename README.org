@@ -3,59 +3,68 @@
 # [[./img/uni_tile.jpg]]
 #+html: <p align="center"><img src="./img/uni_tile.jpg" /></p>
 
+#+html:<a href="https://isocpp.org/"><img src="https://img.shields.io/badge/language-C++-blue.svg" /></a> <a href="https://en.wikipedia.org/wiki/C%2B%2B11"><img src="https://img.shields.io/badge/C%2B%2B-11-blue.svg" /></a> <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" /></a> <a href="https://travis-ci.org/justinjk007/Pentagonal-tiling"><img src="https://api.travis-ci.org/justinjk007/Pentagonal-tiling.svg?branch=develop" /></a> <a href="https://ci.appveyor.com/project/justinjk007/pentagonal-tiling"><img src="https://ci.appveyor.com/api/projects/status/ldc8jtft09n5997e?svg=true" /></a>
+
 ** Preface
 
-Here I am trying to develop a fit function, which can be coupled
-together with any Differential Evolution / Optimization algorithm out
-there to find possible solutions for pentagonal tiling.
-
-You can generate 3 executables by compiling this source code.
-- =main.exe= - Runs the fit function alone.
+You can generate 2 executables by compiling this source code.
 - =run_tests.exe= - Runs unit tests to see if things are not broken.
-- =run_de.exe= - Runs the optimization algorithm which is coupled with my fit function.
+- =run_gui.exe= - Runs the GUI interface of the algorithm.
 
-The source is written C++ and is developed to be build and compile on
-any platform or environment that supports C++.
+The source is written *C++* and is developed to be build and compile on
+any platform or environment that supports *C++* and where the
+dependencies can be compiled as well.
 
 ** Dependencies
 
 - [[https://www.cgal.org/][CGAL]] - As a helper library for tackling polygons.
 - [[http://www.boost.org/][Boost]] - *CGAL requires boost*, I am also using Boost for Unit Testing.
-- [[https://cmake.org/][CMake]] - Required to build the source code for your platform.
-
-PS: In linux CGAL to work you also require to install =libcgal-qt5-dev=
+- [[https://www1.qt.io/download-open-source/?hsCtaTracking=f977210e-de67-475f-a32b-65cec207fd03%7Cd62710cd-e1db-46aa-8d4d-2f1c1ffdacea#section-2][Qt]] - Qt is required to build the front end GUI.
 
 ** Building the source code
 
-Source code Follows C++11 standard.
+Source code Follows C++11 standard and uses [[https://cmake.org/][CMake]] build system
+generator which will allows the code to build on all-most-all platform where
+the dependencies can be installed.
 
 *** On Windows
-Source code supports Visual Studio 2010 or later.
-
-[[https://doc.cgal.org/latest/Manual/installation.html][Make sure the dependencies are installed]]
+*I strongly suggest using* [[https://github.com/Microsoft/vcpkg][Microsoft's Vcpkg]] to install the dependencies
+- =vcpkg install cgal:x64-windows boost:x64-windows qt5:x64-windows= will install all the dependencies
+- Then add the *vcpkg* toolchain file using the variable =DCMAKE_TOOLCHAIN_FILE=
 
 To build a =.sln= file.
-- *cd* to *src* directory, run cmake for the respected architecture.
-- Open the =.sln= file and build =run_tests= or =main= or =run_de=
-- =main.exe= requires parameters so try running that from the command line.
+- Run cmake for the respected architecture.
+- Open the =.sln= file and build =run_tests= or =run_gui=
 - Executables can be found in the =Debug= or =Release= Directory in the
   build directory, depending on your build setup.
 
 *** On Linux
-Source code requires G++ 6.0 or later.
-
-[[https://doc.cgal.org/latest/Manual/installation.html][Make sure the dependencies are installed]] and also =libcgal-qt5-dev=
+Packages =equivalent= to these must be installed, they must be up-to date.
+   - libboost-all-dev
+   - libcgal-dev
+   - qtbase5-dev
+   - qtdeclarative5-dev
+   - libqt5charts5-dev
 
 To build a =MakeFile=.
-- *cd* to *src* directory.
-- Run =cmake=
+- =mkdir build=
+- =cd build=
+- =cmake ..=
 
-Now run =make= to build the executables. 3 executables should be generated.
+Now run =make= to build the executables. 2 executables should be generated.
 
 ** Resources
 
-- http://www.redblobgames.com/grids/hexagons/
 - [[https://www.mathsisfun.com/geometry/pentagon.html][Pentagon applet]]
+- http://www.redblobgames.com/grids/hexagons/
+- https://doc.cgal.org/4.5.2/Kernel_23/index.html
+- http://doc.qt.io/
+- http://paulbourke.net/texture_colour/tilingplane/
+- https://www.quantamagazine.org/pentagon-tiling-proof-solves-century-old-math-problem-20170711/
+- http://jaapsch.net/tilings
+- https://arxiv.org/abs/1510.01186
+- https://perso.ens-lyon.fr/michael.rao/publi.php?lang=fr
+- https://perso.ens-lyon.fr/michael.rao/publi/penta.pdf
 
 ** LICENSE
 

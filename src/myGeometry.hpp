@@ -3,43 +3,34 @@
 
 class Point
 {
-   public:
+    public:
     double x;
     double y;
-    Point()
+    Point() : x(0.0), y(0.0)
     {
-        this->x = 0.0;
-        this->y = 0.0;
     }
-    Point(double x_cord, double y_cord)
+    Point(double x_cord, double y_cord) : x(x_cord), y(y_cord)
     {
-        this->x = x_cord;
-        this->y = y_cord;
     }
 };
 
 class Line
 {
-   public:
-    Point start;
-    Point end;
+    public:
+    Point source;
+    Point target;
+
     double getSlope();
     double getInclineAngle();
     double getInclineAngle(double);
     Line getLineWithRespectTo(Point, double);
     Line getLineWithRespectTo(double, double, int, char);
     Line reverse();  // Reverse the start and end points of the line.
-    Line()
+    Line() : source(), target()
     {
-        this->start.x = 0.0;
-        this->start.y = 0.0;
-        this->end.x   = 0.0;
-        this->end.y   = 0.0;
     }
-    Line(Point a, Point b)
+    Line(const Point& a,const Point& b) : source(a), target(b)
     {
-        this->start = a;
-        this->end   = b;
     }
 };
 

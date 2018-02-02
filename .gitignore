@@ -1,21 +1,3 @@
-# Ignore all
-*
-
-# Unignore all with extensions
-!*.*
-
-# Unignore all dirs
-!*/
-
-### Above combination will ignore all files without extension ###
-
-# Don't ignore make-file
-!Makefile
-!Oldmakefile
-
-# Ignore specific extensions
-
-
 # Executables
 *.exe
 *.out
@@ -28,14 +10,24 @@
 *.obj
 
 # Log files
-
 *.tlog
 
 # Ignore cmake build dirs
-/src/build
-/src/CMakeFiles
-/src/DLL
+/build
+/CMakeFiles
 
-#Don't ignore these files from build
-!/src/build/debug/plot_lines.py
-!/src/build/debug/example.csv
+# Ignore Visual Studio dir
+.vs
+
+# Ignore source trail files
+*.srctrlbm
+*.srctrldb
+*.srctrlprj
+
+# Ignored Qt files
+*.user
+
+# Ignore GTags
+GPATH
+GRTAGS
+GTAGS

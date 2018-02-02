@@ -5,12 +5,15 @@
  */
 #ifndef PRIMITIVETILE_HPP
 #define PRIMITIVETILE_HPP
+
 #include <algorithm>
 #include <list>
+#include <vector>
 #include "Link.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "boundaryDetection.hpp"
+#include "cgal.hpp"
 #include "myGeometry.hpp"
 
 class PrimitiveTile
@@ -21,7 +24,9 @@ class PrimitiveTile
     Tile pentagon;                   // Stores the measurements of the tile or pentagon used.
     int size;                        // This accounts for the number of tiles in the primitive tile.
     int count;  // Stores the number of primitivetile used in tiling or drawing.
+
     bool isLinkable(Link);
+    Tile createPentagon();
     void drawPentagon(int, int);
     void drawPentagonRev(int, int);
     void addTile(int, int);
@@ -30,27 +35,18 @@ class PrimitiveTile
     void writeToFileRaw();
     void writeToFileRaw(std::list<Line>);
     void writeToFileRaw(std::list<Segment>);
+    void draw();
     void doTiling(double, double, double, double);
     std::list<Line> translate(double, double, std::list<Line>);
-    std::list<Point_2> getPointsFromLines(
-        std::list<Line>);  // Returns the start points of everyline on the given list
-    PrimitiveTile()
-    {
-        this->size  = 1;  // Obviously we need atleast one tile.
-        this->count = 1;  // Obviously we need atleast one primitive tile.
-    }
-    PrimitiveTile(Tile tile)
-    {
-        this->pentagon = tile;
-        this->size     = 1;  // Obviously we need atleast one tile.
-        this->count    = 1;  // Obviously we need atleast one primitive tile.
-    }
+    std::vector<Point_2> getPointsFromLines(std::list<Line>);  // Returns the start points
+    PrimitiveTile() : size(1), count(1) {}
+    PrimitiveTile(Tile tile) : pentagon(tile), size(1), count(1) {}
     ~PrimitiveTile()
     {
-        this->size  = 1;  // Obviously we need atleast one tile.
-        this->count = 1;  // Obviously we need atleast one primitive tile.
         this->lines.clear();
         this->connector_sides.clear();
+        this->size  = 1;  // Obviously we need atleast one tile.
+        this->count = 1;  // Obviously we need atleast one primitive tile.
     }
 };
 

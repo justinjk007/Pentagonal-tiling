@@ -1,0 +1,40 @@
+dist: trusty
+sudo: required
+language: cpp
+
+notifications:
+ email: false
+
+addons:
+ apt:
+  sources:
+   - ubuntu-toolchain-r-test
+   - sourceline: 'ppa:beineri/opt-qt592-trusty'
+  packages:
+   - g++-5
+   # Install other dependencies
+   - libboost-all-dev
+   - libcgal-dev # This is installed so all of cgals dependencies are downloaded before installing latest CGAL
+   - qt59base
+   - qt59declarative
+   - qt59charts-no-lgpl
+   # Install these if you have a newer version of Qt libs on your package manager
+   # which should be available by default
+   # - qtbase5-dev
+   # - qtdeclarative5-dev
+   # - libqt5charts5-dev
+
+script:
+# Install the latest cgal library
+ - wget https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.11/CGAL-4.11.tar.xz
+ - tar -xf CGAL-4.11.tar.xz
+ - cd CGAL-4.11
+ - cmake .
+ - sudo make install
+ # Build my code
+ - pwd
+ - cd ..
+ - mkdir build
+ - cd build
+ - CXX=/usr/bin/g++-5 CC=/usr/bin/gcc-5 cmake ..
+ - cmake --build . -- -j4

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Pentagonal Tiling</title>
+<meta name="author" content="(Justin Kaipada && George Zakharov)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/theme/solarized.css" id="theme"/>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/>
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Pentagonal Tiling</h1><h2 class="author">Justin Kaipada &amp;&amp; George Zakharov</h2><p class="date">Created: 2017-11-28 Tue 04:10</p>
+</section>
+
+<section>
+<section id="slide-orgb8d0717">
+<h2 id="orgb8d0717">What is tiling ?</h2>
+
+<div class="figure">
+<p><img src="./img/sqaure.PNG" alt="sqaure.PNG" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org08ae153">
+<h2 id="org08ae153">Triangles</h2>
+
+<div class="figure">
+<p><img src="./img/triangle.PNG" alt="triangle.PNG" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org7265ac2">
+<h2 id="org7265ac2">Hexagons</h2>
+
+<div class="figure">
+<p><img src="./img/hex.PNG" alt="hex.PNG" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org7f60daf">
+<h2 id="org7f60daf">The problem with 5</h2>
+<ul>
+<li>Unlike other geometrical shapes all pentagons cannot be tiled perfectly.</li>
+
+</ul>
+
+<div class="figure">
+<p><img src="./img/gap.PNG" alt="gap.PNG" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgb951648">
+<h2 id="orgb951648">Goal</h2>
+
+<div class="figure">
+<p><img src="./img/pentagon.PNG" alt="pentagon.PNG" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orge493f0b">
+<h2 id="orge493f0b">List of all pentagons found</h2>
+
+<div class="figure">
+<p><img src="./img/tiles.PNG" alt="tiles.PNG" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgff8883f">
+<h2 id="orgff8883f">Primitive tile</h2>
+<ul>
+<li>Last one was found in 2015 by three mathematicians from <b>University of Washington Bothell</b></li>
+
+</ul>
+
+<div class="figure">
+<p><img src="./img/primitive.PNG" alt="primitive.PNG" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgfd1c6db">
+<h2 id="orgfd1c6db">News !!</h2>
+
+<div class="figure">
+<p><img src="./img/michael.jpg" alt="michael.jpg" />
+</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgd739fe4">
+<h2 id="orgd739fe4">Problems</h2>
+<ul>
+<li>We have a primitive tile, what is the correct translation ?</li>
+<li>All tiles are invalid !!</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org8a55f58">
+<h2 id="org8a55f58">Problems</h2>
+<ul>
+<li>The pentagon will become valid if the DE fixes this one dimension can it do that ?</li>
+
+</ul>
+
+<p>
+Yes, just that.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org2e3a8a2">
+<h2 id="org2e3a8a2">1011011</h2>
+<p>
+Source Code Available : <a href="https://github.com/justinjk007/Pentagonal-tiling">https://github.com/justinjk007/Pentagonal-tiling</a>
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org04a828c">
+<h2 id="org04a828c">References</h2>
+<ul>
+<li><a href="http://paulbourke.net/texture_colour/tilingplane/">http://paulbourke.net/texture_colour/tilingplane/</a></li>
+<li><a href="https://www.quantamagazine.org/pentagon-tiling-proof-solves-century-old-math-problem-20170711/">https://www.quantamagazine.org/pentagon-tiling-proof-solves-century-old-math-problem-20170711/</a></li>
+<li><a href="http://jaapsch.net/tilings">http://jaapsch.net/tilings</a></li>
+<li><a href="https://arxiv.org/abs/1510.01186">https://arxiv.org/abs/1510.01186</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/lib/js/head.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: false,
+rollingLinks: false,
+keyboard: true,
+overview: true,
+margin: 0.30,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }]
+});
+</script>
+</body>
+</html>

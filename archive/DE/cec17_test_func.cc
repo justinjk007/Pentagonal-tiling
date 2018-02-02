@@ -8,11 +8,14 @@
 #include <malloc.h>
 #include <math.h>
 #include <stdio.h>
+#include <iostream>
 
 #define INF 1.0e99
 #define EPS 1.0e-14
 #define E 2.7182818284590452353602874713526625
 #define PI 3.1415926535897932384626433832795029
+
+static int testing_count = 0;
 
 void sphere_func(double*, double*, int, double*, double*, int, int);      /* Sphere */
 void ellips_func(double*, double*, int, double*, double*, int, int);      /* Ellipsoidal */
@@ -214,11 +217,11 @@ void cec17_test_func(double* x, double* f, int nx, int mx, int func_num)
                 f[i] += 500.0;
                 break;
             case 6:
-                schaffer_F7_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
+                sphere_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
                 f[i] += 600.0;
                 break;
             case 7:
-                bi_rastrigin_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
+                sphere_func(&x[i * nx], &f[i], nx, OShift, M, 1, 1);
                 f[i] += 700.0;
                 break;
             case 8:
@@ -321,8 +324,20 @@ void cec17_test_func(double* x, double* f, int nx, int mx, int func_num)
     }
 }
 
-void sphere_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,
-                 int r_flag) /* Sphere */
+void rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,
+                    int r_flag) /* Rastrigin's  */
+{
+    int i;
+    f[0] = 0.0;
+
+    sr_func(x, z, nx, Os, Mr, 5.12 / 100.0, s_flag, r_flag); /* shift and rotate */
+
+    for (i = 0; i < nx; i++) {
+        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
+    }
+}
+
+void sphere_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag, int r_flag) /* Sphere */
 {
     int i;
     f[0] = 0.0;
@@ -556,19 +571,6 @@ void griewank_func(double* x, double* f, int nx, double* Os, double* Mr, int s_f
         p *= cos(z[i] / sqrt(1.0 + i));
     }
     f[0] = 1.0 + s / 4000.0 - p;
-}
-
-void rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,
-                    int r_flag) /* Rastrigin's  */
-{
-    int i;
-    f[0] = 0.0;
-
-    sr_func(x, z, nx, Os, Mr, 5.12 / 100.0, s_flag, r_flag); /* shift and rotate */
-
-    for (i = 0; i < nx; i++) {
-        f[0] += (z[i] * z[i] - 10.0 * cos(2.0 * PI * z[i]) + 10.0);
-    }
 }
 
 void step_rastrigin_func(double* x, double* f, int nx, double* Os, double* Mr, int s_flag,

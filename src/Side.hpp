@@ -11,13 +11,11 @@
 
 struct Side {
     double value;
-    Side()
+    Side() : value(0.0)
     {
-        this->value = 0.0;
     }
-    Side(double val)
+    Side(double val) : value(val)
     {
-        this->value = val;
     }
 };
 

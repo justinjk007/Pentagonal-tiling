@@ -4,40 +4,25 @@
  */
 #ifndef CALCULATEGAP_HPP
 #define CALCULATEGAP_HPP
-#include <algorithm>
-#include <list>
+#include <QObject>
+#include <QString>
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
 #include "boundaryDetection.hpp"
+#include "myGeometry.hpp"
 
-static Point_2 centroid;
-
-double getGap(Tile);
-double calculateGap(Tile, int, int);
-bool validateTile(Tile);
-double getMaxSide(Tile);
-double getMaxAngle(Tile);
-double getThirdSide(Side, Side, double);
-double getTriangleArea(double, double, double);
-double getTileArea(Tile);
-double getOtherAngle(Side, Side, double, char);
-double getPolygonArea(std::list<Line>);
-double getPolygonArea(std::list<Segment>);
-double getPolygonArea(std::list<Point_2>);
-void printData(std::list<Line>);
-void printData(std::list<Segment>);
-void printData(std::list<Point_2>);
-std::list<Line> removeCommonLines(std::list<Line>);
-std::list<Point_2> removeCommonPoints(std::list<Point_2>);
-std::list<Line> removeLine(std::list<Line>, Line);
-std::list<Point_2> removePoint(std::list<Point_2>, Point_2);
-bool comparePoint(Point_2, Point_2);
-std::list<Point_2> getSources(std::list<Line>);
-std::list<Point_2> getSources(std::list<Segment>);
-Point_2 getMidPoint(Segment);
-Point_2 getCentroid(std::list<Point_2>);
-bool comparePoints(Point_2, Point_2);
-std::list<Point_2> sortClockwise(std::list<Point_2>);
-
+class CalculateGap : public QObject
+{
+    Q_OBJECT
+   public:
+    double getGap(const Tile&);
+    void getGap(double*, double*, const long&);
+    double calculateGap(const Tile&, const int&, const int&);
+   signals:
+    void tileInfo(const QString&);
+    void minimumGap(const long&, const double&);
+    void sideCreated(std::vector<Line>);
+    void tilingCreated(std::list<Line>);
+};
 #endif /* CALCULATEGAP_HPP */
