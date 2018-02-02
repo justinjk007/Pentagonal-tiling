@@ -4,14 +4,14 @@ PROJECT (PentagonalTiling)
 set(CMAKE_CXX_STANDARD 11)
 
 # The version number.
-set(VERSION_MAJOR 2)
-set(VERSION_MINOR 0)
+set(VER_MAJOR 3)
+set(VER_MINOR 0)
 
 # Project Configuration Settings
 file(
   WRITE ${PROJECT_BINARY_DIR}/Config.h.in
-  "#define VERSION_MAJOR @VERSION_MAJOR@\n"
-  "#define VERSION_MINOR @VERSION_MINOR@"
+  "const int VER_MAJOR = @VER_MAJOR@;"
+  " const int VER_MINOR = @VER_MINOR@;"
   )
 configure_file (
   "${PROJECT_BINARY_DIR}/Config.h.in"

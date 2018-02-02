@@ -1,5 +1,6 @@
 #include <QApplication>
 #include <QString>
+#include "Config.h"  // Written by CMake
 #include "mainwindow.h"
 
 // This macro disables the extra cmd window popup when in Microsoft windows
@@ -16,7 +17,7 @@ int main(int argc, char* argv[])
     QApplication a(argc, argv);
     MainWindow w;
     // Window settings
-    w.setWindowTitle("Pentagonal Tiling - Visulization");
+    w.setWindowTitle("Pentagonal Tiling - Visulization " + QString::number(VER_MAJOR) + "." +QString::number(VER_MINOR));
     w.setWindowIcon(QIcon("favicon.ico"));
     // After all this time
     w.show();
