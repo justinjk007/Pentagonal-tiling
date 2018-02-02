@@ -9,17 +9,17 @@
 
 int main(int argc, char* argv[])
 {
-    qRegisterMetaType<std::vector<Line>>("std::vector<Line>"); // This is very important, this is done to Make emitting Line possible
-    qRegisterMetaType<std::list<Line>>("std::list<Line>"); // This is very important, this is done to Make emitting Line possible
+    // Emitted types are registered here to make queued connections possible
+    qRegisterMetaType<std::vector<Line>>("std::vector<Line>");
+    qRegisterMetaType<std::list<Line>>("std::list<Line>");
+
     QApplication a(argc, argv);
     MainWindow w;
-
     // Window settings
     w.setWindowTitle("Pentagonal Tiling - Visulization");
     w.setWindowIcon(QIcon("favicon.ico"));
-    w.setStyleSheet("QMainWindow {background: rgb(147,161,161);}");  // Set background color
-
     // After all this time
     w.show();
     return a.exec();
+    // Always
 }

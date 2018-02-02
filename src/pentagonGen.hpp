@@ -16,6 +16,7 @@ class pentagonGen : public QWidget
 
    private:
     std::vector<Line> current_pentagon;
+    int pixel_scaling;
 
 protected:
     void paintEvent(QPaintEvent* e) override;
