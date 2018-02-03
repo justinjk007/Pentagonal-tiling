@@ -13,26 +13,32 @@ pentagonGen::pentagonGen(QWidget* parent) : QWidget(parent)
 
 void pentagonGen::paintEvent(QPaintEvent* e)
 {
-    // Convert Line into QLineF....becuase QTTTTTTTTT
-    QVector<QLine> qtLines;
+    QPolygon polygon;
     for (const auto& line : this->current_pentagon) {
-        qtLines.push_back(QLine(line.source.x, line.source.y, line.target.x, line.target.y));
+        polygon << QPoint(line.source.x, line.source.y);
     }
     // Make custom pen
     QPen pen;
     pen.setWidth(this->pixel_scaling);
     pen.setColor(QColor(42, 161, 152));
-    // Now draw the line to widget
+    // Make a brush to fill the polygon
+    QBrush fill;
+    fill.setColor(QColor(148, 208, 203));
+    fill.setStyle(Qt::SolidPattern);
+    QPainterPath canvas;
     QPainter painter(this);
     // painter.fillRect(e->rect(), QColor(238, 232, 213));  // Background color
     painter.setRenderHint(QPainter::Antialiasing);
     // Find the center and add the offset to get a good poistion before draw;
     int offestX = -60;
     int offestY = -100;
-    QPoint painter_offest = QPoint(e->rect().center().x()+offestX,e->rect().center().y()+offestY);
+    QPoint painter_offest =
+        QPoint(e->rect().center().x() + offestX, e->rect().center().y() + offestY);
     painter.translate(painter_offest);
     painter.setPen(pen);
-    painter.drawLines(qtLines);
+    canvas.addPolygon(polygon);
+    painter.drawPolygon(polygon);
+    painter.fillPath(canvas, fill);
 }
 
 void pentagonGen::updateLine(std::vector<Line> pentagon)

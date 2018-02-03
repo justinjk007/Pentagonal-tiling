@@ -30,7 +30,11 @@ void tilingGen::paintEvent(QPaintEvent* e)
     // painter.fillRect(e->rect(), QColor(238, 232, 213));
     painter.setRenderHint(QPainter::Antialiasing);
     painter.setPen(pen);
-    painter.translate(100, 100);
+    int offestX = -90;
+    int offestY = -120;
+    QPoint painter_offest =
+        QPoint(e->rect().center().x() + offestX, e->rect().center().y() + offestY);
+    painter.translate(painter_offest);
     painter.scale(0.6, 0.6);
     size_t count = 0;  // Count the number of points appended to the polygon
     QPolygon polygon;
