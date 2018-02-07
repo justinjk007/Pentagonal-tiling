@@ -198,7 +198,7 @@ bool validateTile(const Tile& tile)
 bool validatePolygon(const std::vector<Point_2>& points)
 {
     /**
-     * Make sure the polygon created is convex and simple
+     * Make sure the polygon created is convex and simple using CGAL
      */
     Polygon_2 polygon;
     for (auto& point : points) polygon.push_back(point);
