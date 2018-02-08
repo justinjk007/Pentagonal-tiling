@@ -7,6 +7,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(VER_MAJOR 3)
 set(VER_MINOR 0)
 
+set(CMAKE_BUILD_TYPE Debug) # Defualt built type
+
 # Project Configuration Settings
 file(
   WRITE ${PROJECT_BINARY_DIR}/Config.h.in
