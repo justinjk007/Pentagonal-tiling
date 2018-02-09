@@ -34,8 +34,9 @@ class MainWindow : public QMainWindow
    private slots:
     void on_start_btn_clicked();
     void on_stop_btn_clicked();
-    void on_pause_btn_clicked();
-    void on_resume_btn_clicked();
+
+   signals:
+    void stop_execution();
 
    private:
     Ui::MainWindow* ui;
