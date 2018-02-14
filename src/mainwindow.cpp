@@ -24,8 +24,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     // Setup the QChart Widget on the bottom left of the window
     QSplineSeries* series = new QSplineSeries(this);
     QChart* chart         = new QChart();
-    QFont arial("Arial", 9, QFont::Bold);
-    chart->setTitleFont(arial);
+    QFont font("Consolas", 9, QFont::Bold);
+    chart->setTitleFont(font);
     chart->legend()->hide();
     chart->addSeries(series);
     chart->createDefaultAxes();
