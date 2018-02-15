@@ -6,6 +6,7 @@
 #define CALCULATEGAP_HPP
 #include <QObject>
 #include <QString>
+#include <fstream>
 #include "PrimitiveTile.hpp"
 #include "Side.hpp"
 #include "Tile.hpp"
@@ -19,6 +20,17 @@ class CalculateGap : public QObject
     double getGap(const Tile&);
     void getGap(double*, double*, const long&);
     double calculateGap(const Tile&, const int&, const int&);
+    void writeToFileSilently();
+    std::ofstream output_file;
+    CalculateGap ()
+    {
+	output_file.open("output.txt");
+    }
+    ~CalculateGap ()
+    {
+	output_file.close();
+    }
+
    signals:
     void tileInfo(const QString&);
     void minimumGap(const long&, const double&);

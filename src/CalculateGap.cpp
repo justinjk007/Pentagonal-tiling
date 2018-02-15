@@ -1,9 +1,9 @@
 #include "CalculateGap.hpp"
 #include <stdlib.h>
+#include <chrono>
 #include <cmath>
 #include <iostream>
 #include <list>
-#include <chrono>
 #include <thread>
 
 using namespace std;
@@ -49,6 +49,7 @@ void CalculateGap::getGap(double* x, double* fitness, const long& iteration_num)
     bool alarm = false;  // This flag is used to represent the validity of the current tile
     double min_gap;
     Tile tile = {x[0], x[1], x[2], x[3], x[4], x[5], x[6]};  // Create a tile
+
     // Send the information about the tile to the front-end GUI -----------------------------------
     QString tile_info =
         QString("Sides: " + QString::number(x[0], 'g', 5) + " " + QString::number(x[1], 'g', 5) +
@@ -58,6 +59,7 @@ void CalculateGap::getGap(double* x, double* fitness, const long& iteration_num)
     emit tileInfo(tile_info);
     emit tileInfo(QString("Iteration version: " + QString::number(iteration_num)));
     // Send the information about the tile to the front-end GUI -----------------------------------
+
     fillDimensions(tile);  // Fill all the dimensions in
     if (!validateTile(tile)) {
         printf("\nThe tile inputted was invalid");
@@ -91,6 +93,12 @@ void CalculateGap::getGap(double* x, double* fitness, const long& iteration_num)
     emit tileInfo(QString("\n"));
     emit minimumGap(iteration_num, min_gap);
     // Send the information about the tile to the front-end GUI -----------------------------------
+
+    // Write information to file-----------------------------------
+    output_file << "Sides: " << x[0] << " " << x[1] << " " << x[2] << " " << x[3] << "\n";
+    output_file << "Angles: " << x[4] << " " << x[5] << " " << x[6] << "\n";
+    output_file << "Minimum gap is: " << min_gap << "\n\n";
+    // Write information to file-----------------------------------
 }
 
 double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
@@ -115,10 +123,12 @@ double CalculateGap::calculateGap(const Tile& tile, const int& i, const int& j)
                                          // is programmable, meaning
                                          // when you increase the
                                          // primitive tile size.
-	// Send the information about the tile to the front-end GUI -----------------------------------
-	emit tilingCreated(newSample.lines);
-	// Send the information about the tile to the front-end GUI -----------------------------------
-	std::list<Segment> boundary        = removeInnerLines(newSample.lines);
+        // Send the information about the tile to the front-end GUI
+        // -----------------------------------
+        emit tilingCreated(newSample.lines);
+        // Send the information about the tile to the front-end GUI
+        // -----------------------------------
+        std::list<Segment> boundary        = removeInnerLines(newSample.lines);
         std::list<Point_2> boundary_points = getSources(boundary);
         boundary_points                    = sortClockwise(boundary_points);
         double total_area                  = getPolygonArea(boundary_points);
