@@ -1,10 +1,10 @@
 #ifndef WORKER_HPP
 #define WORKER_HPP
 
-#include <QObject>
+#include <QThread>
 #include "myGeometry.hpp"
 
-class Worker : public QObject
+class Worker : public QThread
 {
     Q_OBJECT
    public slots:

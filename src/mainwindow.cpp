@@ -119,7 +119,6 @@ void MainWindow::updatePrimitiveTileGeneration(std::list<Line> tiling)
 void MainWindow::on_start_btn_clicked()
 {
     QThread* worker_thread = new QThread;
-    //worker_thread->setTerminationEnabled();
     Worker* new_worker_obj = new Worker();
     new_worker_obj->moveToThread(worker_thread);
     connect(new_worker_obj, &Worker::updatePentagonInfo, this, &MainWindow::updatePentagonInfo);
@@ -134,14 +133,7 @@ void MainWindow::on_start_btn_clicked()
     connect(new_worker_obj, SIGNAL(finished()), new_worker_obj, SLOT(deleteLater()));
     connect(worker_thread, SIGNAL(finished()), worker_thread, SLOT(deleteLater()));
     // Stop the execution when stop button is clicked
-    //connect(ui->stop_btn, SIGNAL(clicked()), worker_thread, SLOT(exit()));
-    connect(this, SIGNAL(stop_execution()), worker_thread, SLOT(quit()));
+    connect(ui->stop_btn, SIGNAL(pressed()), worker_thread, SLOT(quit()));
     // Finally start the thread
     worker_thread->start();
-}
-
-void MainWindow::on_stop_btn_clicked()
-{
-    qDebug() << "Emitting shit";
-    emit stop_execution();
 }
