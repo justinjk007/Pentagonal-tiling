@@ -132,8 +132,6 @@ void MainWindow::on_start_btn_clicked()
     connect(new_worker_obj, SIGNAL(finished()), worker_thread, SLOT(quit()));
     connect(new_worker_obj, SIGNAL(finished()), new_worker_obj, SLOT(deleteLater()));
     connect(worker_thread, SIGNAL(finished()), worker_thread, SLOT(deleteLater()));
-    // Stop the execution when stop button is clicked
-    connect(ui->stop_btn, SIGNAL(pressed()), worker_thread, SLOT(quit()));
     // Finally start the thread
     worker_thread->start();
 }

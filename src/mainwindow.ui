@@ -82,11 +82,12 @@
          </sizepolicy>
         </property>
         <property name="font">
-          <font>
-            <family>Consolas</family>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-          </font>
+         <font>
+          <family>Consolas</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
         </property>
         <property name="cursor" stdset="0">
          <cursorShape>IBeamCursor</cursorShape>
@@ -104,34 +105,6 @@
         <property name="spacing">
          <number>1</number>
         </property>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="stop_btn">
-          <property name="font">
-           <font>
-            <family>Consolas</family>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <italic>false</italic>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="toolTip">
-           <string>Stop and reset mutation objects</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font: 10pt &quot;Consolas&quot;;</string>
-          </property>
-          <property name="text">
-           <string>Stop and Reset</string>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-          <property name="flat">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="0">
          <widget class="QPushButton" name="start_btn">
           <property name="sizePolicy">
