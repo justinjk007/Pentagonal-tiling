@@ -8,6 +8,7 @@ set(VER_MAJOR 3)
 set(VER_MINOR 0)
 
 set(CMAKE_BUILD_TYPE Debug) # Defualt built type
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Get compilation database if available
 
 # Project Configuration Settings
 file(
