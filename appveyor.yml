@@ -7,10 +7,12 @@ image:
 
 environment:
   matrix:
-    configuration: Debug
-    configuration: Release
-    platform: Win32
-    platform: x64
+    configuration:
+      - Debug
+      - Release
+    platform:
+      - Win32
+      - x64
 
 test: off
 
