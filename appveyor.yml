@@ -1,5 +1,6 @@
 version: '2.1.{build}'
 
+# The Matrix Revolutions
 image:
   - Visual Studio 2017
   - Visual Studio 2015
@@ -12,13 +13,12 @@ test: off
 
 clone_folder: c:\Repos\source
 
-# Enable catched builds, this is much faster
 cache:
   - C:\Repos\source\Pentagonal_Tiling_Dependencies -> appveyor.yml
 
 # Download dependencies
 install:
-  - ps: if($env:PLATFORM  -eq 'x64') { $env:arch = 'Win64'; } else {$env:arch = 'Win32';}
+  - ps: if($env:PLATFORM  -eq 'x64') { $env:arch = 'Win64'; } # No value required for x86
   - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2017') { $env:compiler = 'Visual Studio 15 2017'; }
   - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2015') { $env:compiler = 'Visual Studio 14 2015'; }
   - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2013') { $env:compiler = 'Visual Studio 12 2013'; }
@@ -37,5 +37,6 @@ build_script:
   - cd C:\Repos\source\
   - mkdir build
   - cd build
+  # Anything b/w %% will get replaced by the value of that environment variable
   - cmake -D CMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "%compiler% %arch%"
-  - cmake --build . --config "%configuration%" # This will substitute the %configuration% with Release or Debug respectively
+  - cmake --build . --config "%configuration%"
