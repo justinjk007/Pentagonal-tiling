@@ -2,6 +2,15 @@ version: '2.1.{build}'
 
 image:
   - Visual Studio 2017
+  - Visual Studio 2015
+  - Visual Studio 2013
+
+environment:
+  matrix:
+    configuration: Debug
+    configuration: Release
+    platform: Win32
+    platform: x64
 
 test: off
 
