@@ -54,7 +54,7 @@ endif(MSVC)
 # Boost config
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
-find_package( Boost COMPONENTS unit_test_framework REQUIRED )
+find_package( Boost REQUIRED )
 message("-- Boost Library was found")
 include_directories( ${Boost_INCLUDE_DIR} )
 
