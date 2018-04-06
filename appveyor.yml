@@ -2,18 +2,22 @@ version: '2.1.{build}'
 
 image:
   - Visual Studio 2017
-  - Visual Studio 2015
-  - Visual Studio 2013
+  # - Visual Studio 2015
+  # - Visual Studio 2013
 configuration:
   - Debug
   - Release
-platform:
-  - Win32
-  - x64
-environment:
-  matrix:
-    - MY_VAR: A
-    - MY_VAR: B
+# platform:
+#   - Win32
+#   - x64
+# environment:
+#   matrix:
+#     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+#       MY_VAR: value1
+#     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+#       MY_VAR: value1
+#     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+#       MY_VAR: value2
 
 test: off
 
@@ -37,8 +41,8 @@ install:
       # -o   => Set Output directory
 
 build_script:
-  - cd C:\Repos\source\
-  - mkdir build
-  - cd build
-  - cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
-  - cmake --build . --config "Debug"
+  - ps:cd C:\Repos\source\
+  - ps:mkdir build
+  - ps:cd build
+  - ps:cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
+  - ps:cmake --build . --config "$env:configuration"
