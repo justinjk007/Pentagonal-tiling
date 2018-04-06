@@ -2,22 +2,14 @@ version: '2.1.{build}'
 
 image:
   - Visual Studio 2017
-  # - Visual Studio 2015
-  # - Visual Studio 2013
+  - Visual Studio 2015
+  - Visual Studio 2013
 configuration:
   - Debug
   - Release
-# platform:
-#   - x86
-#   - x64
-# environment:
-#   matrix:
-#     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
-#       MY_VAR: value1
-#     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
-#       MY_VAR: value1
-#     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-#       MY_VAR: value2
+platform:
+  - x86
+  - x64
 
 test: off
 
@@ -29,6 +21,10 @@ cache:
 
 # Download dependencies
 install:
+  - ps: if($env:PLATFORM  -eq 'x64') { $env:arch = 'Win64'; } else {$env:arch = 'Win32';}
+  - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2017') { $env:compiler = 'Visual Studio 15'; }
+  - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2015') { $env:compiler = 'Visual Studio 14'; }
+  - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2013') { $env:compiler = 'Visual Studio 12'; }
   - if not exist Pentagonal_Tiling_Dependencies (mkdir Pentagonal_Tiling_Dependencies)
   - cd Pentagonal_Tiling_Dependencies
   - if not exist deps.7z (
@@ -44,5 +40,5 @@ build_script:
   - cd C:\Repos\source\
   - mkdir build
   - cd build
-  - cmake -D CMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
+  - cmake -D CMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "%compiler% %architecture%"
   - cmake --build . --config "%configuration%" # This will substitute the %configuration% with Release or Debug respectively
