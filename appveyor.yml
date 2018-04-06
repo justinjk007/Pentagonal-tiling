@@ -41,8 +41,8 @@ install:
       # -o   => Set Output directory
 
 build_script:
-  - ps:cd C:\Repos\source\
-  - ps:mkdir build
-  - ps:cd build
-  - ps:cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
-  - ps:cmake --build . --config "$env:configuration"
+  - ps: cd C:\Repos\source\
+  - ps: mkdir build
+  - ps: cd build
+  - ps: cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
+  - ps: cmake --build . --config "$env:configuration"
