@@ -8,7 +8,7 @@ configuration:
   - Debug
   - Release
 # platform:
-#   - Win32
+#   - x86
 #   - x64
 # environment:
 #   matrix:
@@ -44,5 +44,5 @@ build_script:
   - cd C:\Repos\source\
   - mkdir build
   - cd build
-  - cmake -DCMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
-  - cmake --build . --config "%configuration%"
+  - cmake -D CMAKE_TOOLCHAIN_FILE=C:/Repos/source/Pentagonal_Tiling_Dependencies/vcpkg-export-20180112-110203/scripts/buildsystems/vcpkg.cmake C:\Repos\source -G "Visual Studio 15 Win64"
+  - cmake --build . --config "%configuration%" # This will substitute the %configuration% with Release or Debug respectively
