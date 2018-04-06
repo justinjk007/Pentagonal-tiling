@@ -4,9 +4,7 @@ version: '2.1.{build}'
 image:
   - Visual Studio 2017
   - Visual Studio 2015
-  - Visual Studio 2013
 platform:
-  - x86
   - x64
 
 test: off
@@ -21,7 +19,6 @@ install:
   - ps: if($env:PLATFORM  -eq 'x64') { $env:arch = ' Win64'; } else { $env:arch = ''; } # Null for x86 builds
   - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2017') { $env:compiler = 'Visual Studio 15 2017'; }
   - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2015') { $env:compiler = 'Visual Studio 14 2015'; }
-  - ps: if($env:APPVEYOR_BUILD_WORKER_IMAGE  -eq 'Visual Studio 2013') { $env:compiler = 'Visual Studio 12 2013'; }
   - if not exist Pentagonal_Tiling_Dependencies (mkdir Pentagonal_Tiling_Dependencies)
   - cd Pentagonal_Tiling_Dependencies
   - if not exist deps.7z (
