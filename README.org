@@ -3,7 +3,7 @@
 # [[./img/uni_tile.jpg]]
 #+html: <p align="center"><img src="./img/uni_tile.jpg" /></p>
 
-#+html:<a href="https://isocpp.org/"><img src="https://img.shields.io/badge/language-C++-blue.svg" /></a> <a href="https://en.wikipedia.org/wiki/C%2B%2B11"><img src="https://img.shields.io/badge/C%2B%2B-11-blue.svg" /></a> <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" /></a> <a href="https://travis-ci.org/justinjk007/Pentagonal-tiling"><img src="https://api.travis-ci.org/justinjk007/Pentagonal-tiling.svg?branch=develop" /></a> <a href="https://ci.appveyor.com/project/justinjk007/pentagonal-tiling"><img src="https://ci.appveyor.com/api/projects/status/ldc8jtft09n5997e?svg=true" /></a>
+#+html:<a href="https://isocpp.org/"><img src="https://img.shields.io/badge/language-C++-blue.svg" /></a> <a href="https://en.wikipedia.org/wiki/C%2B%2B11"><img src="https://img.shields.io/badge/C%2B%2B-11-blue.svg" /></a> <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" /></a> <a href="https://travis-ci.org/justinjk007/Pentagonal-tiling"><img src="https://api.travis-ci.org/justinjk007/Pentagonal-tiling.svg?branch=master" /></a> <a href="https://ci.appveyor.com/project/justinjk007/pentagonal-tiling"><img src="https://ci.appveyor.com/api/projects/status/ldc8jtft09n5997e/branch/master?svg=true" /></a>
 
 ** Preface
 
