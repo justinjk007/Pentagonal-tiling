@@ -7,6 +7,8 @@
 
 ** Preface
 
+[[https://www.quantamagazine.org/pentagon-tiling-proof-solves-century-old-math-problem-20170711/][This problem has been solved, this project might be worked on just for fun/experience]]
+
 You can generate 2 executables by compiling this source code.
 - =run_tests.exe= - Runs unit tests to see if things are not broken.
 - =run_gui.exe= - Runs the GUI interface of the algorithm.
